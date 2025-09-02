@@ -10,8 +10,15 @@ A simple PHP finance tracker with MySQL database running in Docker containers an
 
 1. MySQL Database with persistant storage
 2. phpMyAdmin for database management
-3. DOcker Compose YAML file for easy startup
+3. Docker Compose YAML file for easy startup
 4. Sample database data (automatically imported)
+
+## Set Up
+
+1. Make sure you have Docker Desktop installed.
+2. Copy this repository onto your local machine.
+3. Create a .env file (using the template in the .env.example file) and create your own values for each environment variable.
+4. Run docker-compose up -d to start the application.
 
 ## Application Access
 
