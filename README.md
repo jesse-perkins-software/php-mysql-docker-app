@@ -22,4 +22,4 @@ A simple PHP finance tracker with MySQL database running in Docker containers an
 ## Application Access
 
 * Visit http://localhost:8000/controller.php to access the application
-* Visit http://localhost:8080 for phpMyAdmin 
+* Visit http://localhost:8080 for database access through phpMyAdmin 
