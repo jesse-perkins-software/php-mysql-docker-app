@@ -15,10 +15,9 @@ A simple PHP finance tracker with MySQL database running in Docker containers an
 
 ## Set Up
 
-1. Make sure you have Docker Desktop installed.
-2. Copy this repository onto your local machine.
-3. Create a .env file (using the template in the .env.example file) and create your own values for each environment variable.
-4. Run ```docker-compose up -d``` to start the application.
+1. Copy this repository onto your local machine.
+2. Create a .env file (using the template in the .env.example file) and create your own values for each environment variable.
+3. Run ```docker-compose up -d``` to start the application.
 
 ## Application Access
 
