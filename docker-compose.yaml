@@ -1,7 +1,7 @@
 services:
   
   db:
-    image: mysql:latest
+    image: mysql:9.4.0-oracle
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
@@ -12,7 +12,7 @@ services:
       - ./init-scripts:/docker-entrypoint-initdb.d
 
   phpmyadmin:
-    image: phpmyadmin:latest
+    image: phpmyadmin:5.2.2
     restart: always
     ports:
       - 8080:80
