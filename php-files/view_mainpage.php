@@ -82,7 +82,7 @@
             <div id="dash-container" class="container text-center">
                 <div class="row gap-4">
                     <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3>Total Monthly Balance</h3>
+                        <h3>Total Balance</h3>
                         <span id="totalBalance"></span>
                     </div>
                     
