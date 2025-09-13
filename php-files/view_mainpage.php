@@ -27,55 +27,82 @@
 </head>
 <body class="bg-light">
     <!--  Nav Bar  -->
-    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">
-        <ul class="nav flex-column w-100 p-3 gap-4">
-            <li class="nav-item rounded-3">
-                <form action="/controller.php" method="post">
-                    <input type="hidden" name="page" value="MainPage">
-                    <input type="hidden" name="command" value="Dashboard">
+    <nav class="position-absolute h-100 border-end" id="nav-bar">
+        <div class="nav-section mt-5">
+            <div class></div>
+            <form action="/controller.php" method="post">
+                <input type="hidden" name="page" value="MainPage">
+                <input type="hidden" name="command" value="Dashboard">
+                <ul class="navbar-nav border-1">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                </ul>
 
-                    <button class="btn btn-primary fs-5 w-100" type="submit">Dashboard</button>
-                </form>
-            </li>
+            </form>
+        </div>
 
-            <li class="nav-item rounded-3">
-                <form action="/controller.php" method="post">
-                    <input type="hidden" name="page" value="MainPage">
-                    <input type="hidden" name="command" value="History">
+        <div class="nav-section">
 
-                    <button class="btn btn-secondary fs-5 w-100" type="submit">History</button>
-                </form>
-            </li>
+        </div>
 
-            <li class="nav-item rounded-3">
-                <form action="/controller.php" method="post">
-                    <input type="hidden" name="page" value="MainPage">
-                    <input type="hidden" name="command" value="Profile">
+        <div class="nav-section">
 
-                    <button class="btn btn-secondary fs-5 w-100" type="submit">Profile</button>
-                </form>
-            </li>
+        </div>
 
-            <li class="nav-item rounded-3">
-                <form action="/controller.php" method="post">
-                    <input type="hidden" name="page" value="MainPage">
-                    <input type="hidden" name="command" value="SignOut">
+        <div class="nav-section">
 
-                    <button class="btn btn-danger fs-5 w-100" type="submit">Sign Out</button>
-                </form>
-            </li>
-        </ul>
-    </div>
+        </div>
+    </nav>
+<!--    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">-->
+<!--        <ul class="nav flex-column w-100 p-3 gap-4">-->
+<!--            <li class="nav-item rounded-3">-->
+<!--                <form action="/controller.php" method="post">-->
+<!--                    <input type="hidden" name="page" value="MainPage">-->
+<!--                    <input type="hidden" name="command" value="Dashboard">-->
+<!---->
+<!--                    <button class="btn btn-primary fs-5 w-100" type="submit">Dashboard</button>-->
+<!--                </form>-->
+<!--            </li>-->
+<!---->
+<!--            <li class="nav-item rounded-3">-->
+<!--                <form action="/controller.php" method="post">-->
+<!--                    <input type="hidden" name="page" value="MainPage">-->
+<!--                    <input type="hidden" name="command" value="History">-->
+<!---->
+<!--                    <button class="btn btn-secondary fs-5 w-100" type="submit">History</button>-->
+<!--                </form>-->
+<!--            </li>-->
+<!---->
+<!--            <li class="nav-item rounded-3">-->
+<!--                <form action="/controller.php" method="post">-->
+<!--                    <input type="hidden" name="page" value="MainPage">-->
+<!--                    <input type="hidden" name="command" value="Profile">-->
+<!---->
+<!--                    <button class="btn btn-secondary fs-5 w-100" type="submit">Profile</button>-->
+<!--                </form>-->
+<!--            </li>-->
+<!---->
+<!--            <li class="nav-item rounded-3">-->
+<!--                <form action="/controller.php" method="post">-->
+<!--                    <input type="hidden" name="page" value="MainPage">-->
+<!--                    <input type="hidden" name="command" value="SignOut">-->
+<!---->
+<!--                    <button class="btn btn-danger fs-5 w-100" type="submit">Sign Out</button>-->
+<!--                </form>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
     
     <div class="d-flex flex-column vh-100" id="content">
-        <!--  Greeting Card -->
-        <div id="greeting" class="d-flex border border-2 bg-light rounded-3 m-2">
-            <div class="fs-2 fw-medium p-3">
-                Hello 
-                <span class="text-capitalize" id="name"><?php echo getFirstName($_SESSION["username"]);?></span>!&#128075
-                Here is your dashboard where you can see all of your stats and recent transactions.
-            </div>
-        </div>
+<!--        <!--  Greeting Card -->
+<!--        <div id="greeting" class="d-flex border border-2 bg-light rounded-3 m-2">-->
+<!--            <div class="fs-2 fw-medium p-3">-->
+<!--                Hello -->
+<!--                <span class="text-capitalize" id="name">--><?php //echo getFirstName($_SESSION["username"]);?><!--</span>!&#128075-->
+<!--                Here is your dashboard where you can see all of your stats and recent transactions.-->
+<!--            </div>-->
+<!--        </div>-->
 
         <!--  Dashboard  -->
         <div id="dash" class="shadow-sm border border-2 bg-light rounded-3 m-2 p-3">
@@ -140,94 +167,94 @@
             
         </div>
 
-        <!--  Add Transaction Button  -->
-        <div class="d-flex justify-content-end m-2">
-            <button id="newTransaction" class="btn btn-primary fs-5" data-bs-toggle="modal" data-bs-target="#transactionModal">+ New Transaction</button>
-        </div>
-        
-        <!--  Modal  -->
-        <div class="modal fade" id="transactionModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Transaction Details</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/controller.php" method="post" class="needs-validation" novalidate>
-                            <input type="hidden" name="page" value="MainPage">
-                            <input type="hidden" name="command" value="AddTransaction">
-                            <div class="input-group">
-                                <span class="input-group-text">$</span>
-                                <div class="form-floating">
-                                    <input type="number" class="form-control" id="amount" name="amount" step=".01" placeholder="Amount" required>
-                                    <label for="amount">Amount</label>
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please enter a number.
-                                </div>
-                            </div><br>
-                            <div class="form-floating">
-                                <select id="category" class="form-select" name="category" required>
-                                    <option value="">Choose...</option>
-                                    <option>Income</option>
-                                    <option>Savings</option>
-                                    <option>Rent</option>
-                                    <option>Utilities</option>
-                                    <option>Groceries</option>
-                                    <option>Transport</option>
-                                    <option>Entertainment</option>
-                                    <option>Hobbies</option>
-                                    <option>Travel Fund</option>
-                                    <option>Emergency Fund</option>
-                                </select>
-                                <label for="category">Category</label>
-                                <div class="invalid-feedback">
-                                    Please choose a valid option.
-                                </div>
-                            </div><br>
-                            <div class="form-floating">
-                                <select id="account" class="form-select" name="account" required>
-                                    <option value="">Choose...</option>
-                                    <option>Chequing</option>
-                                    <option>Savings</option>
-                                    <option>Credit Card</option>
-                                </select>
-                                <label for="account">Account</label>
-                                <div class="invalid-feedback">
-                                    Please choose a valid option.
-                                </div>
-                            </div><br>
-                            <div class="form-floating">
-                                <input type="date" class="form-control" id="date" name="date" required>
-                                <label for="date">Date</label>
-                                <div class="invalid-feedback">
-                                    Please choose a valid date.
-                                </div>
-                            </div><br>
-                            <div class="w-100 d-flex flex-row-reverse gap-2">
-                                <button type="submit" class="btn btn-primary" id="submitTransaction">Save Transaction</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--  Recent Transactions  -->
-        <div id="recent" class="flex-fill shadow-sm border border-2 bg-light rounded-3 m-2">
-            <table id="tbl" class="table table-striped-columns table-light align-middle table-hover">
-                <thead>
-                    <tr>
-                        <th class="fs-4">Amount</th>
-                        <th class="fs-4">Category</th>
-                        <th class="fs-4">Account</th>
-                        <th class="fs-4">Date</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
+<!--        <!--  Add Transaction Button  -->
+<!--        <div class="d-flex justify-content-end m-2">-->
+<!--            <button id="newTransaction" class="btn btn-primary fs-5" data-bs-toggle="modal" data-bs-target="#transactionModal">+ New Transaction</button>-->
+<!--        </div>-->
+<!--        -->
+<!--        <!--  Modal  -->
+<!--        <div class="modal fade" id="transactionModal">-->
+<!--            <div class="modal-dialog modal-dialog-centered">-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <h1 class="modal-title fs-5" id="exampleModalLabel">Transaction Details</h1>-->
+<!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+<!--                        <form action="/controller.php" method="post" class="needs-validation" novalidate>-->
+<!--                            <input type="hidden" name="page" value="MainPage">-->
+<!--                            <input type="hidden" name="command" value="AddTransaction">-->
+<!--                            <div class="input-group">-->
+<!--                                <span class="input-group-text">$</span>-->
+<!--                                <div class="form-floating">-->
+<!--                                    <input type="number" class="form-control" id="amount" name="amount" step=".01" placeholder="Amount" required>-->
+<!--                                    <label for="amount">Amount</label>-->
+<!--                                </div>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please enter a number.-->
+<!--                                </div>-->
+<!--                            </div><br>-->
+<!--                            <div class="form-floating">-->
+<!--                                <select id="category" class="form-select" name="category" required>-->
+<!--                                    <option value="">Choose...</option>-->
+<!--                                    <option>Income</option>-->
+<!--                                    <option>Savings</option>-->
+<!--                                    <option>Rent</option>-->
+<!--                                    <option>Utilities</option>-->
+<!--                                    <option>Groceries</option>-->
+<!--                                    <option>Transport</option>-->
+<!--                                    <option>Entertainment</option>-->
+<!--                                    <option>Hobbies</option>-->
+<!--                                    <option>Travel Fund</option>-->
+<!--                                    <option>Emergency Fund</option>-->
+<!--                                </select>-->
+<!--                                <label for="category">Category</label>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please choose a valid option.-->
+<!--                                </div>-->
+<!--                            </div><br>-->
+<!--                            <div class="form-floating">-->
+<!--                                <select id="account" class="form-select" name="account" required>-->
+<!--                                    <option value="">Choose...</option>-->
+<!--                                    <option>Chequing</option>-->
+<!--                                    <option>Savings</option>-->
+<!--                                    <option>Credit Card</option>-->
+<!--                                </select>-->
+<!--                                <label for="account">Account</label>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please choose a valid option.-->
+<!--                                </div>-->
+<!--                            </div><br>-->
+<!--                            <div class="form-floating">-->
+<!--                                <input type="date" class="form-control" id="date" name="date" required>-->
+<!--                                <label for="date">Date</label>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please choose a valid date.-->
+<!--                                </div>-->
+<!--                            </div><br>-->
+<!--                            <div class="w-100 d-flex flex-row-reverse gap-2">-->
+<!--                                <button type="submit" class="btn btn-primary" id="submitTransaction">Save Transaction</button>-->
+<!--                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!--        <!--  Recent Transactions  -->
+<!--        <div id="recent" class="flex-fill shadow-sm border border-2 bg-light rounded-3 m-2">-->
+<!--            <table id="tbl" class="table table-striped-columns table-light align-middle table-hover">-->
+<!--                <thead>-->
+<!--                    <tr>-->
+<!--                        <th class="fs-4">Amount</th>-->
+<!--                        <th class="fs-4">Category</th>-->
+<!--                        <th class="fs-4">Account</th>-->
+<!--                        <th class="fs-4">Date</th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--            </table>-->
+<!--        </div>-->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
