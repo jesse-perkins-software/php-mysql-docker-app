@@ -15,7 +15,7 @@ services:
     image: phpmyadmin:5.2.2
     restart: always
     ports:
-      - 8080:80
+      - 3001:80
     environment:
       - PMA_ARBITRARY=1
     depends_on:
@@ -26,7 +26,7 @@ services:
       dockerfile: Dockerfile
     container_name: myapp
     ports:
-      - 8000:80
+      - 3000:80
     volumes:
       - ./php-files:/var/www/html
     depends_on:
