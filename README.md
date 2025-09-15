@@ -24,5 +24,5 @@ A simple finance tracker with PHP + MySQL database running in Docker Compose.
 
 ## Application Access
 
-* Visit http://localhost:8000/controller.php to access the application
-* Visit http://localhost:8080 for database access through phpMyAdmin 
+* Visit http://localhost:3000/controller.php to access the application
+* Visit http://localhost:3001 for database access through phpMyAdmin 
