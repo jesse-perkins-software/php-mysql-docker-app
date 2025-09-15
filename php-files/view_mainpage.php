@@ -22,6 +22,10 @@
         #dash-container {
             min-width: 100%;
         }
+
+        .nav-item:hover {
+            background-color: #eee;
+        }
         
     </style>
 </head>
@@ -33,9 +37,15 @@
             <form action="/controller.php" method="post">
                 <input type="hidden" name="page" value="MainPage">
                 <input type="hidden" name="command" value="Dashboard">
-                <ul class="navbar-nav border-1">
+                <p class="ms-3 mb-2 fw-bold border-bottom">
+                    <button class="nav-link" type="submit">Account</button>
+                </p>
+                <ul class="navbar-nav lh-1">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">Home</a>
+                        <button class="nav-link ms-3" type="submit">Savings</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link ms-3" type="submit">Chequing</button>
                     </li>
                 </ul>
 
