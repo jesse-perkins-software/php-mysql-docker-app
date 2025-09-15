@@ -23,7 +23,7 @@
             min-width: 100%;
         }
 
-        .nav-item:hover {
+        .nav-link:hover {
             background-color: #eee;
         }
         
@@ -31,37 +31,43 @@
 </head>
 <body class="bg-light">
     <!--  Nav Bar  -->
-    <nav class="position-absolute h-100 border-end" id="nav-bar">
-        <div class="nav-section mt-5">
-            <div class></div>
-            <form action="/controller.php" method="post">
-                <input type="hidden" name="page" value="MainPage">
-                <input type="hidden" name="command" value="Dashboard">
-                <p class="ms-3 mb-2 fw-bold border-bottom">
-                    <button class="nav-link" type="submit">Account</button>
-                </p>
-                <ul class="navbar-nav lh-1">
-                    <li class="nav-item">
-                        <button class="nav-link ms-3" type="submit">Savings</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link ms-3" type="submit">Chequing</button>
-                    </li>
-                </ul>
-
+    <nav class="position-absolute h-100 border-end border-3" id="nav-bar">
+        <div class="nav-section mt-5 mb-4">
+            <form action="controller.php" method="post">
+                <div class="fw-bold">
+                    <input type="hidden" name="page" value="MainPage">
+                    <input type="hidden" name="command" value="Dashboard">
+                    <button class="nav-link text-start ps-3 pe-3 w-100" type="submit">Dashboard</button>
+                </div>
             </form>
         </div>
 
         <div class="nav-section">
+            <form action="controller.php" method="post">
+                <div class="nav-link fw-bold border-bottom">
+                    <input type="hidden" name="page" value="MainPage">
+                    <input type="hidden" name="command" value="Dashboard">
+                    <button class="nav-link text-start ps-3 pe-3 w-100" type="submit">Accounts<span class="pull-right">30,000</span></button>
+                </div>
+                <ul class="navbar-nav lh-1">
+                    <li class="nav-item">
+                        <input type="hidden" name="page" value="MainPage">
+                        <input type="hidden" name="command" value="History">
+                        <button class="nav-link text-start ps-4 w-100" type="submit">Savings</button>
+                    </li>
+                    <li class="nav-item">
+                        <input type="hidden" name="page" value="MainPage">
+                        <input type="hidden" name="command" value="History">
+                        <button class="nav-link text-start ps-4 w-100" type="submit">Chequing</button>
+                    </li>
+                    <li class="nav-item">
+                        <input type="hidden" name="page" value="MainPage">
+                        <input type="hidden" name="command" value="History">
+                        <button class="nav-link text-start ps-4 w-100" type="submit">Mastercard</button>
+                    </li>
+                </ul>
 
-        </div>
-
-        <div class="nav-section">
-
-        </div>
-
-        <div class="nav-section">
-
+            </form>
         </div>
     </nav>
 <!--    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">-->
