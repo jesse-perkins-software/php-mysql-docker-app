@@ -1,33 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
-    <style>
-        #nav-bar {
-            width: 15vw;
-            min-width: 162px;
-        }
-
-        #content {
-            margin-left: 15vw;
-        }
-
-        #new {
-            width: 8vw;
-        }
-
-        #dash-container {
-            min-width: 100%;
-        }
-
-        .nav-link:hover {
-            background-color: #eee;
-        }
-        
-    </style>
+    <link rel="stylesheet" href="/src/stylesheets/mainpage.css"> <!-- CSS isn't linking for some reason -->
+    <title>Finance App</title>
 </head>
 <body class="bg-light">
     <!--  Nav Bar  -->
@@ -274,7 +254,6 @@
 <!--            </table>-->
 <!--        </div>-->
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 <script defer>
     //----- Form Validation -----
@@ -296,8 +275,8 @@
 
     //----- Total Balance Calculation -----
     function setTotalBalance() {
-        let totalBalance = 
-            <?php 
+        let totalBalance =
+            <?php
                 $income = getIncome($_SESSION["username"]);
                 $spending = getSpending($_SESSION["username"]);
                 $total = $income - $spending;
@@ -317,8 +296,8 @@
 
     //----- Total Income Calculation -----
     function setTotalIncome() {
-        let totalIncome = 
-            <?php 
+        let totalIncome =
+            <?php
                 $income = getIncome($_SESSION["username"]);
                 if (empty($income)) {
                     $income = 0;
@@ -332,8 +311,8 @@
 
     //----- Total Spending Calculation -----
     function setTotalSpending() {
-        let totalSpending = 
-            <?php 
+        let totalSpending =
+            <?php
                 $spending = getSpending($_SESSION["username"]);
                 if (empty($spending)) {
                     $spending = 0;
@@ -347,8 +326,8 @@
 
     //----- Monthly Balance Calculation -----
     function setMonthlyBalance() {
-        let monthlyBalance = 
-            <?php 
+        let monthlyBalance =
+            <?php
                 $income = getMonthIncome($_SESSION["username"]);
                 $spending = getMonthSpending($_SESSION["username"]);
                 $total = $income - $spending;
@@ -368,8 +347,8 @@
 
     //----- Monthly Income Calculation -----
     function setMonthlyIncome() {
-        let monthlyIncome = 
-            <?php 
+        let monthlyIncome =
+            <?php
                 $income = getMonthIncome($_SESSION["username"]);
                 if (empty($income)) {
                     $income = 0;
@@ -380,12 +359,12 @@
         document.getElementById("monthlyIncome").style.color = "green";
     }
     setMonthlyIncome();
-    
+
 
     //----- Monthly Spending Calculation -----
     function setMonthlySpending() {
-        let monthlySpending = 
-            <?php 
+        let monthlySpending =
+            <?php
                 $spending = getMonthSpending($_SESSION["username"]);
                 if (empty($spending)) {
                     $spending = 0;
@@ -396,19 +375,19 @@
         document.getElementById("monthlySpending").style.color = "red";
     }
     setMonthlySpending();
-    
+
     //----- Average Savings Calculation -----
     function setAvgSavingsRate() {
-        let income = 
-            <?php 
+        let income =
+            <?php
                 $result = getIncome($_SESSION["username"]);
                 if (empty($result)) {
                     $result = 0;
                 }
                 echo $result;
             ?>;
-        let totalSavings = 
-            <?php 
+        let totalSavings =
+            <?php
                 $income = getIncome($_SESSION["username"]);
                 if (empty($income)) {
                     $income = 0;
@@ -436,16 +415,16 @@
 
     //----- Needs Calculation -----
     function setNeedsRate() {
-        let needs = 
-            <?php 
+        let needs =
+            <?php
                 $result = getNeeds($_SESSION["username"]);
                 if (empty($result)) {
                     $result = 0;
                 }
                 echo $result;
             ?>;
-        let total = 
-            <?php 
+        let total =
+            <?php
                 $result = getThisMonthIncome($_SESSION["username"]);
                 if (empty($result)) {
                     $result = 0;
@@ -457,23 +436,23 @@
             rate = (needs / total) * 100;
         }
         let r = rate.toFixed(2);
-        
+
         document.getElementById("monthNeedsRate").innerText = r + "%";
     }
     setNeedsRate();
-    
+
     //----- Wants Calculation -----
     function setWantsRate() {
-        let wants = 
-            <?php 
+        let wants =
+            <?php
                 $result = getWants($_SESSION["username"]);
                 if (empty($result)) {
                     $result = 0;
                 }
                 echo $result;
             ?>;
-        let total = 
-            <?php 
+        let total =
+            <?php
                 $result = getThisMonthIncome($_SESSION["username"]);
                 if (empty($result)) {
                     $result = 0;
@@ -485,23 +464,23 @@
             rate = (wants / total) * 100;
         }
         let r = rate.toFixed(2);
-        
+
         document.getElementById("monthWantsRate").innerText = r + "%";
     }
     setWantsRate();
 
     //----- Savings Rate -----
     function setSavingsRate() {
-        let savings = 
-            <?php 
+        let savings =
+            <?php
                 $result = getSavings($_SESSION["username"]);
                 if (empty($result)) {
                     $result = 0;
                 }
                 echo $result;
             ?>;
-        let total = 
-            <?php 
+        let total =
+            <?php
                 $result = getThisMonthIncome($_SESSION["username"]);
                 if (empty($result)) {
                     $result = 0;
@@ -513,7 +492,7 @@
             rate = (savings / total) * 100;
         }
         let r = rate.toFixed(2);
-        
+
         document.getElementById("monthSavingsRate").innerText = r + "%";
     }
     setSavingsRate();
@@ -543,7 +522,7 @@
         for (let i = 0; i < data.length; i++) {
             str += "<tbody class='table-group-divider'>";
             str += "<tr>";
-            
+
             for (let j in data[i]) {
                 if (j != "Id") {
                     if (j == "Amount") {
@@ -556,14 +535,14 @@
                         str += "<td class='fs-5'>" + data[i][j] + "</td>";
                     }
                 }
-                    
+
             }
             str += "<td data-id='" + data[i]["Id"] + "' class='fit-btn-content text-center'><button class='btn btn-danger w-75 fs-5'>Delete</button>" + "</td>";
 
             str += "</tr>";
             str += "</tbody>";
         }
-        
+
         str += "</table>";
 
         document.getElementById("recent").innerHTML = str;
@@ -637,7 +616,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let totalIncome = this.responseText;
-                
+
                 document.getElementById("totalIncome").innerText = "$" + Intl.NumberFormat().format(totalIncome);
                 document.getElementById("totalIncome").style.color = "green";
             }
@@ -653,7 +632,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let totalSpending = this.responseText;
-                
+
                 document.getElementById("totalSpending").innerText = "($" + Intl.NumberFormat().format(totalSpending) + ")";
                 document.getElementById("totalSpending").style.color = "red";
             }
@@ -692,7 +671,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let monthlyIncome = this.responseText;
-                
+
                 document.getElementById("monthlyIncome").innerText = "$" + Intl.NumberFormat().format(monthlyIncome);
                 document.getElementById("monthlyIncome").style.color = "green";
             }
@@ -708,7 +687,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let monthlySpending = this.responseText;
-                
+
                 document.getElementById("monthlySpending").innerText = "($" + Intl.NumberFormat().format(monthlySpending) + ")";
                 document.getElementById("monthlySpending").style.color = "red";
             }
@@ -718,7 +697,7 @@
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
     }
-    
+
     function updateAvgSavingsRate() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
