@@ -47,6 +47,9 @@
 
             <ul class="navbar-nav lh-1">
                 <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Overview</button>
+                </li>
+                <li class="nav-item">
                     <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Savings</button>
                 </li>
                 <li class="nav-item">
@@ -68,7 +71,6 @@
         <div class="nav-section mt-4" id="nav-logout">
             <button class="nav-link fw-bold p-2 bg-secondary-subtle m-auto border rounded" type="submit" onclick="viewPage('SignOut')">Sign Out</button>
         </div>
-
     </nav>
 <!--    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">-->
 <!--        <ul class="nav flex-column w-100 p-3 gap-4">-->

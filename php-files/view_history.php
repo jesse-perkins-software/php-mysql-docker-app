@@ -24,50 +24,95 @@
             display: none;
         }
 
+        .nav-link:hover {
+            background-color: #eee;
+        }
+
     </style>
 </head>
 <body class="bg-light">
+    <!--  Nav Bar  -->
+    <nav class="position-absolute h-100 border-end border-3" id="nav-bar">
+        <!-- Form that controls what page the user will be directed to when they click a nav button -->
+        <form action="controller.php" method="post" id="nav-form">
+            <input type="hidden" name="page" value="MainPage">
+            <input type="hidden" name="command" value="" id="command-value"> <!-- Value changes depending on the nav button clicked -->
+        </form>
 
-    <!--  Nav Bar -->
-    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">
-        <ul class="nav flex-column w-100 p-3 gap-4">
-            <li class="nav-item rounded-3">
-                <form action="/controller.php" method="post">
-                    <input type="hidden" name="page" value="MainPage">
-                    <input type="hidden" name="command" value="Dashboard">
+        <div class="nav-section mt-2" id="nav-dashboard">
+            <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="viewPage('Dashboard')">Dashboard</button>
+        </div>
 
-                    <button class="btn btn-secondary fs-5 w-100" type="submit">Dashboard</button>
-                </form>
-            </li>
+        <div class="nav-section mt-4" id="nav-accounts">
+            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Accounts</p>
 
-            <li class="nav-item rounded-3">
-                <form action="/controller.php" method="post">
-                    <input type="hidden" name="page" value="MainPage">
-                    <input type="hidden" name="command" value="History">
+            <ul class="navbar-nav lh-1">
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Overview</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Savings</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Chequing</button>
+                </li>
+            </ul>
+        </div>
 
-                    <button class="btn btn-primary fs-5 w-100" type="submit">History</button>
-                </form>
-            </li>
+        <div class="nav-section mt-4" id="nav-profile">
+            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Profile</p>
 
-            <li class="nav-item rounded-3">
-                <form action="/controller.php" method="post">
-                    <input type="hidden" name="page" value="MainPage">
-                    <input type="hidden" name="command" value="Profile">
+            <ul class="navbar-nav lh-1">
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('Profile')">Settings</button>
+                </li>
+            </ul>
+        </div>
 
-                    <button class="btn btn-secondary fs-5 w-100" type="submit">Profile</button>
-                </form>
-            </li>
+        <div class="nav-section mt-4" id="nav-logout">
+            <button class="nav-link fw-bold p-2 bg-secondary-subtle m-auto border rounded" type="submit" onclick="viewPage('SignOut')">Sign Out</button>
+        </div>
+    </nav>
 
-            <li class="nav-item rounded-3">
-                <form action="/controller.php" method="post">
-                    <input type="hidden" name="page" value="MainPage">
-                    <input type="hidden" name="command" value="SignOut">
-
-                    <button class="btn btn-danger fs-5 w-100" type="submit">Sign Out</button>
-                </form>
-            </li>
-        </ul>
-    </div>
+<!--    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">-->
+<!--        <ul class="nav flex-column w-100 p-3 gap-4">-->
+<!--            <li class="nav-item rounded-3">-->
+<!--                <form action="/controller.php" method="post">-->
+<!--                    <input type="hidden" name="page" value="MainPage">-->
+<!--                    <input type="hidden" name="command" value="Dashboard">-->
+<!---->
+<!--                    <button class="btn btn-secondary fs-5 w-100" type="submit">Dashboard</button>-->
+<!--                </form>-->
+<!--            </li>-->
+<!---->
+<!--            <li class="nav-item rounded-3">-->
+<!--                <form action="/controller.php" method="post">-->
+<!--                    <input type="hidden" name="page" value="MainPage">-->
+<!--                    <input type="hidden" name="command" value="History">-->
+<!---->
+<!--                    <button class="btn btn-primary fs-5 w-100" type="submit">History</button>-->
+<!--                </form>-->
+<!--            </li>-->
+<!---->
+<!--            <li class="nav-item rounded-3">-->
+<!--                <form action="/controller.php" method="post">-->
+<!--                    <input type="hidden" name="page" value="MainPage">-->
+<!--                    <input type="hidden" name="command" value="Profile">-->
+<!---->
+<!--                    <button class="btn btn-secondary fs-5 w-100" type="submit">Profile</button>-->
+<!--                </form>-->
+<!--            </li>-->
+<!---->
+<!--            <li class="nav-item rounded-3">-->
+<!--                <form action="/controller.php" method="post">-->
+<!--                    <input type="hidden" name="page" value="MainPage">-->
+<!--                    <input type="hidden" name="command" value="SignOut">-->
+<!---->
+<!--                    <button class="btn btn-danger fs-5 w-100" type="submit">Sign Out</button>-->
+<!--                </form>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
 
     <div class="d-flex flex-column vh-100" id="content">
         <!--  Greeting Card -->
@@ -290,4 +335,10 @@
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
     }
+
+    function viewPage(page) {
+        document.getElementById("command-value").value = page;
+        document.getElementById("nav-form").submit();
+    }
+
 </script>
