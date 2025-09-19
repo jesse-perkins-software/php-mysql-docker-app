@@ -41,7 +41,11 @@
         </form>
 
         <div class="nav-section mt-2" id="nav-dashboard">
-            <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="viewPage('Dashboard')">Dashboard</button>
+            <ul class="navbar-nav lh-1">
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="viewPage('Dashboard')">Dashboard</button>
+                </li>
+            </ul>
         </div>
 
         <div class="nav-section mt-4" id="nav-accounts">
