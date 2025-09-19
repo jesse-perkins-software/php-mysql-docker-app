@@ -6,6 +6,6 @@ RUN docker-php-ext-enable mysqli
 
 WORKDIR /var/www/html
 
-COPY src/php-files/ /var/www/html/
+COPY src/ /var/www/html/
 
 EXPOSE 80
