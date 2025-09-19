@@ -6,8 +6,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
-    <link rel="stylesheet" href="/stylesheets/mainpage.css">
     <title>Finance App</title>
+    <style>
+        #nav-bar {
+            width: 15vw;
+            min-width: 162px;
+        }
+
+        #content {
+            margin-left: 15vw;
+        }
+
+        #new {
+            width: 8vw;
+        }
+
+        #dash-container {
+            min-width: 100%;
+        }
+
+        .nav-link:hover {
+            background-color: #eee;
+        }
+
+    </style>
 </head>
 <body class="bg-light">
     <!--  Nav Bar  -->
