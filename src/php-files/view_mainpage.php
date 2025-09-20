@@ -15,6 +15,7 @@
 
         #content {
             margin-left: 15vw;
+
         }
 
         #new {
@@ -29,9 +30,18 @@
             background-color: #eee;
         }
 
+        .card-text {
+            font-size: 0.75em;
+            color: gray;
+        }
+
+        .card-small {
+            background-color: white;
+        }
+
     </style>
 </head>
-<body class="bg-light">
+<body>
     <!--  Nav Bar  -->
     <nav class="position-absolute h-100 border-end border-3" id="nav-bar">
         <!-- Form that controls what page the user will be directed to when they click a nav button -->
@@ -117,8 +127,30 @@
 <!--            </li>-->
 <!--        </ul>-->
 <!--    </div>-->
-    
-    <div class="d-flex flex-column vh-100" id="content">
+
+    <div class="vh-100" id="content">
+        <div class="container p-4">
+            <div class="row p-3 gap-4">
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top d-flex justify-content-between mb-4">
+                        <span class="card-text">Today's Spending</span>
+                        <span class="card-text">3%</span>
+                    </div>
+                    <h4>$3,400</h4>
+                    <div class="card-bottom d-flex justify-content-between mt-4">
+                        <span class="card-text">Chequing</span>
+                        <span class="card-text">Updated 2h</span>
+                    </div>
+                </div>
+                <div class="col border">Col 2</div>
+                <div class="col border">Col 3</div>
+                <div class="col border">Col 4</div>
+            </div>
+        </div>
+
+
+
+
 <!--        <!--  Greeting Card -->
 <!--        <div id="greeting" class="d-flex border border-2 bg-light rounded-3 m-2">-->
 <!--            <div class="fs-2 fw-medium p-3">-->
@@ -129,67 +161,67 @@
 <!--        </div>-->
 
         <!--  Dashboard  -->
-        <div id="dash" class="shadow-sm border border-2 bg-light rounded-3 m-2 p-3">
-            <div id="dash-container" class="container text-center">
-                <div class="row gap-4">
-                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3>Total Balance</h3>
-                        <span id="totalBalance"></span>
-                    </div>
-                    
-                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3>Total Income</h3>
-                        <span id="totalIncome"></span>
-                    </div>
-                    
-                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3>Total Spending</h3>
-                        <span id="totalSpending"></span>
-                    </div>
-                </div>
-
-                <br>
-                
-                <div class="row gap-4">
-                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3>Monthly Balance</h3>
-                        <span id="monthlyBalance"></span>
-                    </div>
-                    
-                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3>Monthly Income</h3>
-                        <span id="monthlyIncome"></span>
-                    </div>
-                    
-                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3>Monthly Spending</h3>
-                        <span id="monthlySpending"></span>
-                    </div>
-                </div><br>
-                
-                <div class="row gap-4">
-                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3>Avg. Savings Rate</h3>
-                        <span id="avgRate">20%</span>
-                    </div>
-                    
-                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3 id="monthNeeds">Needs</h3>
-                        <span id="monthNeedsRate">10%</span>
-                    </div>
-                    
-                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3 id="monthWants">Wants</h3>
-                        <span id="monthWantsRate">5%</span>
-                    </div>
-                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">
-                        <h3 id="monthSavings">Savings</h3>
-                        <span id="monthSavingsRate">5%</span>
-                    </div>
-                </div><br>
-            </div>
-            
-        </div>
+<!--        <div id="dash" class="shadow-sm border border-2 bg-light rounded-3 m-2 p-3">-->
+<!--            <div id="dash-container" class="container text-center">-->
+<!--                <div class="row gap-4">-->
+<!--                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">-->
+<!--                        <h3>Total Balance</h3>-->
+<!--                        <span id="totalBalance"></span>-->
+<!--                    </div>-->
+<!--                    -->
+<!--                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">-->
+<!--                        <h3>Total Income</h3>-->
+<!--                        <span id="totalIncome"></span>-->
+<!--                    </div>-->
+<!--                    -->
+<!--                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">-->
+<!--                        <h3>Total Spending</h3>-->
+<!--                        <span id="totalSpending"></span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!---->
+<!--                <br>-->
+<!--                -->
+<!--                <div class="row gap-4">-->
+<!--                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">-->
+<!--                        <h3>Monthly Balance</h3>-->
+<!--                        <span id="monthlyBalance"></span>-->
+<!--                    </div>-->
+<!--                    -->
+<!--                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">-->
+<!--                        <h3>Monthly Income</h3>-->
+<!--                        <span id="monthlyIncome"></span>-->
+<!--                    </div>-->
+<!--                    -->
+<!--                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">-->
+<!--                        <h3>Monthly Spending</h3>-->
+<!--                        <span id="monthlySpending"></span>-->
+<!--                    </div>-->
+<!--                </div><br>-->
+<!--                -->
+<!--                <div class="row gap-4">-->
+<!--                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">-->
+<!--                        <h3>Avg. Savings Rate</h3>-->
+<!--                        <span id="avgRate">20%</span>-->
+<!--                    </div>-->
+<!--                    -->
+<!--                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">-->
+<!--                        <h3 id="monthNeeds">Needs</h3>-->
+<!--                        <span id="monthNeedsRate">10%</span>-->
+<!--                    </div>-->
+<!--                    -->
+<!--                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">-->
+<!--                        <h3 id="monthWants">Wants</h3>-->
+<!--                        <span id="monthWantsRate">5%</span>-->
+<!--                    </div>-->
+<!--                    <div class="col border p-2 rounded-3 bg-light fs-2 shadow">-->
+<!--                        <h3 id="monthSavings">Savings</h3>-->
+<!--                        <span id="monthSavingsRate">5%</span>-->
+<!--                    </div>-->
+<!--                </div><br>-->
+<!--            </div>-->
+<!--            -->
+<!--        </div>-->
 
 <!--        <!--  Add Transaction Button  -->
 <!--        <div class="d-flex justify-content-end m-2">-->
