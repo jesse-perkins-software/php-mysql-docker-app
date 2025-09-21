@@ -3,9 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <title>Finance App</title>
     <style>
         #nav-bar {
@@ -31,12 +30,24 @@
         }
 
         .card-text {
-            font-size: 0.75em;
+            font-size: 0.9em;
             color: gray;
         }
 
         .card-small {
             background-color: white;
+        }
+
+        .info-box-pos {
+            color: green;
+        }
+
+        .info-box-neg {
+            color: red;
+        }
+
+        .col h4 {
+            font-size: 2em;
         }
 
     </style>
@@ -133,18 +144,84 @@
             <div class="row p-3 gap-4">
                 <div class="col card-small p-2 rounded shadow-sm">
                     <div class="card-top d-flex justify-content-between mb-4">
-                        <span class="card-text">Today's Spending</span>
-                        <span class="card-text">3%</span>
+                        <span class="card-text">Current Balance</span>
+                        <span class="card-text info-box-pos rounded-pill">+$3,000 (6.7%)</span>
                     </div>
-                    <h4>$3,400</h4>
+                    <h4>$29,437</h4>
+                    <div class="card-bottom d-flex justify-content-between mt-4">
+                        <span class="card-text">All Accounts</span>
+                        <span class="card-text">As of today</span>
+                    </div>
+                </div>
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top d-flex justify-content-between mb-4">
+                        <span class="card-text">Today's Spending</span>
+                        <span class="card-text info-box-neg">-3% vs avg</span>
+                    </div>
+                    <h4>$120</h4>
                     <div class="card-bottom d-flex justify-content-between mt-4">
                         <span class="card-text">Chequing</span>
                         <span class="card-text">Updated 2h</span>
                     </div>
                 </div>
-                <div class="col border">Col 2</div>
-                <div class="col border">Col 3</div>
-                <div class="col border">Col 4</div>
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top d-flex justify-content-between mb-4">
+                        <span class="card-text">Next Upcoming Bill</span>
+                        <span class="card-text">Oct 25</span>
+                    </div>
+                    <h4>$79</h4>
+                    <div class="card-bottom d-flex justify-content-between mt-4">
+                        <span class="card-text">Autopay off</span>
+                        <span class="card-text">Reminder enabled</span>
+                    </div>
+                </div>
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top d-flex justify-content-between mb-4">
+                        <span class="card-text">Monthly Cash Flow</span>
+                        <span class="card-text">September</span>
+                    </div>
+                    <h4>$1,340</h4>
+                    <div class="card-bottom d-flex justify-content-between mt-4">
+                        <span class="card-text">All Accounts</span>
+                        <span class="card-text">As of today</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row p-3 gap-4">
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top d-flex justify-content-between mb-4">
+                        <span class="card-text">Current Balance</span>
+                        <span class="card-text info-box-pos rounded-pill">+$3,000 (6.7%)</span>
+                    </div>
+                    <h4>$29,437</h4>
+                    <div class="card-bottom d-flex justify-content-between mt-4">
+                        <span class="card-text">All Accounts</span>
+                        <span class="card-text">As of today</span>
+                    </div>
+                </div>
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top d-flex justify-content-between mb-4">
+                        <span class="card-text">Today's Spending</span>
+                        <span class="card-text info-box-neg">-3% vs avg</span>
+                    </div>
+                    <h4>$120</h4>
+                    <div class="card-bottom d-flex justify-content-between mt-4">
+                        <span class="card-text">Chequing</span>
+                        <span class="card-text">Updated 2h</span>
+                    </div>
+                </div>
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top d-flex justify-content-between mb-4">
+                        <span class="card-text">Next Upcoming Bill</span>
+                        <span class="card-text">Oct 25</span>
+                    </div>
+                    <h4>$79</h4>
+                    <div class="card-bottom d-flex justify-content-between mt-4">
+                        <span class="card-text">Autopay off</span>
+                        <span class="card-text">Reminder enabled</span>
+                    </div>
+                </div>
             </div>
         </div>
 
