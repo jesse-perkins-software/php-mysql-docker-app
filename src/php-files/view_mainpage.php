@@ -30,12 +30,35 @@
         }
 
         .card-text {
-            font-size: 0.9em;
+            font-size: 0.8em;
             color: gray;
         }
 
         .card-small {
             background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 10em;
+        }
+
+        .card-top, .card-bottom {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-top-half, .card-bottom-half {
+            height: 50%;
+        }
+
+        .card-top-half, .card-bottom-half {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-top {
+            margin-bottom: 1.5em;
         }
 
         .info-box-pos {
@@ -46,16 +69,16 @@
             color: red;
         }
 
-        .col h4 {
-            font-size: 2em;
-        }
-
         #car-loan-progress {
             width: 50%;
         }
 
         .progress.car-loan {
             height: 0.5em;
+        }
+
+        h5 {
+            margin-bottom: 0;
         }
 
     </style>
@@ -151,45 +174,45 @@
         <div class="container p-4">
             <div class="row p-3 gap-4">
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top d-flex justify-content-between mb-4">
+                    <div class="card-top">
                         <span class="card-text">Current Balance</span>
                         <span class="card-text info-box-pos rounded-pill">+$3,000 (6.7%)</span>
                     </div>
                     <h5>$29,437</h5>
-                    <div class="card-bottom d-flex justify-content-between mt-4">
+                    <div class="card-bottom">
                         <span class="card-text">All Accounts</span>
                         <span class="card-text">As of today</span>
                     </div>
                 </div>
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top d-flex justify-content-between mb-4">
+                    <div class="card-top">
                         <span class="card-text">Today's Spending</span>
                         <span class="card-text info-box-neg">-3% vs avg</span>
                     </div>
                     <h5>$120</h5>
-                    <div class="card-bottom d-flex justify-content-between mt-4">
+                    <div class="card-bottom">
                         <span class="card-text">Chequing</span>
                         <span class="card-text">Updated 2h</span>
                     </div>
                 </div>
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top d-flex justify-content-between mb-4">
+                    <div class="card-top">
                         <span class="card-text">Next Upcoming Bill</span>
                         <span class="card-text">Oct 25</span>
                     </div>
                     <h5>$79</h5>
-                    <div class="card-bottom d-flex justify-content-between mt-4">
+                    <div class="card-bottom">
                         <span class="card-text">Autopay off</span>
                         <span class="card-text">Reminder enabled</span>
                     </div>
                 </div>
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top d-flex justify-content-between mb-4">
+                    <div class="card-top">
                         <span class="card-text">Monthly Cash Flow</span>
                         <span class="card-text">September</span>
                     </div>
                     <h5>$1,340</h5>
-                    <div class="card-bottom d-flex justify-content-between mt-4">
+                    <div class="card-bottom">
                         <span class="card-text">All Accounts</span>
                         <span class="card-text">As of today</span>
                     </div>
@@ -198,7 +221,7 @@
 
             <div class="row p-3 gap-4">
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top d-flex justify-content-between mb-4">
+                    <div class="card-top">
                         <span class="card-text">Car Loan</span>
                         <span class="card-text info-box-pos rounded-pill">+$200 (0.8%)</span>
                     </div>
@@ -206,40 +229,47 @@
                     <div class="progress car-loan" role="progressbar">
                         <div class="progress-bar" id="car-loan-progress"></div>
                     </div>
-                    <div class="card-bottom d-flex justify-content-between mt-4">
+                    <div class="card-bottom">
                         <span class="card-text">Monthly Contribution - $200</span>
                         <span class="card-text">49.8%</span>
                     </div>
                 </div>
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top d-flex justify-content-between mb-4">
-                        <span class="card-text">Today's Spending</span>
-                        <span class="card-text info-box-neg">-3% vs avg</span>
+                    <div class="card-top-half">
+                        <div class="card-top-text">
+                            <span class="card-text">Subscriptions</span>
+                            <span class="card-text info-box-neg">+</span>
+                        </div>
+                        <h5>$120</h5>
                     </div>
-                    <h5>$120</h5>
-                    <div class="card-bottom d-flex justify-content-between mt-4">
-                        <span class="card-text">Chequing</span>
-                        <span class="card-text">Updated 2h</span>
+                    <div class="card-bottom-half">
+                        <div class="progress car-loan" role="progressbar">
+                            <div class="progress-bar" id="car-loan-progress"></div>
+                        </div>
+                        <div class="card-bottom-text">
+                            <span class="card-text">3 Subscriptions</span>
+                            <span class="card-text">As of today</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top d-flex justify-content-between mb-4">
+                    <div class="card-top">
                         <span class="card-text">Next Upcoming Bill</span>
                         <span class="card-text">Oct 25</span>
                     </div>
-                    <h4>$79</h4>
-                    <div class="card-bottom d-flex justify-content-between mt-4">
+                    <h5>$79</h5>
+                    <div class="card-bottom">
                         <span class="card-text">Autopay off</span>
                         <span class="card-text">Reminder enabled</span>
                     </div>
                 </div>
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top d-flex justify-content-between mb-4">
+                    <div class="card-top">
                         <span class="card-text">Monthly Cash Flow</span>
                         <span class="card-text">September</span>
                     </div>
-                    <h4>$1,340</h4>
-                    <div class="card-bottom d-flex justify-content-between mt-4">
+                    <h5>$1,340</h5>
+                    <div class="card-bottom">
                         <span class="card-text">All Accounts</span>
                         <span class="card-text">As of today</span>
                     </div>
