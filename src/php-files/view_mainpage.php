@@ -44,10 +44,16 @@
 
         .card-top, .card-bottom {
             display: flex;
+            flex-direction: row;
             justify-content: space-between;
         }
 
-        .card-top-half, .card-bottom-half {
+        .card-top-half {
+            height: 50%;
+        }
+
+        .card-bottom-half {
+            padding-top: 0.2em;
             height: 50%;
         }
 
@@ -55,10 +61,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-        }
-
-        .card-top {
-            margin-bottom: 1.5em;
         }
 
         .info-box-pos {
@@ -221,17 +223,22 @@
 
             <div class="row p-3 gap-4">
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top">
-                        <span class="card-text">Car Loan</span>
-                        <span class="card-text info-box-pos rounded-pill">+$200 (0.8%)</span>
+                    <div class="card-top-half">
+                        <div class="card-top">
+                            <span class="card-text">Car Loan</span>
+                            <span class="card-text info-box-pos rounded-pill">+$200 (0.8%)</span>
+                        </div>
+                        <div></div>
                     </div>
                     <h5>$12,450</h5>
-                    <div class="progress car-loan" role="progressbar">
-                        <div class="progress-bar" id="car-loan-progress"></div>
-                    </div>
-                    <div class="card-bottom">
-                        <span class="card-text">Monthly Contribution - $200</span>
-                        <span class="card-text">49.8%</span>
+                    <div class="card-bottom-half">
+                        <div class="progress car-loan" role="progressbar">
+                            <div class="progress-bar" id="car-loan-progress"></div>
+                        </div>
+                        <div class="card-bottom">
+                            <span class="card-text">Monthly Contribution - $200</span>
+                            <span class="card-text">49.8%</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col card-small p-2 rounded shadow-sm">
@@ -240,12 +247,11 @@
                             <span class="card-text">Subscriptions</span>
                             <span class="card-text info-box-neg">+</span>
                         </div>
-                        <h5>$120</h5>
+                        <div></div>
                     </div>
+                    <h5>$120</h5>
                     <div class="card-bottom-half">
-                        <div class="progress car-loan" role="progressbar">
-                            <div class="progress-bar" id="car-loan-progress"></div>
-                        </div>
+                        <div></div>
                         <div class="card-bottom-text">
                             <span class="card-text">3 Subscriptions</span>
                             <span class="card-text">As of today</span>
@@ -253,25 +259,37 @@
                     </div>
                 </div>
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top">
-                        <span class="card-text">Next Upcoming Bill</span>
-                        <span class="card-text">Oct 25</span>
+                    <div class="card-top-half">
+                        <div class="card-top">
+                            <span class="card-text">Next Upcoming Bill</span>
+                            <span class="card-text">Oct 25</span>
+                        </div>
+                        <div></div>
                     </div>
                     <h5>$79</h5>
-                    <div class="card-bottom">
-                        <span class="card-text">Autopay off</span>
-                        <span class="card-text">Reminder enabled</span>
+                    <div class="card-bottom-half">
+                        <div></div>
+                        <div class="card-bottom">
+                            <span class="card-text">Autopay off</span>
+                            <span class="card-text">Reminder enabled</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top">
-                        <span class="card-text">Monthly Cash Flow</span>
-                        <span class="card-text">September</span>
+                    <div class="card-top-half">
+                        <div class="card-top">
+                            <span class="card-text">Monthly Cash Flow</span>
+                            <span class="card-text">September</span>
+                        </div>
+                        <div></div>
                     </div>
                     <h5>$1,340</h5>
-                    <div class="card-bottom">
-                        <span class="card-text">All Accounts</span>
-                        <span class="card-text">As of today</span>
+                    <div class="card-bottom-half">
+                        <div></div>
+                        <div class="card-bottom">
+                            <span class="card-text">All Accounts</span>
+                            <span class="card-text">As of today</span>
+                        </div>
                     </div>
                 </div>
             </div>
