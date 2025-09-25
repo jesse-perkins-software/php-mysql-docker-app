@@ -180,8 +180,8 @@
                 <div class="col card-small p-2 rounded shadow-sm">
                     <div class="card-top-half"> <!-- Top half of the card -->
                         <div class="card-top-text"> <!-- Text for the top of the card -->
-                            <span class="card-text">Current Balance</span>
-                            <span class="card-text info-box-pos rounded-pill">+$3,000 (6.7%)</span>
+                            <span class="card-text">Current Balance</span> <!-- Top right corner -->
+                            <span class="card-text info-box-pos ">+$3,000 (6.7%)</span> <!-- Top left corner -->
                         </div>
                         <div></div> <!-- Just in case I want to add anything else here later -->
                     </div>
@@ -191,8 +191,8 @@
                     <div class="card-bottom-half"> <!-- Bottom half of the card -->
                         <div></div> <!-- Just in case I want to add anything else here later -->
                         <div class="card-bottom-text"> <!-- Text for the bottom of the card -->
-                            <span class="card-text">All Accounts</span>
-                            <span class="card-text">As of today</span>
+                            <span class="card-text">All Accounts</span> <!-- Bottom right corner -->
+                            <span class="card-text">As of today</span> <!-- Bottom left corner -->
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Today's Spending</span>
-                            <span class="card-text info-box-neg">-3% vs avg</span>
+                            <span class="card-text info-box-neg">+3% vs avg</span>
                         </div>
                         <div></div>
                     </div>
@@ -256,7 +256,7 @@
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Car Loan</span>
-                            <span class="card-text info-box-pos rounded-pill">+$200 (0.8%)</span>
+                            <span class="card-text info-box-pos ">+$200 (0.8%)</span>
                         </div>
                         <div></div>
                     </div>
@@ -266,7 +266,7 @@
                             <div class="progress-bar" id="car-loan-progress"></div>
                         </div>
                         <div class="card-bottom-text">
-                            <span class="card-text">Monthly Contribution - $200</span>
+                            <span class="card-text">Contributed Monthly</span>
                             <span class="card-text">49.8%</span>
                         </div>
                     </div>
@@ -279,11 +279,28 @@
                         </div>
                         <div></div>
                     </div>
-                    <h5>$120</h5>
+                    <h5>$50</h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
-                            <span class="card-text">3 Subscriptions</span>
+                            <span class="card-text">Most Expensive - Netflix ($29)</span>
+                            <span class="card-text"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top-half">
+                        <div class="card-top-text">
+                            <span class="card-text">7 Day Spending</span>
+                            <span class="card-text info-box-pos">-18% vs avg</span>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h5>$178</h5>
+                    <div class="card-bottom-half">
+                        <div></div>
+                        <div class="card-bottom-text">
+                            <span class="card-text">From Sep 18</span>
                             <span class="card-text">As of today</span>
                         </div>
                     </div>
@@ -291,41 +308,93 @@
                 <div class="col card-small p-2 rounded shadow-sm">
                     <div class="card-top-half">
                         <div class="card-top-text">
-                            <span class="card-text">Next Upcoming Bill</span>
-                            <span class="card-text">Oct 25</span>
+                            <span class="card-text">Current Savings Rate (Monthly)</span>
+                            <span class="card-text info-box-pos">+3% vs Aug</span>
                         </div>
                         <div></div>
                     </div>
-                    <h5>$79</h5>
+                    <h5>21%</h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
-                            <span class="card-text">Autopay off</span>
-                            <span class="card-text">Reminder enabled</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top-half">
-                        <div class="card-top-text">
-                            <span class="card-text">Monthly Cash Flow</span>
-                            <span class="card-text">September</span>
-                        </div>
-                        <div></div>
-                    </div>
-                    <h5>$1,340</h5>
-                    <div class="card-bottom-half">
-                        <div></div>
-                        <div class="card-bottom-text">
-                            <span class="card-text">All Accounts</span>
-                            <span class="card-text">As of today</span>
+                            <span class="card-text">Target 25%</span>
+                            <span class="card-text"></span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Third Row -->
-
+            <div class="row p-3 gap-4">
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top-half">
+                        <div class="card-top-text">
+                            <span class="card-text">Top Category (This Month)</span>
+                            <span class="card-text">Groceries</span>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h5>$520</h5>
+                    <div class="card-bottom-half">
+                        <div></div>
+                        <div class="card-bottom-text">
+                            <span class="card-text"></span>
+                            <span class="card-text">As of today</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top-half">
+                        <div class="card-top-text">
+                            <span class="card-text">Subscriptions</span>
+                            <span class="card-text">3</span>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h5>$50</h5>
+                    <div class="card-bottom-half">
+                        <div></div>
+                        <div class="card-bottom-text">
+                            <span class="card-text">Most Expensive - Netflix ($29)</span>
+                            <span class="card-text"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top-half">
+                        <div class="card-top-text">
+                            <span class="card-text">7 Day Spending</span>
+                            <span class="card-text info-box-pos">-18% vs avg</span>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h5>$178</h5>
+                    <div class="card-bottom-half">
+                        <div></div>
+                        <div class="card-bottom-text">
+                            <span class="card-text">From Sep 18</span>
+                            <span class="card-text">As of today</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top-half">
+                        <div class="card-top-text">
+                            <span class="card-text">Current Savings Rate (Monthly)</span>
+                            <span class="card-text info-box-pos">+3% vs Aug</span>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h5>21%</h5>
+                    <div class="card-bottom-half">
+                        <div></div>
+                        <div class="card-bottom-text">
+                            <span class="card-text">Target 25%</span>
+                            <span class="card-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
