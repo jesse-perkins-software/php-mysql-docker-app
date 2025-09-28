@@ -99,31 +99,59 @@
                 <li class="nav-item">
                     <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="viewPage('Dashboard')">Dashboard</button>
                 </li>
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="">Accounts</button>
+                </li>
             </ul>
         </div>
 
         <div class="nav-section mt-4" id="nav-accounts">
-            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Accounts</p>
+            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Transactions</p>
 
             <ul class="navbar-nav lh-1">
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Overview</button>
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Income</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Savings</button>
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Expenses</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Chequing</button>
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Transfers</button>
                 </li>
             </ul>
         </div>
 
         <div class="nav-section mt-4" id="nav-profile">
-            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Profile</p>
+            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Budget</p>
 
             <ul class="navbar-nav lh-1">
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('Profile')">Settings</button>
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Income</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Expenses</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Budgeted vs. Actual</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nav-section mt-4" id="nav-profile">
+            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Settings</p>
+
+            <ul class="navbar-nav lh-1">
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('Profile')">Profile</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Preferences</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Categories & Accounts</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">About & Help</button>
                 </li>
             </ul>
         </div>
@@ -185,7 +213,7 @@
                     <div></div> <!-- Just in case I want to add anything else here later -->
                 </div>
 
-                <h5>$29,437</h5> <!-- The primary statistic (dollar amount, percentage, etc.) -->
+                <h5>$29,437.29</h5> <!-- The primary statistic (dollar amount, percentage, etc.) -->
 
                 <div class="card-bottom-half"> <!-- Bottom half of the card -->
                     <div></div> <!-- Just in case I want to add anything else here later -->
@@ -199,92 +227,16 @@
             <div class="col card-small p-2 rounded shadow-sm">
                 <div class="card-top-half">
                     <div class="card-top-text">
-                        <span class="card-text">Today's Spending</span>
+                        <span class="card-text">7 Day Spending</span>
                         <span class="card-text info-box-neg">+3% vs avg</span>
                     </div>
                     <div></div>
                 </div>
-                <h5>$120</h5>
+                <h5>$120.00</h5>
                 <div class="card-bottom-half">
                     <div></div>
                     <div class="card-bottom-text">
-                        <span class="card-text">Chequing</span>
-                        <span class="card-text">Updated 2h</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row p-3 gap-4">
-            <div class="col card-small p-2 rounded shadow-sm">
-                <div class="card-top-half">
-                    <div class="card-top-text">
-                        <span class="card-text">Next Upcoming Bill</span>
-                        <span class="card-text">Oct 25</span>
-                    </div>
-                    <div></div>
-                </div>
-                <h5>Internet ($79)</h5>
-                <div class="card-bottom-half">
-                    <div></div>
-                    <div class="card-bottom-text">
-                        <span class="card-text">Autopay off</span>
-                        <span class="card-text">Reminder enabled</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col card-small p-2 rounded shadow-sm">
-                <div class="card-top-half">
-                    <div class="card-top-text">
-                        <span class="card-text">Monthly Cash Flow</span>
-                        <span class="card-text">September</span>
-                    </div>
-                    <div></div>
-                </div>
-                <h5>$1,340</h5>
-                <div class="card-bottom-half">
-                    <div></div>
-                    <div class="card-bottom-text">
-                        <span class="card-text">All Accounts</span>
-                        <span class="card-text">As of today</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row p-3 gap-4">
-            <div class="col card-small p-2 rounded shadow-sm">
-                <div class="card-top-half">
-                    <div class="card-top-text">
-                        <span class="card-text">Car Loan</span>
-                        <span class="card-text info-box-pos ">+$200 (0.8%)</span>
-                    </div>
-                    <div></div>
-                </div>
-                <h5>$12,450</h5>
-                <div class="card-bottom-half">
-                    <div class="progress car-loan" role="progressbar">
-                        <div class="progress-bar" id="car-loan-progress"></div>
-                    </div>
-                    <div class="card-bottom-text">
-                        <span class="card-text">Contributed Monthly</span>
-                        <span class="card-text">49.8%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col card-small p-2 rounded shadow-sm">
-                <div class="card-top-half">
-                    <div class="card-top-text">
-                        <span class="card-text">Subscriptions</span>
-                        <span class="card-text">3</span>
-                    </div>
-                    <div></div>
-                </div>
-                <h5>$50</h5>
-                <div class="card-bottom-half">
-                    <div></div>
-                    <div class="card-bottom-text">
-                        <span class="card-text">Most Expensive - Netflix ($29)</span>
+                        <span class="card-text">Since Sep 20</span>
                         <span class="card-text"></span>
                     </div>
                 </div>
@@ -295,33 +247,50 @@
             <div class="col card-small p-2 rounded shadow-sm">
                 <div class="card-top-half">
                     <div class="card-top-text">
-                        <span class="card-text">7 Day Spending</span>
-                        <span class="card-text info-box-pos">-18% vs avg</span>
+                        <span class="card-text">Monthly Savings Rate</span>
+                        <span class="card-text info-box-pos">+5% vs Aug</span>
                     </div>
                     <div></div>
                 </div>
-                <h5>$178</h5>
+                <h5>52.57%</h5>
                 <div class="card-bottom-half">
                     <div></div>
                     <div class="card-bottom-text">
-                        <span class="card-text">From Sep 18</span>
-                        <span class="card-text">As of today</span>
+                        <span class="card-text">Aim for 60%</span>
+                        <span class="card-text"></span>
                     </div>
                 </div>
             </div>
             <div class="col card-small p-2 rounded shadow-sm">
                 <div class="card-top-half">
                     <div class="card-top-text">
-                        <span class="card-text">Current Savings Rate (Monthly)</span>
-                        <span class="card-text info-box-pos">+3% vs Aug</span>
+                        <span class="card-text">Monthly Needs Rate</span>
+                        <span class="card-text info-box-neg">-10% vs Aug</span>
                     </div>
                     <div></div>
                 </div>
-                <h5>21%</h5>
+                <h5>25.76%</h5>
                 <div class="card-bottom-half">
                     <div></div>
                     <div class="card-bottom-text">
-                        <span class="card-text">Target 25%</span>
+                        <span class="card-text">Aim for 30%</span>
+                        <span class="card-text"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col card-small p-2 rounded shadow-sm">
+                <div class="card-top-half">
+                    <div class="card-top-text">
+                        <span class="card-text">Monthly Wants Rate</span>
+                        <span class="card-text info-box-neg">-8% vs Aug</span>
+                    </div>
+                    <div></div>
+                </div>
+                <h5>15.76%</h5>
+                <div class="card-bottom-half">
+                    <div></div>
+                    <div class="card-bottom-text">
+                        <span class="card-text">Aim for 10%</span>
                         <span class="card-text"></span>
                     </div>
                 </div>
