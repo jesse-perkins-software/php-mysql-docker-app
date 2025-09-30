@@ -15,16 +15,28 @@
 
         #content-container {
             display: flex;
+            flex-direction: row;
+            justify-content: center;
             height: 100vh;
         }
 
-        #card-small-content, #graphs-charts-content {
+        #graphs-charts-content {
             flex: 1;
+        }
+
+        #top-half, #bottom-half {
+            height: 50%;
             padding: 1.5em;
         }
 
         #card-small-content {
+            flex: 1;
+            padding: 1.5em;
             margin-left: 15%;
+        }
+
+        .chart {
+            height: 50%;
         }
 
         #new {
@@ -328,7 +340,12 @@
         </section>
 
         <section class="vh-100 container" id="graphs-charts-content">
-            <canvas id="pie-chart"></canvas>
+            <div class="" id="top-half">
+                <canvas id="first-chart"></canvas>
+            </div>
+            <div class="" id="bottom-half">
+                <canvas id="second-chart"></canvas>
+            </div>
         </section>
     </div>
 
@@ -498,7 +515,7 @@
 
 </body>
 <script defer>
-    const pie_chart = new Chart(document.getElementById('pie-chart'), {
+    const first_chart = new Chart(document.getElementById('first-chart'), {
         type: 'doughnut',
         data: {
             datasets: [{
@@ -506,8 +523,43 @@
                 backgroundColor: ["rgb(34,139,34)", 'rgb(30,144,255)', 'rgb(178,34,34)']
             }],
             labels: ['Savings', 'Needs', 'Wants'],
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                }
+            }
         }
-    })
+    });
+
+    const second_chart = new Chart(document.getElementById('second-chart'), {
+        type: 'line',
+        data: {
+            datasets: [
+                {
+                    label: "Monthly Balance",
+                    data: [100, 50, 85, 210, 150, 175, 160, 75, 110, 120, 90, 130],
+                    backgroundColor: "rgb(0, 0, 0)",
+                    borderColor: "rgb(75, 192, 192)",
+                    tension: 0,
+                    borderWidth: 2,
+
+                }
+            ],
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                }
+            }
+        }
+    });
 
     //----- Form Validation -----
     (() => {
