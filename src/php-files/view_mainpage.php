@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <title>Finance App</title>
     <style>
         #nav-bar {
@@ -208,7 +209,7 @@
 <!--        </ul>-->
 <!--    </div>-->
     <div id="content-container">
-        <section class="vh-100 container border" id="card-small-content">
+        <section class="vh-100 container" id="card-small-content">
             <div class="row p-3 gap-4"> <!-- This is the div for an entire row on the dashboard page -->
 
                 <!-- Here is the overall structure for a small dashboard card. -->
@@ -326,8 +327,8 @@
             </div>
         </section>
 
-        <section class="vh-100 container border" id="graphs-charts-content">
-
+        <section class="vh-100 container" id="graphs-charts-content">
+            <canvas id="pie-chart"></canvas>
         </section>
     </div>
 
@@ -497,6 +498,17 @@
 
 </body>
 <script defer>
+    const pie_chart = new Chart(document.getElementById('pie-chart'), {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [50, 30, 20],
+                backgroundColor: ["rgb(34,139,34)", 'rgb(30,144,255)', 'rgb(178,34,34)']
+            }],
+            labels: ['Savings', 'Needs', 'Wants'],
+        }
+    })
+
     //----- Form Validation -----
     (() => {
         'use strict'
