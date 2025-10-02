@@ -25,8 +25,9 @@
         }
 
         #top-half, #bottom-half {
-            height: 50%;
+            height: 45%;
             padding: 1.5em;
+            text-align: center;
         }
 
         #card-small-content {
@@ -35,8 +36,8 @@
             margin-left: 15%;
         }
 
-        .chart {
-            height: 50%;
+        #first-chart {
+            margin-bottom: 1.5em;
         }
 
         #new {
@@ -341,9 +342,11 @@
 
         <section class="vh-100 container" id="graphs-charts-content">
             <div class="" id="top-half">
+                <h2>Monthly Spending</h2>
                 <canvas id="first-chart"></canvas>
             </div>
             <div class="" id="bottom-half">
+                <h2>Yearly Spending</h2>
                 <canvas id="second-chart"></canvas>
             </div>
         </section>
@@ -520,7 +523,7 @@
         data: {
             datasets: [{
                 data: [50, 30, 20],
-                backgroundColor: ["rgb(34,139,34)", 'rgb(30,144,255)', 'rgb(178,34,34)']
+                backgroundColor: ["rgb(6, 95, 70)", 'rgb(30, 58, 138)', 'rgb(178,34,34)']
             }],
             labels: ['Savings', 'Needs', 'Wants'],
         },
@@ -535,17 +538,43 @@
     });
 
     const second_chart = new Chart(document.getElementById('second-chart'), {
-        type: 'line',
         data: {
             datasets: [
                 {
-                    label: "Monthly Balance",
+                    type: "bar",
+                    label: "Total",
                     data: [100, 50, 85, 210, 150, 175, 160, 75, 110, 120, 90, 130],
-                    backgroundColor: "rgb(0, 0, 0)",
-                    borderColor: "rgb(75, 192, 192)",
-                    tension: 0,
-                    borderWidth: 2,
+                    backgroundColor: "#D4D4D4",
 
+                    tension: 0,
+                    order: 2
+                },
+                {
+                    type: "line",
+                    label: "Savings",
+                    data: [50, 25, 42.5, 105, 75, 87.5, 80, 37.5, 55, 60, 45, 65],
+                    backgroundColor: "rgb(6, 95, 70)",
+                    borderColor: "rgb(6, 95, 70, 0.5)",
+                    tension: 0,
+                    order: 1
+                },
+                {
+                    type: "line",
+                    label: "Needs",
+                    data: [35, 15, 32.5, 75, 50, 57.5, 60, 22.5, 35, 30, 25, 45],
+                    backgroundColor: "rgb(30, 58, 138)",
+                    borderColor: "rgb(30, 58, 138, 0.5)",
+                    tension: 0,
+                    order: 1
+                },
+                {
+                    type: "line",
+                    label: "Wants",
+                    data: [20, 10, 10, 30, 25, 30, 20, 15, 20, 15, 20, 20],
+                    backgroundColor: "rgb(178, 34, 34)",
+                    borderColor: "rgb(178, 34, 34, 0.5)",
+                    tension: 0,
+                    order: 1
                 }
             ],
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
