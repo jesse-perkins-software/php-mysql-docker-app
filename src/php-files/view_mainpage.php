@@ -521,10 +521,12 @@
     const first_chart = new Chart(document.getElementById('first-chart'), {
         type: 'doughnut',
         data: {
-            datasets: [{
-                data: [50, 30, 20],
-                backgroundColor: ["rgb(6, 95, 70)", 'rgb(30, 58, 138)', 'rgb(178,34,34)']
-            }],
+            datasets: [
+                {
+                    data: [50, 30, 20],
+                    backgroundColor: ["rgb(6, 95, 70)", 'rgb(30, 58, 138)', 'rgb(178,34,34)']
+                }
+            ],
             labels: ['Savings', 'Needs', 'Wants'],
         },
         options: {
