@@ -8,6 +8,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <title>Finance App</title>
     <style>
+        .container {
+            height: 100vh;
+        }
+
         #nav-bar {
             width: 15vw;
             min-width: 162px;
@@ -40,6 +44,10 @@
             margin-bottom: 1.5em;
         }
 
+        .progress {
+            height: 0.5em;
+        }
+
         #new {
             width: 8vw;
         }
@@ -48,6 +56,10 @@
             min-width: 100%;
         }
 
+        .nav-link {
+            width: 100%;
+        }
+        
         .nav-link:hover {
             background-color: #eee;
         }
@@ -132,13 +144,13 @@
 
             <ul class="navbar-nav lh-1">
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Income</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="">Income</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Expenses</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="">Expenses</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Transfers</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="">Transfers</button>
                 </li>
             </ul>
         </div>
@@ -148,13 +160,13 @@
 
             <ul class="navbar-nav lh-1">
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Income</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="">Income</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Expenses</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="">Expenses</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Budgeted vs. Actual</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="">Budgeted vs. Actual</button>
                 </li>
             </ul>
         </div>
@@ -164,22 +176,22 @@
 
             <ul class="navbar-nav lh-1">
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('Profile')">Profile</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Profile')">Profile</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Preferences</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="">Preferences</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">Categories & Accounts</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="">Categories & Accounts</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="">About & Help</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="">About & Help</button>
                 </li>
             </ul>
         </div>
 
         <div class="nav-section mt-4" id="nav-logout">
-            <button class="nav-link fw-bold p-2 bg-secondary-subtle m-auto border rounded" type="submit" onclick="viewPage('SignOut')">Sign Out</button>
+            <button class="nav-link fw-bold p-2 bg-secondary-subtle m-auto rounded w-50" type="submit" onclick="viewPage('SignOut')">Sign Out</button>
         </div>
     </nav>
 <!--    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">-->
@@ -222,7 +234,7 @@
 <!--        </ul>-->
 <!--    </div>-->
     <div id="content-container">
-        <section class="vh-100 container" id="card-small-content">
+        <section class="container" id="card-small-content">
             <div class="row p-3 gap-4"> <!-- This is the div for an entire row on the dashboard page -->
 
                 <!-- Here is the overall structure for a small dashboard card. -->
@@ -269,16 +281,18 @@
                 <div class="col card-small p-2 rounded shadow-sm">
                     <div class="card-top-half">
                         <div class="card-top-text">
-                            <span class="card-text">Monthly Savings Rate</span>
-                            <span class="card-text info-box-pos">+5% vs Aug</span>
+                            <span class="card-text">Budget Spent</span>
+                            <span class="card-text">87%</span>
                         </div>
                         <div></div>
                     </div>
-                    <h5>52.57%</h5>
+                    <h5>$4,350</h5>
                     <div class="card-bottom-half">
-                        <div></div>
+                        <div class="progress" role="progressbar">
+                            <div class="progress-bar" style="width: 87%"></div>
+                        </div>
                         <div class="card-bottom-text">
-                            <span class="card-text">Aim for 60%</span>
+                            <span class="card-text"></span>
                             <span class="card-text"></span>
                         </div>
                     </div>
@@ -340,7 +354,7 @@
             </div>
         </section>
 
-        <section class="vh-100 container" id="graphs-charts-content">
+        <section class="container" id="graphs-charts-content">
             <div class="" id="top-half">
                 <h2>Monthly Spending</h2>
                 <canvas id="first-chart"></canvas>
@@ -544,15 +558,6 @@
             datasets: [
                 {
                     type: "bar",
-                    label: "Total",
-                    data: [100, 50, 85, 210, 150, 175, 160, 75, 110, 120, 90, 130],
-                    backgroundColor: "#D4D4D4",
-
-                    tension: 0,
-                    order: 2
-                },
-                {
-                    type: "line",
                     label: "Savings",
                     data: [50, 25, 42.5, 105, 75, 87.5, 80, 37.5, 55, 60, 45, 65],
                     backgroundColor: "rgb(6, 95, 70)",
@@ -561,7 +566,7 @@
                     order: 1
                 },
                 {
-                    type: "line",
+                    type: "bar",
                     label: "Needs",
                     data: [35, 15, 32.5, 75, 50, 57.5, 60, 22.5, 35, 30, 25, 45],
                     backgroundColor: "rgb(30, 58, 138)",
@@ -570,7 +575,7 @@
                     order: 1
                 },
                 {
-                    type: "line",
+                    type: "bar",
                     label: "Wants",
                     data: [20, 10, 10, 30, 25, 30, 20, 15, 20, 15, 20, 20],
                     backgroundColor: "rgb(178, 34, 34)",
@@ -587,6 +592,14 @@
             plugins: {
                 legend: {
                     position: 'bottom',
+                }
+            },
+            scale: {
+                x: {
+                    stacked: true,
+                },
+                y: {
+                    stacked: true,
                 }
             }
         }
