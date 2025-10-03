@@ -21,23 +21,34 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
-            height: 100vh;
         }
 
         #graphs-charts-content {
+            display: flex;
+            flex-direction: column;
             flex: 1;
         }
 
-        #top-half, #bottom-half {
-            height: 45%;
+        .graph {
+            height: 47.5%;
             padding: 1.5em;
             text-align: center;
         }
 
         #card-small-content {
+            display: flex;
+            flex-direction: column;
             flex: 1;
-            padding: 1.5em;
             margin-left: 15%;
+        }
+
+        .row {
+            display: flex;
+            flex: 1;
+        }
+
+        canvas {
+            display: flex;
         }
 
         #first-chart {
@@ -74,7 +85,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 9.5em;
         }
 
         .card-top-text, .card-bottom-text {
@@ -103,14 +113,6 @@
 
         .info-box-neg {
             color: red;
-        }
-
-        #car-loan-progress {
-            width: 50%;
-        }
-
-        .progress.car-loan {
-            height: 0.5em;
         }
 
         h5 {
@@ -242,7 +244,7 @@
                     <div class="card-top-half"> <!-- Top half of the card -->
                         <div class="card-top-text"> <!-- Text for the top of the card -->
                             <span class="card-text">Current Balance</span> <!-- Top right corner -->
-                            <span class="card-text info-box-pos ">+$3,000 (6.7%)</span> <!-- Top left corner -->
+                            <span class="card-text info-box-pos ">+$3,000 (+6.7%)</span> <!-- Top left corner -->
                         </div>
                         <div></div> <!-- Just in case I want to add anything else here later -->
                     </div>
@@ -266,7 +268,7 @@
                         </div>
                         <div></div>
                     </div>
-                    <h5>$120.00</h5>
+                    <h5>$323.47</h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
@@ -278,6 +280,60 @@
             </div>
 
             <div class="row p-3 gap-4">
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top-half">
+                        <div class="card-top-text">
+                            <span class="card-text">30 Day Spending</span>
+                            <span class="card-text info-box-pos">-15% vs avg</span>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h5>$3,245.45</h5>
+                    <div class="card-bottom-half">
+                        <div></div>
+                        <div class="card-bottom-text">
+                            <span class="card-text">Since Sep 1</span>
+                            <span class="card-text"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top-half">
+                        <div class="card-top-text">
+                            <span class="card-text">Most Recent Purchase</span>
+                            <span class="card-text">Sep 30</span>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h5>$147.23</h5>
+                    <div class="card-bottom-half">
+                        <div></div>
+                        <div class="card-bottom-text">
+                            <span class="card-text">@ Earls</span>
+                            <span class="card-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row p-3 gap-4">
+                <div class="col card-small p-2 rounded shadow-sm">
+                    <div class="card-top-half">
+                        <div class="card-top-text">
+                            <span class="card-text">Top Transaction Category</span>
+                            <span class="card-text">Sep</span>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h5>Groceries</h5>
+                    <div class="card-bottom-half">
+                        <div></div>
+                        <div class="card-bottom-text">
+                            <span class="card-text">$450</span>
+                            <span class="card-text">As of today</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="col card-small p-2 rounded shadow-sm">
                     <div class="card-top-half">
                         <div class="card-top-text">
@@ -297,39 +353,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col card-small p-2 rounded shadow-sm">
-                    <div class="card-top-half">
-                        <div class="card-top-text">
-                            <span class="card-text">Monthly Needs Rate</span>
-                            <span class="card-text info-box-neg">-10% vs Aug</span>
-                        </div>
-                        <div></div>
-                    </div>
-                    <h5>25.76%</h5>
-                    <div class="card-bottom-half">
-                        <div></div>
-                        <div class="card-bottom-text">
-                            <span class="card-text">Aim for 30%</span>
-                            <span class="card-text"></span>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="row p-3 gap-4">
                 <div class="col card-small p-2 rounded shadow-sm">
                     <div class="card-top-half">
                         <div class="card-top-text">
-                            <span class="card-text">Monthly Wants Rate</span>
-                            <span class="card-text info-box-neg">-8% vs Aug</span>
+                            <span class="card-text">Title</span>
+                            <span class="card-text info-box-neg"></span>
                         </div>
                         <div></div>
                     </div>
-                    <h5>15.76%</h5>
+                    <h5>%</h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
-                            <span class="card-text">Aim for 10%</span>
+                            <span class="card-text"></span>
                             <span class="card-text"></span>
                         </div>
                     </div>
@@ -355,11 +394,11 @@
         </section>
 
         <section class="container" id="graphs-charts-content">
-            <div class="" id="top-half">
+            <div class="graph" id="top-half">
                 <h2>Monthly Spending</h2>
                 <canvas id="first-chart"></canvas>
             </div>
-            <div class="" id="bottom-half">
+            <div class="graph" id="bottom-half">
                 <h2>Yearly Spending</h2>
                 <canvas id="second-chart"></canvas>
             </div>
@@ -549,7 +588,8 @@
                 legend: {
                     position: 'bottom',
                 }
-            }
+            },
+            cutout: '0%'
         }
     });
 
@@ -594,11 +634,18 @@
                     position: 'bottom',
                 }
             },
-            scale: {
+            scales: {
                 x: {
                     stacked: true,
                 },
                 y: {
+                    title: {
+                        display: false,
+                        text: 'Amount (CAD)',
+                        font: {
+                            size: 15
+                        }
+                    },
                     stacked: true,
                 }
             }
