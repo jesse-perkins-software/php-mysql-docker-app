@@ -8,6 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <title>Finance App</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
         .container {
             height: 100vh;
         }
@@ -146,7 +151,7 @@
 
             <ul class="navbar-nav lh-1">
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="">Income</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Transaction_Income')">Income</button>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link text-start ps-4" type="submit" onclick="">Expenses</button>

@@ -77,6 +77,10 @@ if ($page == "SignInPage") {
                 include("view_history.php");
                 exit();
             }
+            case "Transaction_Income": {
+                include("view_transaction_income.php");
+                exit();
+            }
             case "Profile": {
                 include("view_profile.php");
                 exit();

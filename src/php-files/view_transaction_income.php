@@ -6,14 +6,39 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
         #nav-bar {
             width: 15vw;
-            min-width: 162px;
         }
 
         #content {
             margin-left: 15vw;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
+
+        #header-container {
+            height: 20vh;
+            background-color: #E9E9E9;
+            padding: 2em;
+        }
+
+        #header-amount {
+            font-size: 1.25em;
+        }
+
+        #transaction-column-titles {
+            width: 85vw;
+        }
+
+        .col {
+            border-right: 1px solid black;
+        }
+
         #buttons {
             width: 10vw;
         }
@@ -22,6 +47,10 @@
         }
         #amount-filter, #category-filter, #account-filter, #date-filter {
             display: none;
+        }
+
+        .nav-link {
+            width: 100%;
         }
 
         .nav-link:hover {
@@ -55,7 +84,7 @@
 
             <ul class="navbar-nav lh-1">
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('History')">Income</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Transaction_Income')">Income</button>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link text-start ps-4" type="submit" onclick="">Expenses</button>
@@ -146,111 +175,131 @@
 <!--        </ul>-->
 <!--    </div>-->
 
-    <div class="d-flex flex-column vh-100" id="content">
-        <!--  Greeting Card -->
-        <div id="greeting" class="d-flex border border-2 bg-light rounded-3 m-2">
-            <div class="fs-2 fw-medium p-3">
-                Here are all your past transactions.
-            </div>
+    <div class="" id="content">
+        <div id="header-container">
+            <h1 id="header-title">Income Transactions</h1>
+            <p id="header-amount">$10,000.00</p>
         </div>
-        
-        <!-- Search Bar -->
-        <div id="searchBar" class="m-2">
-            <div class="input-group">
-                <div class="form-floating">
-                    <input type="search" class="form-control" id="search" placeholder="Search" onkeyup="searchTransactions(this.value)">
-                    <label for="search">Search</label>
-                </div>
+
+        <div class="container" id="transactions-container">
+            <div class="row" id="transaction-column-titles">
+                <div class="col">Date</div>
+                <div class="col">Account</div>
+                <div class="col">Payee</div>
+                <div class="col">Amount</div>
+                <div class="col">Category</div>
             </div>
         </div>
 
-        <!--  History Transactions  -->
-        <div id="history" class="flex-fill shadow-sm border border-2 bg-light rounded-3 m-2">
-            <table id="tbl" class="table table-striped-columns table-light align-middle table-hover">
-                <thead>
-                    <tr">
-                        <th class="fs-4">Amount</th>
-                        <th class="fs-4">Category</th>
-                        <th class="fs-4">Account</th>
-                        <th class="fs-4">Date</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
 
-        <!--  Modal  -->
-        <div class="modal fade" id="transactionModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Transaction Details</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/controller.php" method="post" class="needs-validation" novalidate>
-                            <input type="hidden" name="page" value="History">
-                            <input type="hidden" name="command" value="EditTransaction">
-                            <input type="hidden" id="editId" name="Id" value="">
 
-                            <div class="input-group">
-                                <span class="input-group-text">$</span>
-                                <div class="form-floating">
-                                    <input type="number" class="form-control" id="amount" name="amount" step=".01" placeholder="Amount" required>
-                                    <label for="amount">Amount</label>
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please input an amount.
-                                </div>
-                            </div><br>
-                            <div class="form-floating">
-                                <select id="category" class="form-select" name="category" required>
-                                    <option value="">Choose...</option>
-                                    <option>Income</option>
-                                    <option>Savings</option>
-                                    <option>Rent</option>
-                                    <option>Utilities</option>
-                                    <option>Groceries</option>
-                                    <option>Transport</option>
-                                    <option>Entertainment</option>
-                                    <option>Hobbies</option>
-                                    <option>Travel Fund</option>
-                                    <option>Emergency Fund</option>
-                                </select>
-                                <label for="category">Category</label>
-                                <div class="invalid-feedback">
-                                    Please choose a valid option.
-                                </div>
-                            </div><br>
-                            <div class="form-floating">
-                                <select id="account" class="form-select" name="account" required>
-                                    <option value="">Choose...</option>
-                                    <option>Chequing</option>
-                                    <option>Savings</option>
-                                    <option>Credit Card</option>
-                                </select>
-                                <label for="account">Account</label>
-                                <div class="invalid-feedback">
-                                    Please choose a valid option.
-                                </div>
-                            </div><br>
-                            <div class="form-floating">
-                                <input type="date" class="form-control" id="date" name="date" required>
-                                <label for="date">Date</label>
-                                <div class="invalid-feedback">
-                                    Please choose a valid date.
-                                </div>
-                            </div><br>
-                            <div class="w-100 d-flex flex-row-reverse gap-2">
-                                <button type="submit" class="btn btn-primary" id="submitTransaction">Save Transaction</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
+
+<!--        <!--  Greeting Card -->
+<!--        <div id="greeting" class="d-flex border border-2 bg-light rounded-3 m-2">-->
+<!--            <div class="fs-2 fw-medium p-3">-->
+<!--                Transaction Income-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        -->
+<!--        <!-- Search Bar -->
+<!--        <div id="searchBar" class="m-2">-->
+<!--            <div class="input-group">-->
+<!--                <div class="form-floating">-->
+<!--                    <input type="search" class="form-control" id="search" placeholder="Search" onkeyup="searchTransactions(this.value)">-->
+<!--                    <label for="search">Search</label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!--        <!--  History Transactions  -->
+<!--        <div id="history" class="flex-fill shadow-sm border border-2 bg-light rounded-3 m-2">-->
+<!--            <table id="tbl" class="table table-striped-columns table-light align-middle table-hover">-->
+<!--                <thead>-->
+<!--                    <tr">-->
+<!--                        <th class="fs-4">Amount</th>-->
+<!--                        <th class="fs-4">Category</th>-->
+<!--                        <th class="fs-4">Account</th>-->
+<!--                        <th class="fs-4">Date</th>-->
+<!--                        <th></th>-->
+<!--                        <th></th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--            </table>-->
+<!--        </div>-->
+<!---->
+<!--        <!--  Modal  -->
+<!--        <div class="modal fade" id="transactionModal">-->
+<!--            <div class="modal-dialog modal-dialog-centered">-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <h1 class="modal-title fs-5" id="exampleModalLabel">Transaction Details</h1>-->
+<!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+<!--                        <form action="/controller.php" method="post" class="needs-validation" novalidate>-->
+<!--                            <input type="hidden" name="page" value="History">-->
+<!--                            <input type="hidden" name="command" value="EditTransaction">-->
+<!--                            <input type="hidden" id="editId" name="Id" value="">-->
+<!---->
+<!--                            <div class="input-group">-->
+<!--                                <span class="input-group-text">$</span>-->
+<!--                                <div class="form-floating">-->
+<!--                                    <input type="number" class="form-control" id="amount" name="amount" step=".01" placeholder="Amount" required>-->
+<!--                                    <label for="amount">Amount</label>-->
+<!--                                </div>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please input an amount.-->
+<!--                                </div>-->
+<!--                            </div><br>-->
+<!--                            <div class="form-floating">-->
+<!--                                <select id="category" class="form-select" name="category" required>-->
+<!--                                    <option value="">Choose...</option>-->
+<!--                                    <option>Income</option>-->
+<!--                                    <option>Savings</option>-->
+<!--                                    <option>Rent</option>-->
+<!--                                    <option>Utilities</option>-->
+<!--                                    <option>Groceries</option>-->
+<!--                                    <option>Transport</option>-->
+<!--                                    <option>Entertainment</option>-->
+<!--                                    <option>Hobbies</option>-->
+<!--                                    <option>Travel Fund</option>-->
+<!--                                    <option>Emergency Fund</option>-->
+<!--                                </select>-->
+<!--                                <label for="category">Category</label>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please choose a valid option.-->
+<!--                                </div>-->
+<!--                            </div><br>-->
+<!--                            <div class="form-floating">-->
+<!--                                <select id="account" class="form-select" name="account" required>-->
+<!--                                    <option value="">Choose...</option>-->
+<!--                                    <option>Chequing</option>-->
+<!--                                    <option>Savings</option>-->
+<!--                                    <option>Credit Card</option>-->
+<!--                                </select>-->
+<!--                                <label for="account">Account</label>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please choose a valid option.-->
+<!--                                </div>-->
+<!--                            </div><br>-->
+<!--                            <div class="form-floating">-->
+<!--                                <input type="date" class="form-control" id="date" name="date" required>-->
+<!--                                <label for="date">Date</label>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please choose a valid date.-->
+<!--                                </div>-->
+<!--                            </div><br>-->
+<!--                            <div class="w-100 d-flex flex-row-reverse gap-2">-->
+<!--                                <button type="submit" class="btn btn-primary" id="submitTransaction">Save Transaction</button>-->
+<!--                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
