@@ -35,8 +35,12 @@
             width: 85vw;
         }
 
-        .col {
-            border-right: 1px solid black;
+        [class*="col-"] {
+            border-bottom: 1px solid grey;
+        }
+
+        .row {
+
         }
 
         #buttons {
@@ -183,11 +187,20 @@
 
         <div class="container" id="transactions-container">
             <div class="row" id="transaction-column-titles">
-                <div class="col">Date</div>
-                <div class="col">Account</div>
-                <div class="col">Payee</div>
-                <div class="col">Amount</div>
-                <div class="col">Category</div>
+                <div class="col-1">Date</div>
+                <div class="col-3">Account</div>
+                <div class="col-3">Payee</div>
+                <div class="col-1">Amount</div>
+                <div class="col-2">Category</div>
+                <div class="col-2">Notes</div>
+            </div>
+            <div class="row" id="transaction-row">
+                <div class="col-1"></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-1"></div>
+                <div class="col-2"></div>
+                <div class="col-2"></div>
             </div>
         </div>
 
