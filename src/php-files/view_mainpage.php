@@ -141,7 +141,7 @@
                     <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="viewPage('Dashboard')">Dashboard</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="">Accounts</button>
+                    <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="viewPage('Accounts')">Accounts</button>
                 </li>
             </ul>
         </div>
@@ -245,7 +245,7 @@
             <div class="row p-3 gap-4"> <!-- This is the div for an entire row on the dashboard page -->
 
                 <!-- Here is the overall structure for a small dashboard card. -->
-                <div class="col card-small p-2 rounded shadow-sm">
+                <div class="col card-small p-2 rounded shadow-sm border">
                     <div class="card-top-half"> <!-- Top half of the card -->
                         <div class="card-top-text"> <!-- Text for the top of the card -->
                             <span class="card-text">Current Balance</span> <!-- Top right corner -->
@@ -265,7 +265,7 @@
                     </div>
                 </div>
 
-                <div class="col card-small p-2 rounded shadow-sm">
+                <div class="col card-small p-2 rounded shadow-sm border">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">7 Day Spending</span>
@@ -285,7 +285,7 @@
             </div>
 
             <div class="row p-3 gap-4">
-                <div class="col card-small p-2 rounded shadow-sm">
+                <div class="col card-small p-2 rounded shadow-sm border">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">30 Day Spending</span>
@@ -302,7 +302,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col card-small p-2 rounded shadow-sm">
+                <div class="col card-small p-2 rounded shadow-sm border">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Most Recent Purchase</span>
@@ -322,7 +322,7 @@
             </div>
 
             <div class="row p-3 gap-4">
-                <div class="col card-small p-2 rounded shadow-sm">
+                <div class="col card-small p-2 rounded shadow-sm border">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Top Transaction Category</span>
@@ -339,7 +339,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col card-small p-2 rounded shadow-sm">
+                <div class="col card-small p-2 rounded shadow-sm border">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Budget Spent</span>
@@ -361,7 +361,7 @@
             </div>
 
             <div class="row p-3 gap-4">
-                <div class="col card-small p-2 rounded shadow-sm">
+                <div class="col card-small p-2 rounded shadow-sm border">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Title</span>
@@ -378,7 +378,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col card-small p-2 rounded shadow-sm">
+                <div class="col card-small p-2 rounded shadow-sm border">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Title</span>

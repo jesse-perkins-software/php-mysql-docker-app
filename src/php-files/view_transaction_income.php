@@ -32,15 +32,10 @@
         }
 
         #transaction-column-titles {
-            width: 85vw;
         }
 
-        [class*="col-"] {
+        #transaction-column-titles [class*="col-"] {
             border-bottom: 1px solid grey;
-        }
-
-        .row {
-
         }
 
         #buttons {
@@ -187,18 +182,18 @@
 
         <div class="container" id="transactions-container">
             <div class="row" id="transaction-column-titles">
-                <div class="col-1">Date</div>
-                <div class="col-3">Account</div>
-                <div class="col-3">Payee</div>
-                <div class="col-1">Amount</div>
+                <div class="col-2">Date</div>
+                <div class="col-2">Account</div>
+                <div class="col-2">Payee</div>
+                <div class="col-2">Amount</div>
                 <div class="col-2">Category</div>
                 <div class="col-2">Notes</div>
             </div>
             <div class="row" id="transaction-row">
-                <div class="col-1"></div>
-                <div class="col-3"></div>
-                <div class="col-3"></div>
-                <div class="col-1"></div>
+                <div class="col-2"></div>
+                <div class="col-2"></div>
+                <div class="col-2"></div>
+                <div class="col-2"></div>
                 <div class="col-2"></div>
                 <div class="col-2"></div>
             </div>
