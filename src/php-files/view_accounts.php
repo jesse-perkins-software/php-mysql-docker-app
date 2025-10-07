@@ -40,13 +40,27 @@
         #accounts-container {
             display: flex;
             flex-direction: column;
-            padding: 1.5em;
+            margin: 4em;
             gap: 1.5em;
         }
 
         .account {
             background-color: white;
-            height: 4em;
+            padding: 2em;
+        }
+
+        .account-heading {
+
+        }
+
+        .account-details {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .account-transactions {
+
         }
 
     </style>
@@ -129,7 +143,22 @@
 
     <div id="content-container">
         <section class="" id="accounts-container">
-            <div class="account rounded p-2 shadow-sm border" id="account-1">
+            <div class="account rounded shadow-sm border" id="account-1">
+                <div class="account-heading border">
+                    <div class="account-details border">
+                        <h2 class="account-type">Chequing</h2>
+                        <h2 class="account-amount">$14,000</h2>
+                    </div>
+                    <p class="account-number">1234 5678 9123 4567</p>
+                </div>
+
+                <div class="account-transactions border">
+
+                </div>
+
+            </div>
+
+            <div class="account rounded p-2 shadow-sm border" id="account-2">
 
             </div>
         </section>
