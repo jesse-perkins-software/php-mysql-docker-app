@@ -13,6 +13,11 @@
             padding: 0;
         }
 
+        h1, h2, h3, h4, h5, h6, p, span {
+            margin: 0;
+            padding: 0;
+        }
+
         #content-container {
             height: 100vh;
             margin-left: 15vw;
@@ -20,7 +25,6 @@
 
         #nav-bar {
             width: 15vw;
-            min-width: 162px;
         }
 
         .nav-link {
@@ -34,14 +38,20 @@
         #content-container {
             display: flex;
             flex-direction: column;
-            height: 50vh;
+            justify-content: center;
+            padding: 2.5em;
         }
 
         #accounts-container {
             display: flex;
             flex-direction: column;
-            margin: 4em;
+
             gap: 1.5em;
+        }
+
+        .divider {
+            height: 0.5vh;
+            background-color: lightgrey;
         }
 
         .accounts-a-tag {
@@ -59,8 +69,9 @@
         }
 
         .account-heading {
-            padding: 2em 2em 1.2em 2em;
+            padding: 1em;
         }
+
 
         .account-details {
             display: flex;
@@ -68,8 +79,30 @@
             justify-content: space-between;
         }
 
-        .account-transactions {
+        .transaction {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 0.5em 1em 0.5em 1em;
+        }
 
+        .transaction:hover {
+            background-color: #f0f0f0;
+        }
+
+        .transaction-details {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 20%;
+        }
+
+        .info-box-pos {
+            color: green;
+        }
+
+        .info-box-neg {
+            color: red;
         }
 
     </style>
@@ -161,17 +194,105 @@
                         </div>
                         <p class="account-number">1234 5678 9123 4567</p>
                     </div>
-
-                    <div class="account-transactions border">
-
+                    <div class="divider"></div>
+                    <div class="account-transactions">
+                        <div class="transaction border-bottom">
+                            <div class="transaction-details">
+                                <p class="transaction-place">Earls</p>
+                                <p class="transaction-date">Sep 22</p>
+                            </div>
+                            <p class="transaction-amount">-$150</p>
+                        </div>
+                        <div class="transaction border-bottom">
+                            <div class="transaction-details">
+                                <p class="transaction-place">Save On</p>
+                                <p class="transaction-date">Sep 19</p>
+                            </div>
+                            <p class="transaction-amount">-$200</p>
+                        </div>
+                        <div class="transaction border-bottom">
+                            <div class="transaction-details">
+                                <p class="transaction-place">Dairy Queen</p>
+                                <p class="transaction-date">Sep 18</p>
+                            </div>
+                            <p class="transaction-amount">-$15</p>
+                        </div>
                     </div>
                 </div>
             </a>
 
+            <a href="#" class="accounts-a-tag">
+                <div class="account rounded shadow-sm border" id="account-1">
+                    <div class="account-heading">
+                        <div class="account-details">
+                            <h2 class="account-type">Chequing</h2>
+                            <h2 class="account-amount">$14,000</h2>
+                        </div>
+                        <p class="account-number">1234 5678 9123 4567</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="account-transactions">
+                        <div class="transaction border-bottom">
+                            <div class="transaction-details">
+                                <p class="transaction-place">Earls</p>
+                                <p class="transaction-date">Sep 22</p>
+                            </div>
+                            <p class="transaction-amount">-$150</p>
+                        </div>
+                        <div class="transaction border-bottom">
+                            <div class="transaction-details">
+                                <p class="transaction-place">Save On</p>
+                                <p class="transaction-date">Sep 19</p>
+                            </div>
+                            <p class="transaction-amount">-$200</p>
+                        </div>
+                        <div class="transaction border-bottom">
+                            <div class="transaction-details">
+                                <p class="transaction-place">Dairy Queen</p>
+                                <p class="transaction-date">Sep 18</p>
+                            </div>
+                            <p class="transaction-amount">-$15</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
 
-            <div class="account rounded p-2 shadow-sm border" id="account-2">
+            <a href="#" class="accounts-a-tag">
+                <div class="account rounded shadow-sm border" id="account-1">
+                    <div class="account-heading">
+                        <div class="account-details">
+                            <h2 class="account-type">Chequing</h2>
+                            <h2 class="account-amount">$14,000</h2>
+                        </div>
+                        <p class="account-number">1234 5678 9123 4567</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="account-transactions">
+                        <div class="transaction border-bottom">
+                            <div class="transaction-details">
+                                <p class="transaction-place">Earls</p>
+                                <p class="transaction-date">Sep 22</p>
+                            </div>
+                            <p class="transaction-amount">-$150</p>
+                        </div>
+                        <div class="transaction border-bottom">
+                            <div class="transaction-details">
+                                <p class="transaction-place">Save On</p>
+                                <p class="transaction-date">Sep 19</p>
+                            </div>
+                            <p class="transaction-amount">-$200</p>
+                        </div>
+                        <div class="transaction border-bottom">
+                            <div class="transaction-details">
+                                <p class="transaction-place">Dairy Queen</p>
+                                <p class="transaction-date">Sep 18</p>
+                            </div>
+                            <p class="transaction-amount">-$15</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
 
-            </div>
         </section>
     </div>
 </body>
