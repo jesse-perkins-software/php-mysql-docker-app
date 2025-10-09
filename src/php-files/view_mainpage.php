@@ -90,6 +90,11 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.3s ease;
+        }
+
+        .card-small:hover {
+            transform: scale(1.05);
         }
 
         .card-top-text, .card-bottom-text {

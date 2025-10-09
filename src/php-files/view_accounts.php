@@ -44,13 +44,22 @@
             gap: 1.5em;
         }
 
+        .accounts-a-tag {
+            text-decoration: none;
+            color: black;
+            transition: transform 0.3s ease;
+        }
+
+        .accounts-a-tag:hover {
+            transform: translateY(-0.3em);
+        }
+
         .account {
             background-color: white;
-            padding: 2em;
         }
 
         .account-heading {
-
+            padding: 2em 2em 1.2em 2em;
         }
 
         .account-details {
@@ -143,20 +152,22 @@
 
     <div id="content-container">
         <section class="" id="accounts-container">
-            <div class="account rounded shadow-sm border" id="account-1">
-                <div class="account-heading border">
-                    <div class="account-details border">
-                        <h2 class="account-type">Chequing</h2>
-                        <h2 class="account-amount">$14,000</h2>
+            <a href="#" class="accounts-a-tag">
+                <div class="account rounded shadow-sm border" id="account-1">
+                    <div class="account-heading">
+                        <div class="account-details">
+                            <h2 class="account-type">Chequing</h2>
+                            <h2 class="account-amount">$14,000</h2>
+                        </div>
+                        <p class="account-number">1234 5678 9123 4567</p>
                     </div>
-                    <p class="account-number">1234 5678 9123 4567</p>
+
+                    <div class="account-transactions border">
+
+                    </div>
                 </div>
+            </a>
 
-                <div class="account-transactions border">
-
-                </div>
-
-            </div>
 
             <div class="account rounded p-2 shadow-sm border" id="account-2">
 
