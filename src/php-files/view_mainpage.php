@@ -26,6 +26,7 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
+            overflow-y: auto;
         }
 
         #graphs-charts-content {

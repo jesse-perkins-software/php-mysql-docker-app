@@ -73,7 +73,7 @@
                     <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="viewPage('Dashboard')">Dashboard</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="">Accounts</button>
+                    <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="viewPage('Accounts')">Accounts</button>
                 </li>
             </ul>
         </div>
