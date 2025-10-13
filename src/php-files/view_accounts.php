@@ -22,6 +22,10 @@
             height: 100vh;
             margin-left: 15vw;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            padding: 1em;
         }
 
         #nav-bar {
@@ -34,13 +38,6 @@
 
         .nav-link:hover {
             background-color: #eee;
-        }
-
-        #content-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            padding: 2.5em;
         }
 
         #accounts-container {
@@ -128,7 +125,7 @@
 
             <ul class="navbar-nav lh-1">
                 <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Transaction_Income')">Income</button>
+                    <button class="nav-link text-start ps-4" type="submit" onclick="">Income</button>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link text-start ps-4" type="submit" onclick="">Expenses</button>
@@ -180,9 +177,9 @@
     </nav>
 
 
-    <div id="content-container">
+    <div id="content-container" class="">
         <section class="" id="accounts-container">
-            <a href="#" class="accounts-a-tag">
+            <a href="#" class="accounts-a-tag" onclick="viewPage('Accounts-Chequing')">
                 <div class="account rounded shadow-sm border" id="account-1">
                     <div class="account-heading">
                         <div class="account-details">

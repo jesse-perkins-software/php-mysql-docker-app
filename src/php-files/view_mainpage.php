@@ -13,6 +13,11 @@
             padding: 0;
         }
 
+        h1, h2, h3, h4, h5, h6, p, span {
+            margin: 0;
+            padding: 0;
+        }
+
         .container {
             height: 100vh;
         }
@@ -124,10 +129,6 @@
 
         .info-box-neg {
             color: red;
-        }
-
-        h5 {
-            margin-bottom: 0;
         }
 
     </style>

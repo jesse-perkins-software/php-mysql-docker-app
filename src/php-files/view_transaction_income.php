@@ -10,6 +10,12 @@
             margin: 0;
             padding: 0;
         }
+
+        h1, h2, h3, h4, h5, h6, p, span {
+            margin: 0;
+            padding: 0;
+        }
+
         #nav-bar {
             width: 15vw;
         }
@@ -31,12 +37,6 @@
             font-size: 1.25em;
         }
 
-        #transaction-column-titles {
-        }
-
-        #transaction-column-titles [class*="col-"] {
-            border-bottom: 1px solid grey;
-        }
 
         #buttons {
             width: 10vw;
@@ -56,9 +56,27 @@
             background-color: #eee;
         }
 
+        #content-container {
+            height: 100vh;
+            margin-left: 15vw;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            padding: 1em;
+        }
+
+        #account-header {
+            padding: 1em;
+        }
+
+        #account-container {
+            height: 100vh;
+        }
+
     </style>
 </head>
-<body class="bg-light">
+<body>
     <!--  Nav Bar  -->
     <nav class="position-absolute h-100 border-end border-3" id="nav-bar">
         <!-- Form that controls what page the user will be directed to when they click a nav button -->
@@ -174,28 +192,32 @@
 <!--        </ul>-->
 <!--    </div>-->
 
-    <div class="" id="content">
-        <div id="header-container">
-            <h1 id="header-title">Income Transactions</h1>
-            <p id="header-amount">$10,000.00</p>
-        </div>
-
-        <div class="container" id="transactions-container">
-            <div class="row" id="transaction-column-titles">
-                <div class="col-2">Date</div>
-                <div class="col-2">Account</div>
-                <div class="col-2">Payee</div>
-                <div class="col-2">Amount</div>
-                <div class="col-2">Category</div>
-                <div class="col-2">Notes</div>
+    <div class="" id="content-container">
+        <div class="" id="account-container">
+            <div class="" id="account-header">
+                <h3 id="account-type">Chequing</h3>
+                <p id="account-number">1234 5678 9012 3456</p>
             </div>
-            <div class="row" id="transaction-row">
-                <div class="col-2"></div>
-                <div class="col-2"></div>
-                <div class="col-2"></div>
-                <div class="col-2"></div>
-                <div class="col-2"></div>
-                <div class="col-2"></div>
+
+            <div class="" id="account-transactions">
+                <div class="container" id="transactions-container">
+                    <div class="row" id="transaction-column-titles">
+                        <div class="col-2">Date</div>
+                        <div class="col-2">Account</div>
+                        <div class="col-2">Payee</div>
+                        <div class="col-2">Amount</div>
+                        <div class="col-2">Category</div>
+                        <div class="col-2">Notes</div>
+                    </div>
+                    <div class="row" id="transaction-row">
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                    </div>
+                </div>
             </div>
         </div>
 

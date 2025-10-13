@@ -77,6 +77,10 @@ if ($page == "SignInPage") {
                 include("view_accounts.php");
                 exit();
             }
+            case "Accounts-Chequing": {
+                include("view_accounts_chequing.php");
+                exit();
+            }
             case "History": {
                 include("view_history.php");
                 exit();
