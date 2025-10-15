@@ -189,9 +189,9 @@
 
         <div class="" id="account-header">
             <div id="account-type">
-                <h4 id="account-name">Chequing <span>(</span><span id="account-number">3456</span><span>)</span></h4>
+                <h4 id="account-name">Credit Card <span>(</span><span id="account-number">3456</span><span>)</span></h4>
             </div>
-            <h4 id="account-amount">$14,000</h4>
+            <h4 id="account-amount">-$2,000</h4>
         </div>
 
         <div class="" id="account-transactions">
@@ -577,10 +577,10 @@
     }
 
     var purchases =
-        <?php
-        $transactions = getTopTransactions($_SESSION["username"]);
-        echo $transactions;
-        ?>;
+            <?php
+            $transactions = getTopTransactions($_SESSION["username"]);
+            echo $transactions;
+            ?>;
 
     window.onload = function() {
         makeTable(purchases);

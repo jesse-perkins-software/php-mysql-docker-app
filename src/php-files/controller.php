@@ -81,12 +81,28 @@ if ($page == "SignInPage") {
                 include("view_accounts_chequing.php");
                 exit();
             }
+            case "Accounts-Savings": {
+                include("view_accounts_savings.php");
+                exit();
+            }
+            case "Accounts-Credit-Card": {
+                include("view_accounts_credit_card.php");
+                exit();
+            }
             case "History": {
                 include("view_history.php");
                 exit();
             }
-            case "Transaction_Income": {
-                include("view_transaction_income.php");
+            case "Transactions_Income": {
+                include("view_transactions_income.php");
+                exit();
+            }
+            case "Transactions_Expenses": {
+                include("view_transactions_expenses.php");
+                exit();
+            }
+            case "Transactions_Transfers": {
+                include("view_transactions_transfers.php");
                 exit();
             }
             case "Profile": {

@@ -101,81 +101,7 @@
     </style>
 </head>
 <body>
-    <!--  Nav Bar  -->
-    <nav class="position-absolute h-100 border-end border-3" id="nav-bar">
-        <!-- Form that controls what page the user will be directed to when they click a nav button -->
-        <form action="controller.php" method="post" id="nav-form">
-            <input type="hidden" name="page" value="MainPage">
-            <input type="hidden" name="command" value="" id="command-value"> <!-- Value changes depending on the nav button clicked -->
-        </form>
-
-        <div class="nav-section mt-2" id="nav-dashboard">
-            <ul class="navbar-nav lh-1">
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="viewPage('Dashboard')">Dashboard</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="">Accounts</button>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav-section mt-4" id="nav-accounts">
-            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Transactions</p>
-
-            <ul class="navbar-nav lh-1">
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="">Income</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="">Expenses</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="">Transfers</button>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav-section mt-4" id="nav-profile">
-            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Budget</p>
-
-            <ul class="navbar-nav lh-1">
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="">Income</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="">Expenses</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="">Budgeted vs. Actual</button>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav-section mt-4" id="nav-profile">
-            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Settings</p>
-
-            <ul class="navbar-nav lh-1">
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Profile')">Profile</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="">Preferences</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="">Categories & Accounts</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4" type="submit" onclick="">About & Help</button>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav-section mt-4" id="nav-logout">
-            <button class="nav-link fw-bold p-2 bg-secondary-subtle m-auto rounded w-50" type="submit" onclick="viewPage('SignOut')">Sign Out</button>
-        </div>
-    </nav>
-
+    <?php require 'navigation.php'; ?>
 
     <div id="content-container" class="">
         <section class="" id="accounts-container">
@@ -214,7 +140,7 @@
                 </div>
             </a>
 
-            <a href="#" class="accounts-a-tag">
+            <a href="#" class="accounts-a-tag" onclick="viewPage('Accounts-Savings')">
                 <div class="account rounded shadow-sm border" id="account-1">
                     <div class="account-heading">
                         <div class="account-details">
@@ -249,7 +175,7 @@
                 </div>
             </a>
 
-            <a href="#" class="accounts-a-tag">
+            <a href="#" class="accounts-a-tag" onclick="viewPage('Accounts-Credit-Card')">
                 <div class="account rounded shadow-sm border" id="account-1">
                     <div class="account-heading">
                         <div class="account-details">
