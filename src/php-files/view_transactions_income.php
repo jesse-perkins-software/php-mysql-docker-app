@@ -66,6 +66,16 @@
             justify-content: start;
         }
 
+        #account-transactions {
+            padding-bottom: 2em;
+        }
+
+        #account-type {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
         #account-name {
             display: flex;
             flex-direction: row;
@@ -110,16 +120,12 @@
         }
 
         .row {
-            margin-left: 1em;
-            margin-right: 1em;
+            margin: 0 1em 0 1em;
+            padding: 0.15em 0 0.15em 0;
         }
 
         .row.individual-transactions {
             color: black;
-        }
-
-        #transaction-column-titles {
-            padding: 0.5em 0 0.5em 0;
         }
 
         .row:nth-child(even) {
@@ -190,9 +196,32 @@
         <div class="" id="account-header">
             <div id="account-type">
                 <h4 id="account-name">Income</h4>
+                <button class="btn btn-secondary" id="new-transaction-button" data-bs-toggle="modal" data-bs-target="#newTransactionModel">+ New Transaction</button>
             </div>
             <h4 id="account-amount">$14,000</h4>
         </div>
+
+        <!-- Transaction Model Starts -->
+        <div class="modal fade" id="newTransactionModel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Transaction Model Ends -->
 
         <div class="" id="account-transactions">
             <div class="container" id="transactions-container">
@@ -201,6 +230,7 @@
                     <div class="col-5">Description</div>
                     <div class="col">Amount</div>
                     <div class="col">Account</div>
+                    <div class="col">Category</div>
                     <div class="col-3">Notes</div>
                 </div>
 
@@ -209,20 +239,23 @@
                     <div class="col-5">Royal Bank of Canada</div>
                     <div class="col">$90</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Wants</div>
+                    <div class="col-3">Date Night</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">25-02-2024</div>
                     <div class="col-5">Walmart</div>
                     <div class="col">$40</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Needs</div>
+                    <div class="col-3">Peanuts</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">30-02-2024</div>
                     <div class="col-5">Continental Barbershop</div>
                     <div class="col">$30</div>
                     <div class="col">Savings</div>
+                    <div class="col">Needs</div>
                     <div class="col-3"></div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
@@ -230,20 +263,23 @@
                     <div class="col-5">Royal Bank of Canada</div>
                     <div class="col">$90</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Wants</div>
+                    <div class="col-3">Date Night</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">25-02-2024</div>
                     <div class="col-5">Walmart</div>
                     <div class="col">$40</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Needs</div>
+                    <div class="col-3">Peanuts</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">30-02-2024</div>
                     <div class="col-5">Continental Barbershop</div>
                     <div class="col">$30</div>
                     <div class="col">Savings</div>
+                    <div class="col">Needs</div>
                     <div class="col-3"></div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
@@ -251,20 +287,23 @@
                     <div class="col-5">Royal Bank of Canada</div>
                     <div class="col">$90</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Wants</div>
+                    <div class="col-3">Date Night</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">25-02-2024</div>
                     <div class="col-5">Walmart</div>
                     <div class="col">$40</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Needs</div>
+                    <div class="col-3">Peanuts</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">30-02-2024</div>
                     <div class="col-5">Continental Barbershop</div>
                     <div class="col">$30</div>
                     <div class="col">Savings</div>
+                    <div class="col">Needs</div>
                     <div class="col-3"></div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
@@ -272,20 +311,23 @@
                     <div class="col-5">Royal Bank of Canada</div>
                     <div class="col">$90</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Wants</div>
+                    <div class="col-3">Date Night</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">25-02-2024</div>
                     <div class="col-5">Walmart</div>
                     <div class="col">$40</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Needs</div>
+                    <div class="col-3">Peanuts</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">30-02-2024</div>
                     <div class="col-5">Continental Barbershop</div>
                     <div class="col">$30</div>
                     <div class="col">Savings</div>
+                    <div class="col">Needs</div>
                     <div class="col-3"></div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
@@ -293,20 +335,23 @@
                     <div class="col-5">Royal Bank of Canada</div>
                     <div class="col">$90</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Wants</div>
+                    <div class="col-3">Date Night</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">25-02-2024</div>
                     <div class="col-5">Walmart</div>
                     <div class="col">$40</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Needs</div>
+                    <div class="col-3">Peanuts</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">30-02-2024</div>
                     <div class="col-5">Continental Barbershop</div>
                     <div class="col">$30</div>
                     <div class="col">Savings</div>
+                    <div class="col">Needs</div>
                     <div class="col-3"></div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
@@ -314,20 +359,23 @@
                     <div class="col-5">Royal Bank of Canada</div>
                     <div class="col">$90</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Wants</div>
+                    <div class="col-3">Date Night</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">25-02-2024</div>
                     <div class="col-5">Walmart</div>
                     <div class="col">$40</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Needs</div>
+                    <div class="col-3">Peanuts</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">30-02-2024</div>
                     <div class="col-5">Continental Barbershop</div>
                     <div class="col">$30</div>
                     <div class="col">Savings</div>
+                    <div class="col">Needs</div>
                     <div class="col-3"></div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
@@ -335,42 +383,16 @@
                     <div class="col-5">Royal Bank of Canada</div>
                     <div class="col">$90</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Wants</div>
+                    <div class="col-3">Date Night</div>
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">25-02-2024</div>
                     <div class="col-5">Walmart</div>
                     <div class="col">$40</div>
                     <div class="col">Savings</div>
-                    <div class="col-3"></div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">30-02-2024</div>
-                    <div class="col-5">Continental Barbershop</div>
-                    <div class="col">$30</div>
-                    <div class="col">Savings</div>
-                    <div class="col-3"></div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">22-02-2024</div>
-                    <div class="col-5">Royal Bank of Canada</div>
-                    <div class="col">$90</div>
-                    <div class="col">Savings</div>
-                    <div class="col-3"></div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">25-02-2024</div>
-                    <div class="col-5">Walmart</div>
-                    <div class="col">$40</div>
-                    <div class="col">Savings</div>
-                    <div class="col-3"></div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">30-02-2024</div>
-                    <div class="col-5">Continental Barbershop</div>
-                    <div class="col">$30</div>
-                    <div class="col">Savings</div>
-                    <div class="col-3"></div>
+                    <div class="col">Needs</div>
+                    <div class="col-3">Peanuts</div>
                 </div>
             </div>
         </div>
