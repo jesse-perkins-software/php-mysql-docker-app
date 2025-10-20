@@ -144,6 +144,9 @@
             padding-right: 1em;
         }
 
+        .transaction-info {
+            margin-bottom: 1em;
+        }
 
 
     </style>
@@ -206,11 +209,54 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Transaction</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <div class="transaction-info">
+                            <div class="input-group">
+                                <span class="input-group-text" id="date-input">Date</span>
+                                <input type="date" class="form-control" placeholder="MM-DD-YYYY">
+                            </div>
+                            <div class="form-text help-text">Date of the transaction</div>
+                        </div>
+
+                        <div class="transaction-info">
+                            <div class="input-group">
+                                <span class="input-group-text" id="date-input">Description</span>
+                                <input type="text" class="form-control" placeholder="Recipient">
+                            </div>
+                            <div class="form-text help-text">The other side of the transaction</div>
+                        </div>
+
+                        <div class="transaction-info">
+                            <div class="input-group">
+                                <span class="input-group-text" id="date-input">$</span>
+                                <input type="text" class="form-control" placeholder="Amount">
+                            </div>
+                        </div>
+
+                        <div class="transaction-info">
+                            <div class="input-group">
+                                <span class="input-group-text" id="date-input">Account</span>
+                                <input type="text" class="form-control" placeholder="Chequing">
+                            </div>
+                        </div>
+
+                        <div class="transaction-info">
+                            <div class="input-group">
+                                <span class="input-group-text" id="date-input">Category</span>
+                                <input type="text" class="form-control" placeholder="Needs/Wants/Savings">
+                            </div>
+                        </div>
+
+                        <div class="transaction-info">
+                            <div class="input-group">
+                                <span class="input-group-text" id="date-input">Notes</span>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -219,8 +265,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- Transaction Model Ends -->
 
         <div class="" id="account-transactions">
