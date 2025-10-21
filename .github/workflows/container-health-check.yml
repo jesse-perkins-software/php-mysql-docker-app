@@ -1,0 +1,24 @@
+name: container-health-check.yml
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+
+jobs:
+  check-containers:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start docker compose
+        run: docker compose up -d
+
+      - name: Wait for containers to start
+        run: sleep 20
+
+      - name: Check if all the containers are running
+        run: docker compose ps
+
+      - name: Stop containers
+        run: docker compose down
