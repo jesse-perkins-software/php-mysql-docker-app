@@ -226,7 +226,7 @@
                                 <span class="input-group-text" id="date-input">Description</span>
                                 <input type="text" class="form-control" placeholder="Recipient">
                             </div>
-                            <div class="form-text help-text">The other side of the transaction</div>
+                            <div class="form-text help-text">The recipient of the transaction</div>
                         </div>
 
                         <div class="transaction-info">
