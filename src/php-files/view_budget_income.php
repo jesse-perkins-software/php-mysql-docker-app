@@ -198,72 +198,10 @@
 
         <div class="" id="account-header">
             <div id="account-type">
-                <h4 id="account-name">Income</h4>
-                <button class="btn btn-secondary" id="new-transaction-button" data-bs-toggle="modal" data-bs-target="#newTransactionModel">+ New Transaction</button>
+                <h4 id="account-name">Budgeted Income ($5,000)</h4>
             </div>
-            <h4 id="account-amount">$14,000</h4>
+            <h4 id="account-amount">$3,000</h4>
         </div>
-
-        <!-- Transaction Model Starts -->
-        <div class="modal fade" id="newTransactionModel">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Transaction</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="transaction-info">
-                            <div class="input-group">
-                                <span class="input-group-text" id="date-input">Date</span>
-                                <input type="date" class="form-control" placeholder="MM-DD-YYYY">
-                            </div>
-                        </div>
-
-                        <div class="transaction-info">
-                            <div class="input-group">
-                                <span class="input-group-text" id="date-input">Description</span>
-                                <input type="text" class="form-control" placeholder="Recipient">
-                            </div>
-                        </div>
-
-                        <div class="transaction-info">
-                            <div class="input-group">
-                                <span class="input-group-text" id="date-input">$</span>
-                                <input type="text" class="form-control" placeholder="Amount">
-                            </div>
-                        </div>
-
-                        <div class="transaction-info">
-                            <div class="input-group">
-                                <span class="input-group-text" id="date-input">Account</span>
-                                <input type="text" class="form-control" placeholder="Chequing">
-                            </div>
-                        </div>
-
-                        <div class="transaction-info">
-                            <div class="input-group">
-                                <span class="input-group-text" id="date-input">Category</span>
-                                <input type="text" class="form-control" placeholder="Needs/Wants/Savings">
-                            </div>
-                        </div>
-
-                        <div class="transaction-info">
-                            <div class="input-group">
-                                <span class="input-group-text" id="date-input">Notes</span>
-                                <textarea class="form-control"></textarea>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Transaction Model Ends -->
 
         <div class="" id="account-transactions">
             <div class="container" id="transactions-container">

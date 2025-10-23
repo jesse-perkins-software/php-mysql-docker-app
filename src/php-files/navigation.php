@@ -38,7 +38,7 @@
 
         <ul class="navbar-nav lh-1">
             <li class="nav-item">
-                <button class="nav-link text-start ps-4" type="submit" onclick="">Income</button>
+                <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Budget_Income')">Income</button>
             </li>
             <li class="nav-item">
                 <button class="nav-link text-start ps-4" type="submit" onclick="">Expenses</button>

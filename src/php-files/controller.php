@@ -105,6 +105,10 @@ if ($page == "SignInPage") {
                 include("view_transactions_transfers.php");
                 exit();
             }
+            case "Budget_Income": {
+                include("view_budget_income.php");
+                exit();
+            }
             case "Profile": {
                 include("view_profile.php");
                 exit();
