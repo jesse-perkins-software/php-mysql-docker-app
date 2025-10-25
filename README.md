@@ -1,30 +1,17 @@
-# This is a project that I'm still working on, so please be understanding if anything looks incomplete or unfinished!
+# DevOps Docker Compose Project
 
-## PHP MySQL Docker Project
+## Foreword
 
-A simple finance tracker with PHP + MySQL database running in Docker Compose.
+This is a current work-in-progress project, where I am further
+improving the full-stack website I made in my advanced web development
+course. To make this more DevOps oriented, I've containerized the website
+in Docker and added some CI with a custom GitHub Actions workflow.  
 
-### Prerequisites
 
-1. Have Docker Desktop installed and running.
+## Summary
+This is a finance tracker using HTML5, CSS3, and JS for the 
+frontend, PHP + MySQL database for the backend, and GitHub Actions for CI.
 
-### What's Included in the Project Files
+## Prerequisites
+1. Have Docker installed and running.
 
-1. MySQL Database with persistant storage
-2. phpMyAdmin for database management
-3. Docker Compose YAML file for easy startup
-4. Sample database data (automatically imported)
-
-### Set Up
-
-1. Open your IDE of choice (I use VSCode), and copy this repositroy by using ```git clone github.com/jesseperkins796/php-mysql-docker-app``` in the terminal.
-2. Edit the ```.env.example``` file to your own secure root password, username, password, and DB name. Once you've done that, rename the file to ```.env```.
-3. Ensure you have the VSCode extensions **DotENV** and **PHPIntellisense** installed.
-4. Run ```cd php-mysql-docker-app``` to go move into the correct folder.
-5. Run ```docker-compose up -d``` to start the application.
-6. Run ```docker-compose down``` to stop the application.
-
-### Application Access
-
-* Visit http://localhost:3000/controller.php to access the application
-* Visit http://localhost:3001 for database access through phpMyAdmin 

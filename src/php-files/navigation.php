@@ -41,10 +41,10 @@
                 <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Budget_Income')">Income</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link text-start ps-4" type="submit" onclick="">Expenses</button>
+                <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Budget_Expenses')">Expenses</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link text-start ps-4" type="submit" onclick="">Budgeted vs. Actual</button>
+                <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Budget_vs_Actual')">Budgeted vs. Actual</button>
             </li>
         </ul>
     </div>

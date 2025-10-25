@@ -109,6 +109,14 @@ if ($page == "SignInPage") {
                 include("view_budget_income.php");
                 exit();
             }
+            case "Budget_Expenses": {
+                include("view_budget_expenses.php");
+                exit();
+            }
+            case "Budget_vs_Actual": {
+                include("view_budget_vs_actual.php");
+                exit();
+            }
             case "Profile": {
                 include("view_profile.php");
                 exit();
