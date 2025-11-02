@@ -175,7 +175,7 @@
 <!--        </ul>-->
 <!--    </div>-->
     <div id="content-container">
-        <section class="container" id="card-small-content">
+        <div class="container" id="card-small-content">
             <div class="row p-3 gap-4"> <!-- This is the div for an entire row on the dashboard page -->
 
                 <!-- Here is the overall structure for a small dashboard card. -->
@@ -330,9 +330,9 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="container" id="graphs-charts-content">
+        <div class="container" id="graphs-charts-content">
             <div class="graph" id="top-half">
                 <h2>Monthly Spending</h2>
                 <canvas id="first-chart"></canvas>
@@ -341,7 +341,7 @@
                 <h2>Yearly Spending</h2>
                 <canvas id="second-chart"></canvas>
             </div>
-        </section>
+        </div>
     </div>
 
 
