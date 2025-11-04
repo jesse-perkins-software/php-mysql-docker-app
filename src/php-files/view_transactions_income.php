@@ -147,6 +147,13 @@
         .transaction-info {
             margin-bottom: 1em;
         }
+        
+        .input-group-text {
+            width: 22.5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
 
     </style>
@@ -222,35 +229,35 @@
 
                         <div class="transaction-info">
                             <div class="input-group">
-                                <span class="input-group-text" id="date-input">Description</span>
+                                <span class="input-group-text" id="description-input">Description</span>
                                 <input type="text" class="form-control" placeholder="Recipient">
                             </div>
                         </div>
 
                         <div class="transaction-info">
                             <div class="input-group">
-                                <span class="input-group-text" id="date-input">$</span>
-                                <input type="text" class="form-control" placeholder="Amount">
+                                <span class="input-group-text" id="amount-input">Amount</span>
+                                <input type="text" class="form-control" placeholder="$">
                             </div>
                         </div>
 
                         <div class="transaction-info">
                             <div class="input-group">
-                                <span class="input-group-text" id="date-input">Account</span>
+                                <span class="input-group-text" id="account-input">Account</span>
                                 <input type="text" class="form-control" placeholder="Chequing">
                             </div>
                         </div>
 
                         <div class="transaction-info">
                             <div class="input-group">
-                                <span class="input-group-text" id="date-input">Category</span>
+                                <span class="input-group-text" id="category-input">Category</span>
                                 <input type="text" class="form-control" placeholder="Needs/Wants/Savings">
                             </div>
                         </div>
 
                         <div class="transaction-info">
                             <div class="input-group">
-                                <span class="input-group-text" id="date-input">Notes</span>
+                                <span class="input-group-text" id="notes-input">Notes</span>
                                 <textarea class="form-control"></textarea>
                             </div>
                         </div>

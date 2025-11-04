@@ -69,8 +69,7 @@
         }
 
         .card-text {
-            font-size: 0.8em;
-            color: gray;
+            font-size: 1em;
         }
 
         .card-small {
@@ -78,11 +77,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s ease;
-        }
-
-        .card-small:hover {
-            /*transform: scale(1.01);*/
+            width: 100%;
         }
 
         .card-top-text, .card-bottom-text {
@@ -142,6 +137,34 @@
             flex: 1;
         }
 
+        .row .col:nth-child(1) .card-text:first-child {
+            color: rgb(178,34,34);
+        }
+
+        .row .col:nth-child(1) .progress-bar {
+            background-color: rgb(178,34,34);
+        }
+
+        .row .col:nth-child(2) .card-text:first-child {
+            color: rgb(30, 58, 138);
+        }
+
+        .row .col:nth-child(2) .progress-bar {
+            background-color: rgb(30, 58, 138);
+        }
+
+        .row .col:nth-child(3) .card-text:first-child {
+            color: rgb(6, 95, 70);
+        }
+
+        .row .col:nth-child(3) .progress-bar {
+            background-color: rgb(6, 95, 70);
+        }
+
+        #wants-progress-budgeted, #needs-progress-budgeted, #savings-progress-budgeted {
+            opacity: 50%;
+        }
+
     </style>
 </head>
 <body>
@@ -174,8 +197,11 @@
                 </div>
                 <h5>$400</h5>
                 <div class="card-bottom-half">
-                    <div class="progress" role="progressbar">
-                        <div class="progress-bar" style="width: 300%"></div>
+                    <div class="progress" id="wants-progress-budgeted" role="progressbar">
+                        <div class="progress-bar" style="width: 20%"></div>
+                    </div>
+                    <div class="progress" id="wants-progress-real" role="progressbar">
+                        <div class="progress-bar" style="width: 60%"></div>
                     </div>
                     <div class="card-bottom-text">
                         <span class="card-text"></span>
@@ -193,8 +219,11 @@
                 </div>
                 <h5>$300</h5>
                 <div class="card-bottom-half">
-                    <div class="progress" role="progressbar">
-                        <div class="progress-bar" style="width: 100%"></div>
+                    <div class="progress" id="needs-progress-budgeted" role="progressbar">
+                        <div class="progress-bar" style="width: 30%"></div>
+                    </div>
+                    <div class="progress" id="needs-progress-real" role="progressbar">
+                        <div class="progress-bar" style="width: 30%"></div>
                     </div>
                     <div class="card-bottom-text">
                         <span class="card-text"></span>
@@ -212,8 +241,11 @@
                 </div>
                 <h5>$100</h5>
                 <div class="card-bottom-half">
-                    <div class="progress" role="progressbar">
-                        <div class="progress-bar" style="width: 20%"></div>
+                    <div class="progress" id="savings-progress-budgeted" role="progressbar">
+                        <div class="progress-bar" style="width: 50%"></div>
+                    </div>
+                    <div class="progress" id="savings-progress-real" role="progressbar">
+                        <div class="progress-bar" style="width: 10%"></div>
                     </div>
                     <div class="card-bottom-text">
                         <span class="card-text"></span>

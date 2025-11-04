@@ -6,9 +6,55 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3, h4, h5, h6, p, span {
+            margin: 0;
+            padding: 0;
+        }
+
         #nav-bar {
             width: 15vw;
-            min-width: 162px;
+        }
+
+        #content {
+            margin-left: 15vw;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #header-container {
+            height: 20vh;
+            background-color: #E9E9E9;
+            padding: 2em;
+        }
+
+        #header-amount {
+            font-size: 1.25em;
+        }
+
+
+        #buttons {
+            width: 10vw;
+        }
+        #searchBar {
+            height: 5vh;
+        }
+        #amount-filter, #category-filter, #account-filter, #date-filter {
+            display: none;
+        }
+
+        .nav-link {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            background-color: #eee;
         }
 
         #content {
@@ -30,55 +76,10 @@
             width: 27%;
         }
 
-        .nav-link:hover {
-            background-color: #eee;
-        }
-
     </style>
 </head>
 <body class="bg-light">
-    <!--  Nav Bar  -->
-    <nav class="position-absolute h-100 border-end border-3" id="nav-bar">
-        <!-- Form that controls what page the user will be directed to when they click a nav button -->
-        <form action="controller.php" method="post" id="nav-form">
-            <input type="hidden" name="page" value="MainPage">
-            <input type="hidden" name="command" value="" id="command-value"> <!-- Value changes depending on the nav button clicked -->
-        </form>
-
-        <div class="nav-section mt-2" id="nav-dashboard">
-            <button class="nav-link text-start ps-3 pe-3 w-100 fw-bold" type="submit" onclick="viewPage('Dashboard')">Dashboard</button>
-        </div>
-
-        <div class="nav-section mt-4" id="nav-accounts">
-            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Accounts</p>
-
-            <ul class="navbar-nav lh-1">
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Overview</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Savings</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('History')">Chequing</button>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav-section mt-4" id="nav-profile">
-            <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Profile</p>
-
-            <ul class="navbar-nav lh-1">
-                <li class="nav-item">
-                    <button class="nav-link text-start ps-4 w-100" type="submit" onclick="viewPage('Profile')">Settings</button>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav-section mt-4" id="nav-logout">
-            <button class="nav-link fw-bold p-2 bg-secondary-subtle m-auto border rounded" type="submit" onclick="viewPage('SignOut')">Sign Out</button>
-        </div>
-    </nav>
+    <?php require 'navigation.php'; ?>
 
 <!--    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">-->
 <!--        <ul class="nav flex-column w-100 p-3 gap-4">-->
