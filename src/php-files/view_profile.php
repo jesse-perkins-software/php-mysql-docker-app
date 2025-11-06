@@ -85,14 +85,59 @@
             justify-content: start;
         }
 
+        #general-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            padding: 1em;
+            margin: 1em;
+            gap: 0.75em;
+        }
+
+        #info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+        }
+
+        .input-group-text {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            min-width: 4.5em;
+
+        }
+
     </style>
 </head>
 <body class="bg-light">
     <?php require 'navigation.php'; ?>
 
     <div class="" id="content-container">
-        <div class="profile-section" id="">
+        <div class="rounded border shadow-sm" id="general-info">
+            <h4>Personal Information</h4>
+            <form action="/controller.php" method="post" class="needs-validation" id="info-container" novalidate>
+                <input type="hidden" name="page" value="Profile">
+                <input type="hidden" name="command" value="GeneralInfo">
 
+                <div class="input-group">
+                    <span class="input-group-text" id="date-input">Name</span>
+                    <input type="text" class="form-control" placeholder="First">
+                    <input type="text" class="form-control" placeholder="Last">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text" id="date-input">Email</span>
+                    <input type="email" class="form-control" placeholder="abc@gmail.com">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text" id="date-input">Phone Number</span>
+                    <input type="tel" class="form-control" placeholder="250-888-8888">
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </form>
         </div>
     </div>
 <!--    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">-->
