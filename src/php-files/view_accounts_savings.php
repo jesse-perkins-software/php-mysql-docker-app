@@ -110,16 +110,12 @@
         }
 
         .row {
-            margin-left: 1em;
-            margin-right: 1em;
+            margin: 0 1em 0 1em;
+            padding: 0.15em 0 0.15em 0;
         }
 
         .row.individual-transactions {
             color: black;
-        }
-
-        #transaction-column-titles {
-            padding: 0.5em 0 0.5em 0;
         }
 
         .row:nth-child(even) {

@@ -76,11 +76,25 @@
             width: 27%;
         }
 
+        #content-container {
+            height: 100vh;
+            margin-left: 15vw;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+        }
+
     </style>
 </head>
 <body class="bg-light">
     <?php require 'navigation.php'; ?>
 
+    <div class="" id="content-container">
+        <div class="profile-section" id="">
+
+        </div>
+    </div>
 <!--    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">-->
 <!--        <ul class="nav flex-column w-100 p-3 gap-4">-->
 <!--            <li class="nav-item rounded-3">-->
@@ -120,196 +134,196 @@
 <!--            </li>-->
 <!--        </ul>-->
 <!--    </div>-->
-    
-    <!-- Content Area -->
-    <div class="d-flex flex-column vh-100" id="content">
-        <!--  Greeting Card -->
-        <div id="greeting" class="d-flex border border-2 bg-light rounded-3 m-2">
-            <div class="fs-2 fw-medium p-3">
-                Here is your profile information.
-            </div>
-        </div>
-
-        <!-- Profile Area -->
-        <div id="profile" class="d-flex border border-2 bg-light rounded-3 m-2 h-100">
-            <div id="general-info" class="text-center w-50 m-2 border border-2 bg-light rounded-3">
-                <h1 class="m-2">General Information</h1>
-                <form action="/controller.php" method="post" class="needs-validation m-4" novalidate>
-                    <input type="hidden" name="page" value="Profile">
-                    <input type="hidden" name="command" value="GeneralInfo">
-
-                    <div id="profileName" class="input-group mt-4">
-                        <span class="input-group-text fs-4">Full Name</span>
-                        <input type="text" class="form-control fs-4" id="firstName" name="firstName" value="">
-                        <input type="text" class="form-control fs-4" id="lastName" name="lastName" value="">
-                    </div>
-
-                    <div id="profileUsername" class="input-group mt-4">
-                        <span class="input-group-text fs-4">Username</span>
-                        <input type="text" class="form-control fs-4" id="profileUser" name="profileUser" value="">
-                    </div>
-
-                    <div id="profilePassword" class="input-group mt-4">
-                        <span class="input-group-text fs-4">Password</span>
-                        <input type="text" class="form-control fs-4" id="profilePass" name="profilePass" value="">
-                    </div>
-
-                    <div id="profileEmail" class="input-group mt-4">
-                        <span class="input-group-text fs-4">Email</span>
-                        <input type="text" class="form-control fs-4" id="profilEm" name="profilEm" value="">
-                    </div>
-
-                    <div id="profileCountry" class="input-group mt-4">
-                        <span class="input-group-text fs-4">Country</span>
-                        <input type="text" class="form-control fs-4" id="profileC" name="profileC" value="" placeholder="Canada">
-                    </div>
-
-                    <div id="profilePhone" class="input-group mt-4">
-                        <span class="input-group-text fs-4">Phone Number</span>
-                        <input type="tel" class="form-control fs-4" id="profileP" name="profileP" value="" placeholder="123-456-7890">
-                    </div>
-
-                    <div id="submit-btn" class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary fs-4">Save</button>
-                    </div>                
-                </form>
-            </div>
-
-            <div class="d-flex flex-column flex-grow-1">
-                <div id="account-summary" class="text-center border border-2 m-2 bg-light rounded-3">
-                    <h1 class="m-2">Account Summary</h1>
-                    
-                    <div class="d-flex flex-column gap-4 m-4">
-                        <div id="amountSaved" class="input-group mt-4">
-                            <span class="input-group-text fs-4">Amount Saved</span>
-                            <input type="text" class="form-control fs-4" id="savedA" name="saved" value="" readonly>
-                        </div>
-
-                        <div id="emergencyFund" class="input-group mt-4">
-                            <span class="input-group-text fs-4">Emergency Fund</span>
-                            <input type="text" class="form-control fs-4" id="emergencyA" name="emergency" value="$0" readonly>
-                        </div>
-
-                        <div id="travelFund" class="input-group mt-4">
-                            <span class="input-group-text fs-4">Travel Fund</span>
-                            <input type="text" class="form-control fs-4" id="travelA" name="travel" value="$0" readonly>
-                        </div>
-                    </div>
-                    
-                    <div id="" class="d-flex justify-content-end gap-3 m-4">
-                        <button id="editAccounts" class="btn btn-secondary fs-4" data-bs-toggle="modal" data-bs-target="#transactionModal">Edit</button>
-                    </div> 
-                </div>
-                
-                <!-- Edit Modal -->
-                <div class="modal fade" id="transactionModal">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Accounts</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="/controller.php" method="post" class="needs-validation" novalidate>
-                                    <input type="hidden" name="page" value="Profile">
-                                    <input type="hidden" name="command" value="UpdateAccounts">
-                                    
-                                    <p>Get started on tracking your progress by entering the amount you already saved up.</p>
-                                    
-                                    <div class="form-floating">
-                                        <input type="number" class="form-control" id="saved" name="saved" step=".01" placeholder="Chequing" required>
-                                        <label for="saved">Amount Saved</label>
-                                        <div class="invalid-feedback">
-                                            Please input an amount.
-                                        </div>
-                                    </div><br>
-            
-                                    <div class="form-floating">
-                                        <input type="number" class="form-control" id="emergency" name="emergency" step=".01" placeholder="Savings" required>
-                                        <label for="emergency">Emergency Fund</label>
-                                        <div class="invalid-feedback">
-                                            Please input an amount.
-                                        </div>
-                                    </div><br>
-            
-                                    <div class="form-floating">
-                                        <input type="number" class="form-control" id="travel" name="travel" step=".01" placeholder="credit" required>
-                                        <label for="travel">Travel Fund</label>
-                                        <div class="invalid-feedback">
-                                            Please input an amount.
-                                        </div>
-                                    </div><br>
-
-                                    <div class="d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="other" class="text-center border m-2 border-2 bg-light rounded-3">
-                    <h1 class="m-2">Profile Administration</h1>
-                    
-                    <div class="d-flex flex-column gap-4 m-4">
-                        <div class="input-group">
-                            <button id="clearBtn" class="btn btn-warning fs-4" data-bs-toggle="modal" data-bs-target="#clearModal">Clear Account</button>
-                            <input id="clearAccount" class="form-control fs-5" type="text" value="This will clear all data related to your account." readonly>
-                        </div>
-                        
-                        <div class="input-group">
-                            <button id="deleteBtn" class="btn btn-danger fs-4" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Account</button>
-                            <input id="deleteAccount" class="form-control fs-5" type="text" value="This will delete your account permenantly." readonly>
-                        </div>
-                    
-                    </div>
-                </div>
-            </div>
-
-            <!-- Clear Modal -->
-            <div class="modal fade" id="clearModal">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <form action="/controller.php" method="post" class="needs-validation" novalidate>
-                                <input type="hidden" name="page" value="Profile">
-                                <input type="hidden" name="command" value="ClearAccount">
-                                
-                                <p>All of your transactions and funds will be permanently erased if you continue. <br><br>Are you sure?</p>
-                                
-                                <div class="d-flex justify-content-start">
-                                    <button type="submit" class="btn btn-danger">Yes, I Understand</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Delete Modal -->
-            <div class="modal fade" id="deleteModal">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <form action="/controller.php" method="post" class="needs-validation" novalidate>
-                                <input type="hidden" name="page" value="Profile">
-                                <input type="hidden" name="command" value="DeleteAccount">
-                                
-                                <p>Your account and all related information will be permanently deleted, and recovering your data will not be possible if you continue. <br><br>Are you sure?</p>
-                                
-                                <div class="d-flex justify-content-start">
-                                    <button type="submit" class="btn btn-danger">Yes, I Understand</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-            
-        </div>
-    </div>
+<!--    -->
+<!--    <!-- Content Area -->
+<!--    <div class="d-flex flex-column vh-100" id="content">-->
+<!--        <!--  Greeting Card -->
+<!--        <div id="greeting" class="d-flex border border-2 bg-light rounded-3 m-2">-->
+<!--            <div class="fs-2 fw-medium p-3">-->
+<!--                Here is your profile information.-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!--        <!-- Profile Area -->
+<!--        <div id="profile" class="d-flex border border-2 bg-light rounded-3 m-2 h-100">-->
+<!--            <div id="general-info" class="text-center w-50 m-2 border border-2 bg-light rounded-3">-->
+<!--                <h1 class="m-2">General Information</h1>-->
+<!--                <form action="/controller.php" method="post" class="needs-validation m-4" novalidate>-->
+<!--                    <input type="hidden" name="page" value="Profile">-->
+<!--                    <input type="hidden" name="command" value="GeneralInfo">-->
+<!---->
+<!--                    <div id="profileName" class="input-group mt-4">-->
+<!--                        <span class="input-group-text fs-4">Full Name</span>-->
+<!--                        <input type="text" class="form-control fs-4" id="firstName" name="firstName" value="">-->
+<!--                        <input type="text" class="form-control fs-4" id="lastName" name="lastName" value="">-->
+<!--                    </div>-->
+<!---->
+<!--                    <div id="profileUsername" class="input-group mt-4">-->
+<!--                        <span class="input-group-text fs-4">Username</span>-->
+<!--                        <input type="text" class="form-control fs-4" id="profileUser" name="profileUser" value="">-->
+<!--                    </div>-->
+<!---->
+<!--                    <div id="profilePassword" class="input-group mt-4">-->
+<!--                        <span class="input-group-text fs-4">Password</span>-->
+<!--                        <input type="text" class="form-control fs-4" id="profilePass" name="profilePass" value="">-->
+<!--                    </div>-->
+<!---->
+<!--                    <div id="profileEmail" class="input-group mt-4">-->
+<!--                        <span class="input-group-text fs-4">Email</span>-->
+<!--                        <input type="text" class="form-control fs-4" id="profilEm" name="profilEm" value="">-->
+<!--                    </div>-->
+<!---->
+<!--                    <div id="profileCountry" class="input-group mt-4">-->
+<!--                        <span class="input-group-text fs-4">Country</span>-->
+<!--                        <input type="text" class="form-control fs-4" id="profileC" name="profileC" value="" placeholder="Canada">-->
+<!--                    </div>-->
+<!---->
+<!--                    <div id="profilePhone" class="input-group mt-4">-->
+<!--                        <span class="input-group-text fs-4">Phone Number</span>-->
+<!--                        <input type="tel" class="form-control fs-4" id="profileP" name="profileP" value="" placeholder="123-456-7890">-->
+<!--                    </div>-->
+<!---->
+<!--                    <div id="submit-btn" class="d-flex justify-content-end">-->
+<!--                        <button type="submit" class="btn btn-primary fs-4">Save</button>-->
+<!--                    </div>                -->
+<!--                </form>-->
+<!--            </div>-->
+<!---->
+<!--            <div class="d-flex flex-column flex-grow-1">-->
+<!--                <div id="account-summary" class="text-center border border-2 m-2 bg-light rounded-3">-->
+<!--                    <h1 class="m-2">Account Summary</h1>-->
+<!--                    -->
+<!--                    <div class="d-flex flex-column gap-4 m-4">-->
+<!--                        <div id="amountSaved" class="input-group mt-4">-->
+<!--                            <span class="input-group-text fs-4">Amount Saved</span>-->
+<!--                            <input type="text" class="form-control fs-4" id="savedA" name="saved" value="" readonly>-->
+<!--                        </div>-->
+<!---->
+<!--                        <div id="emergencyFund" class="input-group mt-4">-->
+<!--                            <span class="input-group-text fs-4">Emergency Fund</span>-->
+<!--                            <input type="text" class="form-control fs-4" id="emergencyA" name="emergency" value="$0" readonly>-->
+<!--                        </div>-->
+<!---->
+<!--                        <div id="travelFund" class="input-group mt-4">-->
+<!--                            <span class="input-group-text fs-4">Travel Fund</span>-->
+<!--                            <input type="text" class="form-control fs-4" id="travelA" name="travel" value="$0" readonly>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    -->
+<!--                    <div id="" class="d-flex justify-content-end gap-3 m-4">-->
+<!--                        <button id="editAccounts" class="btn btn-secondary fs-4" data-bs-toggle="modal" data-bs-target="#transactionModal">Edit</button>-->
+<!--                    </div> -->
+<!--                </div>-->
+<!--                -->
+<!--                <!-- Edit Modal -->
+<!--                <div class="modal fade" id="transactionModal">-->
+<!--                    <div class="modal-dialog modal-dialog-centered">-->
+<!--                        <div class="modal-content">-->
+<!--                            <div class="modal-header">-->
+<!--                                <h1 class="modal-title fs-5" id="exampleModalLabel">Accounts</h1>-->
+<!--                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                            </div>-->
+<!--                            <div class="modal-body">-->
+<!--                                <form action="/controller.php" method="post" class="needs-validation" novalidate>-->
+<!--                                    <input type="hidden" name="page" value="Profile">-->
+<!--                                    <input type="hidden" name="command" value="UpdateAccounts">-->
+<!--                                    -->
+<!--                                    <p>Get started on tracking your progress by entering the amount you already saved up.</p>-->
+<!--                                    -->
+<!--                                    <div class="form-floating">-->
+<!--                                        <input type="number" class="form-control" id="saved" name="saved" step=".01" placeholder="Chequing" required>-->
+<!--                                        <label for="saved">Amount Saved</label>-->
+<!--                                        <div class="invalid-feedback">-->
+<!--                                            Please input an amount.-->
+<!--                                        </div>-->
+<!--                                    </div><br>-->
+<!--            -->
+<!--                                    <div class="form-floating">-->
+<!--                                        <input type="number" class="form-control" id="emergency" name="emergency" step=".01" placeholder="Savings" required>-->
+<!--                                        <label for="emergency">Emergency Fund</label>-->
+<!--                                        <div class="invalid-feedback">-->
+<!--                                            Please input an amount.-->
+<!--                                        </div>-->
+<!--                                    </div><br>-->
+<!--            -->
+<!--                                    <div class="form-floating">-->
+<!--                                        <input type="number" class="form-control" id="travel" name="travel" step=".01" placeholder="credit" required>-->
+<!--                                        <label for="travel">Travel Fund</label>-->
+<!--                                        <div class="invalid-feedback">-->
+<!--                                            Please input an amount.-->
+<!--                                        </div>-->
+<!--                                    </div><br>-->
+<!---->
+<!--                                    <div class="d-flex justify-content-end">-->
+<!--                                        <button type="submit" class="btn btn-primary">Save</button>-->
+<!--                                    </div>-->
+<!--                                </form>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!---->
+<!--                <div id="other" class="text-center border m-2 border-2 bg-light rounded-3">-->
+<!--                    <h1 class="m-2">Profile Administration</h1>-->
+<!--                    -->
+<!--                    <div class="d-flex flex-column gap-4 m-4">-->
+<!--                        <div class="input-group">-->
+<!--                            <button id="clearBtn" class="btn btn-warning fs-4" data-bs-toggle="modal" data-bs-target="#clearModal">Clear Account</button>-->
+<!--                            <input id="clearAccount" class="form-control fs-5" type="text" value="This will clear all data related to your account." readonly>-->
+<!--                        </div>-->
+<!--                        -->
+<!--                        <div class="input-group">-->
+<!--                            <button id="deleteBtn" class="btn btn-danger fs-4" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Account</button>-->
+<!--                            <input id="deleteAccount" class="form-control fs-5" type="text" value="This will delete your account permenantly." readonly>-->
+<!--                        </div>-->
+<!--                    -->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--            <!-- Clear Modal -->
+<!--            <div class="modal fade" id="clearModal">-->
+<!--                <div class="modal-dialog modal-dialog-centered">-->
+<!--                    <div class="modal-content">-->
+<!--                        <div class="modal-body">-->
+<!--                            <form action="/controller.php" method="post" class="needs-validation" novalidate>-->
+<!--                                <input type="hidden" name="page" value="Profile">-->
+<!--                                <input type="hidden" name="command" value="ClearAccount">-->
+<!--                                -->
+<!--                                <p>All of your transactions and funds will be permanently erased if you continue. <br><br>Are you sure?</p>-->
+<!--                                -->
+<!--                                <div class="d-flex justify-content-start">-->
+<!--                                    <button type="submit" class="btn btn-danger">Yes, I Understand</button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--            <!-- Delete Modal -->
+<!--            <div class="modal fade" id="deleteModal">-->
+<!--                <div class="modal-dialog modal-dialog-centered">-->
+<!--                    <div class="modal-content">-->
+<!--                        <div class="modal-body">-->
+<!--                            <form action="/controller.php" method="post" class="needs-validation" novalidate>-->
+<!--                                <input type="hidden" name="page" value="Profile">-->
+<!--                                <input type="hidden" name="command" value="DeleteAccount">-->
+<!--                                -->
+<!--                                <p>Your account and all related information will be permanently deleted, and recovering your data will not be possible if you continue. <br><br>Are you sure?</p>-->
+<!--                                -->
+<!--                                <div class="d-flex justify-content-start">-->
+<!--                                    <button type="submit" class="btn btn-danger">Yes, I Understand</button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--            -->
+<!--        </div>-->
+<!--    </div>-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

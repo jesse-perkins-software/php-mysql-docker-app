@@ -198,7 +198,7 @@
 
         <div class="" id="account-header">
             <div id="account-type">
-                <h4 id="account-name">Budgeted Income ($5,000)</h4>
+                <h4 id="account-name">Budgeted Expenses ($5,000)</h4>
             </div>
             <h4 id="account-amount">$3,000</h4>
         </div>
