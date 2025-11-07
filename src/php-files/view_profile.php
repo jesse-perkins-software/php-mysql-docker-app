@@ -85,29 +85,28 @@
             justify-content: start;
         }
 
-        #general-info {
+        #general-info, #security-info {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 30%;
+            width: 40%;
             padding: 1em;
             margin: 1em;
             gap: 0.75em;
         }
 
-        #info-container {
+        .info-form {
             display: flex;
             flex-direction: column;
             gap: 0.5em;
+            width: 100%;
         }
 
         .input-group-text {
             display: flex;
-            flex-direction: row;
             justify-content: center;
             min-width: 4.5em;
-
         }
 
     </style>
@@ -118,25 +117,44 @@
     <div class="" id="content-container">
         <div class="rounded border shadow-sm" id="general-info">
             <h4>Personal Information</h4>
-            <form action="/controller.php" method="post" class="needs-validation" id="info-container" novalidate>
+            <form action="/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
                 <input type="hidden" name="page" value="Profile">
                 <input type="hidden" name="command" value="GeneralInfo">
 
                 <div class="input-group">
-                    <span class="input-group-text" id="date-input">Name</span>
+                    <span class="input-group-text" id="username-input">Username</span>
+                    <input type="text" class="form-control" placeholder="helloWorld123">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text" id="name-input">Name</span>
                     <input type="text" class="form-control" placeholder="First">
                     <input type="text" class="form-control" placeholder="Last">
                 </div>
                 <div class="input-group">
-                    <span class="input-group-text" id="date-input">Email</span>
+                    <span class="input-group-text" id="email-input">Email</span>
                     <input type="email" class="form-control" placeholder="abc@gmail.com">
                 </div>
                 <div class="input-group">
-                    <span class="input-group-text" id="date-input">Phone Number</span>
-                    <input type="tel" class="form-control" placeholder="250-888-8888">
+                    <span class="input-group-text" id="phone-input">Phone Number</span>
+                    <input type="tel" class="form-control" placeholder="250-###-####">
                 </div>
 
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="btn btn-primary" value="Save">
+            </form>
+        </div>
+
+        <div class="rounded border shadow-sm" id="security-info">
+            <h4>Security</h4>
+            <form action="/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
+                <input type="hidden" name="page" value="Profile">
+                <input type="hidden" name="command" value="SecurityInfo">
+
+                <div class="input-group">
+                    <span class="input-group-text" id="password-input">Change Password</span>
+                    <input type="password" class="form-control" placeholder="MySecurePassword">
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Save">
             </form>
         </div>
     </div>
