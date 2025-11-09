@@ -118,7 +118,11 @@ if ($page == "SignInPage") {
                 exit();
             }
             case "Profile": {
-                include("view_profile.php");
+                include("view_settings_profile.php");
+                exit();
+            }
+            case "Preferences": {
+                include("view_settings_preferences.php");
                 exit();
             }
             case "AddTransaction": {
@@ -290,27 +294,27 @@ if ($page == "SignInPage") {
                 if (userDetailsExists($_SESSION["username"])) {
                     if ($_POST["profileC"] == "" && $_POST["profileP"] == "") {
                         deleteDetails($_SESSION["username"]);
-                        include("view_profile.php");
+                        include("view_settings_profile.php");
                         exit();
                     } else if ($_POST["profileP"] != $new_obj["Phone"] || $_POST["profileC"] != $new_obj["Country"]) {
                         changeDetails($_SESSION["username"], $_POST["profileC"], $_POST["profileP"]);
-                        include("view_profile.php");
+                        include("view_settings_profile.php");
                         exit();
                     }
                 } else {
                     addDetails($_SESSION["username"], $_POST["profileC"], $_POST["profileP"]);
-                    include("view_profile.php");
+                    include("view_settings_profile.php");
                     exit();
                 }
             }
             case "UpdateAccounts": {
                 if (!userFundsExists($_SESSION["username"])) {
                     addFunds($_SESSION["username"], $_POST["saved"], $_POST["emergency"], $_POST["travel"]);
-                    include("view_profile.php");
+                    include("view_settings_profile.php");
                     exit();
                 } else {
                     updateFunds($_SESSION["username"], $_POST["saved"], $_POST["emergency"], $_POST["travel"]);
-                    include("view_profile.php");
+                    include("view_settings_profile.php");
                     exit();
                 }
             }

@@ -116,42 +116,19 @@
 
     <div class="" id="content-container">
         <div class="rounded border shadow-sm" id="general-info">
-            <h4>Personal Information</h4>
+            <h4>Account Preferences</h4>
             <form action="/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
                 <input type="hidden" name="page" value="Profile">
                 <input type="hidden" name="command" value="GeneralInfo">
 
                 <div class="input-group">
-                    <span class="input-group-text" id="username-input">Username</span>
-                    <input type="text" class="form-control" placeholder="helloWorld123">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-text" id="name-input">Name</span>
-                    <input type="text" class="form-control" placeholder="First">
-                    <input type="text" class="form-control" placeholder="Last">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-text" id="email-input">Email</span>
-                    <input type="email" class="form-control" placeholder="abc@gmail.com">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-text" id="phone-input">Phone Number</span>
-                    <input type="tel" class="form-control" placeholder="250-###-####">
-                </div>
-
-                <input type="submit" class="btn btn-primary" value="Save">
-            </form>
-        </div>
-
-        <div class="rounded border shadow-sm" id="security-info">
-            <h4>Security</h4>
-            <form action="/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
-                <input type="hidden" name="page" value="Profile">
-                <input type="hidden" name="command" value="SecurityInfo">
-
-                <div class="input-group">
-                    <span class="input-group-text" id="password-input">Change Password</span>
-                    <input type="password" class="form-control" placeholder="MySecurePassword">
+                    <span class="input-group-text" id="username-input">Currency</span>
+                    <select class="form-select" id="currency-input">
+                        <option selected>Choose...</option>
+                        <option value="1">CAD</option>
+                        <option value="2">USD</option>
+                        <option value="3">MXN</option>
+                    </select>
                 </div>
 
                 <input type="submit" class="btn btn-primary" value="Save">

@@ -57,7 +57,7 @@
                 <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Profile')">Profile</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link text-start ps-4" type="submit" onclick="">Preferences</button>
+                <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Preferences')">Preferences</button>
             </li>
             <li class="nav-item">
                 <button class="nav-link text-start ps-4" type="submit" onclick="">Categories & Accounts</button>
