@@ -125,6 +125,10 @@ if ($page == "SignInPage") {
                 include("view_settings_preferences.php");
                 exit();
             }
+            case "CategoriesAndAccounts": {
+                include("view_settings_categories_and_accounts.php");
+                exit();
+            }
             case "AddTransaction": {
                 addTransaction($_SESSION["username"], $_POST["amount"], $_POST["category"], $_POST["account"], $_POST["date"]);
                 include("view_mainpage.php");
