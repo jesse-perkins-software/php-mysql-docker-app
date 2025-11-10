@@ -122,12 +122,31 @@
                 <input type="hidden" name="command" value="GeneralInfo">
 
                 <div class="input-group">
-                    <span class="input-group-text" id="username-input">Currency</span>
-                    <select class="form-select" id="currency-input">
+                    <span class="input-group-text" id="number-format-input">Number Format</span>
+                    <select class="form-select" id="number-input">
                         <option selected>Choose...</option>
-                        <option value="1">CAD</option>
-                        <option value="2">USD</option>
-                        <option value="3">MXN</option>
+                        <option value="1">1,000</option>
+                        <option value="2">1,000.00</option>
+                        <option value="3">1.000</option>
+                        <option value="3">1.000,00</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text" id="date-format-input">Date Format</span>
+                    <select class="form-select" id="date-input">
+                        <option selected>Choose...</option>
+                        <option value="1">MM-DD-YYYY</option>
+                        <option value="2">DD-MM-YYYY</option>
+                        <option value="3">YYYY-MM-DD</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text" id="budget-period-input">Budget Period</span>
+                    <select class="form-select" id="budget-input">
+                        <option selected>Choose...</option>
+                        <option value="1">Weekly</option>
+                        <option value="2">Bi-Weekly</option>
+                        <option value="3">Monthly</option>
                     </select>
                 </div>
 
