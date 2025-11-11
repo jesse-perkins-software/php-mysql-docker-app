@@ -60,21 +60,6 @@
         #content {
             margin-left: 15vw;
         }
-        #buttons {
-            width: 10vw;
-        }
-        #searchBar {
-            height: 5vh;
-        }
-        #amount-filter, #category-filter, #account-filter, #date-filter {
-            display: none;
-        }
-        #submit-btn {
-            margin-top: 25vh;
-        }
-        #clearBtn, #lockBtn, #deleteBtn {
-            width: 27%;
-        }
 
         #content-container {
             height: 100vh;
@@ -86,7 +71,7 @@
             align-items: start;
         }
 
-        #general-info, #security-info {
+        #general-info {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -106,7 +91,35 @@
         .input-group-text {
             display: flex;
             justify-content: center;
-            min-width: 4.5em;
+            width: 8em;
+        }
+
+        .input-group {
+            margin-bottom: 0.5em;
+        }
+
+        #category-title {
+            margin-bottom: 1em;
+        }
+
+        .row {
+            width: 100%;
+            margin-bottom: 1em;
+        }
+
+        .add-button {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+        }
+
+        .categories-list {
+            margin-left: 0.5em;
+        }
+
+        #save-categories {
+            width: 4em;
         }
 
     </style>
@@ -116,14 +129,167 @@
 
     <div class="" id="content-container">
         <div class="rounded border shadow-sm" id="general-info">
-            <h4>Categories</h4>
-            <form action="/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
-                <input type="hidden" name="page" value="Profile">
-                <input type="hidden" name="command" value="Categories">
+            <h4 id="category-title">Categories</h4>
+            <div class="row">
+                <div class="col">
+                    <h5>Home & Utilities</h5>
+                    <div class="categories-list">
+                        <p>Rent/Mortgage</p>
+                        <p>Internet</p>
+                        <p>Electricity & Water</p>
+                        <p>Repairs</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5>Food & Groceries</h5>
+                    <div class="categories-list">
+                        <p>Groceries - Supermarket</p>
+                        <p>Convenience Store</p>
+                    </div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col">
+                    <h5>Transportation</h5>
+                    <div class="categories-list">
+                        <p>Gas</p>
+                        <p>Maintenance</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5>Shopping & Personal</h5>
+                    <div class="categories-list">
+                        <p>Shoes</p>
+                        <p>Clothes - Casual</p>
+                    </div>
+                </div>
+            </div>
 
-            </form>
+            <div class="row">
+                <div class="col">
+                    <h5>Dining & Take-Out</h5>
+                    <div class="categories-list">
+                        <p>Restaurants</p>
+                        <p>Fast Food</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5>Health & Medical</h5>
+                    <div class="categories-list">
+                        <p>Dental</p>
+                        <p>Doctor Visit</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h5>Entertainment & Leisure</h5>
+                    <div class="categories-list">
+                        <p>Movies</p>
+                        <p>Social Events</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5>Travel & Vacation</h5>
+                    <div class="categories-list">
+                        <p>Flights</p>
+                        <p>Hotel</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h5>Transportation</h5>
+                    <div class="categories-list">
+                        <p>Gas</p>
+                        <p>Maintenance</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5>Financial</h5>
+                    <div class="categories-list">
+                        <p>ATM Fees</p>
+                        <p>Credit Card</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h5>Insurance</h5>
+                    <div class="categories-list">
+                        <p>Car</p>
+                        <p>Travel</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5>Education</h5>
+                    <div class="categories-list">
+                        <p>Tuition</p>
+                        <p>Textbooks</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h5>Gifts & Celebration</h5>
+                    <div class="categories-list">
+                        <p>Birthday Gifts</p>
+                        <p>Cards & Wrapping Supplies</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5>Pet Care</h5>
+                    <div class="categories-list">
+                        <p>Pet Food & Treats</p>
+                        <p>Vet & Meds</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="add-button">
+                <button class="btn btn-primary" id="save-categories" data-bs-toggle="modal" data-bs-target="#newCategoryModal">Add</button>
+            </div>
         </div>
+
+        <!-- Add Category Model Starts -->
+        <div class="modal fade" id="newCategoryModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Category</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="transaction-info">
+                            <div class="input-group">
+                                <span class="input-group-text" id="date-input">Category Group</span>
+                                <select class="form-select" id="budget-input">
+                                    <option selected>Choose...</option>
+                                    <option value="1">Home & Utilities</option>
+                                    <option value="2">Food & Groceries</option>
+                                    <option value="3">Transportation</option>
+                                    <option value="4">Shopping & Personal</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text" id="email-input">New Category</span>
+                                <input type="text" class="form-control" placeholder="Bus Fare">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add Category Model Ends -->
 
         <div class="rounded border shadow-sm" id="general-info">
             <h4>Accounts</h4>
