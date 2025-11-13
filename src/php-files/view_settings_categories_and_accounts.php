@@ -98,7 +98,7 @@
             margin-bottom: 0.5em;
         }
 
-        #category-title {
+        .section-title {
             margin-bottom: 1em;
         }
 
@@ -115,7 +115,7 @@
         }
 
         .categories-list {
-            margin-left: 0.5em;
+            margin-left: 1em;
         }
 
         #save-categories {
@@ -129,18 +129,16 @@
 
     <div class="" id="content-container">
         <div class="rounded border shadow-sm" id="general-info">
-            <h4 id="category-title">Categories</h4>
+            <h4 class="section-title">Categories</h4>
             <div class="row">
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Home & Utilities</h5>
                     <div class="categories-list">
                         <p>Rent/Mortgage</p>
                         <p>Internet</p>
-                        <p>Electricity & Water</p>
-                        <p>Repairs</p>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Food & Groceries</h5>
                     <div class="categories-list">
                         <p>Groceries - Supermarket</p>
@@ -150,14 +148,14 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Transportation</h5>
                     <div class="categories-list">
                         <p>Gas</p>
                         <p>Maintenance</p>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Shopping & Personal</h5>
                     <div class="categories-list">
                         <p>Shoes</p>
@@ -167,14 +165,14 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Dining & Take-Out</h5>
                     <div class="categories-list">
                         <p>Restaurants</p>
                         <p>Fast Food</p>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Health & Medical</h5>
                     <div class="categories-list">
                         <p>Dental</p>
@@ -184,14 +182,14 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Entertainment & Leisure</h5>
                     <div class="categories-list">
                         <p>Movies</p>
                         <p>Social Events</p>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Travel & Vacation</h5>
                     <div class="categories-list">
                         <p>Flights</p>
@@ -201,14 +199,14 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Transportation</h5>
                     <div class="categories-list">
                         <p>Gas</p>
                         <p>Maintenance</p>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Financial</h5>
                     <div class="categories-list">
                         <p>ATM Fees</p>
@@ -218,14 +216,14 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Insurance</h5>
                     <div class="categories-list">
                         <p>Car</p>
                         <p>Travel</p>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Education</h5>
                     <div class="categories-list">
                         <p>Tuition</p>
@@ -235,14 +233,14 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Gifts & Celebration</h5>
                     <div class="categories-list">
                         <p>Birthday Gifts</p>
                         <p>Cards & Wrapping Supplies</p>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col categories-container">
                     <h5>Pet Care</h5>
                     <div class="categories-list">
                         <p>Pet Food & Treats</p>
@@ -269,7 +267,7 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="date-input">Category Group</span>
                                 <select class="form-select" id="budget-input">
-                                    <option selected>Choose...</option>
+                                    <option selected>New Category Group</option>
                                     <option value="1">Home & Utilities</option>
                                     <option value="2">Food & Groceries</option>
                                     <option value="3">Transportation</option>
@@ -292,14 +290,60 @@
         <!-- Add Category Model Ends -->
 
         <div class="rounded border shadow-sm" id="general-info">
-            <h4>Accounts</h4>
-            <form action="/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
-                <input type="hidden" name="page" value="Profile">
-                <input type="hidden" name="command" value="Accounts">
+            <h4 class="section-title">Accounts</h4>
+            <div class="row">
+                <div class="col regular-accounts-container">
+                    <h5>Banking (CIBC)</h5>
+                    <div class="categories-list">
+                        <p>Chequing Account (4979)</p>
+                        <p>Savings Account (4979)</p>
+                        <p>Credit Card (8700)</p>
+                    </div>
+                </div>
+                <div class="col regular-accounts-container">
+                    <h5>Investments (Questrade)</h5>
+                    <div class="categories-list">
+                        <p>Margin Account (4532)</p>
+                    </div>
+                </div>
+            </div>
 
+            <div class="add-button">
+                <button class="btn btn-primary" id="save-accounts" data-bs-toggle="modal" data-bs-target="#newAccountModal">Add</button>
+            </div>
 
-
-            </form>
+            <!-- Add Account Model Starts -->
+            <div class="modal fade" id="newAccountModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">New Account</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="transaction-info">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="date-input">Account Group</span>
+                                    <select class="form-select" id="budget-input">
+                                        <option selected>New Account Group</option>
+                                        <option value="1">Banking</option>
+                                        <option value="2">Investments</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="email-input">New Account</span>
+                                    <input type="text" class="form-control" placeholder="Credit Card (Costco)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Account Model Ends -->
         </div>
     </div>
 <!--    <div class="position-absolute h-100 border-end border-2 shadow-sm bg-light d-flex align-items-center" id="nav-bar">-->
