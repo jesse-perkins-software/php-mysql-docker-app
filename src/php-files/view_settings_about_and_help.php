@@ -79,6 +79,11 @@
             width: 50%;
             padding: 1em;
             margin: 1em;
+            text-align: center;
+        }
+
+        div p {
+            margin-top: 0.75em;
         }
 
     </style>
@@ -89,13 +94,26 @@
     <div class="" id="content-container">
         <div class="rounded border shadow-sm" id="about-info">
             <h4 class="section-title">About</h4>
-
+            <p>
+                This Docker project is made to help keep track of finances simple.
+                You can make a budget for yourself, add transactions, and keep
+                track of your accounts.
+            </p>
+            <p>
+                This was made to be a portfolio piece, so if you have copied the
+                GitHub repo and plan to use this for yourself please be aware that
+                this is not a secure piece of software. As such, this should ONLY
+                be used in your local network and never exposed to the internet.
+            </p>
 
         </div>
 
         <div class="rounded border shadow-sm" id="help-info">
             <h4 class="section-title">Help</h4>
-
+            <p>
+                If you find anything that breaks this software or have any helpful
+                suggestions to improve it, feel free to do so on GitHub.
+            </p>
 
         </div>
     </div>

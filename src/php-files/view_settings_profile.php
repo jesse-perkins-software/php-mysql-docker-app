@@ -83,6 +83,7 @@
             display: flex;
             flex-direction: column;
             justify-content: start;
+            align-items: center;
         }
 
         #general-info, #security-info {
