@@ -138,6 +138,23 @@
             padding-right: 1em;
         }
 
+        #account-type {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .transaction-info {
+            margin-bottom: 1em;
+        }
+
+        .input-group-text {
+            width: 22.5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
 
 
     </style>
@@ -190,6 +207,8 @@
         <div class="" id="account-header">
             <div id="account-type">
                 <h4 id="account-name">Expenses</h4>
+                <button class="btn btn-secondary" id="new-transaction-button" data-bs-toggle="modal" data-bs-target="#newTransactionModel">+ New Transaction</button>
+                <?php require 'new_transaction_modal.php'; ?>
             </div>
             <h4 id="account-amount">$10,000</h4>
         </div>

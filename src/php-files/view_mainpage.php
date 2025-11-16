@@ -42,7 +42,7 @@
 
         .graph {
             height: 47.5%;
-            padding: 1.5em;
+            padding: 1em 1.5em 3em 1.5em;
             text-align: center;
         }
 
@@ -129,6 +129,10 @@
 
         .info-box-neg {
             color: red;
+        }
+
+        canvas {
+            padding-top: 0.75em;
         }
 
     </style>
@@ -287,7 +291,7 @@
                             <div class="progress-bar" style="width: 87%"></div>
                         </div>
                         <div class="card-bottom-text">
-                            <span class="card-text"></span>
+                            <span class="card-text">Sep</span>
                             <span class="card-text"></span>
                         </div>
                     </div>
