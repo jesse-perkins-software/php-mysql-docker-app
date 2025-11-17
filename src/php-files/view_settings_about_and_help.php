@@ -97,7 +97,8 @@
             <p>
                 This Docker project is made to help keep track of finances simple.
                 You can make a budget for yourself, add transactions, and keep
-                track of your accounts.
+                track of your spending and saving. This tool is meant to help
+                people take control of their finances in an uncomplicated way.
             </p>
             <p>
                 This was made to be a portfolio piece, so if you have copied the
