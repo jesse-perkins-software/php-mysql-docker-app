@@ -144,8 +144,21 @@
             padding-right: 1em;
         }
 
-        .transaction-info {
-            margin-bottom: 1em;
+        #set-income-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            padding: 1em 0 0 1em;
+        }
+
+        #set-income-budget-form {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5em;
+            padding: 1em;
         }
 
 
@@ -195,10 +208,25 @@
 <!--    </div>-->
 
     <div class="" id="content-container">
+        <div id="set-income-container">
+            <div class="border shadow-sm rounded" id="set-income">
+                <form action="/controller.php" method="post" class="needs-validation info-form" id="set-income-budget-form" novalidate>
+                    <input type="hidden" name="page" value="Transactions">
+                    <input type="hidden" name="command" value="SetIncome">
 
+                    <div class="input-group">
+                        <span class="input-group-text" id="income-budget">Set Income</span>
+                        <span class="input-group-text" id="dollar-symbol">$</span>
+                        <input type="text" class="form-control" placeholder="5,000" value="1,000">
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </form>
+            </div>
+        </div>
         <div class="" id="account-header">
             <div id="account-type">
-                <h4 id="account-name">Budgeted Income ($5,000)</h4>
+                <h4 id="account-name">Actual Income Received</h4>
             </div>
             <h4 id="account-amount">$3,000</h4>
         </div>
@@ -237,142 +265,6 @@
                     <div class="col">Savings</div>
                     <div class="col">Needs</div>
                     <div class="col-3"></div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">22-02-2024</div>
-                    <div class="col-5">Royal Bank of Canada</div>
-                    <div class="col">$90</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Wants</div>
-                    <div class="col-3">Date Night</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">25-02-2024</div>
-                    <div class="col-5">Walmart</div>
-                    <div class="col">$40</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3">Peanuts</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">30-02-2024</div>
-                    <div class="col-5">Continental Barbershop</div>
-                    <div class="col">$30</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3"></div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">22-02-2024</div>
-                    <div class="col-5">Royal Bank of Canada</div>
-                    <div class="col">$90</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Wants</div>
-                    <div class="col-3">Date Night</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">25-02-2024</div>
-                    <div class="col-5">Walmart</div>
-                    <div class="col">$40</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3">Peanuts</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">30-02-2024</div>
-                    <div class="col-5">Continental Barbershop</div>
-                    <div class="col">$30</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3"></div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">22-02-2024</div>
-                    <div class="col-5">Royal Bank of Canada</div>
-                    <div class="col">$90</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Wants</div>
-                    <div class="col-3">Date Night</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">25-02-2024</div>
-                    <div class="col-5">Walmart</div>
-                    <div class="col">$40</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3">Peanuts</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">30-02-2024</div>
-                    <div class="col-5">Continental Barbershop</div>
-                    <div class="col">$30</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3"></div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">22-02-2024</div>
-                    <div class="col-5">Royal Bank of Canada</div>
-                    <div class="col">$90</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Wants</div>
-                    <div class="col-3">Date Night</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">25-02-2024</div>
-                    <div class="col-5">Walmart</div>
-                    <div class="col">$40</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3">Peanuts</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">30-02-2024</div>
-                    <div class="col-5">Continental Barbershop</div>
-                    <div class="col">$30</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3"></div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">22-02-2024</div>
-                    <div class="col-5">Royal Bank of Canada</div>
-                    <div class="col">$90</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Wants</div>
-                    <div class="col-3">Date Night</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">25-02-2024</div>
-                    <div class="col-5">Walmart</div>
-                    <div class="col">$40</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3">Peanuts</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">30-02-2024</div>
-                    <div class="col-5">Continental Barbershop</div>
-                    <div class="col">$30</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3"></div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">22-02-2024</div>
-                    <div class="col-5">Royal Bank of Canada</div>
-                    <div class="col">$90</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Wants</div>
-                    <div class="col-3">Date Night</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">25-02-2024</div>
-                    <div class="col-5">Walmart</div>
-                    <div class="col">$40</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3">Peanuts</div>
                 </div>
             </div>
         </div>
