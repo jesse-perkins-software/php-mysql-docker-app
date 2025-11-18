@@ -302,29 +302,29 @@
                 <div class="col card-small p-2 rounded shadow-sm border">
                     <div class="card-top-half">
                         <div class="card-top-text">
-                            <span class="card-text">Title</span>
-                            <span class="card-text info-box-neg"></span>
+                            <span class="card-text">Biggest Purchase</span>
+                            <span class="card-text">Nov</span>
                         </div>
                         <div></div>
                     </div>
-                    <h5>%</h5>
+                    <h5>$1,430</h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
-                            <span class="card-text"></span>
-                            <span class="card-text"></span>
+                            <span class="card-text">@ BestBuy</span>
+                            <span class="card-text">As of today</span>
                         </div>
                     </div>
                 </div>
                 <div class="col card-small p-2 rounded shadow-sm border">
                     <div class="card-top-half">
                         <div class="card-top-text">
-                            <span class="card-text">Title</span>
-                            <span class="card-text info-box-neg"></span>
+                            <span class="card-text">Payday Countdown</span>
+                            <span class="card-text">Nov</span>
                         </div>
                         <div></div>
                     </div>
-                    <h5>%</h5>
+                    <h5>3 Days</h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">

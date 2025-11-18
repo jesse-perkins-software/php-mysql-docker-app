@@ -209,8 +209,8 @@
                 <div class="col categories-container">
                     <h5>Financial</h5>
                     <div class="categories-list">
-                        <p>ATM Fees</p>
-                        <p>Credit Card</p>
+                        <p>Income</p>
+                        <p>Credit Card Payment</p>
                     </div>
                 </div>
             </div>
