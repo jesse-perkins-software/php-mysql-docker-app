@@ -22,11 +22,11 @@ if ($page == "SignInPage") {
                 $_SESSION["username"] = $_POST["username"];
                 $_SESSION["password"] = $_POST["password"];
                 $_SESSION["signedin"] = true;
-                $wrong_user = false;
+//                $wrong_user = false;
                 setcookie("signedin", true, time() + 86400 * 7);
                 include("view_mainpage.php");
             } else {
-                $wrong_user = true;
+//                $wrong_user = true;
                 include("view_signin.php");
             }
             

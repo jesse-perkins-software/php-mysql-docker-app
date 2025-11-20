@@ -6,63 +6,127 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3, h4, h5, h6, p, span {
+            margin: 0;
+            padding: 0;
+        }
+
         #err-msg {
             display: none;
+        }
+
+        #content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1em;
+            width: 50vw;
+            margin-top: 10vh;
+            background-color: white;
+        }
+
+        /*#signUpForm {*/
+        /*    display: flex;*/
+        /*    flex-direction: column;*/
+        /*    gap: 1em;*/
+        /*    width: 40vw;*/
+        /*    margin-bottom: 2em;*/
+        /*}*/
+
+        #signUpForm {
+            display: flex;
+            justify-content: center;
+        }
+
+        #form-title {
+            margin-top: 1em;
+        }
+
+        #signUpBtn {
+            width: 6em;
+            height: 3em;
+            text-align: center;
         }
     </style>
 </head>
 <body class="bg-light">
-    <div class="p-5"></div>
-    <div class="p-5"></div>
-    
-    <div class="container w-50">
-        <form action="/controller.php" method="post" class="needs-validation bg-white rounded-3 p-3 shadow" novalidate>
+    <div class="container bg-white shadow rounded-3" id="content-container">
+        <h3 id="form-title">Please Fill In The Form To Make An Account With Us</h3>
+        <form id="signUpForm" action="/controller.php" method="post" class="needs-validation p-3 row" novalidate>
             <input type="hidden" name="page" value="SignUpPage">
             <input type="hidden" name="command" value="SignedUp">
 
-            <p class="fs-3">Please Fill In The Form To Make An Account With Us</p>
+            <div class="col-md-6">
+                <label for="inputFirstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="inputFirstName">
+            </div>
+            <div class="col-md-6">
+                <label for="inputLastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="inputLastName">
+            </div>
 
-            <div class="form-floating">
-                <input type="text" class="form-control rounded-2" id="firstname" placeholder="Enter your first name" name="firstname" required>
-                <label for="firstname" class="form-label">First Name:</label>
-                <div class="invalid-feedback">
-                    Please enter in your first name.
-                </div>
-            </div><br>
+            <div class="col-12 pt-3">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="">
+            </div>
 
-            <div class="form-floating">
-                <input type="text" class="form-control rounded-2" id="lastname" placeholder="Enter your last name" name="lastname" required>
-                <label for="lastname" class="form-label">Last Name:</label>
-                <div class="invalid-feedback">
-                    Please enter in your last name.
-                </div>
-            </div><br>
+            <div class="col-md-6 pt-3 pb-5">
+                <label for="inputUsername" class="form-label">Username</label>
+                <input type="text" class="form-control" id="inputUsername">
+            </div>
+            <div class="col-md-6 pt-3">
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword">
+            </div>
 
-            <div class="form-floating">
-                <input type="text" class="form-control rounded-2" id="username" placeholder="Enter username" name="username" required>
-                <label for="username" class="form-label">Username:</label>
-                <div class="invalid-feedback">
-                    Please enter in your username.
-                </div>
-            </div><br>
+<!--            <div class="form-floating">-->
+<!--                <input type="text" class="form-control rounded-2" id="firstname" placeholder="Enter your first name" name="firstname" required>-->
+<!--                <label for="firstname" class="form-label">First Name:</label>-->
+<!--                <div class="invalid-feedback">-->
+<!--                    Please enter in your first name.-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--            <div class="form-floating">-->
+<!--                <input type="text" class="form-control rounded-2" id="lastname" placeholder="Enter your last name" name="lastname" required>-->
+<!--                <label for="lastname" class="form-label">Last Name:</label>-->
+<!--                <div class="invalid-feedback">-->
+<!--                    Please enter in your last name.-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--            <div class="form-floating">-->
+<!--                <input type="text" class="form-control rounded-2" id="username" placeholder="Enter username" name="username" required>-->
+<!--                <label for="username" class="form-label">Username:</label>-->
+<!--                <div class="invalid-feedback">-->
+<!--                    Please enter in your username.-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--            <div class="form-floating">-->
+<!--                <input type="password" class="form-control rounded-2" id="password" placeholder="Enter password" name="password" required>-->
+<!--                <label for="password" class="form-label">Password:</label>-->
+<!--                <div class="invalid-feedback">-->
+<!--                    Please enter in your password.-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--            <div class="form-floating">-->
+<!--                <input type="email" class="form-control rounded-2" id="email" placeholder="Enter email" name="email" required>-->
+<!--                <label for="email" class="form-label">Email:</label>-->
+<!--                <div class="invalid-feedback">-->
+<!--                    Please enter in your email.-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <div class="form-floating">
-                <input type="password" class="form-control rounded-2" id="password" placeholder="Enter password" name="password" required>
-                <label for="password" class="form-label">Password:</label>
-                <div class="invalid-feedback">
-                    Please enter in your password.
-                </div>
-            </div><br>
-
-            <div class="form-floating">
-                <input type="email" class="form-control rounded-2" id="email" placeholder="Enter email" name="email" required>
-                <label for="email" class="form-label">Email:</label>
-                <div class="invalid-feedback">
-                    Please enter in your email.
-                </div>
-            </div><br>
-
-            <button type="submit" class="btn btn-primary">Sign Up</button><br>
+            <button type="submit" class="btn btn-primary" id="signUpBtn">Sign Up</button>
 
             <label class="fw-lighter bg-danger-subtle text-danger border border-danger p-1 mt-2 rounded-2" id="err-msg">That username already exists.</label>
         </form>
