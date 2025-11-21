@@ -28,7 +28,7 @@
             align-items: center;
             gap: 1em;
             width: 50vw;
-            margin-top: 10vh;
+            margin-top: 15vh;
             background-color: white;
         }
 
@@ -49,11 +49,10 @@
             margin-top: 1em;
         }
 
-        #signUpBtn {
-            width: 6em;
-            height: 3em;
-            text-align: center;
+        #sign-up-container {
+            margin-bottom: 1em;
         }
+
     </style>
 </head>
 <body class="bg-light">
@@ -126,7 +125,10 @@
 <!--                </div>-->
 <!--            </div>-->
 
-            <button type="submit" class="btn btn-primary" id="signUpBtn">Sign Up</button>
+            <div id="sign-up-container">
+                <button type="submit" class="btn btn-primary" id="signUpBtn">Sign Up</button>
+            </div>
+
 
             <label class="fw-lighter bg-danger-subtle text-danger border border-danger p-1 mt-2 rounded-2" id="err-msg">That username already exists.</label>
         </form>

@@ -29,12 +29,16 @@
         }
 
         #loginForm {
+            display: flex;
+            flex-direction: column;
             gap: 1em;
             width: 20vw;
+            padding-bottom: 2em;
         }
 
         #form-title {
             margin-top: 1em;
+            margin-bottom: 0.5em;
         }
 
         /*#err {*/
@@ -53,18 +57,18 @@
 
             <div class="form-floating">
                 <input type="text" class="form-control rounded-2" id="username" placeholder="Username" name="username" autocomplete="new-username" required>
-                <label for="username" class="form-label">Username:</label>
+                <label for="username" class="form-label">Username</label>
             </div>
 
             <div class="form-floating">
                 <input type="password" class="form-control rounded-2" id="password" placeholder="Enter password" autocomplete="new-password" name="password" required>
-                <label for="password" class="form-label">Password:</label>
+                <label for="password" class="form-label">Password</label>
 <!--                <div class="invalid-feedback">-->
 <!--                    Incorrect username or password.-->
 <!--                </div>-->
             </div>
 
-            <button type="submit" class="btn btn-primary mr-2">Sign In</button><br><br>
+            <button type="submit" class="btn btn-primary mr-2">Sign In</button>
 <!---->
 <!--            <span id="err" class="container text-bg-danger rounded-3 p-2">User doesn't exist.</span>-->
         </form>

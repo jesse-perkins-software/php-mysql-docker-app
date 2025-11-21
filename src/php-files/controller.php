@@ -74,19 +74,19 @@ if ($page == "SignInPage") {
                 exit();
             }
             case "Accounts": {
-                include("view_accounts.php");
+                include("accounts/view_accounts.php");
                 exit();
             }
             case "Accounts-Chequing": {
-                include("view_accounts_chequing.php");
+                include("accounts/view_accounts_chequing.php");
                 exit();
             }
             case "Accounts-Savings": {
-                include("view_accounts_savings.php");
+                include("accounts/view_accounts_savings.php");
                 exit();
             }
             case "Accounts-Credit-Card": {
-                include("view_accounts_credit_card.php");
+                include("accounts/view_accounts_credit_card.php");
                 exit();
             }
             case "History": {
@@ -94,43 +94,43 @@ if ($page == "SignInPage") {
                 exit();
             }
             case "Transactions_Income": {
-                include("view_transactions_income.php");
+                include("transactions/view_transactions_income.php");
                 exit();
             }
             case "Transactions_Expenses": {
-                include("view_transactions_expenses.php");
+                include("transactions/view_transactions_expenses.php");
                 exit();
             }
             case "Transactions_Transfers": {
-                include("view_transactions_transfers.php");
+                include("transactions/view_transactions_transfers.php");
                 exit();
             }
             case "Budget_Income": {
-                include("view_budget_income.php");
+                include("budget/view_budget_income.php");
                 exit();
             }
             case "Budget_Expenses": {
-                include("view_budget_expenses.php");
+                include("budget/view_budget_expenses.php");
                 exit();
             }
             case "Budget_vs_Actual": {
-                include("view_budget_vs_actual.php");
+                include("budget/view_budget_vs_actual.php");
                 exit();
             }
             case "Profile": {
-                include("view_settings_profile.php");
+                include("settings/view_settings_profile.php");
                 exit();
             }
             case "Preferences": {
-                include("view_settings_preferences.php");
+                include("settings/view_settings_preferences.php");
                 exit();
             }
             case "CategoriesAndAccounts": {
-                include("view_settings_categories_and_accounts.php");
+                include("settings/view_settings_categories_and_accounts.php");
                 exit();
             }
             case "AboutAndHelp": {
-                include("view_settings_about_and_help.php");
+                include("settings/view_settings_about_and_help.php");
                 exit();
             }
             case "AddTransaction": {
@@ -302,27 +302,27 @@ if ($page == "SignInPage") {
                 if (userDetailsExists($_SESSION["username"])) {
                     if ($_POST["profileC"] == "" && $_POST["profileP"] == "") {
                         deleteDetails($_SESSION["username"]);
-                        include("view_settings_profile.php");
+                        include("settings/view_settings_profile.php");
                         exit();
                     } else if ($_POST["profileP"] != $new_obj["Phone"] || $_POST["profileC"] != $new_obj["Country"]) {
                         changeDetails($_SESSION["username"], $_POST["profileC"], $_POST["profileP"]);
-                        include("view_settings_profile.php");
+                        include("settings/view_settings_profile.php");
                         exit();
                     }
                 } else {
                     addDetails($_SESSION["username"], $_POST["profileC"], $_POST["profileP"]);
-                    include("view_settings_profile.php");
+                    include("settings/view_settings_profile.php");
                     exit();
                 }
             }
             case "UpdateAccounts": {
                 if (!userFundsExists($_SESSION["username"])) {
                     addFunds($_SESSION["username"], $_POST["saved"], $_POST["emergency"], $_POST["travel"]);
-                    include("view_settings_profile.php");
+                    include("settings/view_settings_profile.php");
                     exit();
                 } else {
                     updateFunds($_SESSION["username"], $_POST["saved"], $_POST["emergency"], $_POST["travel"]);
-                    include("view_settings_profile.php");
+                    include("settings/view_settings_profile.php");
                     exit();
                 }
             }
@@ -345,6 +345,22 @@ if ($page == "SignInPage") {
                 include("view_signin.php");
                 exit();
             }
+        }
+    }
+} else if ($page == "Transactions_Income") {
+    session_start();
+    if (!isset($_SESSION["signedin"])) {
+        include("view_signin.php");
+    } else {
+        $command = $_POST["command"];
+        switch ($command) {
+            case "NewTransaction": {
+                // saveTransaction(transactionID, $_POST['amount'], $_POST['date'], etc.);
+                // addTransaction(transactionID);
+                include("transactions/view_transactions_income.php");
+                exit();
+            }
+
         }
     }
 }
