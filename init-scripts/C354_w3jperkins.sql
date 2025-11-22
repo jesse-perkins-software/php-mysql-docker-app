@@ -1,185 +1,109 @@
--- phpMyAdmin SQL Dump
--- version 4.9.5deb2
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Dec 12, 2024 at 08:05 PM
--- Server version: 8.0.40-0ubuntu0.20.04.1
--- PHP Version: 7.4.3-4ubuntu2.24
+-- Create database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS finance_app;
+USE finance_app;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+-- Users table
+CREATE TABLE IF NOT EXISTS users (
+    userID INT AUTO_INCREMENT PRIMARY KEY,
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phoneNumber VARCHAR(20),
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
 
+-- Bank institutions table
+CREATE TABLE IF NOT EXISTS banks (
+    bankID INT AUTO_INCREMENT PRIMARY KEY,
+    bankName VARCHAR(100) UNIQUE NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+-- Account types table
+CREATE TABLE IF NOT EXISTS accountTypes (
+    accountTypeID INT AUTO_INCREMENT PRIMARY KEY,
+    typeName VARCHAR(50) UNIQUE NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
---
--- Database: `C354_w3jperkins`
---
+-- Accounts table
+CREATE TABLE IF NOT EXISTS accounts (
+    accountID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    bankID INT NOT NULL,
+    accountTypeID INT NOT NULL,
+    accountName VARCHAR(100) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (bankID) REFERENCES banks(bankID),
+    FOREIGN KEY (accountTypeID) REFERENCES accountTypes(accountTypeID),
+    UNIQUE KEY unique_user_account (userID, accountName)
+);
 
--- --------------------------------------------------------
+-- Category groups table
+CREATE TABLE IF NOT EXISTS categoryGroups (
+    groupID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    groupName VARCHAR(100) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
+    UNIQUE KEY unique_user_group (userID, groupName)
+);
 
---
--- Table structure for table `Transactions`
---
+-- Categories table (subcategories under groups)
+CREATE TABLE IF NOT EXISTS categories (
+    categoryID INT AUTO_INCREMENT PRIMARY KEY,
+    groupID INT NOT NULL,
+    categoryName VARCHAR(100) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (groupID) REFERENCES categoryGroups(groupID) ON DELETE CASCADE,
+    UNIQUE KEY unique_group_category (groupID, categoryName)
+);
 
-CREATE TABLE `Transactions` (
-  `Id` int NOT NULL,
-  `Username` varchar(1024) NOT NULL,
-  `Amount` decimal(10,2) NOT NULL,
-  `Category` varchar(1024) NOT NULL,
-  `Account` varchar(1024) NOT NULL,
-  `Date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- Transactions table
+CREATE TABLE IF NOT EXISTS transactions (
+    transactionID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    accountID INT NOT NULL,
+    categoryID INT,
+    date DATE NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    notes TEXT,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (accountID) REFERENCES accounts(accountID),
+    FOREIGN KEY (categoryID) REFERENCES categories(categoryID) ON DELETE SET NULL,
+    INDEX idx_user_date (userID, date),
+    INDEX idx_account_date (accountID, date)
+);
 
---
--- Dumping data for table `Transactions`
---
+-- Budgets table
+CREATE TABLE IF NOT EXISTS budgets (
+    budgetID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    categoryGroupID INT NOT NULL,
+    budgetType ENUM('income', 'expense') NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    period ENUM('monthly', 'yearly') DEFAULT 'monthly',
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (categoryGroupID) REFERENCES categoryGroups(groupID) ON DELETE CASCADE,
+    UNIQUE KEY unique_user_group_budget (userID, categoryGroupID, budgetType, period)
+);
 
-INSERT INTO `Transactions` (`Id`, `Username`, `Amount`, `Category`, `Account`, `Date`) VALUES
-(479, 'test', '5000.00', 'Income', 'Chequing', '2024-11-01'),
-(480, 'test', '500.00', 'Groceries', 'Credit Card', '2024-11-09'),
-(481, 'test', '200.00', 'Utilities', 'Savings', '2024-11-16'),
-(482, 'test', '300.00', 'Entertainment', 'Savings', '2024-11-07'),
-(483, 'test', '50.00', 'Transport', 'Credit Card', '2024-11-09'),
-(484, 'test', '300.00', 'Savings', 'Savings', '2024-11-12'),
-(485, 'test', '100.00', 'Travel Fund', 'Savings', '2024-11-21'),
-(486, 'test', '100.00', 'Emergency Fund', 'Chequing', '2024-11-21'),
-(487, 'test', '400.00', 'Hobbies', 'Credit Card', '2024-11-20'),
-(488, 'test', '4000.00', 'Income', 'Savings', '2024-10-02'),
-(489, 'test', '200.00', 'Travel Fund', 'Chequing', '2024-10-25'),
-(490, 'test', '600.00', 'Entertainment', 'Chequing', '2024-10-11'),
-(491, 'test', '1000.00', 'Rent', 'Savings', '2024-10-09'),
-(492, 'test', '1000.00', 'Rent', 'Savings', '2024-11-14'),
-(493, 'abc', '150.00', 'Hobbies', 'Chequing', '2024-12-02');
+-- Insert default account types
+INSERT INTO accountTypes (typeName) VALUES ('Savings'), ('Chequing'), ('Credit Card')
+ON DUPLICATE KEY UPDATE typeName=VALUES(typeName);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `UserDetails`
---
-
-CREATE TABLE `UserDetails` (
-  `Id` int NOT NULL,
-  `Username` varchar(1024) NOT NULL,
-  `Country` varchar(1024) NOT NULL,
-  `Phone` varchar(1024) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `UserDetails`
---
-
-INSERT INTO `UserDetails` (`Id`, `Username`, `Country`, `Phone`) VALUES
-(34, 'abc', '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `UserFunds`
---
-
-CREATE TABLE `UserFunds` (
-  `Id` int NOT NULL,
-  `Username` varchar(1024) NOT NULL,
-  `AmountSaved` decimal(10,2) NOT NULL,
-  `EmergencyFund` decimal(10,2) NOT NULL,
-  `TravelFund` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `UserFunds`
---
-
-INSERT INTO `UserFunds` (`Id`, `Username`, `AmountSaved`, `EmergencyFund`, `TravelFund`) VALUES
-(5, 'abc', '1000.00', '500.00', '500.00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Users`
---
-
-CREATE TABLE `Users` (
-  `Id` int NOT NULL,
-  `firstName` varchar(256) NOT NULL,
-  `lastName` varchar(256) NOT NULL,
-  `Username` varchar(256) NOT NULL,
-  `Password` varchar(2048) NOT NULL,
-  `Email` varchar(256) NOT NULL,
-  `Date` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `Users`
---
-
-INSERT INTO `Users` (`Id`, `firstName`, `lastName`, `Username`, `Password`, `Email`, `Date`) VALUES
-(7, 'John', 'Doe', 'test', 'test', 'johndoe@gmail.com', 20241122),
-(9, 'abc', 'abc', 'abc', 'abc', 'abc@tru.ca', 20241203);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `Transactions`
---
-ALTER TABLE `Transactions`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `UserDetails`
---
-ALTER TABLE `UserDetails`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `UserFunds`
---
-ALTER TABLE `UserFunds`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `Users`
---
-ALTER TABLE `Users`
-  ADD PRIMARY KEY (`Id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `Transactions`
---
-ALTER TABLE `Transactions`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=495;
-
---
--- AUTO_INCREMENT for table `UserDetails`
---
-ALTER TABLE `UserDetails`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
---
--- AUTO_INCREMENT for table `UserFunds`
---
-ALTER TABLE `UserFunds`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `Users`
---
-ALTER TABLE `Users`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- Insert default bank (for ungrouped accounts)
+INSERT INTO banks (bankName) VALUES ('Banking')
+ON DUPLICATE KEY UPDATE bankName=VALUES(bankName);
