@@ -1,5 +1,4 @@
 services:
-  
   db:
     image: mysql:9.4.0-oracle
     restart: always
@@ -20,6 +19,7 @@ services:
       - PMA_ARBITRARY=1
     depends_on:
       - db
+
   php-apache:
     build:
       context: .
