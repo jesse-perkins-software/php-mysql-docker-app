@@ -8,7 +8,7 @@ $conn = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 
 function isLoginValid($u, $p) {
     global $conn;
-    $sql = "SELECT * FROM Users WHERE (Username = '$u') AND (Password = '$p')";
+    $sql = "SELECT * FROM users WHERE (username = '$u') AND (password = '$p')";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         return true;
@@ -20,13 +20,13 @@ function isLoginValid($u, $p) {
 function registerNewUser($fn, $ln, $u, $p, $e) {
     global $conn;
     $current_date = date("Ymd");
-    $sql = "INSERT INTO Users(Id, firstName, lastName, Username, Password, Email, Date) VALUE (NULL, '$fn', '$ln', '$u', '$p', '$e', '$current_date')";
+    $sql = "INSERT INTO users(Id, firstName, lastName, username, password, Email, Date) VALUE (NULL, '$fn', '$ln', '$u', '$p', '$e', '$current_date')";
     $result = mysqli_query($conn, $sql);
 }
 
 function userExists($u) {
     global $conn;
-    $sql = "SELECT * FROM Users WHERE (Username = '$u')";
+    $sql = "SELECT * FROM users WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         return true;
@@ -37,7 +37,7 @@ function userExists($u) {
 
 function getFirstName($u) {
     global $conn;
-    $sql = "SELECT firstName FROM Users WHERE (Username = '$u')";
+    $sql = "SELECT firstName FROM users WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $firstName = $row["firstName"];
@@ -47,7 +47,7 @@ function getFirstName($u) {
 
 function getIncome($u) {
     global $conn;
-    $sql = "SELECT SUM(Amount) AS Income FROM Transactions WHERE (Username = '$u') AND (Category = 'Income')";
+    $sql = "SELECT SUM(Amount) AS Income FROM Transactions WHERE (username = '$u') AND (Category = 'Income')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $income = $row["Income"];
@@ -57,7 +57,7 @@ function getIncome($u) {
 
 function getSpending($u) {
     global $conn;
-    $sql = "SELECT SUM(Amount) AS Spending FROM Transactions WHERE (Username = '$u') AND (Category != 'Income')";
+    $sql = "SELECT SUM(Amount) AS Spending FROM Transactions WHERE (username = '$u') AND (Category != 'Income')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $spending = $row["Spending"];
@@ -70,7 +70,7 @@ function getMonthIncome($u) {
     $current_day = date("Ymd");
     $beg_of_month = date("Ym") . "01";
 
-    $sql = "SELECT SUM(Amount) AS Income FROM Transactions WHERE (Username = '$u') AND (Category = 'Income') AND (Date BETWEEN '$beg_of_month' AND '$current_day')";
+    $sql = "SELECT SUM(Amount) AS Income FROM Transactions WHERE (username = '$u') AND (Category = 'Income') AND (Date BETWEEN '$beg_of_month' AND '$current_day')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $monthlyIncome = $row["Income"];
@@ -83,7 +83,7 @@ function getMonthSpending($u) {
     $current_day = date("Ymd");
     $beg_of_month = date("Ym") . "01";
 
-    $sql = "SELECT SUM(Amount) AS Spending FROM Transactions WHERE (Username = '$u') AND (Category != 'Income') AND (Date BETWEEN '$beg_of_month' AND '$current_day')";
+    $sql = "SELECT SUM(Amount) AS Spending FROM Transactions WHERE (username = '$u') AND (Category != 'Income') AND (Date BETWEEN '$beg_of_month' AND '$current_day')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $monthlySpending = $row["Spending"];
@@ -94,21 +94,21 @@ function getMonthSpending($u) {
 function addTransaction($u, $amount, $category, $account, $date) {
     global $conn;
     $corrected_date = date("Y-m-d", strtotime(str_replace('-', '/', $date)));
-    $sql = "INSERT INTO Transactions(Id, Username, Amount, Category, Account, Date) VALUE (NULL, '$u', '$amount', '$category', '$account', '$corrected_date')";
+    $sql = "INSERT INTO Transactions(Id, username, Amount, Category, Account, Date) VALUE (NULL, '$u', '$amount', '$category', '$account', '$corrected_date')";
     $result = mysqli_query($conn, $sql);
 }
 
 function editTransaction($u, $id, $amount, $category, $account, $date) {
     global $conn;
     $corrected_date = date("Y-m-d", strtotime(str_replace('-', '/', $date)));
-    $sql = "UPDATE Transactions SET Amount = '$amount', Username = '$u', Category = '$category', Account = '$account', Date = '$corrected_date' WHERE Id = '$id'";
+    $sql = "UPDATE Transactions SET Amount = '$amount', username = '$u', Category = '$category', Account = '$account', Date = '$corrected_date' WHERE Id = '$id'";
     $result = mysqli_query($conn, $sql);
 }
 
 function getRecentTransactions($u) {
     global $conn;
     $current_date = date("Ymd");
-    $sql = "SELECT Id, Amount, Category, Account, Date FROM Transactions WHERE (Username = '$u') AND (Date <= '$current_date') ORDER BY Date DESC, Id DESC LIMIT 3";
+    $sql = "SELECT Id, Amount, Category, Account, Date FROM Transactions WHERE (username = '$u') AND (Date <= '$current_date') ORDER BY Date DESC, Id DESC LIMIT 3";
     $result = mysqli_query($conn, $sql);
     $data = array();
     while ($row = mysqli_fetch_assoc($result)) {
@@ -126,7 +126,7 @@ function getRecentTransactions($u) {
 function getTopTransactions($u) {
     global $conn;
     $current_date = date("Ymd");
-    $sql = "SELECT Id, Amount, Category, Account, Date FROM Transactions WHERE (Username = '$u') AND (Date <= '$current_date') ORDER BY Date DESC, Id DESC";
+    $sql = "SELECT Id, Amount, Category, Account, Date FROM Transactions WHERE (username = '$u') AND (Date <= '$current_date') ORDER BY Date DESC, Id DESC";
     $result = mysqli_query($conn, $sql);
     $data = array();
     while ($row = mysqli_fetch_assoc($result)) {
@@ -144,14 +144,14 @@ function getTopTransactions($u) {
 function deleteTransaction($u, $id) {
     global $conn;
     $current_date = date("Ymd");
-    $sql = "DELETE FROM Transactions WHERE (Username = '$u') AND (Id = '$id')";
+    $sql = "DELETE FROM Transactions WHERE (username = '$u') AND (Id = '$id')";
     $result = mysqli_query($conn, $sql);
 }
 
 function searchTransactions($u, $str) {
     global $conn;
     $current_date = date("Ymd");
-    $sql = "SELECT Id, Amount, Category, Account, Date FROM Transactions WHERE (Username = '$u') AND (Date <= '$current_date') AND ((Amount LIKE '$str%') OR (Category LIKE '$str%') OR (Account LIKE '$str%') OR (Date LIKE '$str%')) ORDER BY Date DESC, Id DESC";
+    $sql = "SELECT Id, Amount, Category, Account, Date FROM Transactions WHERE (username = '$u') AND (Date <= '$current_date') AND ((Amount LIKE '$str%') OR (Category LIKE '$str%') OR (Account LIKE '$str%') OR (Date LIKE '$str%')) ORDER BY Date DESC, Id DESC";
     $result = mysqli_query($conn, $sql);
     $data = array();
     while ($row = mysqli_fetch_assoc($result)) {
@@ -169,7 +169,7 @@ function searchTransactions($u, $str) {
 function getThisMonthIncome($u) {
     global $conn;
     $current_month = date("Y-m");
-    $sql = "SELECT SUM(Amount) AS MonthTotal FROM Transactions WHERE (Username = '$u') AND (Category = 'Income') AND (Date LIKE '$current_month%')";
+    $sql = "SELECT SUM(Amount) AS MonthTotal FROM Transactions WHERE (username = '$u') AND (Category = 'Income') AND (Date LIKE '$current_month%')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $monthTotal = $row["MonthTotal"];
@@ -180,7 +180,7 @@ function getThisMonthIncome($u) {
 function getNeeds($u) {
     global $conn;
     $current_month = date("Y-m");
-    $sql = "SELECT SUM(Amount) AS Needs FROM Transactions WHERE (Username = '$u') AND ((Category = 'Rent') OR (Category = 'Utilities') OR (Category = 'Groceries') OR (Category = 'Transport')) AND (Date LIKE '%$current_month%')";
+    $sql = "SELECT SUM(Amount) AS Needs FROM Transactions WHERE (username = '$u') AND ((Category = 'Rent') OR (Category = 'Utilities') OR (Category = 'Groceries') OR (Category = 'Transport')) AND (Date LIKE '%$current_month%')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $needs = $row["Needs"];
@@ -191,7 +191,7 @@ function getNeeds($u) {
 function getWants($u) {
     global $conn;
     $current_month = date("Y-m");
-    $sql = "SELECT SUM(Amount) AS Wants FROM Transactions WHERE (Username = '$u') AND ((Category = 'Entertainment') OR (Category = 'Hobbies')) AND (Date LIKE '%$current_month%')";
+    $sql = "SELECT SUM(Amount) AS Wants FROM Transactions WHERE (username = '$u') AND ((Category = 'Entertainment') OR (Category = 'Hobbies')) AND (Date LIKE '%$current_month%')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $wants = $row["Wants"];
@@ -201,7 +201,7 @@ function getWants($u) {
 
 function getTotalNeeds($u) {
     global $conn;
-    $sql = "SELECT SUM(Amount) AS Needs FROM Transactions WHERE (Username = '$u') AND ((Category = 'Rent') OR (Category = 'Utilities') OR (Category = 'Groceries') OR (Category = 'Transport'))";
+    $sql = "SELECT SUM(Amount) AS Needs FROM Transactions WHERE (username = '$u') AND ((Category = 'Rent') OR (Category = 'Utilities') OR (Category = 'Groceries') OR (Category = 'Transport'))";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $needs = $row["Needs"];
@@ -211,7 +211,7 @@ function getTotalNeeds($u) {
 
 function getTotalWants($u) {
     global $conn;
-    $sql = "SELECT SUM(Amount) AS Wants FROM Transactions WHERE (Username = '$u') AND ((Category = 'Entertainment') OR (Category = 'Hobbies'))";
+    $sql = "SELECT SUM(Amount) AS Wants FROM Transactions WHERE (username = '$u') AND ((Category = 'Entertainment') OR (Category = 'Hobbies'))";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $wants = $row["Wants"];
@@ -222,7 +222,7 @@ function getTotalWants($u) {
 function getSavings($u) {
     global $conn;
     $current_month = date("Y-m");
-    $sql = "SELECT SUM(Amount) AS Wants FROM Transactions WHERE (Username = '$u') AND ((Category = 'Savings') OR (Category = 'Emergency Fund') OR (Category = 'Travel Fund')) AND (Date LIKE '%$current_month%')";
+    $sql = "SELECT SUM(Amount) AS Wants FROM Transactions WHERE (username = '$u') AND ((Category = 'Savings') OR (Category = 'Emergency Fund') OR (Category = 'Travel Fund')) AND (Date LIKE '%$current_month%')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $savings = $row["Wants"];
@@ -232,15 +232,15 @@ function getSavings($u) {
 
 function getUserData($u) {
     global $conn;
-    $sql = "SELECT firstName, lastName, Username, Password, Email FROM Users WHERE (Username = '$u')";
+    $sql = "SELECT firstName, lastName, username, password, Email FROM users WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
     $data = array();
     while ($row = mysqli_fetch_assoc($result)) {
         $data[] = array(
             "firstName" => $row["firstName"],
             "lastName" => $row["lastName"],
-            "Username" => $row["Username"],
-            "Password" => $row["Password"],
+            "username" => $row["username"],
+            "password" => $row["password"],
             "Email" => $row["Email"]
         );
     }
@@ -249,19 +249,19 @@ function getUserData($u) {
 
 function addDetails($u, $c, $p) {
     global $conn;
-    $sql = "INSERT INTO UserDetails(Id, Username, Country, Phone) VALUE (NULL, '$u', '$c', '$p')";
+    $sql = "INSERT INTO UserDetails(Id, username, Country, Phone) VALUE (NULL, '$u', '$c', '$p')";
     $result = mysqli_query($conn, $sql);
 }
 
 function changeDetails($u, $c, $p) {
     global $conn;
-    $sql = "UPDATE UserDetails SET Country = '$c', Phone = '$p' WHERE Username = '$u'";
+    $sql = "UPDATE UserDetails SET Country = '$c', Phone = '$p' WHERE username = '$u'";
     $result = mysqli_query($conn, $sql);
 }
 
 function getUserDetails($u) {
     global $conn;
-    $sql = "SELECT Country, Phone FROM UserDetails WHERE (Username = '$u')";
+    $sql = "SELECT Country, Phone FROM UserDetails WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) != 0) {
         $data = array();
@@ -284,13 +284,13 @@ function getUserDetails($u) {
 function deleteDetails($u) {
     global $conn;
     $current_date = date("Ymd");
-    $sql = "DELETE FROM UserDetails WHERE (Username = '$u')";
+    $sql = "DELETE FROM UserDetails WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
 }
 
 function userDetailsExists($u) {
     global $conn;
-    $sql = "SELECT * FROM UserDetails WHERE (Username = '$u')";
+    $sql = "SELECT * FROM UserDetails WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         return true;
@@ -301,7 +301,7 @@ function userDetailsExists($u) {
 
 function userFundsExists($u) {
     global $conn;
-    $sql = "SELECT * FROM UserFunds WHERE (Username = '$u')";
+    $sql = "SELECT * FROM UserFunds WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         return true;
@@ -312,19 +312,19 @@ function userFundsExists($u) {
 
 function addFunds($u, $saved, $emerg, $travel) {
     global $conn;
-    $sql = "INSERT INTO UserFunds(Id, Username, AmountSaved, EmergencyFund, TravelFund) VALUE (NULL, '$u', '$saved', '$emerg', '$travel')";
+    $sql = "INSERT INTO UserFunds(Id, username, AmountSaved, EmergencyFund, TravelFund) VALUE (NULL, '$u', '$saved', '$emerg', '$travel')";
     $result = mysqli_query($conn, $sql);
 }
 
 function updateFunds($u, $saved, $emerg, $travel) {
     global $conn;
-    $sql = "UPDATE UserFunds SET AmountSaved = '$saved', EmergencyFund = '$emerg', TravelFund = '$travel' WHERE Username = '$u'";
+    $sql = "UPDATE UserFunds SET AmountSaved = '$saved', EmergencyFund = '$emerg', TravelFund = '$travel' WHERE username = '$u'";
     $result = mysqli_query($conn, $sql);
 }
 
 function getUserFunds($u) {
     global $conn;
-    $sql = "SELECT SUM(AmountSaved) AS Saved FROM UserFunds WHERE Username = '$u'";
+    $sql = "SELECT SUM(AmountSaved) AS Saved FROM UserFunds WHERE username = '$u'";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $savings = $row["Saved"];
@@ -334,7 +334,7 @@ function getUserFunds($u) {
 
 function getUserEmergencyFunds($u) {
     global $conn;
-    $sql = "SELECT SUM(EmergencyFund) AS Emerg FROM UserFunds WHERE Username = '$u'";
+    $sql = "SELECT SUM(EmergencyFund) AS Emerg FROM UserFunds WHERE username = '$u'";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $emerg = $row["Emerg"];
@@ -344,7 +344,7 @@ function getUserEmergencyFunds($u) {
 
 function getUserEmergencyTransactions($u) {
     global $conn;
-    $sql = "SELECT SUM(Amount) AS Emerg FROM Transactions WHERE (Username = '$u') AND (Category = 'Emergency Fund')";
+    $sql = "SELECT SUM(Amount) AS Emerg FROM Transactions WHERE (username = '$u') AND (Category = 'Emergency Fund')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $emerg = $row["Emerg"];
@@ -354,7 +354,7 @@ function getUserEmergencyTransactions($u) {
 
 function getUserTravelFunds($u) {
     global $conn;
-    $sql = "SELECT SUM(TravelFund) AS Travel FROM UserFunds WHERE Username = '$u'";
+    $sql = "SELECT SUM(TravelFund) AS Travel FROM UserFunds WHERE username = '$u'";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $travel = $row["Travel"];
@@ -364,7 +364,7 @@ function getUserTravelFunds($u) {
 
 function getUserTravelTransactions($u) {
     global $conn;
-    $sql = "SELECT SUM(Amount) AS Travel FROM Transactions WHERE (Username = '$u') AND (Category = 'Travel Fund')";
+    $sql = "SELECT SUM(Amount) AS Travel FROM Transactions WHERE (username = '$u') AND (Category = 'Travel Fund')";
     $result = mysqli_query($conn, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
         $travel = $row["Travel"];
@@ -374,25 +374,25 @@ function getUserTravelTransactions($u) {
 
 function clearUserTransactions($u) {
     global $conn;
-    $sql = "DELETE FROM Transactions WHERE (Username = '$u')";
+    $sql = "DELETE FROM Transactions WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
 }
 
 function clearUserDetails($u) {
     global $conn;
-    $sql = "DELETE FROM UserDetails WHERE (Username = '$u')";
+    $sql = "DELETE FROM UserDetails WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
 }
 
 function clearUserFunds($u) {
     global $conn;
-    $sql = "DELETE FROM UserFunds WHERE (Username = '$u')";
+    $sql = "DELETE FROM UserFunds WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
 }
 
 function clearUser($u) {
     global $conn;
-    $sql = "DELETE FROM Users WHERE (Username = '$u')";
+    $sql = "DELETE FROM users WHERE (username = '$u')";
     $result = mysqli_query($conn, $sql);
 }
 

@@ -1,7 +1,4 @@
--- Create database if it doesn't exist
-CREATE DATABASE IF NOT EXISTS finance_app;
-USE finance_app;
-
+USE finance_app_db;
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
     userID INT AUTO_INCREMENT PRIMARY KEY,

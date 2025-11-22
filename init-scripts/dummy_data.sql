@@ -1,4 +1,4 @@
-USE finance_app;
+USE finance_app_db;
 
 -- Insert user
 INSERT INTO users (firstName, lastName, email, phoneNumber, username, password) VALUES
