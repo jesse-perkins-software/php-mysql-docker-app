@@ -213,11 +213,9 @@
     </div>
 </body>
 <script defer>
-
     function viewPage(page) {
         document.getElementById("command-value").value = page;
         document.getElementById("nav-form").submit();
     }
-
 </script>
 </html>

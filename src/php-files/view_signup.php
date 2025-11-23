@@ -85,46 +85,6 @@
                 <input type="password" class="form-control" id="inputPassword">
             </div>
 
-<!--            <div class="form-floating">-->
-<!--                <input type="text" class="form-control rounded-2" id="firstname" placeholder="Enter your first name" name="firstname" required>-->
-<!--                <label for="firstname" class="form-label">First Name:</label>-->
-<!--                <div class="invalid-feedback">-->
-<!--                    Please enter in your first name.-->
-<!--                </div>-->
-<!--            </div>-->
-<!---->
-<!--            <div class="form-floating">-->
-<!--                <input type="text" class="form-control rounded-2" id="lastname" placeholder="Enter your last name" name="lastname" required>-->
-<!--                <label for="lastname" class="form-label">Last Name:</label>-->
-<!--                <div class="invalid-feedback">-->
-<!--                    Please enter in your last name.-->
-<!--                </div>-->
-<!--            </div>-->
-<!---->
-<!--            <div class="form-floating">-->
-<!--                <input type="text" class="form-control rounded-2" id="username" placeholder="Enter username" name="username" required>-->
-<!--                <label for="username" class="form-label">Username:</label>-->
-<!--                <div class="invalid-feedback">-->
-<!--                    Please enter in your username.-->
-<!--                </div>-->
-<!--            </div>-->
-<!---->
-<!--            <div class="form-floating">-->
-<!--                <input type="password" class="form-control rounded-2" id="password" placeholder="Enter password" name="password" required>-->
-<!--                <label for="password" class="form-label">Password:</label>-->
-<!--                <div class="invalid-feedback">-->
-<!--                    Please enter in your password.-->
-<!--                </div>-->
-<!--            </div>-->
-<!---->
-<!--            <div class="form-floating">-->
-<!--                <input type="email" class="form-control rounded-2" id="email" placeholder="Enter email" name="email" required>-->
-<!--                <label for="email" class="form-label">Email:</label>-->
-<!--                <div class="invalid-feedback">-->
-<!--                    Please enter in your email.-->
-<!--                </div>-->
-<!--            </div>-->
-
             <div id="sign-up-container">
                 <button type="submit" class="btn btn-primary" id="signUpBtn">Sign Up</button>
             </div>
