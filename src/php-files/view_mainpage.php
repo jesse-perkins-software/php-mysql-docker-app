@@ -8,22 +8,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <title>Finance App</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        h1, h2, h3, h4, h5, h6, p, span {
-            margin: 0;
-            padding: 0;
-        }
+        <?php include 'global_variables.css' ?>
 
         .container {
             height: 100vh;
         }
 
         #nav-bar {
-            width: 15vw;
+            width: var(--nav-bar-width);
             min-width: 162px;
         }
 
