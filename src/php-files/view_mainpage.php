@@ -42,7 +42,7 @@
             display: flex;
             flex-direction: column;
             flex: 1;
-            margin-left: 15%;
+            margin-left: var(--nav-bar-width);
         }
 
         .row {
