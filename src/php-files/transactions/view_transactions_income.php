@@ -6,26 +6,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        h1, h2, h3, h4, h5, h6, p, span {
-            margin: 0;
-            padding: 0;
-        }
+        <?php include 'global_variables.css' ?>
 
         #nav-bar {
-            width: 15vw;
-        }
-
-        #content {
-            margin-left: 15vw;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
+            width: var(--nav-bar-width);
         }
 
         #header-container {
@@ -59,7 +43,7 @@
 
         #content-container {
             height: 100vh;
-            margin-left: 15vw;
+            margin-left: var(--nav-bar-width);
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -177,7 +161,7 @@
             <div class="container" id="transactions-container">
                 <div class="row border-bottom border-top" id="transaction-column-titles">
                     <div class="col">Date</div>
-                    <div class="col-5">Description</div>
+                    <div class="col-4">Description</div>
                     <div class="col">Amount</div>
                     <div class="col">Account</div>
                     <div class="col">Category</div>
@@ -186,7 +170,7 @@
 
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">22-02-2024</div>
-                    <div class="col-5">Royal Bank of Canada</div>
+                    <div class="col-4">Royal Bank of Canada</div>
                     <div class="col">$90</div>
                     <div class="col">Savings</div>
                     <div class="col">Wants</div>
@@ -194,7 +178,7 @@
                 </div>
                 <div class="row border-bottom individual-transactions" id="">
                     <div class="col">25-02-2024</div>
-                    <div class="col-5">Walmart</div>
+                    <div class="col-4">Walmart</div>
                     <div class="col">$40</div>
                     <div class="col">Savings</div>
                     <div class="col">Needs</div>

@@ -16,7 +16,6 @@
 
         #nav-bar {
             width: var(--nav-bar-width);
-            min-width: 162px;
         }
 
         #content-container {

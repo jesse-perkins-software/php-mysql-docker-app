@@ -6,26 +6,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        h1, h2, h3, h4, h5, h6, p, span {
-            margin: 0;
-            padding: 0;
-        }
+        <?php include 'global_variables.css' ?>
 
         #nav-bar {
-            width: 15vw;
-        }
-
-        #content {
-            margin-left: 15vw;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
+            width: var(--nav-bar-width);
         }
 
         #header-container {
@@ -110,7 +94,7 @@
 
         #content-container {
             height: 100vh;
-            margin-left: 15vw;
+            margin-left: var(--nav-bar-width);
             overflow-y: auto;
             display: flex;
             flex-direction: column;

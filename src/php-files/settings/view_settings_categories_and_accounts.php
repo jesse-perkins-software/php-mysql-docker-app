@@ -6,19 +6,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        h1, h2, h3, h4, h5, h6, p, span {
-            margin: 0;
-            padding: 0;
-        }
+        <?php include 'global_variables.css' ?>
 
         #nav-bar {
-            width: 15vw;
+            width: var(--nav-bar-width);
         }
 
         #content {
