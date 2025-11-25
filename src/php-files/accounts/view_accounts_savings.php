@@ -12,13 +12,6 @@
             width: var(--nav-bar-width);
         }
 
-        #content {
-            margin-left: 15vw;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-
         #header-container {
             height: 20vh;
             background-color: #E9E9E9;
@@ -50,7 +43,7 @@
 
         #content-container {
             height: 100vh;
-            margin-left: 15vw;
+            margin-left: var(--nav-bar-width);
             overflow-y: auto;
             display: flex;
             flex-direction: column;

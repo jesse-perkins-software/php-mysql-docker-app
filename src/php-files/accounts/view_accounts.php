@@ -12,7 +12,7 @@
 
         #content-container {
             height: 100vh;
-            margin-left: 15vw;
+            margin-left: var(--nav-bar-width);
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -35,7 +35,7 @@
         #accounts-container {
             display: flex;
             flex-direction: column;
-            gap: 2em;
+            gap: 1em;
         }
 
         .accounts-a-tag {
@@ -79,7 +79,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            width: 20%;
+            width: 10em;
         }
 
         .info-box-pos {

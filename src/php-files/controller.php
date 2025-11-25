@@ -355,9 +355,12 @@ if ($page == "SignInPage") {
         $command = $_POST["command"];
         switch ($command) {
             case "NewTransaction": {
-                // saveTransaction(transactionID, $_POST['amount'], $_POST['date'], etc.);
+                // saveTransaction(transactionID, $_POST['date'], $_POST['description'], $_POST["amount"], $_POST['account'], $_POST['category'], $_POST['notes']);
                 // addTransaction(transactionID);
                 include("transactions/view_transactions_income.php");
+                exit();
+            }
+            case "EditTransaction": {
                 exit();
             }
 
