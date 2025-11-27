@@ -22,11 +22,10 @@ if ($page == "SignInPage") {
                 $_SESSION["username"] = $_POST["username"];
                 $_SESSION["password"] = $_POST["password"];
                 $_SESSION["signedin"] = true;
-//                $wrong_user = false;
+                $_SESSION["userID"] = getUserID($_SESSION["username"], $_SESSION["password"]);
                 setcookie("signedin", true, time() + 86400 * 7);
                 include("view_mainpage.php");
             } else {
-//                $wrong_user = true;
                 include("view_signin.php");
             }
             
@@ -355,7 +354,7 @@ if ($page == "SignInPage") {
         $command = $_POST["command"];
         switch ($command) {
             case "NewTransaction": {
-                // saveTransaction(transactionID, $_POST['date'], $_POST['description'], $_POST["amount"], $_POST['account'], $_POST['category'], $_POST['notes']);
+                saveTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
                 // addTransaction(transactionID);
                 include("transactions/view_transactions_income.php");
                 exit();

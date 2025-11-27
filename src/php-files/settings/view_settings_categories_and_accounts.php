@@ -284,11 +284,12 @@
             <h4 class="section-title">Accounts</h4>
             <div class="row">
                 <div class="col regular-accounts-container">
-                    <h5>Banking (CIBC)</h5>
+                    <h5>Banking</h5>
                     <div class="categories-list">
-                        <p>Chequing Account (4979)</p>
-                        <p>Savings Account (4979)</p>
-                        <p>Credit Card (8700)</p>
+                        <p>CIBC Chequing Account</p>
+                        <p>CIBC Savings Account</p>
+                        <p>TD Credit Card</p>
+                        <p>RBC TFSA</p>
                     </div>
                 </div>
                 <div class="col regular-accounts-container">

@@ -17,4 +17,46 @@ function isLoginValid($u, $p) {
     }
 }
 
+function saveTransaction($date, $description, $amount, $account, $category, $notes) {
+    global $conn;
+    $userID = $_SESSION["userID"];
+    $accountID = getAccountID($userID, $account);
+    $groupID = getGroupID($userID, $category);
+    $categoryID = getCategoryID($groupID, $description);
+    $sql = "INSERT INTO transactions ($userID, $accountID, $categoryID, $date, $description, $amount, $notes)";
+    $result = mysqli_query($conn, $sql);
+}
+
+function getUserID($username, $password) {
+    global $conn;
+    $sql = "SELECT userID FROM users WHERE (username = '$username') AND (password = '$password')";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row["userID"];
+}
+
+function getAccountID($userID, $account) {
+    global $conn;
+    $sql = "SELECT accountID FROM accounts WHERE (userID = '$userID') AND (accountName = '$account')";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row["accountID"];
+}
+
+function getGroupID($userID, $category) {
+    global $conn;
+    $sql = "SELECT groupID FROM categoryGroups WHERE (userID = '$userID') AND (groupName = '$category')";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row["groupID"];
+}
+
+function getCategoryID($groupID, $description) {
+    global $conn;
+    $sql = "SELECT categoryID FROM categories WHERE (groupID = '$groupID') AND (categoryName = '$description')";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row["categoryID"];
+}
+
 ?>
