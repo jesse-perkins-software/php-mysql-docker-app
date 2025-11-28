@@ -23,8 +23,14 @@ function saveTransaction($date, $description, $amount, $account, $category, $not
     $accountID = getAccountID($userID, $account);
     $groupID = getGroupID($userID, $category);
     $categoryID = getCategoryID($groupID, $description);
-    $sql = "INSERT INTO transactions ($userID, $accountID, $categoryID, $date, $description, $amount, $notes)";
-    $result = mysqli_query($conn, $sql);
+    if ($accountID === -1 || $groupID === -1 || $categoryID === -1) {
+        $_SESSION['newTransaction'] = false;
+    } else {
+        $sql = "INSERT INTO transactions (userID, accountID, categoryID, date, description, amount, notes)
+                VALUES ('$userID', '$accountID', '$categoryID', '$date', '$description', '$amount', '$notes')";
+        $result = mysqli_query($conn, $sql);
+        return $result;
+    }
 }
 
 function getUserID($username, $password) {
@@ -32,7 +38,11 @@ function getUserID($username, $password) {
     $sql = "SELECT userID FROM users WHERE (username = '$username') AND (password = '$password')";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
-    return $row["userID"];
+    if ($row["userID"] == null) {
+        return -1;
+    } else {
+        return $row["userID"];
+    }
 }
 
 function getAccountID($userID, $account) {
@@ -40,7 +50,11 @@ function getAccountID($userID, $account) {
     $sql = "SELECT accountID FROM accounts WHERE (userID = '$userID') AND (accountName = '$account')";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
-    return $row["accountID"];
+    if ($row["accountID"] == null) {
+        return -1;
+    } else {
+        return $row["accountID"];
+    }
 }
 
 function getGroupID($userID, $category) {
@@ -48,7 +62,11 @@ function getGroupID($userID, $category) {
     $sql = "SELECT groupID FROM categoryGroups WHERE (userID = '$userID') AND (groupName = '$category')";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
-    return $row["groupID"];
+    if ($row["groupID"] == null) {
+        return -1;
+    } else {
+        return $row["groupID"];
+    }
 }
 
 function getCategoryID($groupID, $description) {
@@ -56,7 +74,18 @@ function getCategoryID($groupID, $description) {
     $sql = "SELECT categoryID FROM categories WHERE (groupID = '$groupID') AND (categoryName = '$description')";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
-    return $row["categoryID"];
+    if ($row["categoryID"] == null) {
+        return -1;
+    } else {
+        return $row["categoryID"];
+    }
+}
+
+function getTransactions($userID) {
+    global $conn;
+    $sql = "SELECT * FROM transactions WHERE (userID = '$userID')";
+    $result = mysqli_query($conn, $sql);
+    return $result;
 }
 
 ?>

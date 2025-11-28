@@ -212,4 +212,22 @@
         document.getElementById("command-value").value = page;
         document.getElementById("nav-form").submit();
     }
+
+    function fetchTransactions() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                displayTransactions(data);
+            }
+        };
+        let query = "page=Transactions_Income&command=FetchTransactions";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function displayTransactions(data) {
+
+    }
 </script>

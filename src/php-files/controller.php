@@ -355,11 +355,18 @@ if ($page == "SignInPage") {
         switch ($command) {
             case "NewTransaction": {
                 saveTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
-                // addTransaction(transactionID);
-                include("transactions/view_transactions_income.php");
+                if (!$_SESSION['newTransaction']) {
+                    echo "Transaction failed";
+                    include("transactions/view_transactions_income.php");
+                } else {
+
+                    include("transactions/view_transactions_income.php");
+                }
                 exit();
             }
-            case "EditTransaction": {
+            case "FetchTransactions": {
+                $fetchedTransactions = getTransactions($_SESSION["userID"]);
+                include("transactions/view_transactions_income.php");
                 exit();
             }
 
