@@ -227,6 +227,10 @@
         xhttp.send(query);
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchTransactions();
+    });
+
     function displayTransactions(data) {
 
     }

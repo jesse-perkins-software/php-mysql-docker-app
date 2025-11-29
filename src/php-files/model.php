@@ -85,7 +85,13 @@ function getTransactions($userID) {
     global $conn;
     $sql = "SELECT * FROM transactions WHERE (userID = '$userID')";
     $result = mysqli_query($conn, $sql);
-    return $result;
+
+    $transactions = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $transactions[] = $row;
+    }
+
+    return $transactions;
 }
 
 ?>
