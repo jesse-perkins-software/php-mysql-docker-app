@@ -168,22 +168,6 @@
                     <div class="col-3">Notes</div>
                 </div>
 
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">22-02-2024</div>
-                    <div class="col-4">Royal Bank of Canada</div>
-                    <div class="col">$90</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Wants</div>
-                    <div class="col-3">Date Night</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">25-02-2024</div>
-                    <div class="col-4">Walmart</div>
-                    <div class="col">$40</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3">Peanuts</div>
-                </div>
             </div>
         </div>
     </div>
@@ -214,9 +198,10 @@
     }
 
     function makeTransactions(data) {
+        console.log(data);
         let transactionData = JSON.parse(data);
-        console.log(transactionData);
-        console.log(transactionData.length);
+        //console.log(transactionData);
+        // console.log(transactionData.length);
 
         for (let i = 0; i < transactionData.length; i++) {
             let div = document.createElement('div');
@@ -236,13 +221,11 @@
 
             let accountColumn = document.createElement('div');
             accountColumn.className = "col";
-            // getAccountName(transactionData[i]['accountID'];
-            accountColumn.textContent = "";
+            accountColumn.textContent = transactionData[i]['accountName'];
 
             let categoryColumn = document.createElement('div');
             categoryColumn.className = "col";
-            // getCategoryName(transactionData[i]['categoryID'];
-            categoryColumn.textContent = "";
+            categoryColumn.textContent = transactionData[i]['groupName'];
 
             let notesColumn = document.createElement('div');
             notesColumn.className = "col-3";

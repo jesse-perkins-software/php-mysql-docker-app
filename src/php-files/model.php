@@ -83,13 +83,25 @@ function getCategoryID($groupID, $description) {
 
 function getTransactions($userID) {
     global $conn;
-    $sql = "SELECT * FROM transactions WHERE (userID = '$userID') AND (transactionID = 1)";
+    $sql = "SELECT T.date, T.description, T.amount, A.accountName, G.groupName, T.notes 
+            FROM transactions T, accounts A, categories C, categoryGroups G
+            WHERE (T.userID = '$userID')
+              AND (T.accountID = A.accountID) 
+              AND (T.categoryID = C.categoryID AND C.groupID = G.groupID)";
     $result = mysqli_query($conn, $sql);
     $rows = [];
     while ($row = mysqli_fetch_assoc($result)) {
         $rows[] = $row;
     }
     return json_encode($rows);
+}
+
+function getAccountName($userID, $accountID) {
+    global $conn;
+    $sql = "SELECT accountName FROM accounts WHERE (userID = '$userID') AND (accountID = '$accountID')";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row["accountName"];
 }
 
 ?>
