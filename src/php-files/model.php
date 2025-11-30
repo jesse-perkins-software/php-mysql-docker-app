@@ -83,15 +83,13 @@ function getCategoryID($groupID, $description) {
 
 function getTransactions($userID) {
     global $conn;
-    $sql = "SELECT * FROM transactions WHERE (userID = '$userID')";
+    $sql = "SELECT * FROM transactions WHERE (userID = '$userID') AND (transactionID = 1)";
     $result = mysqli_query($conn, $sql);
-
-    $transactions = array();
+    $rows = [];
     while ($row = mysqli_fetch_assoc($result)) {
-        $transactions[] = $row;
+        $rows[] = $row;
     }
-
-    return $transactions;
+    return json_encode($rows);
 }
 
 ?>

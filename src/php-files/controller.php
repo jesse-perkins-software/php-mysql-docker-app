@@ -365,8 +365,8 @@ if ($page == "SignInPage") {
                 exit();
             }
             case "FetchTransactions": {
-                echo "hello";
-                include("transactions/view_transactions_income.php");
+                $transactions = getTransactions($_SESSION["userID"]);
+                echo $transactions;
                 exit();
             }
 

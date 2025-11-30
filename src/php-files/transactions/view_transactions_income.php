@@ -213,12 +213,58 @@
         document.getElementById("nav-form").submit();
     }
 
+    function makeTransactions(data) {
+        let transactionData = JSON.parse(data);
+        console.log(transactionData);
+        console.log(transactionData.length);
+
+        for (let i = 0; i < transactionData.length; i++) {
+            let div = document.createElement('div');
+            div.className = "row border-bottom individual-transactions";
+
+            let dateColumn = document.createElement('div');
+            dateColumn.className = "col";
+            dateColumn.textContent = transactionData[i]['date'];
+
+            let descriptionColumn = document.createElement('div');
+            descriptionColumn.className = "col-4";
+            descriptionColumn.textContent = transactionData[i]['description'];
+
+            let amountColumn = document.createElement('div');
+            amountColumn.className = "col";
+            amountColumn.textContent = "$" + transactionData[i]['amount'];
+
+            let accountColumn = document.createElement('div');
+            accountColumn.className = "col";
+            // getAccountName(transactionData[i]['accountID'];
+            accountColumn.textContent = "";
+
+            let categoryColumn = document.createElement('div');
+            categoryColumn.className = "col";
+            // getCategoryName(transactionData[i]['categoryID'];
+            categoryColumn.textContent = "";
+
+            let notesColumn = document.createElement('div');
+            notesColumn.className = "col-3";
+            notesColumn.textContent = transactionData[i]['notes'];
+
+            div.appendChild(dateColumn);
+            div.appendChild(descriptionColumn)
+            div.appendChild(amountColumn);
+            div.appendChild(accountColumn);
+            div.appendChild(categoryColumn);
+            div.appendChild(notesColumn);
+
+            document.getElementById('transactions-container').appendChild((div));
+        }
+    }
+
     function fetchTransactions() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                let data = JSON.parse(this.responseText);
-                displayTransactions(data);
+                let data = this.responseText;
+                makeTransactions(data);
             }
         };
         let query = "page=Transactions_Income&command=FetchTransactions";
@@ -232,6 +278,6 @@
     });
 
     function displayTransactions(data) {
-
+        return data;
     }
 </script>
