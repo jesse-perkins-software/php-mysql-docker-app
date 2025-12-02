@@ -355,13 +355,8 @@ if ($page == "SignInPage") {
         switch ($command) {
             case "NewTransaction": {
                 saveTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
-                if (!$_SESSION['newTransaction']) {
-                    echo "Transaction failed";
-                    include("transactions/view_transactions_income.php");
-                } else {
 
-                    include("transactions/view_transactions_income.php");
-                }
+                include("transactions/view_transactions_income.php");
                 exit();
             }
             case "FetchTransactions": {

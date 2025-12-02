@@ -161,9 +161,9 @@
             <div class="container" id="transactions-container">
                 <div class="row border-bottom border-top" id="transaction-column-titles">
                     <div class="col">Date</div>
-                    <div class="col-4">Description</div>
+                    <div class="col-2">Description</div>
                     <div class="col">Amount</div>
-                    <div class="col">Account</div>
+                    <div class="col-2">Account</div>
                     <div class="col">Category</div>
                     <div class="col-3">Notes</div>
                 </div>
@@ -212,7 +212,7 @@
             dateColumn.textContent = transactionData[i]['date'];
 
             let descriptionColumn = document.createElement('div');
-            descriptionColumn.className = "col-4";
+            descriptionColumn.className = "col-3";
             descriptionColumn.textContent = transactionData[i]['description'];
 
             let amountColumn = document.createElement('div');
@@ -220,7 +220,7 @@
             amountColumn.textContent = "$" + transactionData[i]['amount'];
 
             let accountColumn = document.createElement('div');
-            accountColumn.className = "col";
+            accountColumn.className = "col-2";
             accountColumn.textContent = transactionData[i]['accountName'];
 
             let categoryColumn = document.createElement('div');

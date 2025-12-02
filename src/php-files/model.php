@@ -23,14 +23,11 @@ function saveTransaction($date, $description, $amount, $account, $category, $not
     $accountID = getAccountID($userID, $account);
     $groupID = getGroupID($userID, $category);
     $categoryID = getCategoryID($groupID, $description);
-    if ($accountID === -1 || $groupID === -1 || $categoryID === -1) {
-        $_SESSION['newTransaction'] = false;
-    } else {
-        $sql = "INSERT INTO transactions (userID, accountID, categoryID, date, description, amount, notes)
-                VALUES ('$userID', '$accountID', '$categoryID', '$date', '$description', '$amount', '$notes')";
-        $result = mysqli_query($conn, $sql);
-        return $result;
-    }
+
+    $sql = "INSERT INTO transactions (userID, accountID, categoryID, date, description, amount, notes)
+            VALUES ('$userID', '$accountID', '$categoryID', '$date', '$description', '$amount', '$notes')";
+    $result = mysqli_query($conn, $sql);
+    return $result;
 }
 
 function getUserID($username, $password) {
@@ -83,11 +80,21 @@ function getCategoryID($groupID, $description) {
 
 function getTransactions($userID) {
     global $conn;
-    $sql = "SELECT T.date, T.description, T.amount, A.accountName, G.groupName, T.notes 
-            FROM transactions T, accounts A, categories C, categoryGroups G
-            WHERE (T.userID = '$userID')
-              AND (T.accountID = A.accountID) 
-              AND (T.categoryID = C.categoryID AND C.groupID = G.groupID)";
+    $sql = "SELECT 
+                transactions.date, 
+                transactions.description, 
+                transactions.amount, 
+                accounts.accountName, 
+                categoryGroups.groupName, 
+                transactions.notes
+            FROM 
+                transactions
+            INNER JOIN
+                accounts ON transactions.accountID = accounts.accountID
+            INNER JOIN
+                categories ON transactions.categoryID = categories.categoryID
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID";
     $result = mysqli_query($conn, $sql);
     $rows = [];
     while ($row = mysqli_fetch_assoc($result)) {
