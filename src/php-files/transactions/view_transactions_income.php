@@ -152,7 +152,7 @@
                 <h4 id="account-name">Income</h4>
                 <button class="btn btn-secondary" id="new-transaction-button" data-bs-toggle="modal" data-bs-target="#newTransactionModel">+ New Transaction</button>
             </div>
-            <h4 id="account-amount">$14,000</h4>
+            <h4 id="account-amount"></h4>
         </div>
 
         <?php require 'new_transaction_modal.php'; ?>
@@ -161,7 +161,7 @@
             <div class="container" id="transactions-container">
                 <div class="row border-bottom border-top" id="transaction-column-titles">
                     <div class="col">Date</div>
-                    <div class="col-2">Description</div>
+                    <div class="col-3">Description</div>
                     <div class="col">Amount</div>
                     <div class="col-2">Account</div>
                     <div class="col">Category</div>
@@ -202,7 +202,7 @@
         let transactionData = JSON.parse(data);
         //console.log(transactionData);
         // console.log(transactionData.length);
-
+        let total_amount = 0;
         for (let i = 0; i < transactionData.length; i++) {
             let div = document.createElement('div');
             div.className = "row border-bottom individual-transactions";
@@ -217,7 +217,8 @@
 
             let amountColumn = document.createElement('div');
             amountColumn.className = "col";
-            amountColumn.textContent = "$" + transactionData[i]['amount'];
+            amountColumn.textContent = "$" + Number(transactionData[i]['amount']).toLocaleString();
+            total_amount += Number(transactionData[i]['amount']);
 
             let accountColumn = document.createElement('div');
             accountColumn.className = "col-2";
@@ -240,6 +241,7 @@
 
             document.getElementById('transactions-container').appendChild((div));
         }
+        document.getElementById('account-amount').textContent = "$" + total_amount.toLocaleString();
     }
 
     function fetchTransactions() {

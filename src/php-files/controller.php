@@ -356,6 +356,7 @@ if ($page == "SignInPage") {
             case "NewTransaction": {
                 saveTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
 
+                header('Location: ' . $_SERVER['PHP_SELF']);
                 include("transactions/view_transactions_income.php");
                 exit();
             }

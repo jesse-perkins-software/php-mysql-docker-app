@@ -26,8 +26,7 @@ function saveTransaction($date, $description, $amount, $account, $category, $not
 
     $sql = "INSERT INTO transactions (userID, accountID, categoryID, date, description, amount, notes)
             VALUES ('$userID', '$accountID', '$categoryID', '$date', '$description', '$amount', '$notes')";
-    $result = mysqli_query($conn, $sql);
-    return $result;
+    return mysqli_query($conn, $sql);
 }
 
 function getUserID($username, $password) {
@@ -94,7 +93,8 @@ function getTransactions($userID) {
             INNER JOIN
                 categories ON transactions.categoryID = categories.categoryID
             INNER JOIN
-                categoryGroups ON categories.groupID = categoryGroups.groupID";
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            ORDER BY transactions.date DESC";
     $result = mysqli_query($conn, $sql);
     $rows = [];
     while ($row = mysqli_fetch_assoc($result)) {
