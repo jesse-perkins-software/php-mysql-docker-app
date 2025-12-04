@@ -139,7 +139,13 @@
             justify-content: center;
         }
 
+        .text-green {
+            color: var(--green_text);
+        }
 
+        .text-red {
+            color: var(--red_text);
+        }
     </style>
 </head>
 <body>
@@ -216,9 +222,21 @@
             descriptionColumn.textContent = transactionData[i]['description'];
 
             let amountColumn = document.createElement('div');
-            amountColumn.className = "col";
-            amountColumn.textContent = "$" + Number(transactionData[i]['amount']).toLocaleString();
-            total_amount += Number(transactionData[i]['amount']);
+            let amount = Number(transactionData[i]['amount']);
+            if (amount < 0) {
+                amountColumn.className = "col individual-transaction-amount text-red";
+                amountColumn.textContent = "($" + Math.abs(amount).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }) + ")";
+            } else {
+                amountColumn.className = "col individual-transaction-amount text-green";
+                amountColumn.textContent = "$" + amount.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+            total_amount += amount;
 
             let accountColumn = document.createElement('div');
             accountColumn.className = "col-2";

@@ -115,11 +115,11 @@
         }
 
         .info-box-pos {
-            color: green;
+            color: var(--green_text);
         }
 
         .info-box-neg {
-            color: red;
+            color: var(--red_text);
         }
 
         canvas {
