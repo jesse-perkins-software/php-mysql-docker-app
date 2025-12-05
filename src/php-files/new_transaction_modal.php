@@ -13,42 +13,45 @@
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="date-input">Date</span>
-                            <input type="date" name="date" class="form-control" placeholder="MM-DD-YYYY" required>
+                            <input type="date" name="date" class="form-control" placeholder="MM-DD-YYYY" aria-label="date-selection" required>
                         </div>
                     </div>
 
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="description-input">Description</span>
-                            <input type="text" name="description" class="form-control" placeholder="Recipient" required>
+                            <select class="form-select" id="description-options" aria-label="description-selection" required>
+                                <option selected>Select...</option>
+
+                            </select>
                         </div>
                     </div>
 
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="amount-input">Amount</span>
-                            <input type="number" name="amount" class="form-control" placeholder="$" step="0.01" required>
+                            <input type="number" name="amount" class="form-control" placeholder="$" step="0.01" aria-label="amount-selection" required>
                         </div>
                     </div>
 
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="account-input">Account</span>
-                            <input type="text" name="account" class="form-control" placeholder="Chequing" required>
+                            <input type="text" name="account" class="form-control" placeholder="Chequing" aria-label="account-selection" required>
                         </div>
                     </div>
 
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="category-input">Category</span>
-                            <input type="text" name="category" class="form-control" placeholder="Needs/Wants/Savings" required>
+                            <input type="text" name="category" class="form-control" placeholder="Needs/Wants/Savings" aria-label="category-selection" required>
                         </div>
                     </div>
 
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="notes-input">Notes</span>
-                            <textarea name="notes" class="form-control"></textarea>
+                            <textarea name="notes" class="form-control" aria-label="notes-selection"></textarea>
                         </div>
                     </div>
 

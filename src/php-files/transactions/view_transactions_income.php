@@ -204,10 +204,9 @@
     }
 
     function makeTransactions(data) {
-        console.log(data);
+        //console.log(data);
         let transactionData = JSON.parse(data);
-        //console.log(transactionData);
-        // console.log(transactionData.length);
+
         let total_amount = 0;
         for (let i = 0; i < transactionData.length; i++) {
             let div = document.createElement('div');
@@ -231,10 +230,7 @@
                 }) + ")";
             } else {
                 amountColumn.className = "col individual-transaction-amount text-green";
-                amountColumn.textContent = "$" + amount.toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
+                amountColumn.textContent = "$" + amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             }
             total_amount += amount;
 
@@ -276,11 +272,33 @@
         xhttp.send(query);
     }
 
+    function assignDescriptions(data) {
+        console.log(data);
+        let descriptions = document.getElementById('description-options');
+        for (let i = 0; i < data.length; i++) {
+            let descriptionOption = document.createElement('option');
+            descriptionOption.textContent = data[i]['categoryName'];
+            descriptions.appendChild(descriptionOption);
+        }
+    }
+
+    function fetchSelectionOptions() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                console.log(data);
+                //assignDescriptions(data);
+            }
+        };
+        let query = "page=Transactions_Income&command=FetchSelectionOptions";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         fetchTransactions();
+        fetchSelectionOptions();
     });
-
-    function displayTransactions(data) {
-        return data;
-    }
 </script>

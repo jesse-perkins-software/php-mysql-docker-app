@@ -103,12 +103,89 @@ function getTransactions($userID) {
     return json_encode($rows);
 }
 
-function getAccountName($userID, $accountID) {
+function getAccountNames($userID) {
     global $conn;
-    $sql = "SELECT accountName FROM accounts WHERE (userID = '$userID') AND (accountID = '$accountID')";
+    $sql = "SELECT accountName FROM accounts WHERE (userID = '$userID')";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     return $row["accountName"];
+}
+
+function getDescriptions($userID) {
+    global $conn;
+    $sql = "SELECT 
+                categories.categoryName 
+            FROM 
+                categories
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            WHERE 
+                categoryGroups.userID = '$userID'";
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return json_encode($rows);
+}
+
+function getCategories($userID) {
+    global $conn;
+    $sql = "SELECT
+                groupName
+            FROM
+                categoryGroups
+            WHERE
+                userID = '$userID'";
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return json_encode($rows);
+}
+
+function getSelections($userID) {
+    global $conn;
+
+    $sql1 = "SELECT accountName FROM accounts WHERE (userID = '$userID')";
+    $result1 = mysqli_query($conn, $sql1);
+    $accountNames = [];
+    while ($accountName = mysqli_fetch_assoc($result1)) {
+        $accountNames[] = $accountName['accountName'];
+    }
+
+    $sql2 = "SELECT 
+                categories.categoryName 
+            FROM 
+                categories
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            WHERE 
+                categoryGroups.userID = '$userID'";
+    $result2 = mysqli_query($conn, $sql2);
+    $categoryNames = [];
+    while ($categoryName = mysqli_fetch_assoc($result2)) {
+        $categoryNames[] = $categoryName['categoryName'];
+    }
+
+    $sql3 = "SELECT
+                groupName
+            FROM
+                categoryGroups
+            WHERE
+                userID = '$userID'";
+    $result3 = mysqli_query($conn, $sql3);
+    $groupNames = [];
+    while ($groupName = mysqli_fetch_assoc($result3)) {
+        $groupNames[] = $groupName['groupName'];
+    }
+
+    return [
+        'accountNames' => $accountNames,
+        'categoryNames' => $categoryNames,
+        'categoryGroups' => $groupNames
+    ];
 }
 
 ?>
