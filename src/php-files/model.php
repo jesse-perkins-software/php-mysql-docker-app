@@ -102,49 +102,6 @@ function getTransactions($userID) {
     }
     return json_encode($rows);
 }
-
-function getAccountNames($userID) {
-    global $conn;
-    $sql = "SELECT accountName FROM accounts WHERE (userID = '$userID')";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
-    return $row["accountName"];
-}
-
-function getDescriptions($userID) {
-    global $conn;
-    $sql = "SELECT 
-                categories.categoryName 
-            FROM 
-                categories
-            INNER JOIN
-                categoryGroups ON categories.groupID = categoryGroups.groupID
-            WHERE 
-                categoryGroups.userID = '$userID'";
-    $result = mysqli_query($conn, $sql);
-    $rows = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $rows[] = $row;
-    }
-    return json_encode($rows);
-}
-
-function getCategories($userID) {
-    global $conn;
-    $sql = "SELECT
-                groupName
-            FROM
-                categoryGroups
-            WHERE
-                userID = '$userID'";
-    $result = mysqli_query($conn, $sql);
-    $rows = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $rows[] = $row;
-    }
-    return json_encode($rows);
-}
-
 function getSelections($userID) {
     global $conn;
 

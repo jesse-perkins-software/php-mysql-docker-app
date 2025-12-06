@@ -37,14 +37,20 @@
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="account-input">Account</span>
-                            <input type="text" name="account" class="form-control" placeholder="Chequing" aria-label="account-selection" required>
+                            <select class="form-select" id="account-options" aria-label="account-selection" required>
+                                <option selected>Select...</option>
+
+                            </select>
                         </div>
                     </div>
 
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="category-input">Category</span>
-                            <input type="text" name="category" class="form-control" placeholder="Needs/Wants/Savings" aria-label="category-selection" required>
+                            <select class="form-select" id="category-options" aria-label="category-selection" required>
+                                <option selected>Select...</option>
+
+                            </select>
                         </div>
                     </div>
 

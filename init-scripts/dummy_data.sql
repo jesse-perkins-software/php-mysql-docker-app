@@ -60,21 +60,21 @@ SET @creditCardAccountID = (SELECT accountID FROM accounts WHERE userID = @userI
 
 -- Insert transactions
 INSERT INTO transactions (userID, accountID, categoryID, date, description, amount, notes) VALUES
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Employer A' AND groupID = @salaryGroupID), '2025-11-01', 'Monthly Salary', 3500.00, 'Regular salary deposit'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Walmart' AND groupID = @groceryGroupID), '2025-11-02', 'Walmart Groceries', -125.50, 'Weekly groceries'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), '2025-11-03', 'Netflix Subscription', -15.99, 'Monthly subscription'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2025-11-04', 'Shell Gas Station', -65.00, 'Fill up'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Costco' AND groupID = @groceryGroupID), '2025-11-05', 'Costco Shopping', -200.00, 'Monthly bulk shopping'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Restaurants' AND groupID = @entertainmentGroupID), '2025-11-06', 'Italian Restaurant', -45.75, 'Dinner with friends'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), '2025-11-07', 'Hydro Bill', -120.00, 'Monthly utility'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Internet' AND groupID = @utilitiesGroupID), '2025-11-08', 'Internet Provider', -79.99, 'Monthly internet'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gaming' AND groupID = @entertainmentGroupID), '2025-11-09', 'Steam Game Purchase', -29.99, 'Video game'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Freelance' AND groupID = @salaryGroupID), '2025-11-10', 'Freelance Project Payment', 500.00, 'Web design project'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Maintenance' AND groupID = @transportationGroupID), '2025-11-12', 'Oil Change Service', -85.00, 'Routine maintenance'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Local Market' AND groupID = @groceryGroupID), '2025-11-14', 'Farmers Market', -35.50, 'Fresh produce'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Water' AND groupID = @utilitiesGroupID), '2025-11-15', 'Water Bill', -45.00, 'Monthly water'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Restaurants' AND groupID = @entertainmentGroupID), '2025-11-16', 'Coffee Shop', -6.50, 'Morning coffee'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Transit' AND groupID = @transportationGroupID), '2025-11-18', 'Transit Pass', -150.00, 'Monthly transit pass');
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Employer A' AND groupID = @salaryGroupID), '2025-11-01', 'Employer A', 3500.00, 'Regular salary deposit'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Walmart' AND groupID = @groceryGroupID), '2025-11-02', 'Walmart', -125.50, 'Weekly groceries'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), '2025-11-03', 'Movies', -15.99, 'Monthly subscription'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2025-11-04', 'Gas', -65.00, 'Fill up'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Costco' AND groupID = @groceryGroupID), '2025-11-05', 'Costco', -200.00, 'Monthly bulk shopping'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Restaurants' AND groupID = @entertainmentGroupID), '2025-11-06', 'Restaurants', -45.75, 'Dinner with friends'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), '2025-11-07', 'Electricity', -120.00, 'Monthly utility'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Internet' AND groupID = @utilitiesGroupID), '2025-11-08', 'Internet', -79.99, 'Monthly internet'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gaming' AND groupID = @entertainmentGroupID), '2025-11-09', 'Gaming', -29.99, 'Video game'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Freelance' AND groupID = @salaryGroupID), '2025-11-10', 'Freelance', 500.00, 'Web design project'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Maintenance' AND groupID = @transportationGroupID), '2025-11-12', 'Car Maintenance', -85.00, 'Routine maintenance'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Local Market' AND groupID = @groceryGroupID), '2025-11-14', 'Local Market', -35.50, 'Fresh produce'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Water' AND groupID = @utilitiesGroupID), '2025-11-15', 'Water', -45.00, 'Monthly water'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Restaurants' AND groupID = @entertainmentGroupID), '2025-11-16', 'Restaurants', -6.50, 'Morning coffee'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Transit' AND groupID = @transportationGroupID), '2025-11-18', 'Transit', -150.00, 'Monthly transit pass');
 
 -- Insert budgets
 INSERT INTO budgets (userID, categoryGroupID, budgetType, amount, period) VALUES

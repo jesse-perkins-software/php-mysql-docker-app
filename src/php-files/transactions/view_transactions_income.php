@@ -273,12 +273,30 @@
     }
 
     function assignDescriptions(data) {
-        console.log(data);
-        let descriptions = document.getElementById('description-options');
-        for (let i = 0; i < data.length; i++) {
+        let descriptionsOptions = document.getElementById('description-options');
+        let categoryOptions = document.getElementById('category-options');
+        let accountOptions = document.getElementById('account-options');
+
+        let descriptions = data.categoryNames;
+        let categories = data.categoryGroups;
+        let accounts = data.accountNames;
+
+        for (let i = 0; i < descriptions.length; i++) {
             let descriptionOption = document.createElement('option');
-            descriptionOption.textContent = data[i]['categoryName'];
-            descriptions.appendChild(descriptionOption);
+            descriptionOption.textContent = descriptions[i];
+            descriptionsOptions.appendChild(descriptionOption);
+        }
+
+        for (let i = 0; i < categories.length; i++) {
+            let categoryOption = document.createElement('option');
+            categoryOption.textContent = categories[i];
+            categoryOptions.appendChild(categoryOption);
+        }
+
+        for (let i = 0; i < accounts.length; i++) {
+            let accountOption = document.createElement('option');
+            accountOption.textContent = accounts[i];
+            accountOptions.appendChild(accountOption);
         }
     }
 
@@ -288,7 +306,7 @@
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
                 console.log(data);
-                //assignDescriptions(data);
+                assignDescriptions(data);
             }
         };
         let query = "page=Transactions_Income&command=FetchSelectionOptions";
