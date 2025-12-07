@@ -363,8 +363,13 @@ if ($page == "SignInPage") {
                 echo $transactions;
                 exit();
             }
-            case "FetchSelectionOptions": {
-                $descriptions = getSelections($_SESSION["userID"]);
+            case "FetchCategorySelectionOptions": {
+                $categories = getCategorySelections($_SESSION["userID"]);
+                echo json_encode($categories);
+                exit();
+            }
+            case "FetchDescriptionSelectionOptions": {
+                $descriptions = getDescriptionSelections($_SESSION["userID"], $_POST['selectedCategory']);
                 echo json_encode($descriptions);
                 exit();
             }

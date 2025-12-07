@@ -204,7 +204,6 @@
     }
 
     function makeTransactions(data) {
-        console.log(data);
         let transactionData = JSON.parse(data);
 
         let total_amount = 0;
@@ -272,38 +271,48 @@
         xhttp.send(query);
     }
 
-    function assignDescriptions(data) {
-        let descriptionsOptions = document.getElementById('description-options');
+    function assignCategories(data) {
         let categoryOptions = document.getElementById('category-options');
-        let accountOptions = document.getElementById('account-options');
-
-        let descriptions = data.categoryNames;
-        let categories = data.categoryGroups;
-        let accounts = data.accountNames;
-
-        for (let i = 0; i < descriptions.length; i++) {
-            let descriptionOption = document.createElement('option');
-            descriptionOption.textContent = descriptions[i];
-            descriptionOption.value = descriptions[i];
-            descriptionsOptions.appendChild(descriptionOption);
-        }
-
-        for (let i = 0; i < categories.length; i++) {
+        categoryOptions.addEventListener('change', (event) => {
+            const selectedCategory = event.target.value;
+            let descriptionOptions = document.getElementById('description-options');
+            descriptionOptions.replaceChildren(descriptionOptions.options[0]);
+            fetchDescriptionSelectionOptions(selectedCategory);
+        });
+        for (let i = 0; i < data.length; i++) {
             let categoryOption = document.createElement('option');
-            categoryOption.textContent = categories[i];
-            categoryOption.value = categories[i];
+            categoryOption.textContent = data[i];
+            categoryOption.value = data[i];
             categoryOptions.appendChild(categoryOption);
-        }
-
-        for (let i = 0; i < accounts.length; i++) {
-            let accountOption = document.createElement('option');
-            accountOption.textContent = accounts[i];
-            accountOption.value = accounts[i];
-            accountOptions.appendChild(accountOption);
         }
     }
 
-    function fetchSelectionOptions() {
+    function fetchCategorySelectionOptions() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                assignCategories(data);
+            }
+        };
+        let query = "page=Transactions_Income&command=FetchCategorySelectionOptions";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function assignDescriptions(data) {
+        let descriptionOptions = document.getElementById('description-options');
+
+        for (let i = 0; i < data.length; i++) {
+            let descriptionOption = document.createElement('option');
+            descriptionOption.textContent = data[i];
+            descriptionOption.value = data[i];
+            descriptionOptions.appendChild(descriptionOption);
+        }
+    }
+
+    function fetchDescriptionSelectionOptions(selectedCategory) {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -311,7 +320,8 @@
                 assignDescriptions(data);
             }
         };
-        let query = "page=Transactions_Income&command=FetchSelectionOptions";
+
+        let query = "page=Transactions_Income&command=FetchDescriptionSelectionOptions&selectedCategory=" + selectedCategory;
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
@@ -319,6 +329,6 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         fetchTransactions();
-        fetchSelectionOptions();
+        fetchCategorySelectionOptions();
     });
 </script>

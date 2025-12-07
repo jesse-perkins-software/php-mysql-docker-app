@@ -130,29 +130,21 @@ function getTransactions($userID) {
     }
     return json_encode($rows);
 }
-function getSelections($userID) {
+
+function getAccountSelections($userID) {
     global $conn;
 
-    $sql1 = "SELECT accountName FROM accounts WHERE (userID = '$userID')";
-    $result1 = mysqli_query($conn, $sql1);
+    $sql = "SELECT accountName FROM accounts WHERE (userID = '$userID')";
+    $result = mysqli_query($conn, $sql);
     $accountNames = [];
-    while ($accountName = mysqli_fetch_assoc($result1)) {
+    while ($accountName = mysqli_fetch_assoc($result)) {
         $accountNames[] = $accountName['accountName'];
     }
+    return $accountNames;
+}
 
-    $sql2 = "SELECT 
-                categories.categoryName 
-            FROM 
-                categories
-            INNER JOIN
-                categoryGroups ON categories.groupID = categoryGroups.groupID
-            WHERE 
-                categoryGroups.userID = '$userID'";
-    $result2 = mysqli_query($conn, $sql2);
-    $categoryNames = [];
-    while ($categoryName = mysqli_fetch_assoc($result2)) {
-        $categoryNames[] = $categoryName['categoryName'];
-    }
+function getCategorySelections($userID) {
+    global $conn;
 
     $sql3 = "SELECT
                 groupName
@@ -165,12 +157,27 @@ function getSelections($userID) {
     while ($groupName = mysqli_fetch_assoc($result3)) {
         $groupNames[] = $groupName['groupName'];
     }
+    return $groupNames;
+}
 
-    return [
-        'accountNames' => $accountNames,
-        'categoryNames' => $categoryNames,
-        'categoryGroups' => $groupNames
-    ];
+function getDescriptionSelections($userID, $selectedCategory) {
+    global $conn;
+
+    $sql = "SELECT 
+                categories.categoryName 
+            FROM 
+                categories
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            WHERE 
+                categoryGroups.userID = '$userID'
+                AND categoryGroups.groupName = '$selectedCategory'";
+    $result = mysqli_query($conn, $sql);
+    $categoryNames = [];
+    while ($categoryName = mysqli_fetch_assoc($result)) {
+        $categoryNames[] = $categoryName['categoryName'];
+    }
+    return $categoryNames;
 }
 
 ?>

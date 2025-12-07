@@ -19,8 +19,8 @@
 
                     <div class="transaction-info">
                         <div class="input-group">
-                            <span class="input-group-text" id="description-input">Description</span>
-                            <select class="form-select" id="description-options" name="description" aria-label="description-selection" required>
+                            <span class="input-group-text" id="category-input">Category</span>
+                            <select class="form-select" id="category-options" name="category" aria-label="category-selection" required>
                                 <option value="" selected>Select...</option>
 
                             </select>
@@ -29,8 +29,11 @@
 
                     <div class="transaction-info">
                         <div class="input-group">
-                            <span class="input-group-text" id="amount-input">Amount</span>
-                            <input type="number" name="amount" class="form-control" placeholder="$" step="0.01" aria-label="amount-selection" required>
+                            <span class="input-group-text" id="description-input">Description</span>
+                            <select class="form-select" id="description-options" name="description" aria-label="description-selection" required>
+                                <option value="" selected>Select...</option>
+
+                            </select>
                         </div>
                     </div>
 
@@ -46,11 +49,8 @@
 
                     <div class="transaction-info">
                         <div class="input-group">
-                            <span class="input-group-text" id="category-input">Category</span>
-                            <select class="form-select" id="category-options" name="category" aria-label="category-selection" required>
-                                <option value="" selected>Select...</option>
-
-                            </select>
+                            <span class="input-group-text" id="amount-input">Amount</span>
+                            <input type="number" name="amount" class="form-control" placeholder="$" step="0.01" aria-label="amount-selection" required>
                         </div>
                     </div>
 
