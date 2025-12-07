@@ -204,7 +204,7 @@
     }
 
     function makeTransactions(data) {
-        //console.log(data);
+        console.log(data);
         let transactionData = JSON.parse(data);
 
         let total_amount = 0;
@@ -284,18 +284,21 @@
         for (let i = 0; i < descriptions.length; i++) {
             let descriptionOption = document.createElement('option');
             descriptionOption.textContent = descriptions[i];
+            descriptionOption.value = descriptions[i];
             descriptionsOptions.appendChild(descriptionOption);
         }
 
         for (let i = 0; i < categories.length; i++) {
             let categoryOption = document.createElement('option');
             categoryOption.textContent = categories[i];
+            categoryOption.value = categories[i];
             categoryOptions.appendChild(categoryOption);
         }
 
         for (let i = 0; i < accounts.length; i++) {
             let accountOption = document.createElement('option');
             accountOption.textContent = accounts[i];
+            accountOption.value = accounts[i];
             accountOptions.appendChild(accountOption);
         }
     }
@@ -305,7 +308,6 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
-                console.log(data);
                 assignDescriptions(data);
             }
         };

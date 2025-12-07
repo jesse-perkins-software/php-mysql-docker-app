@@ -355,8 +355,7 @@ if ($page == "SignInPage") {
         switch ($command) {
             case "NewTransaction": {
                 saveTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
-
-                header("Location: ?page=MainPage&command=Dashboard");
+                include("transactions/view_transactions_income.php");
                 exit();
             }
             case "FetchTransactions": {
@@ -366,8 +365,6 @@ if ($page == "SignInPage") {
             }
             case "FetchSelectionOptions": {
                 $descriptions = getSelections($_SESSION["userID"]);
-                //$accounts = getAccountNames($_SESSION["userID"]);
-                //$categories = getCategories($_SESSION["userID"]);
                 echo json_encode($descriptions);
                 exit();
             }

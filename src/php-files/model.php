@@ -17,6 +17,29 @@ function isLoginValid($u, $p) {
     }
 }
 
+function transactionExists($date, $description, $amount, $account, $category, $notes) {
+    global $conn;
+    $userID = $_SESSION["userID"];
+    $accountID = getAccountID($userID, $account);
+    $groupID = getGroupID($userID, $category);
+    $categoryID = getCategoryID($groupID, $description);
+
+    $sql = "SELECT EXISTS(
+                SELECT 1
+                FROM transactions
+                WHERE
+                    transactions.date = '$date'
+                    AND transactions.categoryID = '$categoryID'
+                    AND transactions.amount = '$amount'
+                    AND transactions.accountID = '$accountID'
+                    AND transactions.description = '$description'
+                    AND transactions.notes = '$notes')
+                AS record_exists";
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
+
+}
+
 function saveTransaction($date, $description, $amount, $account, $category, $notes) {
     global $conn;
     $userID = $_SESSION["userID"];
@@ -24,9 +47,14 @@ function saveTransaction($date, $description, $amount, $account, $category, $not
     $groupID = getGroupID($userID, $category);
     $categoryID = getCategoryID($groupID, $description);
 
-    $sql = "INSERT INTO transactions (userID, accountID, categoryID, date, description, amount, notes)
+    if (transactionExists($date, $description, $amount, $account, $category, $notes)) {
+        $sql = "INSERT INTO transactions (userID, accountID, categoryID, date, description, amount, notes)
             VALUES ('$userID', '$accountID', '$categoryID', '$date', '$description', '$amount', '$notes')";
-    return mysqli_query($conn, $sql);
+        return mysqli_query($conn, $sql);
+    } else {
+        return null;
+    }
+
 }
 
 function getUserID($username, $password) {

@@ -20,8 +20,8 @@
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="description-input">Description</span>
-                            <select class="form-select" id="description-options" aria-label="description-selection" required>
-                                <option selected>Select...</option>
+                            <select class="form-select" id="description-options" name="description" aria-label="description-selection" required>
+                                <option value="" selected>Select...</option>
 
                             </select>
                         </div>
@@ -37,8 +37,8 @@
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="account-input">Account</span>
-                            <select class="form-select" id="account-options" aria-label="account-selection" required>
-                                <option selected>Select...</option>
+                            <select class="form-select" id="account-options" name="account" aria-label="account-selection" required>
+                                <option value="" selected>Select...</option>
 
                             </select>
                         </div>
@@ -47,8 +47,8 @@
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="category-input">Category</span>
-                            <select class="form-select" id="category-options" aria-label="category-selection" required>
-                                <option selected>Select...</option>
+                            <select class="form-select" id="category-options" name="category" aria-label="category-selection" required>
+                                <option value="" selected>Select...</option>
 
                             </select>
                         </div>
