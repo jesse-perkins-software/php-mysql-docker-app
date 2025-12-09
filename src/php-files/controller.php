@@ -354,9 +354,20 @@ if ($page == "SignInPage") {
         $command = $_POST["command"];
         switch ($command) {
             case "NewTransaction": {
-                saveTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
-                include("transactions/view_transactions_income.php");
-                exit();
+                if (($_SESSION['date'] == $_POST['date']) && ($_SESSION['description'] == $_POST['description']) && ($_SESSION['amount'] == $_POST['amount']) && ($_SESSION['account'] == $_POST['account']) && ($_SESSION['category'] == $_POST['category']) && ($_SESSION['notes'] == $_POST['notes'])) {
+                    include("transactions/view_transactions_income.php");
+                    exit();
+                } else {
+                    saveTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
+                    $_SESSION['date'] = $_POST['date'];
+                    $_SESSION['description'] = $_POST['description'];
+                    $_SESSION['amount'] = $_POST['amount'];
+                    $_SESSION['account'] = $_POST['account'];
+                    $_SESSION['category'] = $_POST['category'];
+                    $_SESSION['notes'] = $_POST['notes'];
+                    include("transactions/view_transactions_income.php");
+                    exit();
+                }
             }
             case "FetchTransactions": {
                 $transactions = getTransactions($_SESSION["userID"]);

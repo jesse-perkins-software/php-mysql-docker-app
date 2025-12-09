@@ -267,10 +267,12 @@
 
                 document.getElementById('date-entry').value = transaction['date'];
                 document.getElementById('category-options').value = transaction['groupName'];
-                document.getElementById('description-options').value = transaction['description'];
                 document.getElementById('account-options').value = transaction['accountName'];
                 document.getElementById('amount-entry').value = transaction['amount'];
                 document.getElementById('notes-entry').value = transaction['notes'];
+
+                fetchDescriptionForEdit(transaction['groupName'], transaction['description']);
+
 
                 let modal = new bootstrap.Modal(document.getElementById('newTransactionModel'));
                 modal.show();
@@ -389,12 +391,36 @@
         baseOption.textContent = "Select...";
         baseOption.setAttribute('value', "");
 
-        document.getElementById('date-entry').textContent = "";
+        if (!document.getElementById('account-options').children) {
+            document.getElementById('account-options').appendChild(baseOption);
+        }
         document.getElementById('category-options').appendChild(baseOption);
         document.getElementById('description-options').appendChild(baseOption);
-        document.getElementById('account-options').appendChild(baseOption);
-        document.getElementById('amount-entry').textContent = "";
-        document.getElementById('notes-entry').textContent = "";
+    }
+
+    function fetchDescriptionForEdit(selectedCategory, descriptionValue) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                let descriptionOptions = document.getElementById('description-options');
+                descriptionOptions.replaceChildren();
+
+                let baseOption = document.createElement('option');
+                baseOption.textContent = "Select...";
+                baseOption.value = "";
+                descriptionOptions.appendChild(baseOption);
+
+                assignDescriptions(data);
+
+                document.getElementById('description-options').value = descriptionValue;
+            }
+        };
+
+        let query = "page=Transactions_Income&command=FetchDescriptionSelectionOptions&selectedCategory=" + selectedCategory;
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
