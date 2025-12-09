@@ -13,7 +13,7 @@
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="date-input">Date</span>
-                            <input type="date" name="date" class="form-control" placeholder="MM-DD-YYYY" aria-label="date-selection" required>
+                            <input type="date" name="date" class="form-control" placeholder="MM-DD-YYYY" aria-label="date-selection" id="date-entry" required>
                         </div>
                     </div>
 
@@ -50,14 +50,14 @@
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="amount-input">Amount</span>
-                            <input type="number" name="amount" class="form-control" placeholder="$" step="0.01" aria-label="amount-selection" required>
+                            <input type="number" name="amount" id="amount-entry" class="form-control" placeholder="$" step="0.01" aria-label="amount-selection" required>
                         </div>
                     </div>
 
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="notes-input">Notes</span>
-                            <textarea name="notes" class="form-control" aria-label="notes-selection"></textarea>
+                            <textarea name="notes" id="notes-entry" class="form-control" aria-label="notes-selection"></textarea>
                         </div>
                     </div>
 

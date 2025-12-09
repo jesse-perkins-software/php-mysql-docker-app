@@ -156,7 +156,7 @@
         <div class="" id="account-header">
             <div id="account-type">
                 <h4 id="account-name">Income</h4>
-                <button class="btn btn-secondary" id="new-transaction-button" data-bs-toggle="modal" data-bs-target="#newTransactionModel">+ New Transaction</button>
+                <button onclick="clearTransactionData()" class="btn btn-secondary" id="new-transaction-button" data-bs-toggle="modal" data-bs-target="#newTransactionModel">+ New Transaction</button>
             </div>
             <h4 id="account-amount"></h4>
         </div>
@@ -214,10 +214,12 @@
             let dateColumn = document.createElement('div');
             dateColumn.className = "col";
             dateColumn.textContent = transactionData[i]['date'];
+            dateColumn.value = transactionData[i]['date'];
 
             let descriptionColumn = document.createElement('div');
             descriptionColumn.className = "col-3";
             descriptionColumn.textContent = transactionData[i]['description'];
+            descriptionColumn.value = transactionData[i]['description'];
 
             let amountColumn = document.createElement('div');
             let amount = Number(transactionData[i]['amount']);
@@ -227,23 +229,31 @@
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
                 }) + ")";
+                amountColumn.value = transactionData[i]['amount'];
             } else {
                 amountColumn.className = "col individual-transaction-amount text-green";
-                amountColumn.textContent = "$" + amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                amountColumn.textContent = "$" + amount.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+                amountColumn.value = transactionData[i]['amount'];
             }
             total_amount += amount;
 
             let accountColumn = document.createElement('div');
             accountColumn.className = "col-2";
             accountColumn.textContent = transactionData[i]['accountName'];
+            accountColumn.value = transactionData[i]['accountName'];
 
             let categoryColumn = document.createElement('div');
             categoryColumn.className = "col";
             categoryColumn.textContent = transactionData[i]['groupName'];
+            categoryColumn.value = transactionData[i]['groupName'];
 
             let notesColumn = document.createElement('div');
             notesColumn.className = "col-3";
             notesColumn.textContent = transactionData[i]['notes'];
+            notesColumn.value = transactionData[i]['notes'];
 
             div.appendChild(dateColumn);
             div.appendChild(descriptionColumn)
@@ -252,7 +262,22 @@
             div.appendChild(categoryColumn);
             div.appendChild(notesColumn);
 
+            div.addEventListener('click', function() {
+                let transaction = transactionData[i];
+
+                document.getElementById('date-entry').value = transaction['date'];
+                document.getElementById('category-options').value = transaction['groupName'];
+                document.getElementById('description-options').value = transaction['description'];
+                document.getElementById('account-options').value = transaction['accountName'];
+                document.getElementById('amount-entry').value = transaction['amount'];
+                document.getElementById('notes-entry').value = transaction['notes'];
+
+                let modal = new bootstrap.Modal(document.getElementById('newTransactionModel'));
+                modal.show();
+            });
+
             document.getElementById('transactions-container').appendChild((div));
+
         }
         document.getElementById('account-amount').textContent = "$" + total_amount.toLocaleString();
     }
@@ -327,8 +352,55 @@
         xhttp.send(query);
     }
 
+    function addAccountOptions(data) {
+        let accountOptions = document.getElementById('account-options');
+
+        for (let i = 0; i < data.length; i++) {
+            let accountOption = document.createElement('option');
+            accountOption.textContent = data[i];
+            accountOption.value = data[i];
+            accountOptions.appendChild(accountOption);
+        }
+    }
+
+    function fetchAccounts() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                addAccountOptions(data);
+            }
+        };
+        let query = "page=Transactions_Income&command=FetchAccountOptions";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function clearTransactionData() {
+        document.getElementById('date-entry').value = "";
+        document.getElementById('category-options').value = "";
+        document.getElementById('description-options').value = "";
+        document.getElementById('account-options').value = "";
+        document.getElementById('amount-entry').value = "";
+        document.getElementById('notes-entry').value = "";
+
+        let baseOption = document.createElement('option');
+        baseOption.textContent = "Select...";
+        baseOption.setAttribute('value', "");
+
+        document.getElementById('date-entry').textContent = "";
+        document.getElementById('category-options').appendChild(baseOption);
+        document.getElementById('description-options').appendChild(baseOption);
+        document.getElementById('account-options').appendChild(baseOption);
+        document.getElementById('amount-entry').textContent = "";
+        document.getElementById('notes-entry').textContent = "";
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         fetchTransactions();
         fetchCategorySelectionOptions();
+        fetchAccounts();
     });
+
 </script>

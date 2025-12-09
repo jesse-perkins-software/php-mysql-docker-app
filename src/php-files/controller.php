@@ -373,6 +373,10 @@ if ($page == "SignInPage") {
                 echo json_encode($descriptions);
                 exit();
             }
+            case "FetchAccountOptions": {
+                $accounts = getAccountSelections($_SESSION["userID"]);
+                echo json_encode($accounts);
+            }
         }
     }
 }
