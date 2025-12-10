@@ -146,6 +146,12 @@
         .text-red {
             color: var(--red_text);
         }
+
+        .modal-footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
@@ -162,6 +168,8 @@
         </div>
 
         <?php require 'new_transaction_modal.php'; ?>
+
+        <?php require 'edit_transaction_modal.php'; ?>
 
         <div class="" id="account-transactions">
             <div class="container" id="transactions-container">
@@ -265,16 +273,16 @@
             div.addEventListener('click', function() {
                 let transaction = transactionData[i];
 
-                document.getElementById('date-entry').value = transaction['date'];
-                document.getElementById('category-options').value = transaction['groupName'];
-                document.getElementById('account-options').value = transaction['accountName'];
-                document.getElementById('amount-entry').value = transaction['amount'];
-                document.getElementById('notes-entry').value = transaction['notes'];
+                document.getElementById('date-edit').value = transaction['date'];
+                document.getElementById('category-edit').value = transaction['groupName'];
+                document.getElementById('account-edit').value = transaction['accountName'];
+                document.getElementById('amount-edit').value = transaction['amount'];
+                document.getElementById('notes-edit').value = transaction['notes'];
 
                 fetchDescriptionForEdit(transaction['groupName'], transaction['description']);
 
 
-                let modal = new bootstrap.Modal(document.getElementById('newTransactionModel'));
+                let modal = new bootstrap.Modal(document.getElementById('editTransactionModel'));
                 modal.show();
             });
 
@@ -299,19 +307,28 @@
     }
 
     function assignCategories(data) {
-        let categoryOptions = document.getElementById('category-options');
-        categoryOptions.addEventListener('change', (event) => {
-            const selectedCategory = event.target.value;
-            let descriptionOptions = document.getElementById('description-options');
-            descriptionOptions.replaceChildren(descriptionOptions.options[0]);
-            fetchDescriptionSelectionOptions(selectedCategory);
+        let categoryOptions = document.querySelectorAll('.select-category');
+
+        categoryOptions.forEach(field => {
+            for (let i = 0; i < data.length; i++) {
+                let categoryOption = document.createElement('option');
+                categoryOption.textContent = data[i];
+                categoryOption.value = data[i];
+                field.appendChild(categoryOption);
+            }
+
+            field.addEventListener('change', (event) => {
+                const selectedCategory = event.target.value;
+                let descriptionOptions;
+
+                descriptionOptions = document.querySelectorAll('.select-description');
+                descriptionOptions.forEach(i => {
+                    i.replaceChildren(i.options[0]);
+                });
+
+                fetchDescriptionSelectionOptions(selectedCategory);
+            });
         });
-        for (let i = 0; i < data.length; i++) {
-            let categoryOption = document.createElement('option');
-            categoryOption.textContent = data[i];
-            categoryOption.value = data[i];
-            categoryOptions.appendChild(categoryOption);
-        }
     }
 
     function fetchCategorySelectionOptions() {
@@ -329,14 +346,16 @@
     }
 
     function assignDescriptions(data) {
-        let descriptionOptions = document.getElementById('description-options');
+        let descriptionOptions = document.querySelectorAll('.select-description');
 
-        for (let i = 0; i < data.length; i++) {
-            let descriptionOption = document.createElement('option');
-            descriptionOption.textContent = data[i];
-            descriptionOption.value = data[i];
-            descriptionOptions.appendChild(descriptionOption);
-        }
+        descriptionOptions.forEach(field => {
+            for (let i = 0; i < data.length; i++) {
+                let descriptionOption = document.createElement('option');
+                descriptionOption.textContent = data[i];
+                descriptionOption.value = data[i];
+                field.appendChild(descriptionOption);
+            }
+        });
     }
 
     function fetchDescriptionSelectionOptions(selectedCategory) {
@@ -355,14 +374,16 @@
     }
 
     function addAccountOptions(data) {
-        let accountOptions = document.getElementById('account-options');
+        let accountOptions = document.querySelectorAll(".select-account");
 
-        for (let i = 0; i < data.length; i++) {
-            let accountOption = document.createElement('option');
-            accountOption.textContent = data[i];
-            accountOption.value = data[i];
-            accountOptions.appendChild(accountOption);
-        }
+        accountOptions.forEach(field => {
+            for (let i = 0; i < data.length; i++) {
+                let accountOption = document.createElement('option');
+                accountOption.textContent = data[i];
+                accountOption.value = data[i];
+                field.appendChild(accountOption);
+            }
+        });
     }
 
     function fetchAccounts() {
@@ -391,11 +412,7 @@
         baseOption.textContent = "Select...";
         baseOption.setAttribute('value', "");
 
-        if (!document.getElementById('account-options').children) {
-            document.getElementById('account-options').appendChild(baseOption);
-        }
-        document.getElementById('category-options').appendChild(baseOption);
-        document.getElementById('description-options').appendChild(baseOption);
+        document.getElementById('description-options').replaceChildren(baseOption);
     }
 
     function fetchDescriptionForEdit(selectedCategory, descriptionValue) {
@@ -403,7 +420,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
-                let descriptionOptions = document.getElementById('description-options');
+                let descriptionOptions = document.getElementById('description-edit');
                 descriptionOptions.replaceChildren();
 
                 let baseOption = document.createElement('option');
@@ -413,7 +430,7 @@
 
                 assignDescriptions(data);
 
-                document.getElementById('description-options').value = descriptionValue;
+                document.getElementById('description-edit').value = descriptionValue;
             }
         };
 
