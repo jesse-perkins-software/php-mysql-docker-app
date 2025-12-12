@@ -37,7 +37,6 @@ function transactionExists($date, $description, $amount, $account, $category, $n
                 AS record_exists";
     $result = mysqli_query($conn, $sql);
     return mysqli_fetch_assoc($result);
-
 }
 
 function saveTransaction($date, $description, $amount, $account, $category, $notes) {
@@ -54,7 +53,6 @@ function saveTransaction($date, $description, $amount, $account, $category, $not
     } else {
         return null;
     }
-
 }
 
 function getUserID($username, $password) {
@@ -108,6 +106,7 @@ function getCategoryID($groupID, $description) {
 function getTransactions($userID) {
     global $conn;
     $sql = "SELECT 
+                transactions.transactionID,
                 transactions.date, 
                 transactions.description, 
                 transactions.amount, 
@@ -178,6 +177,50 @@ function getDescriptionSelections($userID, $selectedCategory) {
         $categoryNames[] = $categoryName['categoryName'];
     }
     return $categoryNames;
+}
+
+function deleteTransaction($date, $description, $amount, $account, $category, $notes) {
+    global $conn;
+    $userID = $_SESSION["userID"];
+    $accountID = getAccountID($userID, $account);
+    $groupID = getGroupID($userID, $category);
+    $categoryID = getCategoryID($groupID, $description);
+
+    if (transactionExists($date, $description, $amount, $account, $category, $notes)) {
+        $sql = "DELETE FROM transactions 
+                WHERE
+                    userID = '$userID'
+                    AND accountID = '$accountID'
+                    AND categoryID = '$categoryID'
+                    AND date = '$date'
+                    AND description = '$description'
+                    AND amount = '$amount'
+                    AND notes = '$notes'";
+        return mysqli_query($conn, $sql);
+    } else {
+        return null;
+    }
+}
+
+function editTransaction($transactionID, $date, $description, $amount, $account, $category, $notes) {
+    global $conn;
+    $userID = $_SESSION["userID"];
+    $accountID = getAccountID($userID, $account);
+    $groupID = getGroupID($userID, $category);
+    $categoryID = getCategoryID($groupID, $description);
+
+    $sql = "UPDATE 
+                transactions
+            SET 
+                accountID = '$accountID', 
+                categoryID = '$categoryID', 
+                date = '$date', 
+                description = '$description',
+                amount = '$amount',
+                notes = '$notes'
+            WHERE 
+                transactionID = '$transactionID'";
+    return mysqli_query($conn, $sql);
 }
 
 ?>

@@ -139,7 +139,7 @@ if ($page == "SignInPage") {
             }
             case "RefreshTable": {
                 if (isset($_POST["DeleteId"])) {
-                    deleteTransaction($_SESSION["username"], $_POST["DeleteId"]);
+                    //deleteTransaction($_SESSION["username"], $_POST["DeleteId"]);
                 }
                 $transactions = getRecentTransactions($_SESSION["username"]);
                 echo $transactions;
@@ -269,7 +269,7 @@ if ($page == "SignInPage") {
         switch($command) {
             case "RefreshTable": {
                 if (isset($_POST["DeleteId"])) {
-                    deleteTransaction($_SESSION["username"], $_POST["DeleteId"]);
+                    //deleteTransaction($_SESSION["username"], $_POST["DeleteId"]);
                 }
                 $transactions = getTopTransactions($_SESSION["username"]);
                 echo $transactions;
@@ -282,7 +282,7 @@ if ($page == "SignInPage") {
                 exit();
             }
             case "EditTransaction": {
-                editTransaction($_SESSION["username"], $_POST["Id"], $_POST["amount"], $_POST["category"], $_POST["account"], $_POST["date"]);
+                //editTransaction($_SESSION["username"], $_POST["Id"], $_POST["amount"], $_POST["category"], $_POST["account"], $_POST["date"]);
                 include("view_history.php");
                 exit();
             }
@@ -365,6 +365,17 @@ if ($page == "SignInPage") {
                     $_SESSION['account'] = $_POST['account'];
                     $_SESSION['category'] = $_POST['category'];
                     $_SESSION['notes'] = $_POST['notes'];
+                    include("transactions/view_transactions_income.php");
+                    exit();
+                }
+            }
+            case "EditTransaction": {
+                if ($_POST['action'] == 'delete') {
+                    deleteTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
+                    include("transactions/view_transactions_income.php");
+                    exit();
+                } else if ($_POST['action'] == 'save') {
+                    editTransaction($_POST['transaction-id'], $_POST['date'], $_POST['description'], $_POST['amount'], $_POST['account'], $_POST['category'], $_POST['notes']);
                     include("transactions/view_transactions_income.php");
                     exit();
                 }

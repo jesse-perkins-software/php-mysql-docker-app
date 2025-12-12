@@ -1,7 +1,9 @@
 <div class="modal fade" id="editTransactionModel">
-    <form action="/controller.php" method="post" class="needs-validation" novalidate>
+    <form action="/controller.php" method="post" id="editTransactionForm" class="needs-validation" novalidate>
         <input type="hidden" name="page" value="Transactions_Income">
-        <input type="hidden" name="command" value="NewTransaction">
+        <input type="hidden" name="command" value="EditTransaction">
+        <input type="hidden" id="action-input" name="action" value="">
+        <input type="hidden" id="transaction-id" name="transaction-id" value="">
 
         <div class="modal-dialog">
             <div class="modal-content">
@@ -63,8 +65,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
-                    <input type="submit" class="btn btn-primary" value="Save">
+                    <input type="submit" class="btn btn-danger" value="Delete" onclick="submitAction('delete')">
+                    <input type="submit" class="btn btn-primary" value="Save" onclick="submitAction('save')">
                 </div>
             </div>
         </div>

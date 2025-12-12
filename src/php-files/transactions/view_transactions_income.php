@@ -218,6 +218,7 @@
         for (let i = 0; i < transactionData.length; i++) {
             let div = document.createElement('div');
             div.className = "row border-bottom individual-transactions";
+            div.id = transactionData[i]['transactionID'];
 
             let dateColumn = document.createElement('div');
             dateColumn.className = "col";
@@ -272,7 +273,9 @@
 
             div.addEventListener('click', function() {
                 let transaction = transactionData[i];
+                console.log(div.id);
 
+                document.getElementById('transaction-id').value = div.id;
                 document.getElementById('date-edit').value = transaction['date'];
                 document.getElementById('category-edit').value = transaction['groupName'];
                 document.getElementById('account-edit').value = transaction['accountName'];
@@ -445,5 +448,10 @@
         fetchCategorySelectionOptions();
         fetchAccounts();
     });
+
+    function submitAction(action) {
+        document.getElementById('action-input').value = action;
+        document.getElementById('editTransactionForm').submit();
+    }
 
 </script>
