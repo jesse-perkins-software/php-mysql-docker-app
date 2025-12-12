@@ -162,7 +162,7 @@
         <div class="" id="account-header">
             <div id="account-type">
                 <h4 id="account-name">Income</h4>
-                <button onclick="clearTransactionData()" class="btn btn-secondary" id="new-transaction-button" data-bs-toggle="modal" data-bs-target="#newTransactionModel">+ New Transaction</button>
+                <button class="btn btn-secondary" id="new-transaction-button" data-bs-toggle="modal" data-bs-target="#newTransactionModel">+ New Transaction</button>
             </div>
             <h4 id="account-amount"></h4>
         </div>
@@ -212,7 +212,7 @@
     }
 
     function makeTransactions(data) {
-        let transactionData = JSON.parse(data);
+        let transactionData = data;
 
         let total_amount = 0;
         for (let i = 0; i < transactionData.length; i++) {
@@ -273,7 +273,6 @@
 
             div.addEventListener('click', function() {
                 let transaction = transactionData[i];
-                console.log(div.id);
 
                 document.getElementById('transaction-id').value = div.id;
                 document.getElementById('date-edit').value = transaction['date'];
@@ -283,7 +282,6 @@
                 document.getElementById('notes-edit').value = transaction['notes'];
 
                 fetchDescriptionForEdit(transaction['groupName'], transaction['description']);
-
 
                 let modal = new bootstrap.Modal(document.getElementById('editTransactionModel'));
                 modal.show();
@@ -299,11 +297,11 @@
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                let data = this.responseText;
+                let data = JSON.parse(this.responseText);
                 makeTransactions(data);
             }
         };
-        let query = "page=Transactions_Income&command=FetchTransactions";
+        let query = "page=Transactions&command=FetchTransactions&subpage=Income";
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
@@ -342,7 +340,7 @@
                 assignCategories(data);
             }
         };
-        let query = "page=Transactions_Income&command=FetchCategorySelectionOptions";
+        let query = "page=Transactions&command=FetchCategorySelectionOptions";
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
@@ -370,7 +368,7 @@
             }
         };
 
-        let query = "page=Transactions_Income&command=FetchDescriptionSelectionOptions&selectedCategory=" + selectedCategory;
+        let query = "page=Transactions&command=FetchDescriptionSelectionOptions&selectedCategory=" + selectedCategory;
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
@@ -397,7 +395,7 @@
                 addAccountOptions(data);
             }
         };
-        let query = "page=Transactions_Income&command=FetchAccountOptions";
+        let query = "page=Transactions&command=FetchAccountOptions";
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
@@ -437,7 +435,7 @@
             }
         };
 
-        let query = "page=Transactions_Income&command=FetchDescriptionSelectionOptions&selectedCategory=" + selectedCategory;
+        let query = "page=Transactions&command=FetchDescriptionSelectionOptions&selectedCategory=" + selectedCategory;
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
@@ -447,6 +445,7 @@
         fetchTransactions();
         fetchCategorySelectionOptions();
         fetchAccounts();
+        document.getElementById('subpage-value').value = "Income";
     });
 
     function submitAction(action) {

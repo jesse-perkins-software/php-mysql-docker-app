@@ -1,7 +1,8 @@
 <div class="modal fade" id="newTransactionModel">
     <form action="/controller.php" method="post" class="needs-validation" novalidate>
-        <input type="hidden" name="page" value="Transactions_Income">
+        <input type="hidden" name="page" value="Transactions">
         <input type="hidden" name="command" value="NewTransaction">
+        <input type="hidden" id="subpage" name="subpage" value="">
 
         <div class="modal-dialog">
             <div class="modal-content">

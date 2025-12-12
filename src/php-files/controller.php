@@ -346,7 +346,7 @@ if ($page == "SignInPage") {
             }
         }
     }
-} else if ($page == "Transactions_Income") {
+} else if ($page == "Transactions") {
     session_start();
     if (!isset($_SESSION["signedin"])) {
         include("view_signin.php");
@@ -355,7 +355,11 @@ if ($page == "SignInPage") {
         switch ($command) {
             case "NewTransaction": {
                 if (($_SESSION['date'] == $_POST['date']) && ($_SESSION['description'] == $_POST['description']) && ($_SESSION['amount'] == $_POST['amount']) && ($_SESSION['account'] == $_POST['account']) && ($_SESSION['category'] == $_POST['category']) && ($_SESSION['notes'] == $_POST['notes'])) {
-                    include("transactions/view_transactions_income.php");
+                    if ($_POST['subpage'] === "Expenses") {
+                        include("transactions/view_transactions_expenses.php");
+                    } else if ($_POST['subpage'] === "Income") {
+                        include("transactions/view_transactions_income.php");
+                    }
                     exit();
                 } else {
                     saveTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
@@ -365,23 +369,41 @@ if ($page == "SignInPage") {
                     $_SESSION['account'] = $_POST['account'];
                     $_SESSION['category'] = $_POST['category'];
                     $_SESSION['notes'] = $_POST['notes'];
-                    include("transactions/view_transactions_income.php");
+                    if ($_POST['subpage'] === "Expenses") {
+                        include("transactions/view_transactions_expenses.php");
+                    } else if ($_POST['subpage'] === "Income") {
+                        include("transactions/view_transactions_income.php");
+                    } else if ($_POST['subpage'] === "Transfers") {
+                        include("transactions/view_transactions_transfers.php");
+                    }
                     exit();
                 }
             }
             case "EditTransaction": {
                 if ($_POST['action'] == 'delete') {
                     deleteTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
-                    include("transactions/view_transactions_income.php");
+                    if ($_POST['subpage'] === "Expenses") {
+                        include("transactions/view_transactions_expenses.php");
+                    } else if ($_POST['subpage'] === "Income") {
+                        include("transactions/view_transactions_income.php");
+                    } else if ($_POST['subpage'] === "Transfers") {
+                        include("transactions/view_transactions_transfers.php");
+                    }
                     exit();
                 } else if ($_POST['action'] == 'save') {
                     editTransaction($_POST['transaction-id'], $_POST['date'], $_POST['description'], $_POST['amount'], $_POST['account'], $_POST['category'], $_POST['notes']);
-                    include("transactions/view_transactions_income.php");
+                    if ($_POST['subpage'] === "Expenses") {
+                        include("transactions/view_transactions_expenses.php");
+                    } else if ($_POST['subpage'] === "Income") {
+                        include("transactions/view_transactions_income.php");
+                    } else if ($_POST['subpage'] === "Transfers") {
+                        include("transactions/view_transactions_transfers.php");
+                    }
                     exit();
                 }
             }
             case "FetchTransactions": {
-                $transactions = getTransactions($_SESSION["userID"]);
+                $transactions = getTransactions($_SESSION["userID"], $_POST['subpage']);
                 echo $transactions;
                 exit();
             }
