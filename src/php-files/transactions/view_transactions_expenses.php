@@ -286,11 +286,27 @@
                 let modal = new bootstrap.Modal(document.getElementById('editTransactionModel'));
                 modal.show();
             });
-
             document.getElementById('transactions-container').appendChild((div));
-
         }
-        document.getElementById('account-amount').textContent = "$" + total_amount.toLocaleString();
+        let total = document.getElementById('account-amount');
+        if (total_amount < 0) {
+            total.className = "text-red";
+            total.textContent = "($" + Math.abs(total_amount).toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + ")";
+        } else if (total_amount > 0) {
+            total.className = "text-green";
+            total.textContent = "$" + total_amount.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        } else {
+            total.textContent = "$" + total_amount.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
     }
 
     function fetchTransactions() {

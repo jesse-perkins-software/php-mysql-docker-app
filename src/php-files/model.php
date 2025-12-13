@@ -160,7 +160,7 @@ function getTransactions($userID, $subpage) {
             $rows[] = $row;
         }
         return json_encode($rows);
-    } else {
+    } else if ($subpage === "Transfers") {
         $sql = "SELECT 
                 transactions.transactionID,
                 transactions.date, 
@@ -179,6 +179,7 @@ function getTransactions($userID, $subpage) {
                 categoryGroups ON categories.groupID = categoryGroups.groupID
             WHERE
                 transactions.userID = '$userID'
+                AND ((transactions.description LIKE 'Transfer%') OR (transactions.notes LIKE '%transfer%'))
             ORDER BY transactions.date DESC";
         $result = mysqli_query($conn, $sql);
         $rows = [];
