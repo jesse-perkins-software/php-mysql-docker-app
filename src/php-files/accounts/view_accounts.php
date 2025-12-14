@@ -131,83 +131,33 @@
                     </div>
                 </div>
             </a>
-
-            <a href="#" class="accounts-a-tag" onclick="viewPage('Accounts-Savings')">
-                <div class="account rounded shadow-sm border" id="account-1">
-                    <div class="account-heading">
-                        <div class="account-details">
-                            <h4 class="account-type">Savings</h4>
-                            <p class="account-number">2345 6789 0123 4567</p>
-                        </div>
-                        <h4 class="account-amount">$30,000</h4>
-                    </div>
-                    <div class="account-transactions">
-                        <div class="transaction border-bottom border-top">
-                            <div class="transaction-details">
-                                <p class="transaction-place">London Drugs</p>
-                                <p class="transaction-date">Sep 22</p>
-                            </div>
-                            <p class="transaction-amount">$800</p>
-                        </div>
-                        <div class="transaction border-bottom">
-                            <div class="transaction-details">
-                                <p class="transaction-place">Wendy's</p>
-                                <p class="transaction-date">Sep 20</p>
-                            </div>
-                            <p class="transaction-amount">-$20</p>
-                        </div>
-                        <div class="transaction border-bottom">
-                            <div class="transaction-details">
-                                <p class="transaction-place">E-Transfer</p>
-                                <p class="transaction-date">Sep 19</p>
-                            </div>
-                            <p class="transaction-amount">-$190</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="accounts-a-tag" onclick="viewPage('Accounts-Credit-Card')">
-                <div class="account rounded shadow-sm border" id="account-1">
-                    <div class="account-heading">
-                        <div class="account-details">
-                            <h4 class="account-type">Credit Card</h4>
-                            <p class="account-number">5678 9012 3456 7890</p>
-                        </div>
-                        <h4 class="account-amount">-$2,000</h4>
-                    </div>
-                    <div class="account-transactions">
-                        <div class="transaction border-bottom border-top">
-                            <div class="transaction-details">
-                                <p class="transaction-place">BC Hydro</p>
-                                <p class="transaction-date">Sep 19</p>
-                            </div>
-                            <p class="transaction-amount">-$80</p>
-                        </div>
-                        <div class="transaction border-bottom">
-                            <div class="transaction-details">
-                                <p class="transaction-place">Shaw</p>
-                                <p class="transaction-date">Sep 18</p>
-                            </div>
-                            <p class="transaction-amount">-$100</p>
-                        </div>
-                        <div class="transaction border-bottom">
-                            <div class="transaction-details">
-                                <p class="transaction-place">Car Insurance</p>
-                                <p class="transaction-date">Sep 17</p>
-                            </div>
-                            <p class="transaction-amount">-$1,800</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
         </section>
     </div>
 </body>
 <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchAccountDetails();
+    });
+
+    function fetchAccountDetails() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                console.log(data);
+            }
+        };
+        let query = "page=Accounts&command=FetchAccountDetails";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
     function viewPage(page) {
         document.getElementById("command-value").value = page;
         document.getElementById("nav-form").submit();
     }
+
+
 </script>
 </html>

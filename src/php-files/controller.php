@@ -423,6 +423,20 @@ if ($page == "SignInPage") {
             }
         }
     }
+} else if ($page == "Accounts") {
+    session_start();
+    if (!isset($_SESSION["signedin"])) {
+        include("view_signin.php");
+    } else {
+        $command = $_POST["command"];
+        switch ($command) {
+            case "FetchAccountDetails": {
+                $accountDetails = getAccountDetails($_SESSION["userID"]);
+                echo json_encode($accountDetails);
+                exit();
+            }
+        }
+    }
 }
 
 ?>

@@ -283,4 +283,29 @@ function editTransaction($transactionID, $date, $description, $amount, $account,
     return mysqli_query($conn, $sql);
 }
 
+// ---------- Here is the start of the functions for the Accounts page ----------
+function getAccountDetails($userID) {
+    global $conn;
+    $sql = "SELECT
+                accounts.accountName,
+                SUM(transactions.amount) AS totalAmount,
+                transactions.date,
+                transactions.description,
+                transactions.amount AS individualAmount
+            FROM
+                transactions
+            INNER JOIN
+                accounts ON transactions.userID = accounts.userID
+            WHERE
+                transactions.userID = '$userID'
+                AND transactions.transactionID = 1
+            GROUP BY accounts.accountName, transactions.date, transactions.description, transactions.amount";
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
 ?>
