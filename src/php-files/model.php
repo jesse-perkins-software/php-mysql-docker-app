@@ -287,19 +287,30 @@ function editTransaction($transactionID, $date, $description, $amount, $account,
 function getAccountDetails($userID) {
     global $conn;
     $sql = "SELECT
-                accounts.accountName,
-                SUM(transactions.amount) AS totalAmount,
-                transactions.date,
-                transactions.description,
-                transactions.amount AS individualAmount
-            FROM
-                transactions
-            INNER JOIN
-                accounts ON transactions.userID = accounts.userID
-            WHERE
-                transactions.userID = '$userID'
-                AND transactions.transactionID = 1
-            GROUP BY accounts.accountName, transactions.date, transactions.description, transactions.amount";
+                accountName,
+                date,
+                description,
+                amount
+            FROM (
+                SELECT
+                    accounts.accountName,
+                    transactions.date,
+                    transactions.description,
+                    transactions.amount,
+                    ROW_NUMBER() OVER (
+                        PARTITION BY accounts.accountName 
+                        ORDER BY 
+                            transactions.date DESC, 
+                            transactions.accountID DESC
+                    ) as row_num
+                FROM
+                    transactions
+                INNER JOIN 
+                    accounts ON transactions.accountID = accounts.accountID
+                WHERE
+                    transactions.userID = '$userID'
+            ) AS ranked
+            WHERE row_num <= 3";
     $result = mysqli_query($conn, $sql);
     $rows = [];
     while ($row = mysqli_fetch_assoc($result)) {
