@@ -135,6 +135,11 @@
     </div>
 </body>
 <script defer>
+    function viewPage(page) {
+        document.getElementById("command-value").value = page;
+        document.getElementById("nav-form").submit();
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         fetchAccountDetails();
     });
@@ -144,7 +149,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
-                console.log(data);
+                generateAccountHeaders(data);
             }
         };
         let query = "page=Accounts&command=FetchAccountDetails";
@@ -153,9 +158,19 @@
         xhttp.send(query);
     }
 
-    function viewPage(page) {
-        document.getElementById("command-value").value = page;
-        document.getElementById("nav-form").submit();
+    function generateAccountHeaders(data) {
+        console.log(data);
+
+        let accountsContainer = document.getElementById('accounts-container');
+
+        data["accountTotals"].forEach(account => {
+            let a_tag_wrapper = document.createElement('a');
+            a_tag_wrapper.href = '#';
+            a_tag_wrapper.class = 'accounts-a-tag';
+            // DEAL WITH ONCLICK PAGE ROUTING LATER!!!
+
+
+        });
     }
 
 

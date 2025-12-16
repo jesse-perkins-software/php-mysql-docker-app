@@ -286,7 +286,7 @@ function editTransaction($transactionID, $date, $description, $amount, $account,
 // ---------- Here is the start of the functions for the Accounts page ----------
 function getAccountDetails($userID) {
     global $conn;
-    $sql = "SELECT
+    $sql1 = "SELECT
                 accountName,
                 date,
                 description,
@@ -311,12 +311,32 @@ function getAccountDetails($userID) {
                     transactions.userID = '$userID'
             ) AS ranked
             WHERE row_num <= 3";
-    $result = mysqli_query($conn, $sql);
-    $rows = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $rows[] = $row;
+    $result1 = mysqli_query($conn, $sql1);
+    $rows1 = [];
+    while ($row = mysqli_fetch_assoc($result1)) {
+        $rows1[] = $row;
     }
-    return $rows;
-}
 
+    $sql2 = "SELECT
+                accounts.accountName,
+                SUM(transactions.amount) AS total
+            FROM
+                transactions
+            INNER JOIN
+                accounts ON transactions.accountID = accounts.accountID
+            WHERE
+                transactions.userID = '$userID'
+            GROUP BY
+                accounts.accountName";
+    $result2 = mysqli_query($conn, $sql2);
+    $rows2 = [];
+    while ($row = mysqli_fetch_assoc($result2)) {
+        $rows2[] = $row;
+    }
+
+    return [
+        'accountDetails' => $rows1,
+        'accountTotals' => $rows2,
+    ];
+}
 ?>
