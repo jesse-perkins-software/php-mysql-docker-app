@@ -95,42 +95,14 @@
 <body>
     <?php require 'navigation.php'; ?>
 
+    <form action="controller.php" method="post" id="account-form">
+        <input type="hidden" name="page" value="Accounts">
+        <input type="hidden" name="command" value="" id="account-value"> <!-- Value changes depending on the nav button clicked -->
+    </form>
+
     <div id="content-container" class="">
         <section class="" id="accounts-container">
-            <a href="#" class="accounts-a-tag" onclick="viewPage('Accounts-Chequing')">
-                <div class="account rounded shadow-sm border" id="account-1">
-                    <div class="account-heading">
-                        <div class="account-details">
-                            <h4 class="account-type">Chequing</h4>
-                            <p class="account-number">1234 5678 9012 3456</p>
-                        </div>
-                        <h4 class="account-amount">$14,000</h4>
-                    </div>
-                    <div class="account-transactions">
-                        <div class="transaction border-bottom border-top">
-                            <div class="transaction-details">
-                                <p class="transaction-place">Earls</p>
-                                <p class="transaction-date">Sep 22</p>
-                            </div>
-                            <p class="transaction-amount">-$150</p>
-                        </div>
-                        <div class="transaction border-bottom">
-                            <div class="transaction-details">
-                                <p class="transaction-place">Save On</p>
-                                <p class="transaction-date">Sep 19</p>
-                            </div>
-                            <p class="transaction-amount">-$200</p>
-                        </div>
-                        <div class="transaction border-bottom">
-                            <div class="transaction-details">
-                                <p class="transaction-place">Dairy Queen</p>
-                                <p class="transaction-date">Sep 18</p>
-                            </div>
-                            <p class="transaction-amount">-$15</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
+
         </section>
     </div>
 </body>
@@ -138,6 +110,11 @@
     function viewPage(page) {
         document.getElementById("command-value").value = page;
         document.getElementById("nav-form").submit();
+    }
+
+    function viewAccount(accountName) {
+        document.getElementById("account-value").value = accountName;
+        document.getElementById("account-form").submit();
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -167,14 +144,14 @@
             let account_transactions = data['accountDetails'].filter(transactions => transactions['accountName'] === account['accountName']);
 
             accounts_HTML += `
-                <a href="#" class="accounts-a-tag" onclick="viewPage('${account['accountName']}')">
+                <a href="#" class="accounts-a-tag" onclick="viewAccount('${account['accountName']}')">
                     <div class="account rounded shadow-sm border" id="account-1">
                         <div class="account-heading">
                             <div class="account-details">
                                 <h4 class="account-type">${account['accountName']}</h4>
                                 <p class="account-number"></p>
                             </div>
-                            <h4 class="account-amount">${account['total']}</h4>
+                            <h4 class="account-amount">${Number(account['total']).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h4>
                         </div>
             `;
 
@@ -186,7 +163,7 @@
                                 <p class="transaction-place">${transaction['description']}</p>
                                 <p class="transaction-date">${transaction['date']}</p>
                             </div>
-                            <p class="transaction-amount">${transaction['amount']}</p>
+                            <p class="transaction-amount">${Number(transaction['amount']).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                         </div>
                 `;
             });

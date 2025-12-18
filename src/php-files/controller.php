@@ -429,12 +429,15 @@ if ($page == "SignInPage") {
         include("view_signin.php");
     } else {
         $command = $_POST["command"];
-        switch ($command) {
-            case "FetchAccountDetails": {
-                $accountDetails = getAccountDetails($_SESSION["userID"]);
-                echo json_encode($accountDetails);
-                exit();
-            }
+        $user_accounts = getUserAccounts($_SESSION["userID"]);
+
+        if ($command === "FetchAccountDetails") {
+            $accountDetails = getAccountDetails($_SESSION["userID"]);
+            echo json_encode($accountDetails);
+            exit();
+        } else if (in_array($command, $user_accounts)) {
+            $SESSION["selectedAccount"] = $command;
+            include("accounts/view_selected_account.php");
         }
     }
 }

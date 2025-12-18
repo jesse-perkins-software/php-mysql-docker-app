@@ -339,4 +339,19 @@ function getAccountDetails($userID) {
         'accountTotals' => $rows2,
     ];
 }
+
+function getUserAccounts($userID) {
+    global $conn;
+    $sql = "SELECT 
+                accountName
+             FROM 
+                accounts
+             WHERE
+                userID = '$userID'";
+    $result1 = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result1)) {
+        $rows[] = $row['accountName'];
+    }
+    return $rows;
+}
 ?>

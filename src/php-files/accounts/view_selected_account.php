@@ -173,4 +173,11 @@
         document.getElementById("nav-form").submit();
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('account-name').innerHTML = `<?php echo $command; ?>`;
+    });
+
+
+
+
 </script>
