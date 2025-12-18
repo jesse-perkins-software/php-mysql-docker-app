@@ -181,7 +181,6 @@
                     <div class="col">Category</div>
                     <div class="col-3">Notes</div>
                 </div>
-
             </div>
         </div>
     </div>

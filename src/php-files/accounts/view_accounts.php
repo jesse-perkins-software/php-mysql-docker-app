@@ -79,7 +79,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            width: 10em;
+            width: 15em;
         }
 
         .info-box-pos {
@@ -161,16 +161,45 @@
     function generateAccountHeaders(data) {
         console.log(data);
 
-        let accountsContainer = document.getElementById('accounts-container');
+        let accounts_HTML = "";
 
-        data["accountTotals"].forEach(account => {
-            let a_tag_wrapper = document.createElement('a');
-            a_tag_wrapper.href = '#';
-            a_tag_wrapper.class = 'accounts-a-tag';
-            // DEAL WITH ONCLICK PAGE ROUTING LATER!!!
+        data['accountTotals'].forEach(account => {
+            let account_transactions = data['accountDetails'].filter(transactions => transactions['accountName'] === account['accountName']);
 
+            accounts_HTML += `
+                <a href="#" class="accounts-a-tag" onclick="viewPage('${account['accountName']}')">
+                    <div class="account rounded shadow-sm border" id="account-1">
+                        <div class="account-heading">
+                            <div class="account-details">
+                                <h4 class="account-type">${account['accountName']}</h4>
+                                <p class="account-number"></p>
+                            </div>
+                            <h4 class="account-amount">${account['total']}</h4>
+                        </div>
+            `;
 
+            accounts_HTML += `<div class="account-transactions">`;
+            account_transactions.forEach(transaction => {
+                accounts_HTML += `
+                    <div class="transaction border-bottom border-top">
+                            <div class="transaction-details">
+                                <p class="transaction-place">${transaction['description']}</p>
+                                <p class="transaction-date">${transaction['date']}</p>
+                            </div>
+                            <p class="transaction-amount">${transaction['amount']}</p>
+                        </div>
+                `;
+            });
+
+            accounts_HTML += `
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `;
         });
+
+        document.getElementById('accounts-container').innerHTML = accounts_HTML;
     }
 
 

@@ -77,7 +77,7 @@ if ($page == "SignInPage") {
                 exit();
             }
             case "Accounts-Chequing": {
-                include("accounts/view_accounts_chequing.php");
+                include("accounts/view_selected_account.php");
                 exit();
             }
             case "Accounts-Savings": {
