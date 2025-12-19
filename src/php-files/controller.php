@@ -431,13 +431,24 @@ if ($page == "SignInPage") {
         $command = $_POST["command"];
         $user_accounts = getUserAccounts($_SESSION["userID"]);
 
-        if ($command === "FetchAccountDetails") {
-            $accountDetails = getAccountDetails($_SESSION["userID"]);
-            echo json_encode($accountDetails);
-            exit();
-        } else if (in_array($command, $user_accounts)) {
-            $SESSION["selectedAccount"] = $command;
-            include("accounts/view_selected_account.php");
+        switch ($command) {
+            case "FetchAccountDetails": {
+                $accountDetails = getAccountDetails($_SESSION["userID"]);
+                echo json_encode($accountDetails);
+                exit();
+            }
+            case "FetchAccountTransactions": {
+                $accountTransactions = getAccountTransactions($_SESSION["userID"], $_POST["account"]);
+                echo $accountTransactions;
+                exit();
+            }
+            default: {
+                if (in_array($command, $user_accounts)) {
+                    $_SESSION["selectedAccount"] = $command;
+                    include("accounts/view_selected_account.php");
+                }
+                exit();
+            }
         }
     }
 }

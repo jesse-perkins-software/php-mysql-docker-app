@@ -50,6 +50,16 @@
             justify-content: start;
         }
 
+        #account-transactions {
+            padding-bottom: 2em;
+        }
+
+        #account-type {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
         #account-name {
             display: flex;
             flex-direction: row;
@@ -118,9 +128,30 @@
             padding-right: 1em;
         }
 
+        .transaction-info {
+            margin-bottom: 1em;
+        }
 
+        .input-group-text {
+            width: 22.5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    </style>
+        .text-green {
+            color: var(--green_text);
+        }
+
+        .text-red {
+            color: var(--red_text);
+        }
+
+        .modal-footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }    </style>
 </head>
 <body>
     <?php require 'navigation.php'; ?>
@@ -133,6 +164,10 @@
             </div>
             <h4 id="account-amount">$14,000</h4>
         </div>
+
+        <?php require 'new_transaction_modal.php'; ?>
+
+        <?php require 'edit_transaction_modal.php'; ?>
 
         <div class="" id="account-transactions">
             <div class="container" id="transactions-container">
@@ -174,10 +209,121 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('account-name').innerHTML = `<?php echo $command; ?>`;
+        let account = `<?php echo $command; ?>`;
+        document.getElementById('account-name').innerHTML = account;
+        loadTransactions(account);
     });
 
+    function makeTransactions(data) {
+        let transactionData = data;
 
+        let total_amount = 0;
+        for (let i = 0; i < transactionData.length; i++) {
+            let div = document.createElement('div');
+            div.className = "row border-bottom individual-transactions";
+            div.id = transactionData[i]['transactionID'];
 
+            let dateColumn = document.createElement('div');
+            dateColumn.className = "col";
+            dateColumn.textContent = transactionData[i]['date'];
+            dateColumn.value = transactionData[i]['date'];
+
+            let descriptionColumn = document.createElement('div');
+            descriptionColumn.className = "col-3";
+            descriptionColumn.textContent = transactionData[i]['description'];
+            descriptionColumn.value = transactionData[i]['description'];
+
+            let amountColumn = document.createElement('div');
+            let amount = Number(transactionData[i]['amount']);
+            if (amount < 0) {
+                amountColumn.className = "col individual-transaction-amount text-red";
+                amountColumn.textContent = "($" + Math.abs(amount).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }) + ")";
+                amountColumn.value = transactionData[i]['amount'];
+            } else {
+                amountColumn.className = "col individual-transaction-amount text-green";
+                amountColumn.textContent = "$" + amount.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+                amountColumn.value = transactionData[i]['amount'];
+            }
+            total_amount += amount;
+
+            let accountColumn = document.createElement('div');
+            accountColumn.className = "col-2";
+            accountColumn.textContent = transactionData[i]['accountName'];
+            accountColumn.value = transactionData[i]['accountName'];
+
+            let categoryColumn = document.createElement('div');
+            categoryColumn.className = "col";
+            categoryColumn.textContent = transactionData[i]['groupName'];
+            categoryColumn.value = transactionData[i]['groupName'];
+
+            let notesColumn = document.createElement('div');
+            notesColumn.className = "col-3";
+            notesColumn.textContent = transactionData[i]['notes'];
+            notesColumn.value = transactionData[i]['notes'];
+
+            div.appendChild(dateColumn);
+            div.appendChild(descriptionColumn)
+            div.appendChild(amountColumn);
+            div.appendChild(accountColumn);
+            div.appendChild(categoryColumn);
+            div.appendChild(notesColumn);
+
+            div.addEventListener('click', function() {
+                let transaction = transactionData[i];
+
+                document.getElementById('transaction-id').value = div.id;
+                document.getElementById('date-edit').value = transaction['date'];
+                document.getElementById('category-edit').value = transaction['groupName'];
+                document.getElementById('account-edit').value = transaction['accountName'];
+                document.getElementById('amount-edit').value = transaction['amount'];
+                document.getElementById('notes-edit').value = transaction['notes'];
+
+                fetchDescriptionForEdit(transaction['groupName'], transaction['description']);
+
+                let modal = new bootstrap.Modal(document.getElementById('editTransactionModel'));
+                modal.show();
+            });
+            document.getElementById('transactions-container').appendChild((div));
+        }
+        let total = document.getElementById('account-amount');
+        if (total_amount < 0) {
+            total.className = "text-red";
+            total.textContent = "($" + Math.abs(total_amount).toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + ")";
+        } else if (total_amount > 0) {
+            total.className = "text-green";
+            total.textContent = "$" + total_amount.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        } else {
+            total.textContent = "$" + total_amount.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+    }
+
+    function loadTransactions(account) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                makeTransactions(data);
+            }
+        };
+        let query = "page=Accounts&command=FetchAccountTransactions&account=" + account;
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
 
 </script>

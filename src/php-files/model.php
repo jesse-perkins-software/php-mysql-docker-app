@@ -354,4 +354,34 @@ function getUserAccounts($userID) {
     }
     return $rows;
 }
+
+function getAccountTransactions($userID, $accountName) {
+    global $conn;
+    $sql = "SELECT 
+                transactions.transactionID,
+                transactions.date, 
+                transactions.description, 
+                transactions.amount, 
+                accounts.accountName, 
+                categoryGroups.groupName, 
+                transactions.notes
+            FROM 
+                transactions
+            INNER JOIN
+                accounts ON transactions.accountID = accounts.accountID
+            INNER JOIN
+                categories ON transactions.categoryID = categories.categoryID
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            WHERE
+                transactions.userID = '$userID'
+                AND accounts.accountName = '$accountName'
+            ORDER BY transactions.date DESC";
+    $result = mysqli_query($conn, $sql);
+    $transactions = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $transactions[] = $row;
+    }
+    return json_encode($transactions);
+}
 ?>
