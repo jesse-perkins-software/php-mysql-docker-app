@@ -369,12 +369,25 @@ if ($page == "SignInPage") {
                     $_SESSION['account'] = $_POST['account'];
                     $_SESSION['category'] = $_POST['category'];
                     $_SESSION['notes'] = $_POST['notes'];
-                    if ($_POST['subpage'] === "Expenses") {
-                        include("transactions/view_transactions_expenses.php");
-                    } else if ($_POST['subpage'] === "Income") {
-                        include("transactions/view_transactions_income.php");
-                    } else if ($_POST['subpage'] === "Transfers") {
-                        include("transactions/view_transactions_transfers.php");
+                    switch ($_POST['subpage']) {
+                        case "Expenses": {
+                            include("transactions/view_transactions_expenses.php");
+                            exit();
+                        }
+                        case "Income": {
+                            include("transactions/view_transactions_income.php");
+                            exit();
+                        }
+                        case "Transfers": {
+                            include("transactions/view_transactions_transfers.php");
+                            exit();
+                        }
+                        default: {
+                            if (in_array($_POST['subpage'], getUserAccounts($_SESSION["userID"]))) {
+                                include("accounts/view_selected_account.php");
+                                exit();
+                            }
+                        }
                     }
                     exit();
                 }
@@ -382,22 +395,48 @@ if ($page == "SignInPage") {
             case "EditTransaction": {
                 if ($_POST['action'] == 'delete') {
                     deleteTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
-                    if ($_POST['subpage'] === "Expenses") {
-                        include("transactions/view_transactions_expenses.php");
-                    } else if ($_POST['subpage'] === "Income") {
-                        include("transactions/view_transactions_income.php");
-                    } else if ($_POST['subpage'] === "Transfers") {
-                        include("transactions/view_transactions_transfers.php");
+                    switch ($_POST['subpage']) {
+                        case "Expenses": {
+                            include("transactions/view_transactions_expenses.php");
+                            exit();
+                        }
+                        case "Income": {
+                            include("transactions/view_transactions_income.php");
+                            exit();
+                        }
+                        case "Transfers": {
+                            include("transactions/view_transactions_transfers.php");
+                            exit();
+                        }
+                        default: {
+                            if (in_array($_POST['subpage'], getUserAccounts($_SESSION["userID"]))) {
+                                include("accounts/view_selected_account.php");
+                                exit();
+                            }
+                        }
                     }
                     exit();
                 } else if ($_POST['action'] == 'save') {
                     editTransaction($_POST['transaction-id'], $_POST['date'], $_POST['description'], $_POST['amount'], $_POST['account'], $_POST['category'], $_POST['notes']);
-                    if ($_POST['subpage'] === "Expenses") {
-                        include("transactions/view_transactions_expenses.php");
-                    } else if ($_POST['subpage'] === "Income") {
-                        include("transactions/view_transactions_income.php");
-                    } else if ($_POST['subpage'] === "Transfers") {
-                        include("transactions/view_transactions_transfers.php");
+                    switch ($_POST['subpage']) {
+                        case "Expenses": {
+                            include("transactions/view_transactions_expenses.php");
+                            exit();
+                        }
+                        case "Income": {
+                            include("transactions/view_transactions_income.php");
+                            exit();
+                        }
+                        case "Transfers": {
+                            include("transactions/view_transactions_transfers.php");
+                            exit();
+                        }
+                        default: {
+                            if (in_array($_POST['subpage'], getUserAccounts($_SESSION["userID"]))) {
+                                include("accounts/view_selected_account.php");
+                                exit();
+                            }
+                        }
                     }
                     exit();
                 }

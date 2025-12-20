@@ -161,6 +161,7 @@
         <div class="" id="account-header">
             <div id="account-type">
                 <h4 id="account-name">Chequing <span>(</span><span id="account-number">3456</span><span>)</span></h4>
+                <button class="btn btn-secondary" id="new-transaction-button" data-bs-toggle="modal" data-bs-target="#newTransactionModel">+ New Transaction</button>
             </div>
             <h4 id="account-amount">$14,000</h4>
         </div>
@@ -209,9 +210,12 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        let account = `<?php echo $command; ?>`;
+        let account = `<?php echo $_SESSION["selectedAccount"]; ?>`;
         document.getElementById('account-name').innerHTML = account;
         loadTransactions(account);
+        fetchCategorySelectionOptions();
+        fetchAccounts();
+        document.getElementById('subpage').value = account;
     });
 
     function makeTransactions(data) {
@@ -321,6 +325,130 @@
             }
         };
         let query = "page=Accounts&command=FetchAccountTransactions&account=" + account;
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function submitAction(action) {
+        document.getElementById('action-input').value = action;
+        document.getElementById('editTransactionForm').submit();
+    }
+
+    function fetchDescriptionForEdit(selectedCategory, descriptionValue) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                let descriptionOptions = document.getElementById('description-edit');
+                descriptionOptions.replaceChildren();
+
+                let baseOption = document.createElement('option');
+                baseOption.textContent = "Select...";
+                baseOption.value = "";
+                descriptionOptions.appendChild(baseOption);
+
+                assignDescriptions(data);
+
+                document.getElementById('description-edit').value = descriptionValue;
+            }
+        };
+
+        let query = "page=Transactions&command=FetchDescriptionSelectionOptions&selectedCategory=" + selectedCategory;
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function addAccountOptions(data) {
+        let accountOptions = document.querySelectorAll(".select-account");
+
+        accountOptions.forEach(field => {
+            for (let i = 0; i < data.length; i++) {
+                let accountOption = document.createElement('option');
+                accountOption.textContent = data[i];
+                accountOption.value = data[i];
+                field.appendChild(accountOption);
+            }
+        });
+    }
+
+    function fetchAccounts() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                addAccountOptions(data);
+            }
+        };
+        let query = "page=Transactions&command=FetchAccountOptions";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function assignDescriptions(data) {
+        let descriptionOptions = document.querySelectorAll('.select-description');
+
+        descriptionOptions.forEach(field => {
+            for (let i = 0; i < data.length; i++) {
+                let descriptionOption = document.createElement('option');
+                descriptionOption.textContent = data[i];
+                descriptionOption.value = data[i];
+                field.appendChild(descriptionOption);
+            }
+        });
+    }
+
+    function fetchDescriptionSelectionOptions(selectedCategory) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                assignDescriptions(data);
+            }
+        };
+
+        let query = "page=Transactions&command=FetchDescriptionSelectionOptions&selectedCategory=" + selectedCategory;
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function assignCategories(data) {
+        let categoryOptions = document.querySelectorAll('.select-category');
+
+        categoryOptions.forEach(field => {
+            for (let i = 0; i < data.length; i++) {
+                let categoryOption = document.createElement('option');
+                categoryOption.textContent = data[i];
+                categoryOption.value = data[i];
+                field.appendChild(categoryOption);
+            }
+
+            field.addEventListener('change', (event) => {
+                const selectedCategory = event.target.value;
+                let descriptionOptions;
+
+                descriptionOptions = document.querySelectorAll('.select-description');
+                descriptionOptions.forEach(i => {
+                    i.replaceChildren(i.options[0]);
+                });
+
+                fetchDescriptionSelectionOptions(selectedCategory);
+            });
+        });
+    }
+
+    function fetchCategorySelectionOptions() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                assignCategories(data);
+            }
+        };
+        let query = "page=Transactions&command=FetchCategorySelectionOptions";
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
