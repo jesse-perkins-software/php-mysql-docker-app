@@ -355,9 +355,9 @@ if ($page == "SignInPage") {
         switch ($command) {
             case "NewTransaction": {
                 if (($_SESSION['date'] == $_POST['date']) && ($_SESSION['description'] == $_POST['description']) && ($_SESSION['amount'] == $_POST['amount']) && ($_SESSION['account'] == $_POST['account']) && ($_SESSION['category'] == $_POST['category']) && ($_SESSION['notes'] == $_POST['notes'])) {
-                    if ($_POST['subpage'] === "Expenses") {
+                    if ($_POST['subpage-new'] === "Expenses") {
                         include("transactions/view_transactions_expenses.php");
-                    } else if ($_POST['subpage'] === "Income") {
+                    } else if ($_POST['subpage-new'] === "Income") {
                         include("transactions/view_transactions_income.php");
                     }
                     exit();
@@ -369,7 +369,7 @@ if ($page == "SignInPage") {
                     $_SESSION['account'] = $_POST['account'];
                     $_SESSION['category'] = $_POST['category'];
                     $_SESSION['notes'] = $_POST['notes'];
-                    switch ($_POST['subpage']) {
+                    switch ($_POST['subpage-new']) {
                         case "Expenses": {
                             include("transactions/view_transactions_expenses.php");
                             exit();
@@ -383,7 +383,7 @@ if ($page == "SignInPage") {
                             exit();
                         }
                         default: {
-                            if (in_array($_POST['subpage'], getUserAccounts($_SESSION["userID"]))) {
+                            if (in_array($_POST['subpage-new'], getUserAccounts($_SESSION["userID"]))) {
                                 include("accounts/view_selected_account.php");
                                 exit();
                             }
@@ -395,7 +395,7 @@ if ($page == "SignInPage") {
             case "EditTransaction": {
                 if ($_POST['action'] == 'delete') {
                     deleteTransaction($_POST['date'], $_POST['description'], $_POST["amount"], $_POST["account"], $_POST["category"], $_POST['notes']);
-                    switch ($_POST['subpage']) {
+                    switch ($_POST['subpage-edit']) {
                         case "Expenses": {
                             include("transactions/view_transactions_expenses.php");
                             exit();
@@ -409,7 +409,7 @@ if ($page == "SignInPage") {
                             exit();
                         }
                         default: {
-                            if (in_array($_POST['subpage'], getUserAccounts($_SESSION["userID"]))) {
+                            if (in_array($_POST['subpage-edit'], getUserAccounts($_SESSION["userID"]))) {
                                 include("accounts/view_selected_account.php");
                                 exit();
                             }
@@ -418,7 +418,7 @@ if ($page == "SignInPage") {
                     exit();
                 } else if ($_POST['action'] == 'save') {
                     editTransaction($_POST['transaction-id'], $_POST['date'], $_POST['description'], $_POST['amount'], $_POST['account'], $_POST['category'], $_POST['notes']);
-                    switch ($_POST['subpage']) {
+                    switch ($_POST['subpage-edit']) {
                         case "Expenses": {
                             include("transactions/view_transactions_expenses.php");
                             exit();
@@ -432,7 +432,7 @@ if ($page == "SignInPage") {
                             exit();
                         }
                         default: {
-                            if (in_array($_POST['subpage'], getUserAccounts($_SESSION["userID"]))) {
+                            if (in_array($_POST['subpage-edit'], getUserAccounts($_SESSION["userID"]))) {
                                 include("accounts/view_selected_account.php");
                                 exit();
                             }
