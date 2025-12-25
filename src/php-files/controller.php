@@ -132,122 +132,13 @@ if ($page == "SignInPage") {
                 include("settings/view_settings_about_and_help.php");
                 exit();
             }
-            case "AddTransaction": {
-                addTransaction($_SESSION["username"], $_POST["amount"], $_POST["category"], $_POST["account"], $_POST["date"]);
-                include("view_mainpage.php");
-                exit();
-            }
-            case "RefreshTable": {
-                if (isset($_POST["DeleteId"])) {
-                    //deleteTransaction($_SESSION["username"], $_POST["DeleteId"]);
-                }
-                $transactions = getRecentTransactions($_SESSION["username"]);
-                echo $transactions;
-                exit();
-            }
-            case "UpdateTotalBalance": {
-                $income = getIncome($_SESSION["username"]);
-                $spending = getSpending($_SESSION["username"]);
-                $total = $income - $spending;
-                echo $total;
-                exit();
-            }
-            case "UpdateTotalIncome": {
-                $income = getIncome($_SESSION["username"]);
-                if (empty($income)) {
-                    $income = 0;
-                }
-                echo $income;
-                exit();
-            }
-            case "UpdateTotalSpending": {
-                $spending = getSpending($_SESSION["username"]);
-                if (empty($spending)) {
-                    $spending = 0;
-                }
-                echo $spending;
-                exit();
-            }
-            case "UpdateMonthlyBalance": {
-                $income = getMonthIncome($_SESSION["username"]);
-                $spending = getMonthSpending($_SESSION["username"]);
-                $total = $income - $spending;
-                echo $total;
-                exit();
-            }
-            case "UpdateMonthlyIncome": {
-                $income = getMonthIncome($_SESSION["username"]);
-                if (empty($income)) {
-                    $income = 0;
-                }
-                echo $income;
-                exit();
-            }
-            case "UpdateMonthlySpending": {
-                $spending = getMonthSpending($_SESSION["username"]);
-                if (empty($spending)) {
-                    $spending = 0;
-                }
-                echo $spending;
-                exit();
-            }
-            case "UpdateAvgSavingsRate": {
-                $income = getIncome($_SESSION["username"]);
-                if (empty($income)) {
-                    $income = 0;
-                }
-                $needs = getNeeds($_SESSION["username"]);
-                if (empty($needs)) {
-                    $needs = 0;
-                }
-                $wants = getWants($_SESSION["username"]);
-                if (empty($wants)) {
-                    $wants = 0;
-                }
-                $result = (($income - ($needs + $wants)) / $income) * 100;
-                
+            case "LoadCard1": {
+                $result = getCurrentBalance($_SESSION["userID"]);
                 echo $result;
                 exit();
             }
-            case "UpdateNeedsRate": {
-                $needs = getNeeds($_SESSION["username"]);
-                if (empty($needs)) {
-                    $needs = 0;
-                }
-                $income = getThisMonthIncome($_SESSION["username"]);
-                if (empty($income)) {
-                    $income = 0;
-                }
-                $result = ($needs / $income) * 100;
-
-                echo $result;
-                exit();
-            }
-            case "UpdateWantsRate": {
-                $wants = getWants($_SESSION["username"]);
-                if (empty($wants)) {
-                    $wants = 0;
-                }
-                $income = getThisMonthIncome($_SESSION["username"]);
-                if (empty($income)) {
-                    $income = 0;
-                }
-                $result = ($wants / $income) * 100;
-                
-                echo $result;
-                exit();
-            }
-            case "UpdateSavingsRate": {
-                $savings = getSavings($_SESSION["username"]);
-                if (empty($savings)) {
-                    $savings = 0;
-                }
-                $income = getThisMonthIncome($_SESSION["username"]);
-                if (empty($income)) {
-                    $income = 0;
-                }
-                $result = ($savings / $income) * 100;
-                
+            case "LoadCard2": {
+                $result = get7DayBalance($_SESSION["userID"], date("Y-m-d"));
                 echo $result;
                 exit();
             }

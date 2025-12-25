@@ -136,7 +136,7 @@
             <div class="row p-3 gap-4"> <!-- This is the div for an entire row on the dashboard page -->
 
                 <!-- Here is the overall structure for a small dashboard card. -->
-                <div class="col card-small p-2 rounded shadow-sm border">
+                <div class="col card-small p-2 rounded shadow-sm border" id="current-balance-card">
                     <div class="card-top-half"> <!-- Top half of the card -->
                         <div class="card-top-text"> <!-- Text for the top of the card -->
                             <span class="card-text">Current Balance</span> <!-- Top right corner -->
@@ -145,7 +145,7 @@
                         <div></div> <!-- Just in case I want to add anything else here later -->
                     </div>
 
-                    <h5>$29,437.29</h5> <!-- The primary statistic (dollar amount, percentage, etc.) -->
+                    <h5 id="current-balance-total"></h5> <!-- The primary statistic (dollar amount, percentage, etc.) -->
 
                     <div class="card-bottom-half"> <!-- Bottom half of the card -->
                         <div></div> <!-- Just in case I want to add anything else here later -->
@@ -156,7 +156,7 @@
                     </div>
                 </div>
 
-                <div class="col card-small p-2 rounded shadow-sm border">
+                <div class="col card-small p-2 rounded shadow-sm border" id="week-spending-card">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">7 Day Spending</span>
@@ -164,7 +164,7 @@
                         </div>
                         <div></div>
                     </div>
-                    <h5>$323.47</h5>
+                    <h5 id="week-spending-total"></h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
@@ -176,7 +176,7 @@
             </div>
 
             <div class="row p-3 gap-4">
-                <div class="col card-small p-2 rounded shadow-sm border">
+                <div class="col card-small p-2 rounded shadow-sm border" id="month-spending-card">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">30 Day Spending</span>
@@ -193,7 +193,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col card-small p-2 rounded shadow-sm border">
+                <div class="col card-small p-2 rounded shadow-sm border" id="most-recent-purchase-card">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Most Recent Purchase</span>
@@ -213,7 +213,7 @@
             </div>
 
             <div class="row p-3 gap-4">
-                <div class="col card-small p-2 rounded shadow-sm border">
+                <div class="col card-small p-2 rounded shadow-sm border" id="top-transaction-category-card">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Top Transaction Category</span>
@@ -230,7 +230,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col card-small p-2 rounded shadow-sm border">
+                <div class="col card-small p-2 rounded shadow-sm border" id="budget-spent-card">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Budget Spent</span>
@@ -252,7 +252,7 @@
             </div>
 
             <div class="row p-3 gap-4">
-                <div class="col card-small p-2 rounded shadow-sm border">
+                <div class="col card-small p-2 rounded shadow-sm border" id="biggest-purchase-card">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Biggest Purchase</span>
@@ -269,7 +269,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col card-small p-2 rounded shadow-sm border">
+                <div class="col card-small p-2 rounded shadow-sm border" id="payday-countdown-card">
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Payday Countdown</span>
@@ -403,6 +403,55 @@
     function viewPage(page) {
         document.getElementById("command-value").value = page;
         document.getElementById("nav-form").submit();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        load_Card1_Info();
+        load_Card2_Info();
+    });
+
+    function load_Card1_Info() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('current-balance-total').innerHTML = "$" + Number(this.responseText).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+        };
+        let query = "page=MainPage&command=LoadCard1";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function load_Card2_Info() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let weeklyTotal = document.getElementById('week-spending-total');
+                if (this.responseText === "") {
+                    weeklyTotal.innerHTML = "$0";
+                } else {
+                    if (this.responseText > 0) {
+                        weeklyTotal.innerHTML = "$" + Number(this.responseText).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    } else if (this.responseText < 0) {
+                        weeklyTotal.innerHTML = "$(" + Math.abs(Number(this.responseText)).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }) + ")";
+                    }
+                }
+            }
+        };
+        let query = "page=MainPage&command=LoadCard2";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
     }
 
 

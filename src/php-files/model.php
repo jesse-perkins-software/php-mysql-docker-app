@@ -384,4 +384,32 @@ function getAccountTransactions($userID, $accountName) {
     }
     return json_encode($transactions);
 }
+
+function getCurrentBalance($userID) {
+    global $conn;
+    $sql = "SELECT
+                SUM(amount) AS total
+            FROM
+                transactions
+            WHERE
+                userID = '$userID'
+            ";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['total'];
+}
+
+function get7DayBalance($userID, $date) {
+    global $conn;
+    $sql = "SELECT
+                SUM(amount) AS total
+            FROM
+                transactions
+            WHERE
+                userID = '$userID'
+                AND (date BETWEEN DATE_SUB('$date', INTERVAL 7 DAY) AND '$date')";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['total'];
+}
 ?>
