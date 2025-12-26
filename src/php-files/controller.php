@@ -142,6 +142,16 @@ if ($page == "SignInPage") {
                 echo $result;
                 exit();
             }
+            case "LoadCard3": {
+                $result = get30DayBalance($_SESSION["userID"], date("Y-m-d"));
+                echo $result;
+                exit();
+            }
+            case "LoadCard4": {
+                $result = getMostRecentPurchase($_SESSION["userID"]);
+                echo $result;
+                exit();
+            }
             case "SignOut": {
                 session_unset();
                 session_destroy();

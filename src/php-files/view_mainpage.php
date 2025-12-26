@@ -184,7 +184,7 @@
                         </div>
                         <div></div>
                     </div>
-                    <h5>$3,245.45</h5>
+                    <h5 id="month-spending-total"></h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
@@ -197,15 +197,15 @@
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Most Recent Purchase</span>
-                            <span class="card-text">Sep 30</span>
+                            <span class="card-text" id="most-recent-date"></span>
                         </div>
                         <div></div>
                     </div>
-                    <h5>$147.23</h5>
+                    <h5 id="most-recent-amount"></h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
-                            <span class="card-text">@ Earls</span>
+                            <span class="card-text" id="most-recent-description">@</span>
                             <span class="card-text"></span>
                         </div>
                     </div>
@@ -408,6 +408,12 @@
     document.addEventListener('DOMContentLoaded', function() {
         load_Card1_Info();
         load_Card2_Info();
+        load_Card3_Info();
+        load_Card4_Info();
+        //load_Card5_Info();
+        //load_Card6_Info();
+        //load_Card7_Info();
+        //load_Card8_Info();
     });
 
     function load_Card1_Info() {
@@ -449,6 +455,74 @@
             }
         };
         let query = "page=MainPage&command=LoadCard2";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function load_Card3_Info() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let monthlyTotal = document.getElementById('month-spending-total');
+                if (this.responseText === "") {
+                    monthlyTotal.innerHTML = "$0";
+                } else {
+                    if (this.responseText > 0) {
+                        monthlyTotal.innerHTML = "$" + Number(this.responseText).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    } else if (this.responseText < 0) {
+                        monthlyTotal.innerHTML = "$(" + Math.abs(Number(this.responseText)).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }) + ")";
+                    }
+                }
+            }
+        };
+        let query = "page=MainPage&command=LoadCard3";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function load_Card4_Info() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let recentPurchaseAmount = document.getElementById('most-recent-amount');
+                let recentPurchaseDate = document.getElementById('most-recent-date');
+                let recentPurchaseDescription = document.getElementById('most-recent-description');
+
+                let data = JSON.parse(this.responseText);
+                let transaction = data[0];
+                console.log(transaction);
+
+                if (Object.keys(data).length === 0) {
+
+                } else {
+                    if (transaction.amount > 0) {
+                        recentPurchaseAmount.innerHTML = "$" + Number(transaction.amount).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    } else if (transaction.amount < 0) {
+                        recentPurchaseAmount.innerHTML = "$(" + Math.abs(Number(transaction.amount)).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }) + ")";
+                    } else {
+                        recentPurchaseAmount.innerHTML = "$0";
+                    }
+                    const date = new Date(transaction['date']);
+                    recentPurchaseDate.innerHTML = date.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+                    recentPurchaseDescription.innerHTML = "@ " + transaction['description'];
+                }
+            }
+        };
+        let query = "page=MainPage&command=LoadCard4";
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);

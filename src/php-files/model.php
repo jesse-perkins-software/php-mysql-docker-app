@@ -412,4 +412,37 @@ function get7DayBalance($userID, $date) {
     $row = mysqli_fetch_assoc($result);
     return $row['total'];
 }
+
+function get30DayBalance($userID, $date) {
+    global $conn;
+    $sql = "SELECT
+                SUM(amount) AS total
+            FROM
+                transactions
+            WHERE
+                userID = '$userID'
+                AND (date BETWEEN DATE_SUB('$date', INTERVAL 30 DAY) AND '$date')";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['total'];
+}
+
+function getMostRecentPurchase($userID) {
+    global $conn;
+    $sql = "SELECT
+                amount, date, description
+            FROM
+                transactions
+            WHERE
+                userID = '$userID'
+            ORDER BY
+                date DESC
+            LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+    $transactions = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $transactions[] = $row;
+    }
+    return json_encode($transactions);
+}
 ?>
