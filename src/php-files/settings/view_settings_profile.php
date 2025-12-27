@@ -98,7 +98,7 @@
         .input-group-text {
             display: flex;
             justify-content: center;
-            min-width: 4.5em;
+            width: 6em;
         }
 
     </style>
@@ -114,21 +114,17 @@
                 <input type="hidden" name="command" value="GeneralInfo">
 
                 <div class="input-group">
-                    <span class="input-group-text" id="username-input">Username</span>
-                    <input type="text" class="form-control" placeholder="johndoe">
+                    <span class="input-group-text">Username</span>
+                    <input type="text" id="username-input" class="form-control" placeholder="johndoe" value="">
                 </div>
                 <div class="input-group">
-                    <span class="input-group-text" id="name-input">Name</span>
-                    <input type="text" class="form-control" placeholder="John">
-                    <input type="text" class="form-control" placeholder="Doe">
+                    <span class="input-group-text">Name</span>
+                    <input type="text" id="first-name-input" class="form-control" placeholder="John" value="">
+                    <input type="text" id="last-name-input" class="form-control" placeholder="Doe" value="">
                 </div>
                 <div class="input-group">
-                    <span class="input-group-text" id="email-input">Email</span>
-                    <input type="email" class="form-control" placeholder="johndoe@gmail.com">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-text" id="phone-input">Phone Number</span>
-                    <input type="tel" class="form-control" placeholder="###-###-####">
+                    <span class="input-group-text">Email</span>
+                    <input type="email" id="email-input" class="form-control" placeholder="johndoe@gmail.com" value="">
                 </div>
 
                 <input type="submit" class="btn btn-primary" value="Save">
@@ -136,14 +132,22 @@
         </div>
 
         <div class="rounded border shadow-sm" id="security-info">
-            <h4>Security</h4>
+            <h4>Change Password</h4>
             <form action="/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
                 <input type="hidden" name="page" value="Profile">
-                <input type="hidden" name="command" value="SecurityInfo">
+                <input type="hidden" name="command" value="ChangePassword">
 
                 <div class="input-group">
-                    <span class="input-group-text" id="password-input">New Password</span>
-                    <input type="password" class="form-control" placeholder="password">
+                    <span class="input-group-text" id="old-password-input">Old</span>
+                    <input type="password" class="form-control" placeholder="Old Password">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text" id="new-password-input">New</span>
+                    <input type="password" class="form-control" placeholder="New Password">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text" id="new-password-input">Confirm</span>
+                    <input type="password" class="form-control" placeholder="Confirm New Password">
                 </div>
 
                 <input type="submit" class="btn btn-primary" value="Save">
@@ -173,5 +177,39 @@
     function viewPage(page) {
         document.getElementById("command-value").value = page;
         document.getElementById("nav-form").submit();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchProfile();
+    });
+
+    function fetchProfile() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                fillProfile(data);
+            }
+        };
+        let query = "page=Profile&command=LoadProfileInfo";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function fillProfile(data) {
+        let profile = data[0];
+
+        let username = document.getElementById('username-input');
+        username.value = profile['username'];
+
+        let firstName = document.getElementById('first-name-input');
+        firstName.value = profile['firstName'];
+
+        let lastName = document.getElementById('last-name-input');
+        lastName.value = profile['lastName'];
+
+        let email = document.getElementById('email-input');
+        email.value = profile['email'];
     }
 </script>

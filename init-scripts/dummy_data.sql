@@ -1,8 +1,8 @@
 USE finance_app_db;
 
 -- Insert user
-INSERT INTO users (firstName, lastName, email, phoneNumber, username, password) VALUES
-    ('Jesse', 'Perkins', 'jperkins@gmail.com', '555-0123', 'jp', 'testuser');
+INSERT INTO users (firstName, lastName, email, username, password) VALUES
+    ('Jesse', 'Perkins', 'jperkins@gmail.com', 'jp', 'testuser');
 
 -- Get the inserted user ID for reference
 SET @userID = LAST_INSERT_ID();

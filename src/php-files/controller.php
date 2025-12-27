@@ -196,53 +196,8 @@ if ($page == "SignInPage") {
     } else {
         $command = $_POST["command"];
         switch($command) {
-            case "GeneralInfo": {
-                $data = json_decode(getUserDetails($_SESSION["username"]));
-                $new_obj = (array) $data[0];
-                if (userDetailsExists($_SESSION["username"])) {
-                    if ($_POST["profileC"] == "" && $_POST["profileP"] == "") {
-                        deleteDetails($_SESSION["username"]);
-                        include("settings/view_settings_profile.php");
-                        exit();
-                    } else if ($_POST["profileP"] != $new_obj["Phone"] || $_POST["profileC"] != $new_obj["Country"]) {
-                        changeDetails($_SESSION["username"], $_POST["profileC"], $_POST["profileP"]);
-                        include("settings/view_settings_profile.php");
-                        exit();
-                    }
-                } else {
-                    addDetails($_SESSION["username"], $_POST["profileC"], $_POST["profileP"]);
-                    include("settings/view_settings_profile.php");
-                    exit();
-                }
-            }
-            case "UpdateAccounts": {
-                if (!userFundsExists($_SESSION["username"])) {
-                    addFunds($_SESSION["username"], $_POST["saved"], $_POST["emergency"], $_POST["travel"]);
-                    include("settings/view_settings_profile.php");
-                    exit();
-                } else {
-                    updateFunds($_SESSION["username"], $_POST["saved"], $_POST["emergency"], $_POST["travel"]);
-                    include("settings/view_settings_profile.php");
-                    exit();
-                }
-            }
-            case "ClearAccount": {
-                clearUserTransactions($_SESSION["username"]);
-                clearUserDetails($_SESSION["username"]);
-                clearUserFunds($_SESSION["username"]);
-                include("view_mainpage.php");
-                exit();
-            }
-            case "DeleteAccount": {
-                clearUserTransactions($_SESSION["username"]);
-                clearUserDetails($_SESSION["username"]);
-                clearUserFunds($_SESSION["username"]);
-                clearUser($_SESSION["username"]);
-                
-                session_unset();
-                session_destroy();
-                setcookie("signedin", "", time() - 3600);
-                include("view_signin.php");
+            case "LoadProfileInfo": {
+                echo getProfileInfo($_SESSION["userID"]);
                 exit();
             }
         }

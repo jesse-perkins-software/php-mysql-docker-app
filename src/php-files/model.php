@@ -445,4 +445,24 @@ function getMostRecentPurchase($userID) {
     }
     return json_encode($transactions);
 }
+
+function getProfileInfo($userID) {
+    global $conn;
+    $sql = "SELECT
+                firstName,
+                lastName,
+                email,
+                username
+            FROM
+                users
+            WHERE
+                userID = '$userID'";
+    $result = mysqli_query($conn, $sql);
+    $info = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $info[] = $row;
+    }
+    return json_encode($info);
+}
+
 ?>
