@@ -465,4 +465,17 @@ function getProfileInfo($userID) {
     return json_encode($info);
 }
 
+function getLargestPurchase($userID) {
+    global $conn;
+    $sql = "SELECT
+                MAX(amount) AS largest
+            FROM
+                transactions
+            WHERE
+                userID = '$userID'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['largest'];
+}
+
 ?>

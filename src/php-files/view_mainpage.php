@@ -140,7 +140,7 @@
                     <div class="card-top-half"> <!-- Top half of the card -->
                         <div class="card-top-text"> <!-- Text for the top of the card -->
                             <span class="card-text">Current Balance</span> <!-- Top right corner -->
-                            <span class="card-text info-box-pos ">+$3,000 (+6.7%)</span> <!-- Top left corner -->
+                            <span class="card-text info-box-pos "></span> <!-- Top left corner -->
                         </div>
                         <div></div> <!-- Just in case I want to add anything else here later -->
                     </div>
@@ -260,7 +260,7 @@
                         </div>
                         <div></div>
                     </div>
-                    <h5>$1,430</h5>
+                    <h5 id="biggest-purchase-value"></h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
@@ -412,7 +412,7 @@
         load_Card4_Info();
         //load_Card5_Info();
         //load_Card6_Info();
-        //load_Card7_Info();
+        load_Card7_Info();
         //load_Card8_Info();
     });
 
@@ -498,10 +498,12 @@
 
                 let data = JSON.parse(this.responseText);
                 let transaction = data[0];
-                console.log(transaction);
 
                 if (Object.keys(data).length === 0) {
-
+                    recentPurchaseAmount.innerHTML = "$0";
+                    const date = new Date();
+                    recentPurchaseDate.innerHTML = date.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+                    recentPurchaseDescription.innerHTML = "@ ";
                 } else {
                     if (transaction.amount > 0) {
                         recentPurchaseAmount.innerHTML = "$" + Number(transaction.amount).toLocaleString(undefined, {
@@ -523,6 +525,24 @@
             }
         };
         let query = "page=MainPage&command=LoadCard4";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function load_Card7_Info() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = this.responseText;
+
+                document.getElementById('biggest-purchase-value').innerHTML = "$" + Number(this.responseText).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+        };
+        let query = "page=MainPage&command=LoadCard7";
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);

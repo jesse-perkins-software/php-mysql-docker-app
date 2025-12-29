@@ -152,6 +152,11 @@ if ($page == "SignInPage") {
                 echo $result;
                 exit();
             }
+            case "LoadCard7": {
+                $result = getLargestPurchase($_SESSION["userID"]);
+                echo $result;
+                exit();
+            }
             case "SignOut": {
                 session_unset();
                 session_destroy();
