@@ -160,7 +160,7 @@
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">7 Day Spending</span>
-                            <span class="card-text info-box-neg">+3% vs avg</span>
+                            <span class="card-text info-box-neg"></span>
                         </div>
                         <div></div>
                     </div>
@@ -168,7 +168,7 @@
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
-                            <span class="card-text">Since Sep 20</span>
+                            <span id="week-spending-start-date" class="card-text"></span>
                             <span class="card-text"></span>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">30 Day Spending</span>
-                            <span class="card-text info-box-pos">-15% vs avg</span>
+                            <span class="card-text info-box-pos"></span>
                         </div>
                         <div></div>
                     </div>
@@ -188,7 +188,7 @@
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
-                            <span class="card-text">Since Sep 1</span>
+                            <span id="month-spending-start-date" class="card-text"></span>
                             <span class="card-text"></span>
                         </div>
                     </div>
@@ -452,6 +452,11 @@
                         }) + ")";
                     }
                 }
+                let today = new Date();
+                let sevenDaysAgo = new Date();
+                sevenDaysAgo.setDate(today.getDate() - 7);
+                sevenDaysAgo = sevenDaysAgo.toLocaleString('en-CA', { month: 'short', day: 'numeric' });
+                document.getElementById('week-spending-start-date').innerHTML = `Since ${sevenDaysAgo} `;
             }
         };
         let query = "page=MainPage&command=LoadCard2";
@@ -480,6 +485,11 @@
                         }) + ")";
                     }
                 }
+                let today = new Date();
+                let thirtyDaysAgo = new Date();
+                thirtyDaysAgo.setDate(today.getDate() - 30);
+                thirtyDaysAgo = thirtyDaysAgo.toLocaleString('en-CA', { month: 'short', day: 'numeric' });
+                document.getElementById('month-spending-start-date').innerHTML = `Since ${thirtyDaysAgo} `;
             }
         };
         let query = "page=MainPage&command=LoadCard3";
