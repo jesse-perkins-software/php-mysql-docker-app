@@ -478,4 +478,38 @@ function getLargestPurchase($userID) {
     return $row['largest'];
 }
 
+function getCategoriesAndAccounts($userID) {
+    global $conn;
+    $sql1 = "SELECT
+                groupName
+            FROM
+                categoryGroups
+            WHERE
+                userID = '$userID'";
+    $result1 = mysqli_query($conn, $sql1);
+    $rows1 = [];
+    while ($row = mysqli_fetch_assoc($result1)) {
+        $rows1[] = $row;
+    }
+
+    $sql2 = "SELECT
+                categories.categoryName
+            FROM
+                categories
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            WHERE
+                categoryGroups.userID = '$userID'";
+    $result2 = mysqli_query($conn, $sql2);
+    $rows2 = [];
+    while ($row = mysqli_fetch_assoc($result2)) {
+        $rows2[] = $row;
+    }
+
+    return [
+        'categoryGroups' => $rows1,
+        'categories' => $rows2,
+    ];
+}
+
 ?>

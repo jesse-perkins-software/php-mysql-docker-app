@@ -191,7 +191,7 @@
                 fillProfile(data);
             }
         };
-        let query = "page=Profile&command=LoadProfileInfo";
+        let query = "page=Settings&command=LoadProfileInfo";
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);

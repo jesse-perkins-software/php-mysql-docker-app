@@ -54,7 +54,7 @@
 
         #content-container {
             height: 100vh;
-            margin-left: 15vw;
+            margin-left: var(--nav-bar-width);
             overflow-y: auto;
             display: flex;
             flex-direction: row;
@@ -121,124 +121,6 @@
     <div class="" id="content-container">
         <div class="rounded border shadow-sm" id="general-info">
             <h4 class="section-title">Categories</h4>
-            <div class="row">
-                <div class="col categories-container">
-                    <h5>Home & Utilities</h5>
-                    <div class="categories-list">
-                        <p>Rent/Mortgage</p>
-                        <p>Internet</p>
-                    </div>
-                </div>
-                <div class="col categories-container">
-                    <h5>Food & Groceries</h5>
-                    <div class="categories-list">
-                        <p>Groceries - Supermarket</p>
-                        <p>Convenience Store</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col categories-container">
-                    <h5>Transportation</h5>
-                    <div class="categories-list">
-                        <p>Gas</p>
-                        <p>Maintenance</p>
-                    </div>
-                </div>
-                <div class="col categories-container">
-                    <h5>Shopping & Personal</h5>
-                    <div class="categories-list">
-                        <p>Shoes</p>
-                        <p>Clothes - Casual</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col categories-container">
-                    <h5>Dining & Take-Out</h5>
-                    <div class="categories-list">
-                        <p>Restaurants</p>
-                        <p>Fast Food</p>
-                    </div>
-                </div>
-                <div class="col categories-container">
-                    <h5>Health & Medical</h5>
-                    <div class="categories-list">
-                        <p>Dental</p>
-                        <p>Doctor Visit</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col categories-container">
-                    <h5>Entertainment & Leisure</h5>
-                    <div class="categories-list">
-                        <p>Movies</p>
-                        <p>Social Events</p>
-                    </div>
-                </div>
-                <div class="col categories-container">
-                    <h5>Travel & Vacation</h5>
-                    <div class="categories-list">
-                        <p>Flights</p>
-                        <p>Hotel</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col categories-container">
-                    <h5>Transportation</h5>
-                    <div class="categories-list">
-                        <p>Gas</p>
-                        <p>Maintenance</p>
-                    </div>
-                </div>
-                <div class="col categories-container">
-                    <h5>Financial</h5>
-                    <div class="categories-list">
-                        <p>Income</p>
-                        <p>Credit Card Payment</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col categories-container">
-                    <h5>Insurance</h5>
-                    <div class="categories-list">
-                        <p>Car</p>
-                        <p>Travel</p>
-                    </div>
-                </div>
-                <div class="col categories-container">
-                    <h5>Education</h5>
-                    <div class="categories-list">
-                        <p>Tuition</p>
-                        <p>Textbooks</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col categories-container">
-                    <h5>Gifts & Celebration</h5>
-                    <div class="categories-list">
-                        <p>Birthday Gifts</p>
-                        <p>Cards & Wrapping Supplies</p>
-                    </div>
-                </div>
-                <div class="col categories-container">
-                    <h5>Pet Care</h5>
-                    <div class="categories-list">
-                        <p>Pet Food & Treats</p>
-                        <p>Vet & Meds</p>
-                    </div>
-                </div>
-            </div>
 
             <div class="add-button">
                 <button class="btn btn-primary" id="save-categories" data-bs-toggle="modal" data-bs-target="#newCategoryModal">Add</button>
@@ -290,12 +172,6 @@
                         <p>CIBC Savings Account</p>
                         <p>TD Credit Card</p>
                         <p>RBC TFSA</p>
-                    </div>
-                </div>
-                <div class="col regular-accounts-container">
-                    <h5>Investments (Questrade)</h5>
-                    <div class="categories-list">
-                        <p>Margin Account (4532)</p>
                     </div>
                 </div>
             </div>
@@ -361,5 +237,50 @@
     function viewPage(page) {
         document.getElementById("command-value").value = page;
         document.getElementById("nav-form").submit();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch_Categories();
+        //load_Accounts();
+    });
+
+    function fetch_Categories() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                load_Categories(data);
+            }
+        };
+        let query = "page=Settings&command=LoadCategoriesAndAccounts";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function load_Categories(data) {
+        let categoryGroups = data.categoryGroups;
+        let categories = data.categories;
+
+        let rowNum = 0;
+
+        categoryGroups.forEach(group => {
+            if (rowNum < 2) {
+                let row = document.createElement('div');
+                row.class = "row";
+
+                let h5 = document.createElement('h5');
+                h5.innerHTML = group['groupName'];
+
+                row.appendChild(h5);
+
+                document.getElementById('general-info').appendChild(row);
+
+                rowNum++;
+            } else {
+                console.log("row is full");
+                rowNum = 0;
+            }
+        });
     }
 </script>

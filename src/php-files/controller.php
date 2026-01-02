@@ -194,7 +194,7 @@ if ($page == "SignInPage") {
             }
         }
     }
-} else if ($page == "Profile") {
+} else if ($page == "Settings") {
     session_start();
     if (!isset($_SESSION["signedin"])) {
         include("view_signin.php");
@@ -203,6 +203,10 @@ if ($page == "SignInPage") {
         switch($command) {
             case "LoadProfileInfo": {
                 echo getProfileInfo($_SESSION["userID"]);
+                exit();
+            }
+            case "LoadCategoriesAndAccounts": {
+                echo json_encode(getCategoriesAndAccounts($_SESSION["userID"]));
                 exit();
             }
         }
