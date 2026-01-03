@@ -259,28 +259,40 @@
     }
 
     function load_Categories(data) {
-        let categoryGroups = data.categoryGroups;
-        let categories = data.categories;
+        console.log(data);
 
-        let rowNum = 0;
+        let array = [];
 
-        categoryGroups.forEach(group => {
-            if (rowNum < 2) {
-                let row = document.createElement('div');
-                row.class = "row";
+        data.forEach(group => {
+            let outerDiv = document.createElement('div');
+            outerDiv.class = "col regular-accounts-container";
 
-                let h5 = document.createElement('h5');
-                h5.innerHTML = group['groupName'];
+            let h5 = document.createElement('h5');
+            let div = document.createElement('div');
+            div.class = "categories-list";
 
-                row.appendChild(h5);
+            let categoryList = group['categories'].split(", ");
 
-                document.getElementById('general-info').appendChild(row);
-
-                rowNum++;
-            } else {
-                console.log("row is full");
-                rowNum = 0;
+            h5.innerHTML = group['groupName'];
+            for (let i = 0; i < categoryList.length; i++) {
+                let p = document.createElement('p');
+                p.innerHTML = categoryList[i];
+                div.appendChild(p);
             }
+
+            outerDiv.appendChild(h5);
+            outerDiv.appendChild(div);
+
+            array.push(outerDiv);
         });
+
+        for (let i = 0; i < array.length; i++) {
+            let row = document.createElement('div');
+            row.className = 'row';
+
+            row.appendChild(array[i]);
+
+            document.getElementById('general-info').appendChild(row);
+        }
     }
 </script>
