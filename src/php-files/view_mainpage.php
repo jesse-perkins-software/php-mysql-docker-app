@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <title>Finance App</title>
     <style>
-        <?php include 'global_variables.css' ?>
+        <?php include 'global_variables.css'; ?>
 
         .container {
             height: 100vh;

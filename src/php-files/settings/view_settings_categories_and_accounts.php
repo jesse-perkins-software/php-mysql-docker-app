@@ -13,7 +13,7 @@
         }
 
         #content {
-            margin-left: 15vw;
+            margin-left: var(--nav-bar-width);
             display: flex;
             flex-direction: column;
             height: 100vh;
@@ -28,7 +28,6 @@
         #header-amount {
             font-size: 1.25em;
         }
-
 
         #buttons {
             width: 10vw;
@@ -62,7 +61,7 @@
             align-items: start;
         }
 
-        #general-info {
+        .general-info {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -70,6 +69,10 @@
             width: 50%;
             padding: 1em;
             margin: 1em;
+        }
+
+        #row-container {
+
         }
 
         .info-form {
@@ -98,6 +101,11 @@
             margin-bottom: 1em;
         }
 
+        .col {
+            width: 100%;
+            margin: 0 auto;
+        }
+
         .add-button {
             width: 100%;
             display: flex;
@@ -116,11 +124,13 @@
     </style>
 </head>
 <body class="bg-light">
-    <?php require 'navigation.php'; ?>
+    <?php require 'navigation.php' ?>
 
     <div class="" id="content-container">
-        <div class="rounded border shadow-sm" id="general-info">
+        <div class="rounded border shadow-sm general-info" id="">
             <h4 class="section-title">Categories</h4>
+
+            <div class="container" id="row-container"></div>
 
             <div class="add-button">
                 <button class="btn btn-primary" id="save-categories" data-bs-toggle="modal" data-bs-target="#newCategoryModal">Add</button>
@@ -162,7 +172,7 @@
         </div>
         <!-- Add Category Model Ends -->
 
-        <div class="rounded border shadow-sm" id="general-info">
+        <div class="rounded border shadow-sm general-info" id="">
             <h4 class="section-title">Accounts</h4>
             <div class="row">
                 <div class="col regular-accounts-container">
@@ -265,11 +275,11 @@
 
         data.forEach(group => {
             let outerDiv = document.createElement('div');
-            outerDiv.class = "col regular-accounts-container";
+            outerDiv.className = "col regular-accounts-container";
 
             let h5 = document.createElement('h5');
             let div = document.createElement('div');
-            div.class = "categories-list";
+            div.className = "categories-list";
 
             let categoryList = group['categories'].split(", ");
 
@@ -286,13 +296,15 @@
             array.push(outerDiv);
         });
 
-        for (let i = 0; i < array.length; i++) {
+        while (array.length !== 0) {
             let row = document.createElement('div');
             row.className = 'row';
+            row.appendChild(array.shift());
+            if (array.length > 0) {
+                row.appendChild(array.shift());
+            }
 
-            row.appendChild(array[i]);
-
-            document.getElementById('general-info').appendChild(row);
+            document.getElementById('row-container').appendChild(row);
         }
     }
 </script>
