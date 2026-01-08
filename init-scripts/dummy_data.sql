@@ -23,35 +23,62 @@ INSERT INTO accounts (userID, bankID, accountTypeID, accountName) VALUES
 
 -- Insert category groups
 INSERT INTO categoryGroups (userID, groupName) VALUES
-    (@userID, 'Groceries'),
-    (@userID, 'Entertainment'),
-    (@userID, 'Transportation'),
+    (@userID, 'Income'),
+    (@userID, 'Savings'),
+    (@userID, 'Housing'),
     (@userID, 'Utilities'),
-    (@userID, 'Salary');
+    (@userID, 'Transportation'),
+    (@userID, 'Food'),
+    (@userID, 'Healthcare'),
+    (@userID, 'Personal Care'),
+    (@userID, 'Entertainment'),
+    (@userID, 'Travel');
+
 
 -- Get category group IDs
-SET @groceryGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Groceries');
-SET @entertainmentGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Entertainment');
-SET @transportationGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Transportation');
+SET @incomeGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Income');
+SET @savingsGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Savings');
+SET @housingGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Housing');
 SET @utilitiesGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Utilities');
-SET @salaryGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Salary');
+SET @transportationGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Transportation');
+SET @foodGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Food');
+SET @healthcareGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Healthcare');
+SET @personalcareGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Personal Care');
+SET @entertainmentGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Entertainment');
+SET @travelGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID AND groupName = 'Travel');
 
 -- Insert categories
 INSERT INTO categories (groupID, categoryName) VALUES
-    (@groceryGroupID, 'Walmart'),
-    (@groceryGroupID, 'Costco'),
-    (@groceryGroupID, 'Local Market'),
-    (@entertainmentGroupID, 'Movies'),
-    (@entertainmentGroupID, 'Restaurants'),
-    (@entertainmentGroupID, 'Gaming'),
-    (@transportationGroupID, 'Gas'),
-    (@transportationGroupID, 'Car Maintenance'),
-    (@transportationGroupID, 'Transit'),
+    (@incomeGroupID, 'Salary/Wages'),
+    (@incomeGroupID, 'Investments'),
+    (@incomeGroupID, 'Gifts'),
+    (@savingsGroupID, 'Retirement'),
+    (@savingsGroupID, 'Investments'),
+    (@savingsGroupID, 'Emergency Fund'),
+    (@housingGroupID, 'Mortgage/Rent'),
+    (@housingGroupID, 'Home Insurance'),
+    (@housingGroupID, 'Property Taxes'),
     (@utilitiesGroupID, 'Electricity'),
     (@utilitiesGroupID, 'Internet'),
     (@utilitiesGroupID, 'Water'),
-    (@salaryGroupID, 'Employer A'),
-    (@salaryGroupID, 'Freelance');
+    (@transportationGroupID, 'Car Insurance'),
+    (@transportationGroupID, 'Gas'),
+    (@transportationGroupID, 'Car Maintenance'),
+    (@foodGroupID, 'Groceries'),
+    (@foodGroupID, 'Dining Out'),
+    (@foodGroupID, 'Takeout/Delivery'),
+    (@healthcareGroupID, 'Health Insurance'),
+    (@healthcareGroupID, 'Dental Care'),
+    (@healthcareGroupID, 'Therapy/Counseling'),
+    (@personalcareGroupID, 'Salon Services'),
+    (@personalcareGroupID, 'Toiletries'),
+    (@personalcareGroupID, 'Gym Membership'),
+    (@entertainmentGroupID, 'Movies'),
+    (@entertainmentGroupID, 'Hobbies'),
+    (@entertainmentGroupID, 'Subscriptions'),
+    (@travelGroupID, 'Airfare'),
+    (@travelGroupID, 'Hotel Accommodations'),
+    (@travelGroupID, 'Travel Insurance');
 
 -- Get account IDs
 SET @savingsAccountID = (SELECT accountID FROM accounts WHERE userID = @userID AND accountName = 'CIBC Savings');

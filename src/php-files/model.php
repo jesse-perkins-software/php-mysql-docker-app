@@ -46,7 +46,9 @@ function saveTransaction($date, $description, $amount, $account, $category, $not
     $groupID = getGroupID($userID, $category);
     $categoryID = getCategoryID($groupID, $description);
 
-    if (transactionExists($date, $description, $amount, $account, $category, $notes)) {
+    $exists = transactionExists($date, $description, $amount, $account, $category, $notes);
+
+    if (!$exists['record_exists']) {
         $sql = "INSERT INTO transactions (userID, accountID, categoryID, date, description, amount, notes)
             VALUES ('$userID', '$accountID', '$categoryID', '$date', '$description', '$amount', '$notes')";
         return mysqli_query($conn, $sql);
@@ -210,7 +212,10 @@ function getCategorySelections($userID) {
             FROM
                 categoryGroups
             WHERE
-                userID = '$userID'";
+                userID = '$userID'
+            ORDER BY 
+                groupID
+            ";
     $result3 = mysqli_query($conn, $sql3);
     $groupNames = [];
     while ($groupName = mysqli_fetch_assoc($result3)) {
@@ -421,7 +426,8 @@ function get30DayBalance($userID, $date) {
                 transactions
             WHERE
                 userID = '$userID'
-                AND (date BETWEEN DATE_SUB('$date', INTERVAL 30 DAY) AND '$date')";
+                AND (date BETWEEN DATE_SUB('$date', INTERVAL 30 DAY) AND '$date')
+            ";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     return $row['total'];
@@ -478,7 +484,7 @@ function getLargestPurchase($userID) {
     return $row['largest'];
 }
 
-function getCategoriesAndAccounts($userID) {
+function getCategories($userID) {
     global $conn;
     $sql1 = "SELECT
                 categoryGroups.groupName,
@@ -489,7 +495,7 @@ function getCategoriesAndAccounts($userID) {
                 userID = '$userID'
                 AND categoryGroups.groupID = categories.groupID
             GROUP BY
-                categoryGroups.groupName
+                categoryGroups.groupID
             ";
     $result1 = mysqli_query($conn, $sql1);
     $categories = [];
@@ -497,6 +503,66 @@ function getCategoriesAndAccounts($userID) {
         $categories[] = $row;
     }
     return $categories;
+}
+
+function getAccounts($userID) {
+    global $conn;
+    $sql1 = "SELECT
+                banks.bankName,
+                GROUP_CONCAT(accounts.accountName SEPARATOR ', ') as accounts
+            FROM
+                banks, accounts
+            WHERE
+                userID = '$userID'
+                AND banks.bankID = accounts.bankID
+            GROUP BY
+                banks.bankName
+            ";
+    $result1 = mysqli_query($conn, $sql1);
+    $categories = [];
+    while ($row = mysqli_fetch_assoc($result1)) {
+        $categories[] = $row;
+    }
+    return $categories;
+}
+
+function categoryExists($userID, $category) {
+    global $conn;
+    $sql = "SELECT EXISTS(
+                SELECT 1
+                FROM
+                    categoryGroups
+                WHERE
+                    userID = '$userID' 
+                    AND categoryGroups.groupName = '$category')
+                AS categoryExists
+                ";
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function addCategory($userID, $category, $name) {
+    global $conn;
+
+    $exists = categoryExists($userID, $category);
+
+    if ($exists['categoryExists']) {
+        $groupID = getGroupID($userID, $category);
+
+        $sql = "INSERT INTO
+                    categories (groupID, categoryName)
+                VALUES
+                    ('$groupID', '$name')
+                ";
+        return mysqli_query($conn, $sql);
+    } else {
+        $sql = "INSERT INTO 
+                    categoryGroups (userID, groupName)
+                VALUES
+                    ('$userID', '$name')
+                ";
+        return mysqli_query($conn, $sql);
+    }
 }
 
 ?>

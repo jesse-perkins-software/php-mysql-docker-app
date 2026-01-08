@@ -205,9 +205,33 @@ if ($page == "SignInPage") {
                 echo getProfileInfo($_SESSION["userID"]);
                 exit();
             }
-            case "LoadCategoriesAndAccounts": {
-                echo json_encode(getCategoriesAndAccounts($_SESSION["userID"]));
+            case "LoadCategories": {
+                echo json_encode(getCategories($_SESSION["userID"]));
                 exit();
+            }
+            case "GetCategoryOptions": {
+                echo json_encode(getCategorySelections($_SESSION["userID"]));
+                exit();
+            }
+            case "LoadAccounts": {
+                echo json_encode(getAccounts($_SESSION["userID"]));
+                exit();
+            }
+            case "NewCategory": {
+                if (($_SESSION['category'] == $_POST["category"]) && ($_SESSION['name'] == $_POST["name"])) {
+                    include("settings/view_settings_categories_and_accounts.php");
+                    exit();
+                } else {
+                    if (!isset($_POST["category"])) {
+
+                    } else {
+                        addCategory($_SESSION["userID"], $_POST["category"], $_POST["name"]);
+                        $_SESSION['category'] = $_POST["category"];
+                        $_SESSION['name'] = $_POST["name"];
+                        include('settings/view_settings_categories_and_accounts.php');
+                        exit();
+                    }
+                }
             }
         }
     }

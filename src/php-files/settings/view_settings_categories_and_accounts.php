@@ -71,10 +71,6 @@
             margin: 1em;
         }
 
-        #row-container {
-
-        }
-
         .info-form {
             display: flex;
             flex-direction: column;
@@ -139,52 +135,45 @@
 
         <!-- Add Category Model Starts -->
         <div class="modal fade" id="newCategoryModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Category</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="transaction-info">
-                            <div class="input-group">
-                                <span class="input-group-text" id="date-input">Category Group</span>
-                                <select class="form-select" id="budget-input">
-                                    <option selected>New Category Group</option>
-                                    <option value="1">Home & Utilities</option>
-                                    <option value="2">Food & Groceries</option>
-                                    <option value="3">Transportation</option>
-                                    <option value="4">Shopping & Personal</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" id="email-input">New Category</span>
-                                <input type="text" class="form-control" placeholder="Bus Fare">
+            <form action="/controller.php" method="post" class="needs-validation" novalidate>
+                <input type="hidden" name="page" value="Settings">
+                <input type="hidden" name="command" value="NewCategory">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">New Category</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="transaction-info">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="category-input">Category</span>
+                                    <select class="form-select select-category" id="category-options" name="category" aria-label="category-selection" required>
+                                        <option value="" selected>Select...</option>
+                                        <option value="">New Category</option>
+
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="new-category-input">Name</span>
+                                    <input type="text" class="form-control" name="name" placeholder="" required>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Save">
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <!-- Add Category Model Ends -->
 
         <div class="rounded border shadow-sm general-info" id="">
-            <h4 class="section-title">Accounts</h4>
-            <div class="row">
-                <div class="col regular-accounts-container">
-                    <h5>Banking</h5>
-                    <div class="categories-list">
-                        <p>CIBC Chequing Account</p>
-                        <p>CIBC Savings Account</p>
-                        <p>TD Credit Card</p>
-                        <p>RBC TFSA</p>
-                    </div>
-                </div>
-            </div>
+            <h4 class="section-title">Bank Accounts</h4>
+            <div class="container" id="accounts-container"></div>
 
             <div class="add-button">
                 <button class="btn btn-primary" id="save-accounts" data-bs-toggle="modal" data-bs-target="#newAccountModal">Add</button>
@@ -251,26 +240,97 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         fetch_Categories();
-        //load_Accounts();
+        fetch_Accounts();
+        get_category_options();
     });
+
+    function get_category_options() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                data.forEach(option => {
+                    let optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.innerHTML = option;
+
+                    document.getElementById('category-options').appendChild(optionElement);
+                });
+            }
+        };
+        let query = "page=Settings&command=GetCategoryOptions";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function fetch_Accounts() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                load_Accounts(data);
+            }
+        };
+        let query = "page=Settings&command=LoadAccounts";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function load_Accounts(data) {
+        let array = [];
+
+        data.forEach(group => {
+            let outerDiv = document.createElement('div');
+            outerDiv.className = "col regular-accounts-container";
+
+            let h5 = document.createElement('h5');
+            let div = document.createElement('div');
+            div.className = "categories-list";
+
+            let accountList = group['accounts'].split(", ");
+
+            h5.innerHTML = group['bankName'];
+            for (let i = 0; i < accountList.length; i++) {
+                let p = document.createElement('p');
+                p.innerHTML = accountList[i].replace(`${group['bankName']} `, "");
+                div.appendChild(p);
+            }
+
+            outerDiv.appendChild(h5);
+            outerDiv.appendChild(div);
+
+            array.push(outerDiv);
+        });
+
+        while (array.length !== 0) {
+            let row = document.createElement('div');
+            row.className = 'row';
+            row.appendChild(array.shift());
+            if (array.length > 0) {
+                row.appendChild(array.shift());
+            }
+
+            document.getElementById('accounts-container').appendChild(row);
+        }
+    }
 
     function fetch_Categories() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState === 4 && this.status === 200) {
                 let data = JSON.parse(this.responseText);
                 load_Categories(data);
             }
         };
-        let query = "page=Settings&command=LoadCategoriesAndAccounts";
+        let query = "page=Settings&command=LoadCategories";
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
     }
 
     function load_Categories(data) {
-        console.log(data);
-
         let array = [];
 
         data.forEach(group => {
