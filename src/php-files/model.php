@@ -25,8 +25,10 @@ function transactionExists($date, $description, $amount, $account, $category, $n
     $categoryID = getCategoryID($groupID, $description);
 
     $sql = "SELECT EXISTS(
-                SELECT 1
-                FROM transactions
+                SELECT 
+                    1
+                FROM 
+                    transactions
                 WHERE
                     transactions.date = '$date'
                     AND transactions.categoryID = '$categoryID'
@@ -526,10 +528,29 @@ function getAccounts($userID) {
     return $categories;
 }
 
+function getAccountNames($userID) {
+    global $conn;
+    $sql1 = "SELECT DISTINCT
+                banks.bankName
+            FROM
+                banks, accounts
+            WHERE
+                accounts.userID = '$userID'
+                AND accounts.bankID = banks.bankID
+            ";
+    $result1 = mysqli_query($conn, $sql1);
+    $categories = [];
+    while ($row = mysqli_fetch_assoc($result1)) {
+        $categories[] = $row['bankName'];
+    }
+    return $categories;
+}
+
 function categoryExists($userID, $category) {
     global $conn;
     $sql = "SELECT EXISTS(
-                SELECT 1
+                SELECT 
+                    1
                 FROM
                     categoryGroups
                 WHERE
@@ -564,5 +585,75 @@ function addCategory($userID, $category, $name) {
         return mysqli_query($conn, $sql);
     }
 }
+
+//function addAccount($userID, $account, $bank_name, $account_type) {
+//    global $conn;
+//
+//    if ($bank_name) {
+//
+//    } else {
+//        $new_account = $account . " " . $account_type;
+//
+//        $bankID = getBankID($account);
+//        if (accountTypeExists($account_type)) {
+//            $accountTypeID = getAccountTypeID($account_type);
+//            $sql = "INSERT INTO
+//                        accounts (userID, bankID, accountType, accountName)
+//                    VALUES
+//                        ('$userID', '$bankID', '$accountTypeID', '$new_account')
+//                    ";
+//            return mysqli_query($conn, $sql);
+//        } else {
+//
+//        }
+//    }
+//}
+//
+//function getAccountTypeID($account_type) {
+//    global $conn;
+//
+//    $sql = "SELECT
+//                accountTypeID
+//            FROM
+//                accountTypes
+//            WHERE
+//                typeName = '$account_type'
+//            ";
+//    $result = mysqli_query($conn, $sql);
+//    $accountTypeID = mysqli_fetch_assoc($result);
+//    return $accountTypeID['accountTypeID'];
+//}
+//
+//function accountTypeExists($accountType) {
+//    global $conn;
+//
+//    $sql = "SELECT EXISTS(
+//                SELECT
+//                    1
+//                FROM
+//                    accountTypes
+//                WHERE
+//                    typeName = '$accountType')
+//            AS accountTypeExists
+//            ";
+//    $result = mysqli_query($conn, $sql);
+//    return mysqli_fetch_assoc($result);
+//}
+//
+//function getBankID($account) {
+//    global $conn;
+//
+//    $sql = "SELECT
+//                bankID
+//            FROM
+//                banks
+//            WHERE
+//                bankName = '$account'
+//            ";
+//    $result = mysqli_query($conn, $sql);
+//    $row = mysqli_fetch_assoc($result);
+//    return $row['bankID'];
+//}
+
 
 ?>

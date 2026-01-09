@@ -151,7 +151,7 @@
                                     <span class="input-group-text" id="category-input">Category</span>
                                     <select class="form-select select-category" id="category-options" name="category" aria-label="category-selection" required>
                                         <option value="" selected>Select...</option>
-                                        <option value="">New Category</option>
+                                        <option value="new">New Category</option>
 
                                     </select>
                                 </div>
@@ -181,34 +181,43 @@
 
             <!-- Add Account Model Starts -->
             <div class="modal fade" id="newAccountModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">New Account</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="transaction-info">
-                                <div class="input-group">
-                                    <span class="input-group-text" id="date-input">Account Group</span>
-                                    <select class="form-select" id="budget-input">
-                                        <option selected>New Account Group</option>
-                                        <option value="1">Banking</option>
-                                        <option value="2">Investments</option>
-                                    </select>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="email-input">New Account</span>
-                                    <input type="text" class="form-control" placeholder="Credit Card (Costco)">
+                <form action="/controller.php" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" name="page" value="Settings">
+                    <input type="hidden" name="command" value="NewAccount">
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">New Account</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="transaction-info">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="account-input">Account</span>
+                                        <select class="form-select select-category" id="account-options" name="account" aria-label="account-selection" required>
+                                            <option value="" selected>Select...</option>
+                                            <option value="new">New Account</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="input-group account-info" id="bank-name-input">
+                                        <span class="input-group-text" id="new-bank-input">Bank</span>
+                                        <input type="text" class="form-control" name="bank_name" placeholder="CIBC">
+                                    </div>
+                                    <div class="input-group account-info" id="bank-type-input">
+                                        <span class="input-group-text" id="new-type-input">Type</span>
+                                        <input type="text" class="form-control" name="account_type" placeholder="Chequing">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Save">
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <!-- Add Account Model Ends -->
         </div>
@@ -242,6 +251,10 @@
         fetch_Categories();
         fetch_Accounts();
         get_category_options();
+        get_account_options();
+        document.querySelectorAll('.account-info').forEach(item => {
+            item.style.display = "none";
+        });
     });
 
     function get_category_options() {
@@ -259,6 +272,39 @@
             }
         };
         let query = "page=Settings&command=GetCategoryOptions";
+        xhttp.open("POST", "/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function get_account_options() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                data.forEach(option => {
+                    let optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.innerHTML = option;
+
+                    document.getElementById('account-options').appendChild(optionElement);
+                });
+                document.getElementById('account-options').addEventListener('change', event => {
+                    const selectedAccount = event.target.value;
+                    const bankType = document.getElementById('bank-type-input');
+                    const bankName = document.getElementById('bank-name-input');
+
+                    if (selectedAccount !== "new") {
+                        bankType.style.display = "flex";
+                        bankName.style.display = "none";
+                    } else {
+                        bankType.style.display = "flex";
+                        bankName.style.display = "flex";
+                    }
+                });
+            }
+        };
+        let query = "page=Settings&command=GetAccountOptions";
         xhttp.open("POST", "/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);

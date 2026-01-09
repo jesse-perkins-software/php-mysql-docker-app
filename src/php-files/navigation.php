@@ -17,7 +17,7 @@
         </ul>
     </div>
 
-    <div class="nav-section mt-4" id="nav-accounts">
+    <div class="nav-section mt-3" id="nav-accounts">
         <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Transactions</p>
 
         <ul class="navbar-nav lh-1">
@@ -28,12 +28,15 @@
                 <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Transactions_Expenses')">Expenses</button>
             </li>
             <li class="nav-item">
+                <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Transactions_Savings')">Savings</button>
+            </li>
+            <li class="nav-item">
                 <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Transactions_Transfers')">Transfers</button>
             </li>
         </ul>
     </div>
 
-    <div class="nav-section mt-4" id="nav-profile">
+    <div class="nav-section mt-3" id="nav-profile">
         <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Budget</p>
 
         <ul class="navbar-nav lh-1">
@@ -44,12 +47,15 @@
                 <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Budget_Expenses')">Expenses</button>
             </li>
             <li class="nav-item">
+                <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Budget_Savings')">Savings</button>
+            </li>
+            <li class="nav-item">
                 <button class="nav-link text-start ps-4" type="submit" onclick="viewPage('Budget_vs_Actual')">Budgeted vs. Actual</button>
             </li>
         </ul>
     </div>
 
-    <div class="nav-section mt-4" id="nav-profile">
+    <div class="nav-section mt-3" id="nav-profile">
         <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Settings</p>
 
         <ul class="navbar-nav lh-1">
@@ -68,7 +74,7 @@
         </ul>
     </div>
 
-    <div class="nav-section mt-4" id="nav-logout">
+    <div class="nav-section mt-3" id="nav-logout">
         <button class="nav-link fw-bold p-2 bg-secondary-subtle m-auto rounded w-50" type="submit" onclick="viewPage('SignOut')">Sign Out</button>
     </div>
 </nav>

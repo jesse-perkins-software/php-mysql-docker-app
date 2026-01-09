@@ -213,6 +213,10 @@ if ($page == "SignInPage") {
                 echo json_encode(getCategorySelections($_SESSION["userID"]));
                 exit();
             }
+            case "GetAccountOptions": {
+                echo json_encode(getAccountNames($_SESSION["userID"]));
+                exit();
+            }
             case "LoadAccounts": {
                 echo json_encode(getAccounts($_SESSION["userID"]));
                 exit();
@@ -222,16 +226,22 @@ if ($page == "SignInPage") {
                     include("settings/view_settings_categories_and_accounts.php");
                     exit();
                 } else {
-                    if (!isset($_POST["category"])) {
-
-                    } else {
-                        addCategory($_SESSION["userID"], $_POST["category"], $_POST["name"]);
-                        $_SESSION['category'] = $_POST["category"];
-                        $_SESSION['name'] = $_POST["name"];
-                        include('settings/view_settings_categories_and_accounts.php');
-                        exit();
-                    }
+                    addCategory($_SESSION["userID"], $_POST["category"], $_POST["name"]);
+                    $_SESSION['category'] = $_POST["category"];
+                    $_SESSION['name'] = $_POST["name"];
+                    include('settings/view_settings_categories_and_accounts.php');
+                    exit();
                 }
+            }
+            case "NewAccount": {
+                print_r($_POST);
+                if ($_POST["bank_name"] === "") { // Adding a new account to an existing bank
+                    //addAccount($_SESSION["userID"], $_POST["account"], false, $_POST["account_type"]);
+                } else { // Adding a new bank with account
+                    //addAccount($_SESSION["userID"], $_POST["account"], $_POST["bank_name"], $_POST["account_type"]);
+                }
+                include("settings/view_settings_categories_and_accounts.php");
+                exit();
             }
         }
     }
