@@ -23,15 +23,28 @@ git clone https://github.com/jesse-perkins-software/php-mysql-docker-app.git
 2. Rename **.env.example** to **.env,** and change the variable values to your choosing.
 
 3. Change directory to the project
-```bash
+```
 cd php-mysql-docker-app
 ```
-4. Run Docker Compose
-```Windows or Mac
+## Running the Application
+To start:
+```
 docker-compose up -d
 ```
+or
 ```Linux
 docker compose up -d
+```
+
+<br>
+
+To stop:
+```
+docker-compose down
+```
+or
+```
+docker compose down
 ```
 
 ## Access
