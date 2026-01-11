@@ -15,25 +15,26 @@ frontend, PHP + MySQL database for the backend, and GitHub Actions for CI.
 - Docker
 - Docker Compose
 
-## Create .env File
-```
-DB_ROOT_PASSWORD="your_secure_root_password"
-
-DB_USER="your_user"
-DB_PASSWORD="your_password"
-DB_NAME="your_db_name"
-DB_HOST="your_db_host_name"
-```
-
 ## Setup
-1. Clone this repository and run the docker-compose.yaml file
+1. Clone this repository
 ```bash
 git clone https://github.com/jesse-perkins-software/php-mysql-docker-app.git
+```
+2. Rename **.env.example** to **.env,** and change the variable values to your choosing.
+
+3. Change directory to the project
+```bash
 cd php-mysql-docker-app
+```
+4. Run Docker Compose
+```Windows or Mac
+docker-compose up -d
+```
+```Linux
 docker compose up -d
 ```
 
-2. Where to Access
+## Access
 - http://localhost:3000 for the application
 - http://localhost:3001 for the MySQL database
 
