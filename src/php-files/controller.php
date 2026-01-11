@@ -234,14 +234,24 @@ if ($page == "SignInPage") {
                 }
             }
             case "NewAccount": {
-                print_r($_POST);
-                if ($_POST["bank_name"] === "") { // Adding a new account to an existing bank
-                    //addAccount($_SESSION["userID"], $_POST["account"], false, $_POST["account_type"]);
-                } else { // Adding a new bank with account
-                    //addAccount($_SESSION["userID"], $_POST["account"], $_POST["bank_name"], $_POST["account_type"]);
+                if (($_SESSION["account"] == $_POST["account"]) && ($_SESSION['bank_name'] == $_POST["bank_name"]) && $_SESSION['account_type'] == $_POST["account_type"]) {
+                    include("settings/view_settings_categories_and_accounts.php");
+                    exit();
+                } else {
+                    if ($_POST["bank_name"] === "") { // Adding a new account to an existing bank
+                        addAccount($_SESSION["userID"], $_POST["account"], null, $_POST["account_type"]);
+                        $_SESSION['account'] = $_POST["account"];
+                        $_SESSION['bank_name'] = $_POST["bank_name"];
+                        $_SESSION['account_type'] = $_POST["account_type"];
+                    } else { // Adding a new bank with account
+                        addAccount($_SESSION["userID"], $_POST["account"], $_POST["bank_name"], $_POST["account_type"]);
+                        $_SESSION['account'] = $_POST["account"];
+                        $_SESSION['bank_name'] = $_POST["bank_name"];
+                        $_SESSION['account_type'] = $_POST["account_type"];
+                    }
+                    include("settings/view_settings_categories_and_accounts.php");
+                    exit();
                 }
-                include("settings/view_settings_categories_and_accounts.php");
-                exit();
             }
         }
     }

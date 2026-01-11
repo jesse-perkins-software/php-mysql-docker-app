@@ -586,74 +586,113 @@ function addCategory($userID, $category, $name) {
     }
 }
 
-//function addAccount($userID, $account, $bank_name, $account_type) {
-//    global $conn;
-//
-//    if ($bank_name) {
-//
-//    } else {
-//        $new_account = $account . " " . $account_type;
-//
-//        $bankID = getBankID($account);
-//        if (accountTypeExists($account_type)) {
-//            $accountTypeID = getAccountTypeID($account_type);
-//            $sql = "INSERT INTO
-//                        accounts (userID, bankID, accountType, accountName)
-//                    VALUES
-//                        ('$userID', '$bankID', '$accountTypeID', '$new_account')
-//                    ";
-//            return mysqli_query($conn, $sql);
-//        } else {
-//
-//        }
-//    }
-//}
-//
-//function getAccountTypeID($account_type) {
-//    global $conn;
-//
-//    $sql = "SELECT
-//                accountTypeID
-//            FROM
-//                accountTypes
-//            WHERE
-//                typeName = '$account_type'
-//            ";
-//    $result = mysqli_query($conn, $sql);
-//    $accountTypeID = mysqli_fetch_assoc($result);
-//    return $accountTypeID['accountTypeID'];
-//}
-//
-//function accountTypeExists($accountType) {
-//    global $conn;
-//
-//    $sql = "SELECT EXISTS(
-//                SELECT
-//                    1
-//                FROM
-//                    accountTypes
-//                WHERE
-//                    typeName = '$accountType')
-//            AS accountTypeExists
-//            ";
-//    $result = mysqli_query($conn, $sql);
-//    return mysqli_fetch_assoc($result);
-//}
-//
-//function getBankID($account) {
-//    global $conn;
-//
-//    $sql = "SELECT
-//                bankID
-//            FROM
-//                banks
-//            WHERE
-//                bankName = '$account'
-//            ";
-//    $result = mysqli_query($conn, $sql);
-//    $row = mysqli_fetch_assoc($result);
-//    return $row['bankID'];
-//}
+function addAccount($userID, $account, $bank_name, $account_type) {
+    global $conn;
+
+    if (!accountTypeExists($account_type)) {
+        addAccountType($account_type);
+    }
+
+    if (!is_null($bank_name)) {
+        if (!bankExists($bank_name)) {
+            addBank($bank_name);
+        }
+    }
+
+    $bank = $bank_name ?: $account;
+    $new_account = $bank . " " . $account_type;
+    $bankID = getBankID($bank);
+    $accountID = getAccountTypeID($account_type);
+
+    $sql = "INSERT INTO
+                accounts (userID, bankID, accountTypeID, accountName)
+            VALUES
+                ('$userID', '$bankID', '$accountID', '$new_account')
+            ";
+    return mysqli_query($conn, $sql);
+}
+
+function addBank($bank_name) {
+    global $conn;
+
+    $sql = "INSERT INTO
+                banks (bankName)
+            VALUES
+                ('$bank_name')
+            ";
+    return mysqli_query($conn, $sql);
+}
+
+function addAccountType($accountType) {
+    global $conn;
+
+    $sql = "INSERT INTO
+                accountTypes (typeName)
+            VALUES
+                ('$accountType')
+            ";
+    return mysqli_query($conn, $sql);
+}
+
+function getAccountTypeID($account_type) {
+    global $conn;
+
+    $sql = "SELECT
+                accountTypeID
+            FROM
+                accountTypes
+            WHERE
+                typeName = '$account_type'
+            ";
+    $result = mysqli_query($conn, $sql);
+    $accountTypeID = mysqli_fetch_assoc($result);
+    return $accountTypeID['accountTypeID'];
+}
+
+function accountTypeExists($accountType) {
+    global $conn;
+
+    $sql = "SELECT
+                COUNT(*) AS count
+            FROM
+                accountTypes
+            WHERE
+                typeName = '$accountType'
+            ";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['count'] > 0;
+}
+
+function bankExists($bank_name) {
+    global $conn;
+
+    $sql = "SELECT
+                COUNT(*) AS count
+            FROM
+                banks
+            WHERE
+                bankName = '$bank_name'
+            ";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['count'] > 0;
+}
+
+function getBankID($account) {
+    global $conn;
+
+    $sql = "SELECT
+                bankID
+            FROM
+                banks
+            WHERE
+                bankName = '$account'
+            ";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['bankID'];
+}
 
 
 ?>
