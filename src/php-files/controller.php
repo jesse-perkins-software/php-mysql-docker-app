@@ -253,6 +253,15 @@ if ($page == "SignInPage") {
                     exit();
                 }
             }
+            case "DeleteAccount": {
+                deleteAccount($_SESSION["userID"], $_POST["bank"], $_POST["account-type"]);
+                include("settings/view_settings_categories_and_accounts.php");
+                exit();
+            }
+            case "GetSelectedBankAccounts": {
+                echo json_encode(existingBankAccounts($_SESSION["userID"], $_POST["selectedBank"]));
+                exit();
+            }
         }
     }
 } else if ($page == "Transactions") {
