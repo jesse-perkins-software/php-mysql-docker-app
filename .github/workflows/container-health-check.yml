@@ -15,7 +15,7 @@ jobs:
         run: docker compose up -d
 
       - name: Wait for containers to start
-        run: sleep 20
+        run: sleep 5
 
       - name: Check if all the containers are running
         run: docker compose ps
