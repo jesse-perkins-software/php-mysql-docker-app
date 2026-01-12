@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Go to Docker Directory
+        run: cd docker
+
       - name: Start docker compose
         run: docker compose up -d
 
