@@ -15,7 +15,7 @@ jobs:
         run: docker compose -f docker/docker-compose.yaml up -d
 
       - name: Wait for containers to start
-        run: sleep 5
+        run: sleep 15
 
       - name: Check if all the containers are running
         run: docker compose -f docker/docker-compose.yaml ps
