@@ -8,6 +8,12 @@ on:
 jobs:
   check-containers:
     runs-on: ubuntu-latest
+    env:
+      DB_ROOT_PASSWORD: test123
+      DB_USER: testuser
+      DB_PASSWORD: testpass
+      DB_NAME: finance_app_db
+      DB_HOST: db
     steps:
       - uses: actions/checkout@v4
 
