@@ -2,7 +2,6 @@ services:
   db:
     image: mysql:9.4.0-oracle
     container_name: db
-    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       - MYSQL_USER=${DB_USER}
@@ -10,17 +9,21 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
     volumes:
       - ../app/backend/init-scripts:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "status", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
   phpmyadmin:
     image: phpmyadmin:5.2.2
     container_name: phpmyadmin
-    restart: always
     ports:
       - 3001:80
-    environment:
-      - PMA_ARBITRARY=1
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   php-apache:
     build:
@@ -31,11 +34,13 @@ services:
       - 3000:80
     volumes:
       - ../app/frontend:/var/www/html
-    depends_on:
-      - db
     environment:
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
+    depends_on:
+      db:
+        condition: service_healthy
+
   
