@@ -20,11 +20,10 @@ jobs:
       - name: Start docker compose
         run: docker compose -f docker/docker-compose.yaml up -d
 
-      - name: Wait for containers to start
-        run: sleep 15
-
-      - name: Check if all the containers are running
-        run: docker compose -f docker/docker-compose.yaml ps
-
-      - name: Stop containers
+      - name: Wait for db container to be healthy
+        run: |
+          echo "Waiting for db container to be healthy..."
+          timeout 120 sh -c 'until docker inspect --format="{{.State.Health.Status}}" db | grep -q healthy; do sleep 2; done'
+          echo "All containers are healthy!"
+      - name: Shut down the containers
         run: docker compose -f docker/docker-compose.yaml down
