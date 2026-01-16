@@ -161,7 +161,7 @@ if ($page == "SignInPage") {
                 session_unset();
                 session_destroy();
                 setcookie("signedin", "", time() - 3600);
-                include(__DIR__ . "/view_signin.php");
+                include(__DIR__ . "/../view/view_signin.php");
                 exit();
             }
         }
@@ -197,7 +197,7 @@ if ($page == "SignInPage") {
 } else if ($page == "Settings") {
     session_start();
     if (!isset($_SESSION["signedin"])) {
-        include(__DIR__ . "/view_signin.php");
+        include(__DIR__ . "/../view/view_signin.php");
     } else {
         $command = $_POST["command"];
         switch($command) {
@@ -254,7 +254,16 @@ if ($page == "SignInPage") {
                 }
             }
             case "DeleteAccount": {
+//                if (canDeleteAccount($_SESSION["userID"])) { ADD THIS
+//                    echo "Cannot delete account";
+//                } else {
+//                    deleteAccount;
+//                    include(page);
+//                    exit();
+//                }
+
                 deleteAccount($_SESSION["userID"], $_POST["bank"], $_POST["account-type"]);
+
                 include(__DIR__ . "/../view/settings/view_settings_categories_and_accounts.php");
                 exit();
             }
@@ -267,7 +276,7 @@ if ($page == "SignInPage") {
 } else if ($page == "Transactions") {
     session_start();
     if (!isset($_SESSION["signedin"])) {
-        include(__DIR__ . "/view_signin.php");
+        include(__DIR__ . "/../view/view_signin.php");
     } else {
         $command = $_POST["command"];
         switch ($command) {
@@ -383,7 +392,7 @@ if ($page == "SignInPage") {
 } else if ($page == "Accounts") {
     session_start();
     if (!isset($_SESSION["signedin"])) {
-        include(__DIR__ . "/view_signin.php");
+        include(__DIR__ . "/../view/view_signin.php");
     } else {
         $command = $_POST["command"];
         $user_accounts = getUserAccounts($_SESSION["userID"]);

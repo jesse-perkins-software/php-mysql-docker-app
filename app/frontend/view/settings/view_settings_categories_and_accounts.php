@@ -325,7 +325,6 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 let data = JSON.parse(this.responseText);
-                console.log(data);
                 data.forEach(option => {
                     let optionElement = document.createElement('option');
                     optionElement.value = option["typeName"];
@@ -368,6 +367,10 @@
                     }
                 });
                 document.getElementById('choose-bank-name').addEventListener('change', selectedBank => {
+                    let defaultOption = document.getElementById('choose-bank-account').children[0];
+
+                    document.getElementById('choose-bank-account').replaceChildren(defaultOption);
+
                     fetchSelectedBankAccount(selectedBank.target.value);
                 });
             }

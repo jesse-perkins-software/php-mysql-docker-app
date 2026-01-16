@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS budgets (
 );
 
 -- Insert default account types
-INSERT INTO accountTypes (typeName) VALUES ('Savings'), ('Chequing'), ('Credit Card')
+INSERT INTO accountTypes (typeName) VALUES ('Savings'), ('Chequing'), ('Credit Card'), ('TFSA')
 ON DUPLICATE KEY UPDATE typeName=VALUES(typeName);
 
 -- Insert default bank (for ungrouped accounts)

@@ -19,7 +19,7 @@ INSERT INTO accounts (userID, bankID, accountTypeID, accountName) VALUES
     (@userID, (SELECT bankID FROM banks WHERE bankName = 'CIBC'), 1, 'CIBC Savings'),
     (@userID, (SELECT bankID FROM banks WHERE bankName = 'CIBC'), 2, 'CIBC Chequing'),
     (@userID, (SELECT bankID FROM banks WHERE bankName = 'TD'), 3, 'TD Credit Card'),
-    (@userID, (SELECT bankID FROM banks WHERE bankName = 'RBC'), 1, 'RBC TFSA');
+    (@userID, (SELECT bankID FROM banks WHERE bankName = 'RBC'), 4, 'RBC TFSA');
 
 -- Insert category groups
 INSERT INTO categoryGroups (userID, groupName) VALUES
