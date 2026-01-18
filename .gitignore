@@ -1,3 +1,10 @@
 .env
 app/backend/db_data/
 .idea
+
+# Terraform
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.backup
+infra/*.tfvars
+.terraform.lock.hcl
