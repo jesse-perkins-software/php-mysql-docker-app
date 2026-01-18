@@ -3,8 +3,9 @@ app/backend/db_data/
 .idea
 
 # Terraform
-infra/.terraform/
-infra/*.tfstate
-infra/*.tfstate.backup
-infra/*.tfvars
+.terraform/
+*.tfstate
+*.tfstate.lock.info
+*.tfstate.backup
+*.tfvars
 .terraform.lock.hcl
