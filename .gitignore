@@ -7,3 +7,4 @@ app/backend/db_data/
 *.tfstate
 *.tfstate.*
 *.tfvars
+terraform.tfvars
