@@ -287,9 +287,6 @@
         }
     });
 
-    function viewPage(page) {
-        document.getElementById("command-value").value = page;
-        document.getElementById("nav-form").submit();
-    }
+    <?php include(__DIR__ . '/../js/modal-functions.js'); ?>
 
 </script>

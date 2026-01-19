@@ -187,33 +187,6 @@
 </body>
 </html>
 <script defer>
-    //----- Form Validation -----
-    (() => {
-        'use strict'
-        const forms = document.querySelectorAll('.needs-validation')
-
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
-
-    function submitAction(action) {
-        document.getElementById('action-input').value = action;
-        document.getElementById('editTransactionForm').submit();
-    }
-
-    function viewPage(page) {
-        document.getElementById("command-value").value = page;
-        document.getElementById("nav-form").submit();
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
         let account = `<?php echo $_SESSION["selectedAccount"]; ?>`;
         document.getElementById('account-name').innerHTML = account;

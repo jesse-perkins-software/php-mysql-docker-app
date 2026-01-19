@@ -85,18 +85,6 @@
 </body>
 </html>
 <script defer>
-    //let wrongUser =
-    //    <?php //
-    //        if (empty($wrong_user)) {
-    //            $wrong_user = "false";
-    //        }
-    //        echo $wrong_user;
-    //    ?>//;
-    //
-    //if (wrongUser) {
-    //    document.getElementById("err").style.display = "inline";
-    //}
-    //
     //----- Form Validation -----
     (() => {
         'use strict'

@@ -58,7 +58,7 @@
                     <div class="transaction-info">
                         <div class="input-group">
                             <span class="input-group-text" id="notes-input">Notes</span>
-                            <textarea name="notes" id="notes-entry" class="form-control select-notes" aria-label="notes-selection"></textarea>
+                            <textarea name="notes" id="notes-entry" class="form-control select-notes" aria-label="notes-selection" required></textarea>
                         </div>
                     </div>
 

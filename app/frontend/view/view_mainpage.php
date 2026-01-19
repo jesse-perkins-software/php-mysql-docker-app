@@ -302,23 +302,6 @@
     </div>
 </body>
 <script defer>
-    //----- Form Validation -----
-    (() => {
-        'use strict'
-        const forms = document.querySelectorAll('.needs-validation')
-
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
-
     const first_chart = new Chart(document.getElementById('first-chart'), {
         type: 'doughnut',
         data: {
@@ -399,11 +382,6 @@
             }
         }
     });
-
-    function viewPage(page) {
-        document.getElementById("command-value").value = page;
-        document.getElementById("nav-form").submit();
-    }
 
     document.addEventListener('DOMContentLoaded', function() {
         load_Card1_Info();
@@ -665,6 +643,6 @@
     }
 
 
-
+    <?php include(__DIR__ . '/../js/modal-functions.js'); ?>
 </script>
 </html>

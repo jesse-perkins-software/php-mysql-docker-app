@@ -179,7 +179,6 @@
 
             <div class="add-button">
                 <button class="btn btn-primary" id="save-accounts" data-bs-toggle="modal" data-bs-target="#newAccountModal">Add</button>
-                <button class="btn btn-danger" id="save-accounts" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete</button>
             </div>
 
             <!-- Add Account Model Starts -->
@@ -223,73 +222,12 @@
                 </form>
             </div>
             <!-- Add Account Model Ends -->
-
-            <!-- Delete Account Model Starts -->
-            <div class="modal fade" id="deleteAccountModal">
-                <form action="/../controller/controller.php" method="post" class="needs-validation" novalidate>
-                    <input type="hidden" name="page" value="Settings">
-                    <input type="hidden" name="command" value="DeleteAccount">
-
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Account</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="transaction-info">
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="account-input">Bank</span>
-                                        <select class="form-select select-category" id="choose-bank-name" name="bank" required>
-                                            <option value="" selected>Select...</option>
-
-                                        </select>
-                                    </div>
-                                    <div class="input-group" id="delete-bank-type">
-                                        <span class="input-group-text" id="new-type-input">Type</span>
-                                        <select class="form-select select-category" id="choose-bank-account" name="account-type" required>
-                                            <option value="" selected>Select...</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <input type="submit" class="btn btn-danger" value="Delete">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- Delete Account Model Ends -->
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
 <script defer>
-    (() => {
-        'use strict'
-        const forms = document.querySelectorAll('.needs-validation')
-
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-            }
-
-            form.classList.add('was-validated')
-            }, false)
-        })
-    })()
-
-    function viewPage(page) {
-        document.getElementById("command-value").value = page;
-        document.getElementById("nav-form").submit();
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
         fetch_Categories();
         fetch_Accounts();
@@ -351,7 +289,6 @@
                     optionElement.innerHTML = option;
 
                     document.getElementById('account-options').appendChild(optionElement);
-                    document.getElementById('choose-bank-name').appendChild(optionElement)
                 });
                 document.getElementById('account-options').addEventListener('change', event => {
                     const selectedAccount = event.target.value;
@@ -365,13 +302,6 @@
                         bankType.style.display = "flex";
                         bankName.style.display = "flex";
                     }
-                });
-                document.getElementById('choose-bank-name').addEventListener('change', selectedBank => {
-                    let defaultOption = document.getElementById('choose-bank-account').children[0];
-
-                    document.getElementById('choose-bank-account').replaceChildren(defaultOption);
-
-                    fetchSelectedBankAccount(selectedBank.target.value);
                 });
             }
         };
@@ -484,4 +414,6 @@
             document.getElementById('row-container').appendChild(row);
         }
     }
+
+    <?php include(__DIR__ . '/../js/modal-functions.js'); ?>
 </script>

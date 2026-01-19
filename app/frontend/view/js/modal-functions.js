@@ -1,5 +1,31 @@
 // When adding these functions, you need to manually make a function that
 // fetches the transactions of the page.
+//----- Form Validation -----
+(() => {
+    'use strict'
+    const forms = document.querySelectorAll('.needs-validation')
+
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+
+function viewPage(page) {
+    document.getElementById("command-value").value = page;
+    document.getElementById("nav-form").submit();
+}
+
+function viewAccount(accountName) {
+    document.getElementById("account-value").value = accountName;
+    document.getElementById("account-form").submit();
+}
 
 function makeTransactions(data) {
     let transactionData = data;
@@ -119,7 +145,7 @@ function fetchDescriptionForEdit(selectedCategory, descriptionValue) {
     };
 
     let query = "page=Transactions&command=FetchDescriptionSelectionOptions&selectedCategory=" + selectedCategory;
-    xhttp.open("POST", "/controller.php", true);
+    xhttp.open("POST", "/../controller/controller.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(query);
 }
@@ -146,7 +172,7 @@ function fetchAccounts() {
         }
     };
     let query = "page=Transactions&command=FetchAccountOptions";
-    xhttp.open("POST", "/controller.php", true);
+    xhttp.open("POST", "/../controller/controller.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(query);
 }
@@ -174,7 +200,7 @@ function fetchDescriptionSelectionOptions(selectedCategory) {
     };
 
     let query = "page=Transactions&command=FetchDescriptionSelectionOptions&selectedCategory=" + selectedCategory;
-    xhttp.open("POST", "/controller.php", true);
+    xhttp.open("POST", "/../controller/controller.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(query);
 }
@@ -213,7 +239,7 @@ function fetchCategorySelectionOptions() {
         }
     };
     let query = "page=Transactions&command=FetchCategorySelectionOptions";
-    xhttp.open("POST", "/controller.php", true);
+    xhttp.open("POST", "/../controller/controller.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(query);
 }

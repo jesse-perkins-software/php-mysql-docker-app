@@ -107,16 +107,6 @@
     </div>
 </body>
 <script defer>
-    function viewPage(page) {
-        document.getElementById("command-value").value = page;
-        document.getElementById("nav-form").submit();
-    }
-
-    function viewAccount(accountName) {
-        document.getElementById("account-value").value = accountName;
-        document.getElementById("account-form").submit();
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
         fetchAccountDetails();
     });

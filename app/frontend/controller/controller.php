@@ -237,7 +237,7 @@ if ($page == "SignInPage") {
                 if (($_SESSION["account"] == $_POST["account"]) && ($_SESSION['bank_name'] == $_POST["bank_name"]) && $_SESSION['account_type'] == $_POST["account_type"]) {
                     include(__DIR__ . "/../view/settings/view_settings_categories_and_accounts.php");
                     exit();
-                } else {
+                } else if ($_POST["account"] === "new") {
                     if ($_POST["bank_name"] === "") { // Adding a new account to an existing bank
                         addAccount($_SESSION["userID"], $_POST["account"], null, $_POST["account_type"]);
                         $_SESSION['account'] = $_POST["account"];
@@ -252,20 +252,6 @@ if ($page == "SignInPage") {
                     include(__DIR__ . "/../view/settings/view_settings_categories_and_accounts.php");
                     exit();
                 }
-            }
-            case "DeleteAccount": {
-//                if (canDeleteAccount($_SESSION["userID"])) { ADD THIS
-//                    echo "Cannot delete account";
-//                } else {
-//                    deleteAccount;
-//                    include(page);
-//                    exit();
-//                }
-
-                deleteAccount($_SESSION["userID"], $_POST["bank"], $_POST["account-type"]);
-
-                include(__DIR__ . "/../view/settings/view_settings_categories_and_accounts.php");
-                exit();
             }
             case "GetSelectedBankAccounts": {
                 echo json_encode(existingBankAccounts($_SESSION["userID"], $_POST["selectedBank"]));

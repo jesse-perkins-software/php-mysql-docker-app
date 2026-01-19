@@ -511,12 +511,13 @@ function getAccounts($userID) {
     global $conn;
     $sql1 = "SELECT
                 banks.bankName,
-                GROUP_CONCAT(accounts.accountName SEPARATOR ', ') as accounts
+                GROUP_CONCAT(DISTINCT accounts.accountName SEPARATOR ', ') as accounts
             FROM
-                banks, accounts
+                banks
+            INNER JOIN accounts ON banks.bankID = accounts.bankID
+            INNER JOIN transactions ON accounts.accountID = transactions.accountID
             WHERE
-                userID = '$userID'
-                AND banks.bankID = accounts.bankID
+                transactions.userID = '$userID'
             GROUP BY
                 banks.bankName
             ";
@@ -692,24 +693,6 @@ function getBankID($account) {
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     return $row['bankID'];
-}
-
-function deleteAccount($userID, $bankName, $account_type) {
-    global $conn;
-
-    $accountName = $bankName . " " . $account_type;
-    $bankID = getBankID($bankName);
-    $accountTypeID = getAccountTypeID($account_type);
-
-    $sql = "DELETE FROM
-                accounts
-            WHERE
-                userID = '$userID'
-                AND bankID = '$bankID'
-                AND accountTypeID = '$accountTypeID'
-                AND accountName = '$accountName'
-            ";
-    return mysqli_query($conn, $sql);
 }
 
 function existingBankAccounts($userID, $bankName) {
