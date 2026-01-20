@@ -23,17 +23,18 @@ frontend, PHP + MySQL database for the backend, and GitHub Actions for CI.
 
 #### Additional
 - Terraform
+- Microsoft Azure Account
 
 ## Setup
 1. Clone this repository
 ```aiignore
-git clone https://github.com/jesse-perkins-software/php-mysql-docker-app.git
+git clone https://github.com/jesse-perkins-software/internal-dev-platform.git
 ```
 2. Rename **.env.example** to **.env,** and change the variable values to your choosing.
 
 3. Change directory to the project
 ```
-cd php-mysql-docker-app
+cd internal-dev-platform
 ```
 ## Running the Application
 ### Starting the Docker Application
@@ -47,7 +48,7 @@ docker compose up -d
 
 <br>
 
-#### Stopping the Application
+### Stopping the Application
 ```aiignore
 docker-compose down
 ```
@@ -56,11 +57,11 @@ or
 docker compose down
 ```
 
-#### Access
+### Access
 - http://localhost:3000 for the application
 - http://localhost:3001 for the MySQL database
 
-### Terraform Setup + Usage (Azure ONLY for now)
+## Terraform Setup + Usage (Azure ONLY for now)
 1. Download Terraform
 2. Make a Free/Student Account with Microsoft Azure
 3. Download and login to the Azure CLI
