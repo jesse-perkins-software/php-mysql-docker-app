@@ -397,7 +397,7 @@
     function load_Card1_Info() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState === 4 && this.status === 200) {
                 document.getElementById('current-balance-total').innerHTML = "$" + Number(this.responseText).toLocaleString(undefined, {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
@@ -413,7 +413,7 @@
     function load_Card2_Info() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState === 4 && this.status === 200) {
                 let weeklyTotal = document.getElementById('week-spending-total');
                 if (this.responseText === "") {
                     weeklyTotal.innerHTML = "$0";
@@ -446,7 +446,7 @@
     function load_Card3_Info() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState === 4 && this.status === 200) {
                 let monthlyTotal = document.getElementById('month-spending-total');
                 if (this.responseText === "") {
                     monthlyTotal.innerHTML = "$0";
@@ -479,7 +479,7 @@
     function load_Card4_Info() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState === 4 && this.status === 200) {
                 let recentPurchaseAmount = document.getElementById('most-recent-amount');
                 let recentPurchaseDate = document.getElementById('most-recent-date');
                 let recentPurchaseDescription = document.getElementById('most-recent-description');
@@ -521,7 +521,7 @@
     function load_Card7_Info() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState === 4 && this.status === 200) {
                 let data = this.responseText;
 
                 document.getElementById('biggest-purchase-value').innerHTML = "$" + Number(this.responseText).toLocaleString(undefined, {
@@ -536,113 +536,6 @@
         xhttp.send(query);
     }
 
-
-    // Saving so that I can use this as a template for AJAX requests
-    function updateSavingsRate() {
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                let result = parseFloat(this.responseText);
-                if (isNaN(result)) {
-                    result = 0;
-                }
-
-                let r = result.toFixed(2);
-                document.getElementById("monthSavingsRate").innerText = r + "%";
-            }
-        };
-        let query = "page=MainPage&command=UpdateSavingsRate";
-        xhttp.open("POST", "/../controller/controller.php", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send(query);
-    }
-
-    //----- Search Bar AJAX Request Example
-    function searchTransactions(string) {
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                let newData = JSON.parse(this.responseText);
-                makeTable(newData);
-            }
-        };
-        let query = "page=History&command=UpdateSearch&SearchStr=" + string;
-        xhttp.open("POST", "/../controller/controller.php", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send(query);
-    }
-
-    //----- Contruct Transaction Table -----
-    function makeTable(data) {
-        let str = "";
-
-        str = "<table id='tbl' class='table table-striped-columns table-light align-middle table-hover h-100'>";
-
-        str += "<thead>";
-        str += "<tr>";
-        for (let i in data[0]) {
-            if (i != "Id")
-                str += "<th class='fs-4'>" + i + "</th>";
-        }
-        str += "</tr>";
-        str += "</thead>";
-
-        for (let i = 0; i < data.length; i++) {
-            str += "<tbody class='table-group-divider'>";
-            str += "<tr id='rows'>";
-
-            for (let j in data[i]) {
-                if (j != "Id") {
-                    if (j == "Amount") {
-                        if (data[i]["Category"] == "Income") {
-                            str += "<td class='fs-5 text-success'>$" + data[i][j] + "</td>";
-                        } else {
-                            str += "<td class='fs-5 text-danger'>$" + data[i][j] + "</td>";
-                        }
-                    } else {
-                        str += "<td class='fs-5'>" + data[i][j] + "</td>";
-                    }
-                }
-
-            }
-            str += "<td class='fit-btn-content text-center' id='buttons'>" + "<button data-id='" + data[i]["Id"] + "' class='btn btn-secondary w-75 fs-5 mb-2' data-label='edit' data-bs-toggle='modal' data-bs-target='#transactionModal'>Edit</button>" + "<button data-label='delete' data-id='" + data[i]["Id"] + "' class='btn btn-danger w-75 fs-5'>Delete</button>" + "</td>";
-
-
-            str += "</tr>";
-            str += "</tbody>";
-        }
-
-        str += "</table>";
-
-        document.getElementById("history").innerHTML = str;
-
-        document.querySelectorAll("button[data-id]").forEach(function(eobj) {
-            eobj.addEventListener("click", function() {
-                let xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        let newData = JSON.parse(this.responseText);
-                        makeTable(newData);
-                    }
-                };
-                let id = this.getAttribute("data-id");
-                if (this.getAttribute("data-label") == "delete") {
-                    let query = "page=History&command=RefreshTable&DeleteId=" + id;
-                    xhttp.open("POST", "/../controller/controller.php", true);
-                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    xhttp.send(query);
-                } else if (this.getAttribute("data-label") == "edit") {
-                    let id = this.getAttribute("data-id");
-                    console.log("ID: " + id);
-                    document.getElementById("editId").value = id;
-                }
-            });
-        });
-
-        return str;
-    }
-
-
-    <?php include(__DIR__ . '/../js/modal-functions.js'); ?>
+    <?php include(__DIR__ . '/js/modal-functions.js'); ?>
 </script>
 </html>

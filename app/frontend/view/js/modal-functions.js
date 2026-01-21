@@ -27,10 +27,13 @@ function viewAccount(accountName) {
     document.getElementById("account-form").submit();
 }
 
-function makeTransactions(data) {
+function makeTransactions(data, column) {
     let transactionData = data;
+    let selectedColumn = column;
 
     let total_amount = 0;
+
+    // Dynamically creates each row for each transaction from the SQL database query
     for (let i = 0; i < transactionData.length; i++) {
         let div = document.createElement('div');
         div.className = "row border-bottom individual-transactions";
@@ -83,9 +86,15 @@ function makeTransactions(data) {
         div.appendChild(dateColumn);
         div.appendChild(descriptionColumn)
         div.appendChild(amountColumn);
-        div.appendChild(accountColumn);
-        div.appendChild(categoryColumn);
+        if (selectedColumn !== accountColumn.value) {
+            div.appendChild(accountColumn);
+        }
+        if (selectedColumn !== categoryColumn.value) {
+            div.appendChild(categoryColumn);
+        }
         div.appendChild(notesColumn);
+
+
 
         div.addEventListener('click', function() {
             let transaction = transactionData[i];
@@ -104,7 +113,9 @@ function makeTransactions(data) {
         });
         document.getElementById('transactions-container').appendChild((div));
     }
+
     let total = document.getElementById('account-amount');
+
     if (total_amount < 0) {
         total.className = "text-red";
         total.textContent = "($" + Math.abs(total_amount).toLocaleString(undefined, {

@@ -169,6 +169,6 @@
         document.getElementById('accounts-container').innerHTML = accounts_HTML;
     }
 
-
+    <?php include(__DIR__ . '/../js/modal-functions.js'); ?>
 </script>
 </html>

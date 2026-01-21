@@ -176,7 +176,6 @@
                     <div class="col">Date</div>
                     <div class="col-3">Description</div>
                     <div class="col">Amount</div>
-                    <div class="col-2">Account</div>
                     <div class="col">Category</div>
                     <div class="col-3">Notes</div>
                 </div>
@@ -195,6 +194,9 @@
         fetchAccounts();
         document.getElementById('subpage-new-transactions').value = account;
         document.getElementById('subpage-edit-transactions').value = account;
+        document.getElementById('account-edit').disabled = true;
+        document.getElementById('account-edit-selection').innerHTML = account;
+        document.getElementById('account-options').disabled = true;
     });
 
     function loadTransactions(account) {
@@ -202,7 +204,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 let data = JSON.parse(this.responseText);
-                makeTransactions(data);
+                makeTransactions(data, account);
             }
         };
         let query = "page=Accounts&command=FetchAccountTransactions&account=" + account;
