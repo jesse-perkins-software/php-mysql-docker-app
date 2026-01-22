@@ -22,7 +22,7 @@
                         <div class="input-group">
                             <span class="input-group-text" id="category-input">Category</span>
                             <select class="form-select select-category" id="category-options" name="category" aria-label="category-selection" required>
-                                <option value="" selected>Select...</option>
+                                <option id="category-selection-fixed" value="" selected>Select...</option>
 
                             </select>
                         </div>

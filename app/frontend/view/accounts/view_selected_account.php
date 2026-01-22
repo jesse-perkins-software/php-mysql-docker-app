@@ -194,9 +194,6 @@
         fetchAccounts();
         document.getElementById('subpage-new-transactions').value = account;
         document.getElementById('subpage-edit-transactions').value = account;
-        document.getElementById('account-edit').disabled = true;
-        document.getElementById('account-edit-selection').innerHTML = account;
-        document.getElementById('account-options').disabled = true;
     });
 
     function loadTransactions(account) {

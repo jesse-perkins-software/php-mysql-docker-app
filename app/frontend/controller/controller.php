@@ -88,10 +88,6 @@ if ($page == "SignInPage") {
                 include(__DIR__ . "/../view/accounts/view_selected_account.php");
                 exit();
             }
-            case "History": {
-                include(__DIR__ . "/../view/view_history.php");
-                exit();
-            }
             case "Transactions_Income": {
                 include(__DIR__ . "/../view/transactions/view_transactions_income.php");
                 exit();
@@ -162,34 +158,6 @@ if ($page == "SignInPage") {
                 session_destroy();
                 setcookie("signedin", "", time() - 3600);
                 include(__DIR__ . "/../view/view_signin.php");
-                exit();
-            }
-        }
-    }
-} else if ($page == "History") {
-    session_start();
-    if (!isset($_SESSION["signedin"])) {
-        include(__DIR__ . "/../view/view_signin.php");
-    } else {
-        $command = $_POST["command"];
-        switch($command) {
-            case "RefreshTable": {
-                if (isset($_POST["DeleteId"])) {
-                    //deleteTransaction($_SESSION["username"], $_POST["DeleteId"]);
-                }
-                $transactions = getTopTransactions($_SESSION["username"]);
-                echo $transactions;
-                exit();
-            }
-            case "UpdateSearch": {
-                $transactions = searchTransactions($_SESSION["username"], $_POST["SearchStr"]);
-                echo $transactions;
-                
-                exit();
-            }
-            case "EditTransaction": {
-                //editTransaction($_SESSION["username"], $_POST["Id"], $_POST["amount"], $_POST["category"], $_POST["account"], $_POST["date"]);
-                include(__DIR__ . "/../view/view_history.php");
                 exit();
             }
         }
@@ -267,7 +235,7 @@ if ($page == "SignInPage") {
         $command = $_POST["command"];
         switch ($command) {
             case "NewTransaction": {
-                if (($_SESSION['date'] == $_POST['date']) && ($_SESSION['description'] == $_POST['description']) && ($_SESSION['amount'] == $_POST['amount']) && ($_SESSION['account'] == $_POST['account']) && ($_SESSION['category'] == $_POST['category']) && ($_SESSION['notes'] == $_POST['notes'])) {
+                if ((isset($_SESSION['date'])) && (isset($_SESSION['description'])) && (isset($_SESSION['amount'])) && (isset($_SESSION['account'])) && (isset($_SESSION['category'])) && (isset($_SESSION['notes']))) {
                     if ($_POST['subpage-new'] === "Expenses") {
                         include(__DIR__ . "/../view/transactions/view_transactions_expenses.php");
                     } else if ($_POST['subpage-new'] === "Income") {

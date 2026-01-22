@@ -178,7 +178,6 @@
                     <div class="col-3">Description</div>
                     <div class="col">Amount</div>
                     <div class="col-2">Account</div>
-                    <div class="col">Category</div>
                     <div class="col-3">Notes</div>
                 </div>
             </div>
@@ -201,7 +200,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
-                makeTransactions(data);
+                makeTransactions(data, "Income");
             }
         };
         let query = "page=Transactions&command=FetchTransactions&subpage=Income";

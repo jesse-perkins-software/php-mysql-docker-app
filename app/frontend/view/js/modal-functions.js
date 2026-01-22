@@ -17,6 +17,11 @@
     })
 })()
 
+function submitAction(action) {
+    document.getElementById('action-input').value = action;
+    document.getElementById('editTransactionForm').submit();
+}
+
 function viewPage(page) {
     document.getElementById("command-value").value = page;
     document.getElementById("nav-form").submit();

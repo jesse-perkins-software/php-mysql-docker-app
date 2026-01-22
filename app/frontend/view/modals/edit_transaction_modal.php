@@ -44,7 +44,7 @@
                         <div class="input-group">
                             <span class="input-group-text" id="account-input">Account</span>
                             <select class="form-select select-account" id="account-edit" name="account" aria-label="account-selection" required>
-                                <option value="" selected>Select...</option>
+                                <option id="account-new-selection" value="" selected>Select...</option>
 
                             </select>
                         </div>
