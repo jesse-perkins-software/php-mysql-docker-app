@@ -42,7 +42,7 @@
         }
 
         .progress {
-            height: 0.75em;
+            height: 0.5em;
         }
 
         .row {
@@ -75,13 +75,14 @@
         }
 
         .card-bottom-half {
-            padding-top: 0.2em;
+            padding-top: 0.5em;
         }
 
         .card-top-half, .card-bottom-half {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            gap: 0.2em;
         }
 
         .info-box-pos {
@@ -106,6 +107,7 @@
             flex-direction: row;
             justify-content: space-evenly;
             margin-top: 1em;
+            height: 35vh;
         }
 
         .chart {
@@ -119,6 +121,7 @@
 
         .chart canvas {
             flex: 1;
+            height: 65%;
         }
 
         .row .col:nth-child(1) .card-text:first-child {
@@ -259,6 +262,7 @@
             plugins: {
                 legend: {
                     position: 'bottom',
+                    // display: false
                 }
             },
             cutout: '0%'

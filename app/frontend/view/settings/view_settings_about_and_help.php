@@ -88,14 +88,16 @@
             <p>
                 This Docker project is made to help keep track of finances simple.
                 You can make a budget for yourself, add transactions, and keep
-                track of your spending and saving. This tool is meant to help
+                track of your spending and savings. This tool is meant to help
                 people take control of their finances in an uncomplicated way.
             </p>
             <p>
                 This was made to be a portfolio piece, so if you have copied the
-                GitHub repo and plan to use this for yourself please be aware that
+                GitHub repo and plan to use this for yourself, please be aware that
                 this is not a secure piece of software. As such, this should ONLY
                 be used in your local network and never exposed to the internet.
+                Additionally, since the databse is a Docker container, any new data
+                added won't be persistant and will be lost if you down the service.
             </p>
 
         </div>
@@ -113,5 +115,5 @@
 </body>
 </html>
 <script defer>
-
+    <?php include(__DIR__ . '/../js/modal-functions.js'); ?>
 </script>

@@ -138,11 +138,24 @@
 
         #set-income-budget-form {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: center;
-            align-items: center;
             gap: 0.5em;
             padding: 1em;
+        }
+
+        #form-save {
+            margin-top: 0.5em;
+        }
+
+        .budget-titles {
+            font-size: 2em;
+            text-align: center;
+        }
+
+        .input-group-text.label {
+            width: 6em;
+            text-align: center;
         }
 
 
@@ -158,13 +171,25 @@
                     <input type="hidden" name="page" value="Transactions">
                     <input type="hidden" name="command" value="SetIncome">
 
+                    <p class="budget-titles">Expected</p>
+
                     <div class="input-group">
-                        <span class="input-group-text" id="income-budget">Set Income</span>
-                        <span class="input-group-text" id="dollar-symbol">$</span>
+                        <span class="input-group-text label">Income</span>
+                        <span class="input-group-text">$</span>
                         <input type="text" class="form-control" placeholder="5,000" value="1,000">
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-text label">Expenses</span>
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="10,000" value="2,000">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text label">Savings</span>
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="15,000" value="3,000">
+                    </div>
 
-                    <input type="submit" class="btn btn-primary" value="Save">
+                    <input type="submit" id="form-save" class="btn btn-primary" value="Save">
                 </form>
             </div>
         </div>
