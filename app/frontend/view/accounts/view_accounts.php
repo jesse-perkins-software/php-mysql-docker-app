@@ -126,12 +126,17 @@
     }
 
     function generateAccountHeaders(data) {
-        console.log(data);
-
         let accounts_HTML = "";
 
         data['accountTotals'].forEach(account => {
             let account_transactions = data['accountDetails'].filter(transactions => transactions['accountName'] === account['accountName']);
+
+            let accountTotal = account['total'];
+            if (accountTotal < 0) {
+                accountTotal = "(" + Math.abs(Number(accountTotal)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ")";
+            } else {
+                accountTotal = Number(accountTotal).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
 
             accounts_HTML += `
                 <a href="#" class="accounts-a-tag" onclick="viewAccount('${account['accountName']}')">
@@ -141,19 +146,26 @@
                                 <h4 class="account-type">${account['accountName']}</h4>
                                 <p class="account-number"></p>
                             </div>
-                            <h4 class="account-amount">${Number(account['total']).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h4>
+                            <h4 class="account-amount">$${accountTotal}</h4>
                         </div>
             `;
 
             accounts_HTML += `<div class="account-transactions">`;
             account_transactions.forEach(transaction => {
+                let accountAmount = transaction['amount'];
+                if (accountAmount < 0) {
+                    accountAmount = "(" + Math.abs(Number(accountAmount)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ")";
+                } else {
+                    accountAmount = Number(accountAmount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
+
                 accounts_HTML += `
                     <div class="transaction border-bottom border-top">
                             <div class="transaction-details">
                                 <p class="transaction-place">${transaction['description']}</p>
                                 <p class="transaction-date">${transaction['date']}</p>
                             </div>
-                            <p class="transaction-amount">${Number(transaction['amount']).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                            <p class="transaction-amount">${accountAmount}</p>
                         </div>
                 `;
             });

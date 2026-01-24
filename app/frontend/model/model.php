@@ -156,7 +156,35 @@ function getTransactions($userID, $subpage) {
                 categoryGroups ON categories.groupID = categoryGroups.groupID
             WHERE
                 transactions.userID = '$userID'
-                AND transactions.amount < 0
+                AND transactions.categoryID NOT BETWEEN 4 AND 6
+                AND transactions.categoryID NOT BETWEEN 1 AND 3
+            ORDER BY transactions.date DESC";
+        $result = mysqli_query($conn, $sql);
+        $rows = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+        return json_encode($rows);
+    } else if ($subpage === "Savings") {
+        $sql = "SELECT 
+                transactions.transactionID,
+                transactions.date, 
+                transactions.description, 
+                transactions.amount, 
+                accounts.accountName, 
+                categoryGroups.groupName, 
+                transactions.notes
+            FROM 
+                transactions
+            INNER JOIN
+                accounts ON transactions.accountID = accounts.accountID
+            INNER JOIN
+                categories ON transactions.categoryID = categories.categoryID
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            WHERE
+                transactions.userID = '$userID'
+                AND transactions.categoryID BETWEEN 4 AND 6
             ORDER BY transactions.date DESC";
         $result = mysqli_query($conn, $sql);
         $rows = [];

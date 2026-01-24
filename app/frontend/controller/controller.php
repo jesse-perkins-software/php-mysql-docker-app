@@ -96,6 +96,10 @@ if ($page == "SignInPage") {
                 include(__DIR__ . "/../view/transactions/view_transactions_expenses.php");
                 exit();
             }
+            case "Transactions_Savings": {
+                include(__DIR__ . "/../view/transactions/view_transactions_savings.php");
+                exit();
+            }
             case "Transactions_Transfers": {
                 include(__DIR__ . "/../view/transactions/view_transactions_transfers.php");
                 exit();
