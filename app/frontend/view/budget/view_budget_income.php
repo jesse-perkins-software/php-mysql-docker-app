@@ -70,10 +70,6 @@
             padding: 1em 1em 1em 1em;
         }
 
-        h4 {
-            font-size: 1.5em;
-        }
-
         #account-name span {
             opacity: 75%;
             font-weight: normal;
@@ -128,15 +124,16 @@
             padding-right: 1em;
         }
 
-        #set-income-container {
+        #income-container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: center;
             align-items: start;
+            gap: 10%;
             padding: 1em 0 0 1em;
         }
 
-        #set-income-budget-form {
+        #set-actual-income-budget-form, #set-expected-income-budget-form {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -154,7 +151,7 @@
         }
 
         .input-group-text.label {
-            width: 6em;
+            width: 7.5em;
             text-align: center;
         }
 
@@ -165,79 +162,69 @@
     <?php require(__DIR__ . '/../navigation.php'); ?>
 
     <div class="" id="content-container">
-        <div id="set-income-container">
-            <div class="border shadow-sm rounded" id="set-income">
-                <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="set-income-budget-form" novalidate>
+        <div id="income-container">
+            <div class="border shadow-sm rounded" id="set-expected-income">
+                <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="set-expected-income-budget-form" novalidate>
                     <input type="hidden" name="page" value="Transactions">
-                    <input type="hidden" name="command" value="SetIncome">
+                    <input type="hidden" name="command" value="SetExpectedIncome">
 
                     <p class="budget-titles">Expected</p>
 
                     <div class="input-group">
-                        <span class="input-group-text label">Income</span>
+                        <span class="input-group-text label">Gifts</span>
                         <span class="input-group-text">$</span>
                         <input type="text" class="form-control" placeholder="5,000" value="1,000">
                     </div>
                     <div class="input-group">
-                        <span class="input-group-text label">Expenses</span>
+                        <span class="input-group-text label">Investments</span>
                         <span class="input-group-text">$</span>
                         <input type="text" class="form-control" placeholder="10,000" value="2,000">
                     </div>
                     <div class="input-group">
-                        <span class="input-group-text label">Savings</span>
+                        <span class="input-group-text label">Salary/Wages</span>
                         <span class="input-group-text">$</span>
                         <input type="text" class="form-control" placeholder="15,000" value="3,000">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text label">Total</span>
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="30,000" value="3,000">
                     </div>
 
                     <input type="submit" id="form-save" class="btn btn-primary" value="Save">
                 </form>
             </div>
-        </div>
-        <div class="" id="account-header">
-            <div id="account-type">
-                <h4 id="account-name">Actual Income Received</h4>
-            </div>
-            <h4 id="account-amount">$3,000</h4>
-        </div>
 
-        <div class="" id="account-transactions">
-            <div class="container" id="transactions-container">
-                <div class="row border-bottom border-top" id="transaction-column-titles">
-                    <div class="col">Date</div>
-                    <div class="col-4">Description</div>
-                    <div class="col">Amount</div>
-                    <div class="col">Account</div>
-                    <div class="col">Category</div>
-                    <div class="col-3">Notes</div>
-                </div>
+            <div class="border shadow-sm rounded" id="set-actual-income">
+                <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="set-actual-income-budget-form" novalidate>
+                    <input type="hidden" name="page" value="Transactions">
+                    <input type="hidden" name="command" value="SetActualIncome">
 
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">22-02-2024</div>
-                    <div class="col-4">Royal Bank of Canada</div>
-                    <div class="col">$90</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Wants</div>
-                    <div class="col-3">Date Night</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">25-02-2024</div>
-                    <div class="col-4">Walmart</div>
-                    <div class="col">$40</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3">Peanuts</div>
-                </div>
-                <div class="row border-bottom individual-transactions" id="">
-                    <div class="col">30-02-2024</div>
-                    <div class="col-4">Continental Barbershop</div>
-                    <div class="col">$30</div>
-                    <div class="col">Savings</div>
-                    <div class="col">Needs</div>
-                    <div class="col-3"></div>
-                </div>
+                    <p class="budget-titles">Actual</p>
+
+                    <div class="input-group">
+                        <span class="input-group-text label">Gifts</span>
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="5,000" value="1,000" disabled>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text label">Investments</span>
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="10,000" value="2,000" disabled>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text label">Salary/Wages</span>
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="15,000" value="3,000" disabled>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text label">Total</span>
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="30,000" value="3,000" disabled>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
