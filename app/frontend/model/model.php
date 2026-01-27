@@ -107,6 +107,28 @@ function getCategoryID($groupID, $description) {
     }
 }
 
+function getCategoryIDs($userID, $groupName) {
+    global $conn;
+
+    $sql = "SELECT
+                MIN(categories.categoryID) AS MIN,
+                MAX(categories.categoryID) AS MAX
+            FROM
+                categories
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            WHERE
+                categoryGroups.userID = '$userID'
+                AND categoryGroups.groupName = '$groupName'
+            ";
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return json_encode($rows);
+}
+
 function getTransactions($userID, $subpage) {
     global $conn;
 
@@ -166,6 +188,8 @@ function getTransactions($userID, $subpage) {
         }
         return json_encode($rows);
     } else if ($subpage === "Savings") {
+        $categoryIDs = getCategoryIDs($userID, $subpage);
+
         $sql = "SELECT 
                 transactions.transactionID,
                 transactions.date, 

@@ -199,8 +199,9 @@
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                let data = JSON.parse(this.responseText);
-                makeTransactions(data, "Savings");
+                // let data = JSON.parse(this.responseText);
+                // makeTransactions(data, "Savings");
+                console.log(this.responseText);
             }
         };
         let query = "page=Transactions&command=FetchTransactions&subpage=Savings";
