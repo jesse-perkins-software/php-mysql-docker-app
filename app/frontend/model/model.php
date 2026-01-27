@@ -151,7 +151,27 @@ function getTransactions($userID, $subpage) {
                 categoryGroups ON categories.groupID = categoryGroups.groupID
             WHERE
                 transactions.userID = '$userID'
-                AND transactions.amount > 0
+                AND transactions.categoryID BETWEEN (
+                    SELECT
+                        MIN(categories.categoryID)
+                    FROM
+                        categories
+                    INNER JOIN
+                        categoryGroups ON categories.groupID = categoryGroups.groupID
+                    WHERE
+                        categoryGroups.userID = '$userID'
+                        AND categoryGroups.groupName = '$subpage'
+                ) AND (
+                    SELECT
+                        MAX(categories.categoryID)
+                    FROM
+                        categories
+                    INNER JOIN
+                        categoryGroups ON categories.groupID = categoryGroups.groupID
+                    WHERE
+                        categoryGroups.userID = '$userID'
+                        AND categoryGroups.groupName = '$subpage'
+                )
             ORDER BY transactions.date DESC";
         $result = mysqli_query($conn, $sql);
         $rows = [];
@@ -178,8 +198,48 @@ function getTransactions($userID, $subpage) {
                 categoryGroups ON categories.groupID = categoryGroups.groupID
             WHERE
                 transactions.userID = '$userID'
-                AND transactions.categoryID NOT BETWEEN 4 AND 6
-                AND transactions.categoryID NOT BETWEEN 1 AND 3
+                AND transactions.categoryID NOT BETWEEN (
+                    SELECT
+                        MIN(categories.categoryID)
+                    FROM
+                        categories
+                    INNER JOIN
+                        categoryGroups ON categories.groupID = categoryGroups.groupID
+                    WHERE
+                        categoryGroups.userID = '$userID'
+                        AND categoryGroups.groupName = 'Savings'
+                ) AND (
+                    SELECT
+                        MAX(categories.categoryID)
+                    FROM
+                        categories
+                    INNER JOIN
+                        categoryGroups ON categories.groupID = categoryGroups.groupID
+                    WHERE
+                        categoryGroups.userID = '$userID'
+                        AND categoryGroups.groupName = 'Savings'
+                )
+                AND transactions.categoryID NOT BETWEEN (
+                    SELECT
+                        MIN(categories.categoryID)
+                    FROM
+                        categories
+                    INNER JOIN
+                        categoryGroups ON categories.groupID = categoryGroups.groupID
+                    WHERE
+                        categoryGroups.userID = '$userID'
+                        AND categoryGroups.groupName = 'Income'
+                ) AND (
+                    SELECT
+                        MAX(categories.categoryID)
+                    FROM
+                        categories
+                    INNER JOIN
+                        categoryGroups ON categories.groupID = categoryGroups.groupID
+                    WHERE
+                        categoryGroups.userID = '$userID'
+                        AND categoryGroups.groupName = 'Income'
+                )
             ORDER BY transactions.date DESC";
         $result = mysqli_query($conn, $sql);
         $rows = [];
@@ -188,8 +248,6 @@ function getTransactions($userID, $subpage) {
         }
         return json_encode($rows);
     } else if ($subpage === "Savings") {
-        $categoryIDs = getCategoryIDs($userID, $subpage);
-
         $sql = "SELECT 
                 transactions.transactionID,
                 transactions.date, 
@@ -208,7 +266,27 @@ function getTransactions($userID, $subpage) {
                 categoryGroups ON categories.groupID = categoryGroups.groupID
             WHERE
                 transactions.userID = '$userID'
-                AND transactions.categoryID BETWEEN 4 AND 6
+                AND transactions.categoryID BETWEEN (
+                    SELECT
+                        MIN(categories.categoryID)
+                    FROM
+                        categories
+                    INNER JOIN
+                        categoryGroups ON categories.groupID = categoryGroups.groupID
+                    WHERE
+                        categoryGroups.userID = '$userID'
+                        AND categoryGroups.groupName = '$subpage'
+                ) AND (
+                    SELECT
+                        MAX(categories.categoryID)
+                    FROM
+                        categories
+                    INNER JOIN
+                        categoryGroups ON categories.groupID = categoryGroups.groupID
+                    WHERE
+                        categoryGroups.userID = '$userID'
+                        AND categoryGroups.groupName = '$subpage'
+                )
             ORDER BY transactions.date DESC";
         $result = mysqli_query($conn, $sql);
         $rows = [];

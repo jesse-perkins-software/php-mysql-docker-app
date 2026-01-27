@@ -328,8 +328,7 @@ if ($page == "SignInPage") {
             }
             case "FetchTransactions": {
                 $transactions = getTransactions($_SESSION["userID"], $_POST['subpage']);
-                $categoryIDs = getCategoryIDs($_SESSION["userID"], "Savings");
-                echo $categoryIDs;
+                echo $transactions;
                 exit();
             }
             case "FetchCategorySelectionOptions": {
