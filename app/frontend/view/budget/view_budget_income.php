@@ -155,6 +155,11 @@
             text-align: center;
         }
 
+        .expected-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+        }
 
     </style>
 </head>
@@ -170,25 +175,12 @@
 
                     <p class="budget-titles">Expected</p>
 
-                    <div class="input-group">
-                        <span class="input-group-text label">Gifts</span>
-                        <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="5,000" value="1,000">
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text label">Investments</span>
-                        <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="10,000" value="2,000">
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text label">Salary/Wages</span>
-                        <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="15,000" value="3,000">
-                    </div>
+                    <div class="expected-categories"></div>
+
                     <div class="input-group">
                         <span class="input-group-text label">Total</span>
                         <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="30,000" value="3,000">
+                        <input type="text" class="form-control" placeholder="3,000">
                     </div>
 
                     <input type="submit" id="form-save" class="btn btn-primary" value="Save">
@@ -202,21 +194,8 @@
 
                     <p class="budget-titles">Actual</p>
 
-                    <div class="input-group">
-                        <span class="input-group-text label">Gifts</span>
-                        <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="5,000" value="1,000" disabled>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text label">Investments</span>
-                        <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="10,000" value="2,000" disabled>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text label">Salary/Wages</span>
-                        <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="15,000" value="3,000" disabled>
-                    </div>
+                    <div class="expected-categories"></div>
+
                     <div class="input-group">
                         <span class="input-group-text label">Total</span>
                         <span class="input-group-text">$</span>
@@ -229,5 +208,42 @@
 </body>
 </html>
 <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadIncomeCategories();
+    });
+
+    function loadIncomeCategories() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                formatCategories(data);
+            }
+        };
+        let query = "page=Budget&command=LoadIncomeCategories";
+        xhttp.open("POST", "/../controller/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function formatCategories(data) {
+        let containers = document.querySelectorAll(".expected-categories");
+
+        containers.forEach(container => {
+            let div = "";
+            data.forEach(category => {
+                div += `
+                    <div class="input-group">
+                        <span class="input-group-text label">${category}</span>
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="30,000" value="3,000">
+                    </div>
+                    `;
+            });
+            container.innerHTML += div;
+        });
+    }
+
+
     <?php include(__DIR__ . '/../js/modal-functions.js'); ?>
 </script>

@@ -616,9 +616,9 @@ function getLargestPurchase($userID) {
     return $row['largest'];
 }
 
-function getCategories($userID) {
+function getUserCategories($userID) {
     global $conn;
-    $sql1 = "SELECT
+    $sql = "SELECT
                 categoryGroups.groupName,
                 GROUP_CONCAT(categories.categoryName SEPARATOR ', ') as categories
             FROM
@@ -629,10 +629,31 @@ function getCategories($userID) {
             GROUP BY
                 categoryGroups.groupID
             ";
-    $result1 = mysqli_query($conn, $sql1);
+    $result = mysqli_query($conn, $sql);
     $categories = [];
-    while ($row = mysqli_fetch_assoc($result1)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         $categories[] = $row;
+    }
+    return $categories;
+}
+
+function getCategories($userID, $categoryGroup) {
+    global $conn;
+
+    $sql = "SELECT
+                categories.categoryName
+            FROM
+                categories
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            WHERE
+                categoryGroups.userID = '$userID'
+                AND categoryGroups.groupName = '$categoryGroup'
+            ";
+    $result = mysqli_query($conn, $sql);
+    $categories = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $categories[] = $row['categoryName'];
     }
     return $categories;
 }

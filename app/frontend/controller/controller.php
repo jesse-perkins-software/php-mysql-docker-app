@@ -178,7 +178,7 @@ if ($page == "SignInPage") {
                 exit();
             }
             case "LoadCategories": {
-                echo json_encode(getCategories($_SESSION["userID"]));
+                echo json_encode(getUserCategories($_SESSION["userID"]));
                 exit();
             }
             case "GetCategoryOptions": {
@@ -372,6 +372,19 @@ if ($page == "SignInPage") {
                     include(__DIR__ . "/../view/accounts/view_selected_account.php");
                 }
                 exit();
+            }
+        }
+    }
+} else if ($page == "Budget") {
+    session_start();
+    if (!isset($_SESSION["signedin"])) {
+        include(__DIR__ . "/../view/view_signin.php");
+    } else {
+        $command = $_POST["command"];
+
+        switch ($command) {
+            case "LoadIncomeCategories": {
+                echo json_encode(getCategories($_SESSION["userID"], "Income"));
             }
         }
     }
