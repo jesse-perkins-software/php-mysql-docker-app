@@ -175,12 +175,12 @@
 
                     <p class="budget-titles">Expected</p>
 
-                    <div class="expected-categories"></div>
+                    <div class="expected-categories" id="expected-categories"></div>
 
                     <div class="input-group">
                         <span class="input-group-text label">Total</span>
                         <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="3,000">
+                        <input type="text" id="expected-total" class="form-control" disabled>
                     </div>
 
                     <input type="submit" id="form-save" class="btn btn-primary" value="Save">
@@ -194,12 +194,12 @@
 
                     <p class="budget-titles">Actual</p>
 
-                    <div class="expected-categories"></div>
+                    <div class="expected-categories" id="actual-categories"></div>
 
                     <div class="input-group">
                         <span class="input-group-text label">Total</span>
                         <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="30,000" value="3,000" disabled>
+                        <input type="text" id="actual-total" class="form-control" placeholder="30,000" value="3,000" disabled>
                     </div>
                 </form>
             </div>
@@ -226,21 +226,78 @@
         xhttp.send(query);
     }
 
+    function updateExpectedTotal() {
+        let inputs = document.querySelectorAll('#expected-categories input');
+        let total = 0;
+
+        inputs.forEach(input => {
+            let val = parseFloat(input.value.replace(/,/g, ''));
+            if (!isNaN(val)) {
+                total += val;
+            }
+        });
+
+        document.getElementById('expected-total').value = total.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
+    function formatInput(category) {
+        let amount = parseFloat(document.getElementById(category).value.replace(/,/g, ''));
+        if (!isNaN(amount)) {
+            document.getElementById(category).value = Number(amount).toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+    }
+
     function formatCategories(data) {
         let containers = document.querySelectorAll(".expected-categories");
 
         containers.forEach(container => {
             let div = "";
-            data.forEach(category => {
-                div += `
+
+            if (container.id === "actual-categories") {
+                let total = 0;
+
+                data.forEach(item => {
+                    let category = item['categoryName'];
+                    let amount = Number(item['amount']).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+
+                    total += Number(item['amount']);
+                    document.getElementById('actual-total').value = total.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+
+                    div += `
                     <div class="input-group">
                         <span class="input-group-text label">${category}</span>
                         <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="30,000" value="3,000">
+                        <input type="text" class="form-control" value=${amount} disabled>
                     </div>
                     `;
-            });
-            container.innerHTML += div;
+                });
+                container.innerHTML += div;
+            } else {
+                data.forEach(item => {
+                    let category = item['categoryName'];
+
+                    div += `
+                    <div class="input-group">
+                        <span class="input-group-text label">${category}</span>
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" id=${category} onblur="formatInput('${category}')" onkeyup="updateExpectedTotal()">
+                    </div>
+                    `;
+                });
+                container.innerHTML += div;
+            }
         });
     }
 
