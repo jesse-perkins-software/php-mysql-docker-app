@@ -124,7 +124,7 @@
             padding-right: 1em;
         }
 
-        #income-container {
+        #savings-container {
             display: flex;
             flex-direction: row;
             justify-content: center;
@@ -133,7 +133,7 @@
             padding: 1em 0 0 1em;
         }
 
-        #set-actual-income-budget-form, #set-expected-income-budget-form {
+        #set-actual-savings-budget-form, #set-expected-savings-budget-form {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -151,7 +151,7 @@
         }
 
         .input-group-text.label {
-            width: 7.5em;
+            width: 9em;
             text-align: center;
         }
 
@@ -167,11 +167,11 @@
     <?php require(__DIR__ . '/../navigation.php'); ?>
 
     <div class="" id="content-container">
-        <div id="income-container">
-            <div class="border shadow-sm rounded" id="set-expected-income">
-                <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="set-expected-income-budget-form" novalidate>
+        <div id="savings-container">
+            <div class="border shadow-sm rounded" id="set-expected-savings">
+                <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="set-expected-savings-budget-form" novalidate>
                     <input type="hidden" name="page" value="Transactions">
-                    <input type="hidden" name="command" value="SetExpectedIncome">
+                    <input type="hidden" name="command" value="SetExpectedSavings">
 
                     <p class="budget-titles">Expected</p>
 
@@ -187,10 +187,10 @@
                 </form>
             </div>
 
-            <div class="border shadow-sm rounded" id="set-actual-income">
-                <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="set-actual-income-budget-form" novalidate>
+            <div class="border shadow-sm rounded" id="set-actual-savings">
+                <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="set-actual-savings-budget-form" novalidate>
                     <input type="hidden" name="page" value="Transactions">
-                    <input type="hidden" name="command" value="SetActualIncome">
+                    <input type="hidden" name="command" value="SetActualSavings">
 
                     <p class="budget-titles">Actual</p>
 
@@ -209,10 +209,10 @@
 </html>
 <script defer>
     document.addEventListener('DOMContentLoaded', function() {
-        loadIncomeCategories();
+        loadSavingsCategories();
     });
 
-    function loadIncomeCategories() {
+    function loadSavingsCategories() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
@@ -220,7 +220,7 @@
                 formatCategories(data);
             }
         };
-        let query = "page=Budget&command=LoadIncomeCategories&budgetCategory=Income";
+        let query = "page=Budget&command=LoadSavingsCategories&budgetCategory=Savings";
         xhttp.open("POST", "/../controller/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);

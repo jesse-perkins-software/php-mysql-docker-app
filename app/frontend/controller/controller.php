@@ -112,6 +112,10 @@ if ($page == "SignInPage") {
                 include(__DIR__ . "/../view/budget/view_budget_expenses.php");
                 exit();
             }
+            case "Budget_Savings": {
+                include(__DIR__ . "/../view/budget/view_budget_savings.php");
+                exit();
+            }
             case "Budget_vs_Actual": {
                 include(__DIR__ . "/../view/budget/view_budget_vs_actual.php");
                 exit();
@@ -384,7 +388,12 @@ if ($page == "SignInPage") {
 
         switch ($command) {
             case "LoadIncomeCategories": {
-                echo json_encode(getCategories($_SESSION["userID"], "Income"));
+                echo json_encode(getCategories($_SESSION["userID"], $_POST['budgetCategory']));
+                exit();
+            }
+            case "LoadSavingsCategories": {
+                echo json_encode(getCategories($_SESSION["userID"], $_POST['budgetCategory']));
+                exit();
             }
         }
     }
