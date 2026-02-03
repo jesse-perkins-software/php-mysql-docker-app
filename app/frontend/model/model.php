@@ -640,7 +640,8 @@ function getUserCategories($userID) {
 function getCategories($userID, $categoryGroup) {
     global $conn;
 
-    $sql = "SELECT
+    if ($categoryGroup == "Income" || $categoryGroup == "Savings") {
+        $sql = "SELECT
                 categories.categoryName,
                 SUM(transactions.amount) AS amount
             FROM
@@ -655,12 +656,36 @@ function getCategories($userID, $categoryGroup) {
             GROUP BY
                 categories.categoryName
             ";
-    $result = mysqli_query($conn, $sql);
-    $categories = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $categories[] = $row;
+        $result = mysqli_query($conn, $sql);
+        $categories = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $categories[] = $row;
+        }
+        return $categories;
+    } else {
+        $sql = "SELECT
+                categories.categoryName,
+                SUM(transactions.amount) AS amount
+            FROM
+                categories
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            LEFT JOIN
+                transactions ON categories.categoryID = transactions.categoryID
+            WHERE
+                categoryGroups.userID = '$userID'
+                AND categoryGroups.groupName != 'Income'
+                AND categoryGroups.groupName != 'Savings'
+            GROUP BY
+                categories.categoryName
+            ";
+        $result = mysqli_query($conn, $sql);
+        $categories = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $categories[] = $row;
+        }
+        return $categories;
     }
-    return $categories;
 }
 
 function getAccounts($userID) {

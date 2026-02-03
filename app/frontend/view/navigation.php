@@ -36,7 +36,7 @@
         </ul>
     </div>
 
-    <div class="nav-section mt-3" id="nav-profile">
+    <div class="nav-section mt-2" id="nav-profile">
         <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Budget</p>
 
         <ul class="navbar-nav lh-1">
@@ -55,7 +55,7 @@
         </ul>
     </div>
 
-    <div class="nav-section mt-3" id="nav-profile">
+    <div class="nav-section mt-2" id="nav-profile">
         <p class="text-start ps-3 pe-3 w-100 fw-bold border-bottom mb-0">Settings</p>
 
         <ul class="navbar-nav lh-1">

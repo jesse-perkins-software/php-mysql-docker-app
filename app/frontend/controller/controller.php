@@ -396,6 +396,10 @@ if ($page == "SignInPage") {
                 echo json_encode(getCategories($_SESSION["userID"], $_POST['budgetCategory']));
                 exit();
             }
+            case "LoadExpensesCategories": {
+                echo json_encode(getCategories($_SESSION["userID"], $_POST['budgetCategory']));
+                exit();
+            }
         }
     }
 }

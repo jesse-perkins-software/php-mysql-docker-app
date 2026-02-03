@@ -199,7 +199,7 @@
                     <div class="input-group">
                         <span class="input-group-text label">Total</span>
                         <span class="input-group-text">$</span>
-                        <input type="text" id="actual-total" class="form-control" placeholder="30,000" value="3,000" disabled>
+                        <input type="text" id="actual-total" class="form-control" placeholder="30,000" disabled>
                     </div>
                 </form>
             </div>
