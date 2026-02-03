@@ -58,31 +58,31 @@
 <body class="bg-light">
     <div class="container bg-white shadow rounded-3" id="content-container">
         <h3 id="form-title">Please Fill In The Form To Make An Account With Us</h3>
-        <form id="signUpForm" action="/controller.php" method="post" class="needs-validation p-3 row" novalidate>
+        <form id="signUpForm" action="../controller/controller.php" method="post" class="needs-validation p-3 row" novalidate>
             <input type="hidden" name="page" value="SignUpPage">
             <input type="hidden" name="command" value="SignedUp">
 
             <div class="col-md-6">
                 <label for="inputFirstName" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="inputFirstName">
+                <input type="text" name="firstName" class="form-control" id="inputFirstName">
             </div>
             <div class="col-md-6">
                 <label for="inputLastName" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="inputLastName">
+                <input type="text" name="lastName" class="form-control" id="inputLastName">
             </div>
 
             <div class="col-12 pt-3">
                 <label for="inputEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail" placeholder="">
+                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="">
             </div>
 
             <div class="col-md-6 pt-3 pb-5">
                 <label for="inputUsername" class="form-label">Username</label>
-                <input type="text" class="form-control" id="inputUsername">
+                <input type="text" name="username" class="form-control" id="inputUsername">
             </div>
             <div class="col-md-6 pt-3">
                 <label for="inputPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword">
+                <input type="password" name="password" class="form-control" id="inputPassword">
             </div>
 
             <div id="sign-up-container">
@@ -95,7 +95,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-        <form action="/controller.php" method="post">
+        <form action="../controller/controller.php" method="post">
             <input type="hidden" name="page" value="SignUpPage">
             <input type="hidden" name="command" value="SignIn">
 

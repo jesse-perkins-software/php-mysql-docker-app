@@ -874,4 +874,26 @@ function existingBankAccounts($userID, $bankName) {
     return $rows;
 }
 
+function userExists($username, $password) {
+    global $conn;
+    $sql = "SELECT * FROM users WHERE (username = '$username') AND (password = '$password')";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function registerNewUser($firstName, $lastName, $email, $username, $password) {
+    global $conn;
+
+    $sql = "INSERT INTO users 
+                (firstName, lastName, email, username, password)
+            VALUES
+                ('$firstName', '$lastName', '$email', '$username', '$password')
+            ";
+    return mysqli_query($conn, $sql);
+}
+
 ?>

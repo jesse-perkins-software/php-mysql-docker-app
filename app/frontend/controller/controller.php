@@ -40,21 +40,22 @@ if ($page == "SignInPage") {
     $command = $_POST["command"];
     switch($command) {
         case "SignedUp": {
-            if (userExists($_POST["username"])) {
+            if (userExists($_POST["username"], $_POST["password"])) {
                 include(__DIR__ . "/../view/view_signup.php");
+                exit();
             } else {
                 session_start();
                 $_SESSION["username"] = $_POST["username"];
                 $_SESSION["password"] = $_POST["password"];
-                $_SESSION["firstname"] = $_POST["firstname"];
-                $_SESSION["lastname"] = $_POST["lastname"];
+                $_SESSION["firstname"] = $_POST["firstName"];
+                $_SESSION["lastname"] = $_POST["lastName"];
+                $_SESSION["email"] = $_POST["email"];
                 $_SESSION["signedin"] = true;
                 setcookie("signedin", true, time() + 86400 * 7);
-                registerNewUser($_POST["firstname"], $_POST["lastname"], $_POST["username"], $_POST["password"], $_POST["email"]);
+                registerNewUser($_POST["firstName"], $_POST["lastName"], $_POST["email"], $_POST["username"], $_POST["password"]);
                 include(__DIR__ . "/../view/view_mainpage.php");
+                exit();
             }
-            
-            exit();
         }
         case "SignIn": {
             include(__DIR__ . "/../view/view_signin.php");

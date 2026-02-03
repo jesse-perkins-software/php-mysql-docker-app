@@ -75,7 +75,7 @@
     </div>
     
     <div class="d-flex justify-content-center">
-        <form action="/controller.php" method="post">
+        <form action="../controller/controller.php" method="post">
             <input type="hidden" name="page" value="SignInPage">
             <input type="hidden" name="command" value="SignUp">
 
