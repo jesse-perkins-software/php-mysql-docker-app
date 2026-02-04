@@ -134,45 +134,45 @@ function getTransactions($userID, $subpage) {
 
     if ($subpage === "Income") {
         $sql = "SELECT 
-                transactions.transactionID,
-                transactions.date, 
-                transactions.description, 
-                transactions.amount, 
-                accounts.accountName, 
-                categoryGroups.groupName, 
-                transactions.notes
-            FROM 
-                transactions
-            INNER JOIN
-                accounts ON transactions.accountID = accounts.accountID
-            INNER JOIN
-                categories ON transactions.categoryID = categories.categoryID
-            INNER JOIN
-                categoryGroups ON categories.groupID = categoryGroups.groupID
-            WHERE
-                transactions.userID = '$userID'
-                AND transactions.categoryID BETWEEN (
-                    SELECT
-                        MIN(categories.categoryID)
-                    FROM
-                        categories
-                    INNER JOIN
-                        categoryGroups ON categories.groupID = categoryGroups.groupID
-                    WHERE
-                        categoryGroups.userID = '$userID'
-                        AND categoryGroups.groupName = '$subpage'
-                ) AND (
-                    SELECT
-                        MAX(categories.categoryID)
-                    FROM
-                        categories
-                    INNER JOIN
-                        categoryGroups ON categories.groupID = categoryGroups.groupID
-                    WHERE
-                        categoryGroups.userID = '$userID'
-                        AND categoryGroups.groupName = '$subpage'
-                )
-            ORDER BY transactions.date DESC";
+                    transactions.transactionID,
+                    transactions.date, 
+                    transactions.description, 
+                    transactions.amount, 
+                    accounts.accountName, 
+                    categoryGroups.groupName, 
+                    transactions.notes
+                FROM 
+                    transactions
+                INNER JOIN
+                    accounts ON transactions.accountID = accounts.accountID
+                INNER JOIN
+                    categories ON transactions.categoryID = categories.categoryID
+                INNER JOIN
+                    categoryGroups ON categories.groupID = categoryGroups.groupID
+                WHERE
+                    transactions.userID = '$userID'
+                    AND transactions.categoryID BETWEEN (
+                        SELECT
+                            MIN(categories.categoryID)
+                        FROM
+                            categories
+                        INNER JOIN
+                            categoryGroups ON categories.groupID = categoryGroups.groupID
+                        WHERE
+                            categoryGroups.userID = '$userID'
+                            AND categoryGroups.groupName = '$subpage'
+                    ) AND (
+                        SELECT
+                            MAX(categories.categoryID)
+                        FROM
+                            categories
+                        INNER JOIN
+                            categoryGroups ON categories.groupID = categoryGroups.groupID
+                        WHERE
+                            categoryGroups.userID = '$userID'
+                            AND categoryGroups.groupName = '$subpage'
+                    )
+                ORDER BY transactions.date DESC";
         $result = mysqli_query($conn, $sql);
         $rows = [];
         while ($row = mysqli_fetch_assoc($result)) {
@@ -181,66 +181,66 @@ function getTransactions($userID, $subpage) {
         return json_encode($rows);
     } else if ($subpage === "Expenses") {
         $sql = "SELECT 
-                transactions.transactionID,
-                transactions.date, 
-                transactions.description, 
-                transactions.amount, 
-                accounts.accountName, 
-                categoryGroups.groupName, 
-                transactions.notes
-            FROM 
-                transactions
-            INNER JOIN
-                accounts ON transactions.accountID = accounts.accountID
-            INNER JOIN
-                categories ON transactions.categoryID = categories.categoryID
-            INNER JOIN
-                categoryGroups ON categories.groupID = categoryGroups.groupID
-            WHERE
-                transactions.userID = '$userID'
-                AND transactions.categoryID NOT BETWEEN (
-                    SELECT
-                        MIN(categories.categoryID)
-                    FROM
-                        categories
-                    INNER JOIN
-                        categoryGroups ON categories.groupID = categoryGroups.groupID
-                    WHERE
-                        categoryGroups.userID = '$userID'
-                        AND categoryGroups.groupName = 'Savings'
-                ) AND (
-                    SELECT
-                        MAX(categories.categoryID)
-                    FROM
-                        categories
-                    INNER JOIN
-                        categoryGroups ON categories.groupID = categoryGroups.groupID
-                    WHERE
-                        categoryGroups.userID = '$userID'
-                        AND categoryGroups.groupName = 'Savings'
-                )
-                AND transactions.categoryID NOT BETWEEN (
-                    SELECT
-                        MIN(categories.categoryID)
-                    FROM
-                        categories
-                    INNER JOIN
-                        categoryGroups ON categories.groupID = categoryGroups.groupID
-                    WHERE
-                        categoryGroups.userID = '$userID'
-                        AND categoryGroups.groupName = 'Income'
-                ) AND (
-                    SELECT
-                        MAX(categories.categoryID)
-                    FROM
-                        categories
-                    INNER JOIN
-                        categoryGroups ON categories.groupID = categoryGroups.groupID
-                    WHERE
-                        categoryGroups.userID = '$userID'
-                        AND categoryGroups.groupName = 'Income'
-                )
-            ORDER BY transactions.date DESC";
+                    transactions.transactionID,
+                    transactions.date, 
+                    transactions.description, 
+                    transactions.amount, 
+                    accounts.accountName, 
+                    categoryGroups.groupName, 
+                    transactions.notes
+                FROM 
+                    transactions
+                INNER JOIN
+                    accounts ON transactions.accountID = accounts.accountID
+                INNER JOIN
+                    categories ON transactions.categoryID = categories.categoryID
+                INNER JOIN
+                    categoryGroups ON categories.groupID = categoryGroups.groupID
+                WHERE
+                    transactions.userID = '$userID'
+                    AND transactions.categoryID NOT BETWEEN (
+                        SELECT
+                            MIN(categories.categoryID)
+                        FROM
+                            categories
+                        INNER JOIN
+                            categoryGroups ON categories.groupID = categoryGroups.groupID
+                        WHERE
+                            categoryGroups.userID = '$userID'
+                            AND categoryGroups.groupName = 'Savings'
+                    ) AND (
+                        SELECT
+                            MAX(categories.categoryID)
+                        FROM
+                            categories
+                        INNER JOIN
+                            categoryGroups ON categories.groupID = categoryGroups.groupID
+                        WHERE
+                            categoryGroups.userID = '$userID'
+                            AND categoryGroups.groupName = 'Savings'
+                    )
+                    AND transactions.categoryID NOT BETWEEN (
+                        SELECT
+                            MIN(categories.categoryID)
+                        FROM
+                            categories
+                        INNER JOIN
+                            categoryGroups ON categories.groupID = categoryGroups.groupID
+                        WHERE
+                            categoryGroups.userID = '$userID'
+                            AND categoryGroups.groupName = 'Income'
+                    ) AND (
+                        SELECT
+                            MAX(categories.categoryID)
+                        FROM
+                            categories
+                        INNER JOIN
+                            categoryGroups ON categories.groupID = categoryGroups.groupID
+                        WHERE
+                            categoryGroups.userID = '$userID'
+                            AND categoryGroups.groupName = 'Income'
+                    )
+                ORDER BY transactions.date DESC";
         $result = mysqli_query($conn, $sql);
         $rows = [];
         while ($row = mysqli_fetch_assoc($result)) {
@@ -249,45 +249,45 @@ function getTransactions($userID, $subpage) {
         return json_encode($rows);
     } else if ($subpage === "Savings") {
         $sql = "SELECT 
-                transactions.transactionID,
-                transactions.date, 
-                transactions.description, 
-                transactions.amount, 
-                accounts.accountName, 
-                categoryGroups.groupName, 
-                transactions.notes
-            FROM 
-                transactions
-            INNER JOIN
-                accounts ON transactions.accountID = accounts.accountID
-            INNER JOIN
-                categories ON transactions.categoryID = categories.categoryID
-            INNER JOIN
-                categoryGroups ON categories.groupID = categoryGroups.groupID
-            WHERE
-                transactions.userID = '$userID'
-                AND transactions.categoryID BETWEEN (
-                    SELECT
-                        MIN(categories.categoryID)
-                    FROM
-                        categories
-                    INNER JOIN
-                        categoryGroups ON categories.groupID = categoryGroups.groupID
-                    WHERE
-                        categoryGroups.userID = '$userID'
-                        AND categoryGroups.groupName = '$subpage'
-                ) AND (
-                    SELECT
-                        MAX(categories.categoryID)
-                    FROM
-                        categories
-                    INNER JOIN
-                        categoryGroups ON categories.groupID = categoryGroups.groupID
-                    WHERE
-                        categoryGroups.userID = '$userID'
-                        AND categoryGroups.groupName = '$subpage'
-                )
-            ORDER BY transactions.date DESC";
+                    transactions.transactionID,
+                    transactions.date, 
+                    transactions.description, 
+                    transactions.amount, 
+                    accounts.accountName, 
+                    categoryGroups.groupName, 
+                    transactions.notes
+                FROM 
+                    transactions
+                INNER JOIN
+                    accounts ON transactions.accountID = accounts.accountID
+                INNER JOIN
+                    categories ON transactions.categoryID = categories.categoryID
+                INNER JOIN
+                    categoryGroups ON categories.groupID = categoryGroups.groupID
+                WHERE
+                    transactions.userID = '$userID'
+                    AND transactions.categoryID BETWEEN (
+                        SELECT
+                            MIN(categories.categoryID)
+                        FROM
+                            categories
+                        INNER JOIN
+                            categoryGroups ON categories.groupID = categoryGroups.groupID
+                        WHERE
+                            categoryGroups.userID = '$userID'
+                            AND categoryGroups.groupName = '$subpage'
+                    ) AND (
+                        SELECT
+                            MAX(categories.categoryID)
+                        FROM
+                            categories
+                        INNER JOIN
+                            categoryGroups ON categories.groupID = categoryGroups.groupID
+                        WHERE
+                            categoryGroups.userID = '$userID'
+                            AND categoryGroups.groupName = '$subpage'
+                    )
+                ORDER BY transactions.date DESC";
         $result = mysqli_query($conn, $sql);
         $rows = [];
         while ($row = mysqli_fetch_assoc($result)) {
@@ -620,12 +620,13 @@ function getUserCategories($userID) {
     global $conn;
     $sql = "SELECT
                 categoryGroups.groupName,
-                GROUP_CONCAT(categories.categoryName SEPARATOR ', ') as categories
+                GROUP_CONCAT(DISTINCT categories.categoryName SEPARATOR ', ') as categories
             FROM
-                categoryGroups, categories
+                categoryGroups
+            INNER JOIN categories ON categoryGroups.groupID = categories.groupID
+            INNER JOIN transactions ON categories.categoryID = transactions.categoryID
             WHERE
-                userID = '$userID'
-                AND categoryGroups.groupID = categories.groupID
+                categoryGroups.userID = '$userID'
             GROUP BY
                 categoryGroups.groupID
             ";
