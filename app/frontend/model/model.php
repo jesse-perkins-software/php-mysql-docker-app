@@ -634,14 +634,29 @@ function getProfileInfo($userID) {
 function getLargestPurchase($userID) {
     global $conn;
     $sql = "SELECT
-                MAX(amount) AS largest
+                transactions.date,
+                categories.categoryName,
+                transactions.amount
             FROM
                 transactions
+            INNER JOIN
+                categories ON transactions.categoryID = categories.categoryID
             WHERE
-                userID = '$userID'";
+                transactions.userID = '$userID'
+                AND transactions.amount < 0
+                AND categories.categoryName != 'Mortgage/Rent'
+            ORDER BY
+                transactions.amount ASC,
+                transactions.date DESC
+            LIMIT 1
+            ";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
-    return $row['largest'];
+    if ($row) {
+        return json_encode($row);
+    } else {
+        return json_encode([]);
+    }
 }
 
 function getUserCategories($userID) {

@@ -256,7 +256,7 @@
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Biggest Purchase</span>
-                            <span class="card-text">Nov</span>
+                            <span class="card-text" id="biggest-purchase-date"></span>
                         </div>
                         <div></div>
                     </div>
@@ -264,7 +264,7 @@
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
-                            <span class="card-text">@ BestBuy</span>
+                            <span class="card-text" id="biggest-purchase-category"></span>
                             <span class="card-text">As of today</span>
                         </div>
                     </div>
@@ -563,12 +563,36 @@
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-                let data = this.responseText;
+                let data = JSON.parse(this.responseText);
 
-                document.getElementById('biggest-purchase-value').innerHTML = "$" + Number(this.responseText).toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
+                let transactionDate = document.getElementById('biggest-purchase-date');
+                let transactionCategory = document.getElementById('biggest-purchase-category');
+                let transactionValue = document.getElementById('biggest-purchase-value');
+
+                if (Object.keys(data).length === 0) {
+                    transactionValue.innerHTML = "$0";
+                    transactionCategory.innerHTML = "N/A";
+                    const date = new Date();
+                    transactionDate.innerHTML = date.toLocaleString('en-CA', { month: 'short' });
+                } else {
+                    transactionCategory.innerHTML = data.categoryName;
+
+                    const [year, month, day] = data['date'].split('-');
+                    const date = new Date(year, month - 1, day);
+                    transactionDate.innerHTML = date.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+
+                    if (data.amount < 0) {
+                        transactionValue.innerHTML = "$(" + Math.abs(Number(data.amount)).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }) + ")";
+                    } else {
+                         transactionValue.innerHTML = "$" + Number(data.amount).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    }
+                }
             }
         };
         let query = "page=MainPage&command=LoadCard7";
