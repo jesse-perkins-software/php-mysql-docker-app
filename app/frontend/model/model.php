@@ -584,6 +584,34 @@ function getMostRecentPurchase($userID) {
     return json_encode($transactions);
 }
 
+function getMostCommonTransactionCategory($userID) {
+    global $conn;
+    $sql = "SELECT
+                categories.categoryName,
+                COUNT(transactions.categoryID) as count,
+                SUM(transactions.amount) as totalAmount
+            FROM
+                transactions
+            INNER JOIN
+                categories ON transactions.categoryID = categories.categoryID
+            WHERE
+                transactions.userID = '$userID'
+                AND MONTH(transactions.date) = MONTH(CURRENT_DATE())
+                AND YEAR(transactions.date) = YEAR(CURRENT_DATE())
+            GROUP BY
+                categories.categoryID
+            ORDER BY
+                count DESC
+            LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    if ($row) {
+        return json_encode($row);
+    } else {
+        return json_encode([]);
+    }
+}
+
 function getProfileInfo($userID) {
     global $conn;
     $sql = "SELECT

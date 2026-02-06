@@ -157,6 +157,11 @@ if ($page == "SignInPage") {
                 echo $result;
                 exit();
             }
+            case "LoadCard5": {
+                $result = getMostCommonTransactionCategory($_SESSION["userID"]);
+                echo $result;
+                exit();
+            }
             case "LoadCard7": {
                 $result = getLargestPurchase($_SESSION["userID"]);
                 echo $result;

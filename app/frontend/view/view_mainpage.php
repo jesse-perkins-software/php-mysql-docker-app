@@ -217,15 +217,15 @@
                     <div class="card-top-half">
                         <div class="card-top-text">
                             <span class="card-text">Top Transaction Category</span>
-                            <span class="card-text">Sep</span>
+                            <span class="card-text" id="top-transaction-date"></span>
                         </div>
                         <div></div>
                     </div>
-                    <h5>Groceries</h5>
+                    <h5 id="top-transaction-category-value"></h5>
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
-                            <span class="card-text">$450</span>
+                            <span class="card-text" id="top-transaction-amount"></span>
                             <span class="card-text">As of today</span>
                         </div>
                     </div>
@@ -388,7 +388,7 @@
         load_Card2_Info();
         load_Card3_Info();
         load_Card4_Info();
-        //load_Card5_Info();
+        load_Card5_Info();
         //load_Card6_Info();
         load_Card7_Info();
         //load_Card8_Info();
@@ -513,6 +513,47 @@
             }
         };
         let query = "page=MainPage&command=LoadCard4";
+        xhttp.open("POST", "/../controller/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function load_Card5_Info() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                
+                let categoryValue = document.getElementById('top-transaction-category-value');
+                let transactionDate = document.getElementById('top-transaction-date');
+                let transactionAmount = document.getElementById('top-transaction-amount');
+                
+                const date = new Date();
+                transactionDate.innerHTML = date.toLocaleString('en-CA', { month: 'short' });
+
+                if (Object.keys(data).length === 0) {
+                    categoryValue.innerHTML = "";
+                    transactionAmount.innerHTML = "$0";
+                } else {
+                    categoryValue.innerHTML = data.categoryName;
+                    
+                    if (data.totalAmount > 0) {
+                        transactionAmount.innerHTML = "$" + Number(data.totalAmount).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    } else if (data.totalAmount < 0) {
+                        transactionAmount.innerHTML = "$(" + Math.abs(Number(data.totalAmount)).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }) + ")";
+                    } else {
+                        transactionAmount.innerHTML = "$0";
+                    }
+                }
+            }
+        };
+        let query = "page=MainPage&command=LoadCard5";
         xhttp.open("POST", "/../controller/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
