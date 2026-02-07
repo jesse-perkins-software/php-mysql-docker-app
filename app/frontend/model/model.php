@@ -686,20 +686,20 @@ function getCategories($userID, $categoryGroup) {
 
     if ($categoryGroup == "Income" || $categoryGroup == "Savings") {
         $sql = "SELECT
-                categories.categoryName,
-                SUM(transactions.amount) AS amount
-            FROM
-                categories
-            INNER JOIN
-                categoryGroups ON categories.groupID = categoryGroups.groupID
-            LEFT JOIN
-                transactions ON categories.categoryID = transactions.categoryID
-            WHERE
-                categoryGroups.userID = '$userID'
-                AND categoryGroups.groupName = '$categoryGroup'
-            GROUP BY
-                categories.categoryName
-            ";
+                    categories.categoryName,
+                    SUM(transactions.amount) AS amount
+                FROM
+                    categories
+                INNER JOIN
+                    categoryGroups ON categories.groupID = categoryGroups.groupID
+                LEFT JOIN
+                    transactions ON categories.categoryID = transactions.categoryID
+                WHERE
+                    categoryGroups.userID = '$userID'
+                    AND categoryGroups.groupName = '$categoryGroup'
+                GROUP BY
+                    categories.categoryName
+                ";
         $result = mysqli_query($conn, $sql);
         $categories = [];
         while ($row = mysqli_fetch_assoc($result)) {
@@ -963,6 +963,32 @@ function registerNewUser($firstName, $lastName, $email, $username, $password) {
                 ('$firstName', '$lastName', '$email', '$username', '$password')
             ";
     return mysqli_query($conn, $sql);
+}
+
+function getActualAndBudgetedSavings($userID) {
+    global $conn;
+
+    $sql1 = "SELECT
+                SUM(transactions.amount) AS actualSavings
+            FROM
+                categories
+            INNER JOIN
+                categoryGroups ON categories.groupID = categoryGroups.groupID
+            LEFT JOIN
+                transactions ON categories.categoryID = transactions.categoryID
+            WHERE
+                categoryGroups.userID = '$userID'
+                AND categoryGroups.groupName = 'Savings'
+            ";
+    $result1 = mysqli_query($conn, $sql1);
+    $rows1 = [];
+    while ($row = mysqli_fetch_assoc($result1)) {
+        $rows1[] = $row;
+    }
+
+    return [
+        'actualSavings' => $rows1
+    ];
 }
 
 ?>

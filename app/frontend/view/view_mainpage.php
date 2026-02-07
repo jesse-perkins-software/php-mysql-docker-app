@@ -205,7 +205,7 @@
                     <div class="card-bottom-half">
                         <div></div>
                         <div class="card-bottom-text">
-                            <span class="card-text" id="most-recent-description">@</span>
+                            <span class="card-text" id="most-recent-description"></span>
                             <span class="card-text"></span>
                         </div>
                     </div>
@@ -491,7 +491,7 @@
                     recentPurchaseAmount.innerHTML = "$0";
                     const date = new Date();
                     recentPurchaseDate.innerHTML = date.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
-                    recentPurchaseDescription.innerHTML = "@ ";
+                    recentPurchaseDescription.innerHTML = "";
                 } else {
                     if (transaction.amount > 0) {
                         recentPurchaseAmount.innerHTML = "$" + Number(transaction.amount).toLocaleString(undefined, {
@@ -508,7 +508,7 @@
                     }
                     const date = new Date(transaction['date']);
                     recentPurchaseDate.innerHTML = date.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
-                    recentPurchaseDescription.innerHTML = "@ " + transaction['description'];
+                    recentPurchaseDescription.innerHTML = transaction['description'];
                 }
             }
         };

@@ -291,6 +291,24 @@
         }
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        getSavings();
+    });
+
+    function getSavings() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                console.log(data)
+            }
+        };
+        let query = "page=Budget&command=GetSavingsComparison";
+        xhttp.open("POST", "/../controller/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
     <?php include(__DIR__ . '/../js/modal-functions.js'); ?>
 
 </script>
