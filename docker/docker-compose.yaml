@@ -9,6 +9,7 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
     volumes:
       - ../app/backend/init-scripts:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "status", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
       interval: 10s
@@ -43,4 +44,7 @@ services:
       db:
         condition: service_healthy
 
-  
+volumes:
+  db_data:
+    driver: local
+
