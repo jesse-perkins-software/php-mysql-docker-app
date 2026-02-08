@@ -232,7 +232,7 @@
                         <div class="progress-bar" style="width: 50%"></div>
                     </div>
                     <div class="progress" id="savings-progress-real" role="progressbar">
-                        <div class="progress-bar" style="width: 10%"></div>
+                        <div class="progress-bar" id="savings-progress-real-bar" style="width: 10%"></div>
                     </div>
                     <div class="card-bottom-text">
                         <span class="card-text"></span>
@@ -300,7 +300,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 let data = JSON.parse(this.responseText);
-                console.log(data)
+                console.log(data);
             }
         };
         let query = "page=Budget&command=GetSavingsComparison";
