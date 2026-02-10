@@ -77,7 +77,7 @@
             align-items: center;
         }
 
-        #general-info {
+        #general-info, #budget-info {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -132,13 +132,29 @@
                         <option value="3">YYYY-MM-DD</option>
                     </select>
                 </div>
+
+                <input type="submit" class="btn btn-primary" value="Save">
+            </form>
+        </div>
+
+        <div class="rounded border shadow-sm" id="budget-info">
+            <h4>Budget Selection</h4>
+            <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
+                <input type="hidden" name="page" value="Profile">
+                <input type="hidden" name="command" value="BudgetSelection">
+
                 <div class="input-group">
-                    <span class="input-group-text" id="budget-period-input">Budget Period</span>
-                    <select class="form-select" id="budget-input">
+                    <span class="input-group-text">Needs</span>
+                    <select class="form-select" id="needs-selection">
                         <option selected>Choose...</option>
-                        <option value="1">Weekly</option>
-                        <option value="2">Bi-Weekly</option>
-                        <option value="3">Monthly</option>
+
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Wants</span>
+                    <select class="form-select" id="wants-selection">
+                        <option selected>Choose...</option>
+
                     </select>
                 </div>
 
@@ -150,5 +166,23 @@
 </body>
 </html>
 <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch_Categories();
+    });
+
+    function fetch_Categories() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                console.log(data);
+            }
+        };
+        let query = "page=Settings&command=LoadCategories";
+        xhttp.open("POST", "/../controller/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
     <?php include(__DIR__ . '/../js/modal-functions.js'); ?>
 </script>
