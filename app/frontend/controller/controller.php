@@ -191,6 +191,10 @@ if ($page == "SignInPage") {
                 echo json_encode(getUserCategories($_SESSION["userID"]));
                 exit();
             }
+            case "LoadBudgetCategories": {
+                echo json_encode(getBudgetUserCategories($_SESSION["userID"]));
+                exit();
+            }
             case "GetCategoryOptions": {
                 echo json_encode(getCategorySelections($_SESSION["userID"]));
                 exit();

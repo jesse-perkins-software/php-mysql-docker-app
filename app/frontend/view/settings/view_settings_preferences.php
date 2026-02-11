@@ -145,17 +145,15 @@
 
                 <div class="input-group">
                     <span class="input-group-text">Needs</span>
-                    <select class="form-select" id="needs-selection">
-                        <option selected>Choose...</option>
-
-                    </select>
+                    <div class="form-control" id="needs-selection" style="height: auto; max-height: 150px; overflow-y: auto;">
+                        <!-- Checkboxes will be populated here -->
+                    </div>
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Wants</span>
-                    <select class="form-select" id="wants-selection">
-                        <option selected>Choose...</option>
-
-                    </select>
+                    <div class="form-control" id="wants-selection" style="height: auto; max-height: 150px; overflow-y: auto;">
+                        <!-- Checkboxes will be populated here -->
+                    </div>
                 </div>
 
                 <input type="submit" class="btn btn-primary" value="Save">
@@ -167,21 +165,61 @@
 </html>
 <script defer>
     document.addEventListener('DOMContentLoaded', function() {
-        fetch_Categories();
+        fetch_budget_Categories();
     });
 
-    function fetch_Categories() {
+    function fetch_budget_Categories() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 let data = JSON.parse(this.responseText);
-                console.log(data);
+                populateCheckboxes(data, 'needs-selection', 'needs');
+                populateCheckboxes(data, 'wants-selection', 'wants');
             }
         };
-        let query = "page=Settings&command=LoadCategories";
+        let query = "page=Settings&command=LoadBudgetCategories";
         xhttp.open("POST", "/../controller/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
+    }
+
+    function populateCheckboxes(data, containerId, name) {
+        let container = document.getElementById(containerId);
+        container.innerHTML = "";
+        
+        data.forEach(group => {
+            let groupHeader = document.createElement("div");
+            groupHeader.classList.add("fw-bold", "text-secondary", "small", "mb-1");
+            groupHeader.innerText = group.groupName;
+            container.appendChild(groupHeader);
+
+            if (group.categories) {
+                let categories = group.categories.split(', ');
+                categories.forEach(categoryName => {
+                    let div = document.createElement("div");
+                    div.classList.add("form-check", "ms-2");
+                    
+                    let input = document.createElement("input");
+                    input.classList.add("form-check-input");
+                    input.type = "checkbox";
+                    input.name = name + "[]";
+                    input.value = categoryName;
+                    
+                    let safeGroupName = group.groupName.replace(/[^a-zA-Z0-9]/g, '');
+                    let safeCategoryName = categoryName.replace(/[^a-zA-Z0-9]/g, '');
+                    input.id = name + "-" + safeGroupName + "-" + safeCategoryName;
+                    
+                    let label = document.createElement("label");
+                    label.classList.add("form-check-label");
+                    label.htmlFor = input.id;
+                    label.innerText = categoryName;
+                    
+                    div.appendChild(input);
+                    div.appendChild(label);
+                    container.appendChild(div);
+                });
+            }
+        });
     }
 
     <?php include(__DIR__ . '/../js/modal-functions.js'); ?>

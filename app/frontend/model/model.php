@@ -681,6 +681,30 @@ function getUserCategories($userID) {
     return $categories;
 }
 
+function getBudgetUserCategories($userID) {
+    global $conn;
+    $sql = "SELECT
+                categoryGroups.groupName,
+                GROUP_CONCAT(DISTINCT categories.categoryName SEPARATOR ', ') as categories
+            FROM
+                categoryGroups
+            INNER JOIN categories ON categoryGroups.groupID = categories.groupID
+            INNER JOIN transactions ON categories.categoryID = transactions.categoryID
+            WHERE
+                categoryGroups.userID = '$userID'
+                AND categoryGroups.groupName != 'Income'
+                AND categoryGroups.groupName != 'Savings'
+            GROUP BY
+                categoryGroups.groupID
+            ";
+    $result = mysqli_query($conn, $sql);
+    $categories = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $categories[] = $row;
+    }
+    return $categories;
+}
+
 function getCategories($userID, $categoryGroup) {
     global $conn;
 
