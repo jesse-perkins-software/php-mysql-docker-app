@@ -101,6 +101,12 @@
             min-width: 4.5em;
         }
 
+        #needs-selection, #wants-selection {
+            height: auto;
+            max-height: 15em;
+            overflow-y: auto;
+        }
+
     </style>
 </head>
 <body class="bg-light">
@@ -110,7 +116,7 @@
         <div class="rounded border shadow-sm" id="general-info">
             <h4>Account Preferences</h4>
             <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
-                <input type="hidden" name="page" value="Profile">
+                <input type="hidden" name="page" value="Settings">
                 <input type="hidden" name="command" value="GeneralInfo">
 
                 <div class="input-group">
@@ -140,20 +146,16 @@
         <div class="rounded border shadow-sm" id="budget-info">
             <h4>Budget Selection</h4>
             <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
-                <input type="hidden" name="page" value="Profile">
+                <input type="hidden" name="page" value="Settings">
                 <input type="hidden" name="command" value="BudgetSelection">
 
                 <div class="input-group">
                     <span class="input-group-text">Needs</span>
-                    <div class="form-control" id="needs-selection" style="height: auto; max-height: 150px; overflow-y: auto;">
-                        <!-- Checkboxes will be populated here -->
-                    </div>
+                    <div class="form-control" id="needs-selection"></div>
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Wants</span>
-                    <div class="form-control" id="wants-selection" style="height: auto; max-height: 150px; overflow-y: auto;">
-                        <!-- Checkboxes will be populated here -->
-                    </div>
+                    <div class="form-control" id="wants-selection"></div>
                 </div>
 
                 <input type="submit" class="btn btn-primary" value="Save">
@@ -208,6 +210,21 @@
                     let safeGroupName = group.groupName.replace(/[^a-zA-Z0-9]/g, '');
                     let safeCategoryName = categoryName.replace(/[^a-zA-Z0-9]/g, '');
                     input.id = name + "-" + safeGroupName + "-" + safeCategoryName;
+                    input.addEventListener('change', event => {
+                        if (event.target.checked) {
+                            if (name === 'needs') {
+                                document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                            } else {
+                                document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                            }
+                        } else {
+                            if (name === 'needs') {
+                                document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                            } else {
+                                document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                            }
+                        }
+                    });
                     
                     let label = document.createElement("label");
                     label.classList.add("form-check-label");

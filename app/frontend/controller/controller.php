@@ -187,6 +187,19 @@ if ($page == "SignInPage") {
                 echo getProfileInfo($_SESSION["userID"]);
                 exit();
             }
+            case "BudgetSelection": {
+                print_r($_POST);
+                $_SESSION['budget-selection-wants-array'] = $_POST['wants'];
+                $_SESSION['budget-selection-needs-array'] = $_POST['needs'];
+                include(__DIR__ . "/../view/settings/view_settings_preferences.php");
+                exit();
+            }
+            case "GetSelectedWantsAndNeeds": {
+                if (isset($_SESSION['budget-selection-wants-array'])) {
+                    //echo json_encode(getSelectedWantsAndNeeds($_SESSION["userID"]));
+                }
+                exit();
+            }
             case "LoadCategories": {
                 echo json_encode(getUserCategories($_SESSION["userID"]));
                 exit();
