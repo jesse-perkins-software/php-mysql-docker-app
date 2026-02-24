@@ -251,16 +251,3 @@ INSERT INTO transactions (userID, accountID, categoryID, date, description, amou
 
     (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Travel Insurance' AND groupID = @travelGroupID), '2025-12-20', 'Travel Insurance', -45.00, 'Trip insurance policy'),
     (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Travel Insurance' AND groupID = @travelGroupID), '2026-01-20', 'Travel Insurance', -45.00, 'Trip insurance policy');
-
--- Insert budgets
-INSERT INTO budgets (userID, categoryGroupID, budgetType, amount, period) VALUES
-    (@userID, @incomeGroupID, 'income', 4000.00, 'monthly'),
-    (@userID, @savingsGroupID, 'expense', 1000.00, 'monthly'),
-    (@userID, @housingGroupID, 'expense', 2400.00, 'monthly'),
-    (@userID, @utilitiesGroupID, 'expense', 300.00, 'monthly'),
-    (@userID, @transportationGroupID, 'expense', 500.00, 'monthly'),
-    (@userID, @foodGroupID, 'expense', 600.00, 'monthly'),
-    (@userID, @healthcareGroupID, 'expense', 400.00, 'monthly'),
-    (@userID, @personalcareGroupID, 'expense', 200.00, 'monthly'),
-    (@userID, @entertainmentGroupID, 'expense', 200.00, 'monthly'),
-    (@userID, @travelGroupID, 'expense', 150.00, 'monthly');

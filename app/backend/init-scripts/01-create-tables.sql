@@ -81,24 +81,30 @@ CREATE TABLE IF NOT EXISTS transactions (
     INDEX idx_account_date (accountID, date)
 );
 
--- Budgets table
-CREATE TABLE IF NOT EXISTS budgets (
-    budgetID INT AUTO_INCREMENT PRIMARY KEY,
+-- Budget sections table
+CREATE TABLE IF NOT EXISTS budgetSections (
+    sectionID INT AUTO_INCREMENT PRIMARY KEY,
+    sectionName VARCHAR(100) UNIQUE NOT NULL
+);
+
+-- Budget category selections table
+CREATE TABLE IF NOT EXISTS budgetCategorySelections (
     userID INT NOT NULL,
-    categoryGroupID INT NOT NULL,
-    budgetType ENUM('income', 'expense') NOT NULL,
-    amount DECIMAL(10, 2) NOT NULL,
-    period ENUM('monthly', 'yearly') DEFAULT 'monthly',
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    categoryID INT NOT NULL,
+    sectionID INT NOT NULL,
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
-    FOREIGN KEY (categoryGroupID) REFERENCES categoryGroups(groupID) ON DELETE CASCADE,
-    UNIQUE KEY unique_user_group_budget (userID, categoryGroupID, budgetType, period)
+    FOREIGN KEY (categoryID) REFERENCES categories(categoryID) ON DELETE CASCADE,
+    FOREIGN KEY (sectionID) REFERENCES budgetSections(sectionID) ON DELETE CASCADE,
+    PRIMARY KEY (userID, categoryID)
 );
 
 -- Insert default account types
 INSERT INTO accountTypes (typeName) VALUES ('Savings'), ('Chequing'), ('Credit Card'), ('TFSA')
 ON DUPLICATE KEY UPDATE typeName=VALUES(typeName);
+
+-- Insert default budget sections
+INSERT INTO budgetSections (sectionName) VALUES ('Needs'), ('Wants'), ('Savings')
+ON DUPLICATE KEY UPDATE sectionName=VALUES(sectionName);
 
 -- Insert default bank (for ungrouped accounts)
 INSERT INTO banks (bankName) VALUES ('Banking')

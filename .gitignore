@@ -1,4 +1,4 @@
-.env
+docker/.env
 app/backend/db_data/
 .idea
 
