@@ -188,16 +188,13 @@ if ($page == "SignInPage") {
                 exit();
             }
             case "BudgetSelection": {
-                print_r($_POST);
-                $_SESSION['budget-selection-wants-array'] = $_POST['wants'];
-                $_SESSION['budget-selection-needs-array'] = $_POST['needs'];
+                @setBudgetSelection($_SESSION["userID"], $_POST['needs'], $_POST['wants']);
+
                 include(__DIR__ . "/../view/settings/view_settings_preferences.php");
                 exit();
             }
-            case "GetSelectedWantsAndNeeds": {
-                if (isset($_SESSION['budget-selection-wants-array'])) {
-                    //echo json_encode(getSelectedWantsAndNeeds($_SESSION["userID"]));
-                }
+            case "GetBudgetCategories": {
+                echo json_encode(getSelectedBudgetCategories($_SESSION["userID"]));
                 exit();
             }
             case "LoadCategories": {

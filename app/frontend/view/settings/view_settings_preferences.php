@@ -82,10 +82,17 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 40%;
             padding: 1em;
             margin: 1em;
             gap: 0.75em;
+        }
+
+        #general-info {
+            width: 40%;
+        }
+
+        #budget-info {
+            width: 50%;
         }
 
         .info-form {
@@ -113,35 +120,35 @@
     <?php require(__DIR__ . '/../navigation.php'); ?>
 
     <div class="" id="content-container">
-        <div class="rounded border shadow-sm" id="general-info">
-            <h4>Account Preferences</h4>
-            <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="" novalidate>
-                <input type="hidden" name="page" value="Settings">
-                <input type="hidden" name="command" value="GeneralInfo">
-
-                <div class="input-group">
-                    <span class="input-group-text" id="number-format-input">Number Format</span>
-                    <select class="form-select" id="number-input">
-                        <option selected>Choose...</option>
-                        <option value="1">1,000</option>
-                        <option value="2">1,000.00</option>
-                        <option value="3">1.000</option>
-                        <option value="3">1.000,00</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <span class="input-group-text" id="date-format-input">Date Format</span>
-                    <select class="form-select" id="date-input">
-                        <option selected>Choose...</option>
-                        <option value="1">MM-DD-YYYY</option>
-                        <option value="2">DD-MM-YYYY</option>
-                        <option value="3">YYYY-MM-DD</option>
-                    </select>
-                </div>
-
-                <input type="submit" class="btn btn-primary" value="Save">
-            </form>
-        </div>
+<!--        <div class="rounded border shadow-sm" id="general-info">-->
+<!--            <h4>Account Preferences</h4>-->
+<!--            <form action="/../controller/controller.php" method="post" class="needs-validation info-form" id="" novalidate>-->
+<!--                <input type="hidden" name="page" value="Settings">-->
+<!--                <input type="hidden" name="command" value="GeneralInfo">-->
+<!---->
+<!--                <div class="input-group">-->
+<!--                    <span class="input-group-text" id="number-format-input">Number Format</span>-->
+<!--                    <select class="form-select" id="number-input">-->
+<!--                        <option selected>Choose...</option>-->
+<!--                        <option value="1">1,000</option>-->
+<!--                        <option value="2">1,000.00</option>-->
+<!--                        <option value="3">1.000</option>-->
+<!--                        <option value="3">1.000,00</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="input-group">-->
+<!--                    <span class="input-group-text" id="date-format-input">Date Format</span>-->
+<!--                    <select class="form-select" id="date-input">-->
+<!--                        <option selected>Choose...</option>-->
+<!--                        <option value="1">MM-DD-YYYY</option>-->
+<!--                        <option value="2">DD-MM-YYYY</option>-->
+<!--                        <option value="3">YYYY-MM-DD</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!---->
+<!--                <input type="submit" class="btn btn-primary" value="Save">-->
+<!--            </form>-->
+<!--        </div>-->
 
         <div class="rounded border shadow-sm" id="budget-info">
             <h4>Budget Selection</h4>
@@ -149,12 +156,12 @@
                 <input type="hidden" name="page" value="Settings">
                 <input type="hidden" name="command" value="BudgetSelection">
 
-                <div class="input-group">
-                    <span class="input-group-text">Needs</span>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Needs</label>
                     <div class="form-control" id="needs-selection"></div>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-text">Wants</span>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Wants</label>
                     <div class="form-control" id="wants-selection"></div>
                 </div>
 
@@ -167,16 +174,45 @@
 </html>
 <script defer>
     document.addEventListener('DOMContentLoaded', function() {
-        fetch_budget_Categories();
+        fetch_budget_categories();
     });
 
-    function fetch_budget_Categories() {
+    function fetch_selected_categories() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+
+                data.forEach(item => {
+                    let section = item.sectionName.toLowerCase();
+                    let categoryName = item.categoryName;
+                    
+                    // Find all checkboxes with this value
+                    let checkboxes = document.querySelectorAll(`input[type=checkbox][value="${categoryName}"]`);
+                    checkboxes.forEach(checkbox => {
+                        if (checkbox.name === section + "[]") {
+                            checkbox.checked = true;
+                            // Trigger the change event to handle disabling the other section's checkbox
+                            checkbox.dispatchEvent(new Event('change'));
+                        }
+                    });
+                });
+            }
+        };
+        let query = "page=Settings&command=GetBudgetCategories";
+        xhttp.open("POST", "/../controller/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
+
+    function fetch_budget_categories() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 let data = JSON.parse(this.responseText);
                 populateCheckboxes(data, 'needs-selection', 'needs');
                 populateCheckboxes(data, 'wants-selection', 'wants');
+                fetch_selected_categories();
             }
         };
         let query = "page=Settings&command=LoadBudgetCategories";
@@ -189,54 +225,65 @@
         let container = document.getElementById(containerId);
         container.innerHTML = "";
         
-        data.forEach(group => {
-            let groupHeader = document.createElement("div");
-            groupHeader.classList.add("fw-bold", "text-secondary", "small", "mb-1");
-            groupHeader.innerText = group.groupName;
-            container.appendChild(groupHeader);
+        for (let i = 0; i < data.length; i += 2) {
+            let row = document.createElement("div");
+            row.classList.add("row", "mb-3");
+            
+            for (let j = 0; j < 2 && (i + j) < data.length; j++) {
+                let group = data[i + j];
+                let col = document.createElement("div");
+                col.classList.add("col-6");
+                
+                let groupHeader = document.createElement("div");
+                groupHeader.classList.add("fw-bold", "text-secondary", "small", "mb-1");
+                groupHeader.innerText = group.groupName;
+                col.appendChild(groupHeader);
 
-            if (group.categories) {
-                let categories = group.categories.split(', ');
-                categories.forEach(categoryName => {
-                    let div = document.createElement("div");
-                    div.classList.add("form-check", "ms-2");
-                    
-                    let input = document.createElement("input");
-                    input.classList.add("form-check-input");
-                    input.type = "checkbox";
-                    input.name = name + "[]";
-                    input.value = categoryName;
-                    
-                    let safeGroupName = group.groupName.replace(/[^a-zA-Z0-9]/g, '');
-                    let safeCategoryName = categoryName.replace(/[^a-zA-Z0-9]/g, '');
-                    input.id = name + "-" + safeGroupName + "-" + safeCategoryName;
-                    input.addEventListener('change', event => {
-                        if (event.target.checked) {
-                            if (name === 'needs') {
-                                document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                if (group.categories) {
+                    let categories = group.categories.split(', ');
+                    categories.forEach(categoryName => {
+                        let div = document.createElement("div");
+                        div.classList.add("form-check", "ms-2");
+                        
+                        let input = document.createElement("input");
+                        input.classList.add("form-check-input");
+                        input.type = "checkbox";
+                        input.name = name + "[]";
+                        input.value = categoryName;
+                        
+                        let safeGroupName = group.groupName.replace(/[^a-zA-Z0-9]/g, '');
+                        let safeCategoryName = categoryName.replace(/[^a-zA-Z0-9]/g, '');
+                        input.id = name + "-" + safeGroupName + "-" + safeCategoryName;
+                        input.addEventListener('change', event => {
+                            if (event.target.checked) {
+                                if (name === 'needs') {
+                                    document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                                } else {
+                                    document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                                }
                             } else {
-                                document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                                if (name === 'needs') {
+                                    document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                                } else {
+                                    document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                                }
                             }
-                        } else {
-                            if (name === 'needs') {
-                                document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = false;
-                            } else {
-                                document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = false;
-                            }
-                        }
+                        });
+                        
+                        let label = document.createElement("label");
+                        label.classList.add("form-check-label");
+                        label.htmlFor = input.id;
+                        label.innerText = categoryName;
+                        
+                        div.appendChild(input);
+                        div.appendChild(label);
+                        col.appendChild(div);
                     });
-                    
-                    let label = document.createElement("label");
-                    label.classList.add("form-check-label");
-                    label.htmlFor = input.id;
-                    label.innerText = categoryName;
-                    
-                    div.appendChild(input);
-                    div.appendChild(label);
-                    container.appendChild(div);
-                });
+                }
+                row.appendChild(col);
             }
-        });
+            container.appendChild(row);
+        }
     }
 
     <?php include(__DIR__ . '/../js/modal-functions.js'); ?>

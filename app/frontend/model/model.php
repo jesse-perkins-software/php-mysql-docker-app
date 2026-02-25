@@ -992,7 +992,7 @@ function registerNewUser($firstName, $lastName, $email, $username, $password) {
 function getActualAndBudgetedSavings($userID) {
     global $conn;
 
-    $sql1 = "SELECT
+    $sql = "SELECT
                 SUM(transactions.amount) AS actualSavings
             FROM
                 categories
@@ -1004,15 +1004,72 @@ function getActualAndBudgetedSavings($userID) {
                 categoryGroups.userID = '$userID'
                 AND categoryGroups.groupName = 'Savings'
             ";
-    $result1 = mysqli_query($conn, $sql1);
-    $rows1 = [];
-    while ($row = mysqli_fetch_assoc($result1)) {
-        $rows1[] = $row;
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
     }
 
     return [
-        'actualSavings' => $rows1
+        'actualSavings' => $rows
     ];
+}
+
+function getSelectedBudgetCategories($userID) {
+    global $conn;
+
+    $sql = "SELECT
+                categories.categoryName,
+                budgetSections.sectionName
+            FROM
+                categories
+            INNER JOIN
+                budgetCategorySelections ON categories.categoryID = budgetCategorySelections.categoryID
+            INNER JOIN
+                budgetSections ON budgetCategorySelections.sectionID = budgetSections.sectionID
+            WHERE
+                budgetCategorySelections.userID = '$userID'
+            ";
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+function setBudgetSelection($userID, $needsArray, $wantsArray) {
+    global $conn;
+
+    // Clear existing selections for this user
+    $clearSql = "DELETE FROM budgetCategorySelections WHERE userID = '$userID'";
+    mysqli_query($conn, $clearSql);
+
+    // Insert Needs
+    if (!empty($needsArray)) {
+        foreach ($needsArray as $need) {
+            $sql = "INSERT INTO
+                        budgetCategorySelections (userID, categoryID, sectionID)
+                    VALUES 
+                        ('$userID', 
+                        (SELECT categoryID FROM categories c JOIN categoryGroups cg ON c.groupID = cg.groupID WHERE c.categoryName = '$need' AND cg.userID = '$userID' LIMIT 1), 
+                        (SELECT sectionID from budgetSections WHERE sectionName = 'Needs'))";
+            mysqli_query($conn, $sql);
+        }
+    }
+
+    // Insert Wants
+    if (!empty($wantsArray)) {
+        foreach ($wantsArray as $want) {
+            $sql = "INSERT INTO
+                        budgetCategorySelections (userID, categoryID, sectionID)
+                    VALUES 
+                        ('$userID', 
+                        (SELECT categoryID FROM categories c JOIN categoryGroups cg ON c.groupID = cg.groupID WHERE c.categoryName = '$want' AND cg.userID = '$userID' LIMIT 1), 
+                        (SELECT sectionID from budgetSections WHERE sectionName = 'Wants'))";
+            mysqli_query($conn, $sql);
+        }
+    }
 }
 
 ?>
