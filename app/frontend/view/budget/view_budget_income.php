@@ -210,6 +210,7 @@
 <script defer>
     document.addEventListener('DOMContentLoaded', function() {
         loadIncomeCategories();
+        loadIncomeCategoryBudgetAmounts();
     });
 
     function loadIncomeCategories() {
@@ -299,6 +300,29 @@
                 container.innerHTML += div;
             }
         });
+    }
+
+    function loadIncomeCategoryBudgetAmounts() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                console.log(data);
+
+                data.forEach(item => {
+                    let input = document.getElementById(`${item.categoryName}`);
+                    input.value = Number(item.amount).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                });
+                updateExpectedTotal();
+            }
+        };
+        let query = "page=Budget&command=LoadIncomeBudgetCategoryAmounts&budgetCategory=Income";
+        xhttp.open("POST", "/../controller/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
     }
 
 

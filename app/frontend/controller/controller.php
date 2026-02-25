@@ -222,7 +222,7 @@ if ($page == "SignInPage") {
                     include(__DIR__ . "/../view/settings/view_settings_categories_and_accounts.php");
                     exit();
                 } else {
-                    addCategory($_SESSION["userID"], $_POST["category"], $_POST["name"]);
+                    @addCategory($_SESSION["userID"], $_POST["category"], $_POST["name"]);
                     $_SESSION['category'] = $_POST["category"];
                     $_SESSION['name'] = $_POST["name"];
                     include('../view/settings/view_settings_categories_and_accounts.php');
@@ -409,6 +409,10 @@ if ($page == "SignInPage") {
         switch ($command) {
             case "LoadIncomeCategories": {
                 echo json_encode(getCategories($_SESSION["userID"], $_POST['budgetCategory']));
+                exit();
+            }
+            case "LoadIncomeBudgetCategoryAmounts": {
+                echo json_encode(getBudgetCategoryAmounts($_SESSION["userID"], $_POST['budgetCategory']));
                 exit();
             }
             case "LoadSavingsCategories": {

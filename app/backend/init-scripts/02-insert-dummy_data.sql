@@ -251,3 +251,65 @@ INSERT INTO transactions (userID, accountID, categoryID, date, description, amou
 
     (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Travel Insurance' AND groupID = @travelGroupID), '2025-12-20', 'Travel Insurance', -45.00, 'Trip insurance policy'),
     (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Travel Insurance' AND groupID = @travelGroupID), '2026-01-20', 'Travel Insurance', -45.00, 'Trip insurance policy');
+
+-- Get budget section IDs
+SET @needsSectionID = (SELECT sectionID FROM budgetSections WHERE sectionName = 'Needs');
+SET @wantsSectionID = (SELECT sectionID FROM budgetSections WHERE sectionName = 'Wants');
+
+-- Insert budget category selections
+INSERT INTO budgetCategorySelections (userID, categoryID, sectionID) VALUES
+    -- Needs
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Mortgage/Rent' AND groupID = @housingGroupID), @needsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Home Insurance' AND groupID = @housingGroupID), @needsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Property Taxes' AND groupID = @housingGroupID), @needsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), @needsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Internet' AND groupID = @utilitiesGroupID), @needsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Water' AND groupID = @utilitiesGroupID), @needsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), @needsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Health Insurance' AND groupID = @healthcareGroupID), @needsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Insurance' AND groupID = @transportationGroupID), @needsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), @needsSectionID),
+
+    -- Wants
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), @wantsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Takeout/Delivery' AND groupID = @foodGroupID), @wantsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), @wantsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Hobbies' AND groupID = @entertainmentGroupID), @wantsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), @wantsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Travel Insurance' AND groupID = @travelGroupID), @wantsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Airfare' AND groupID = @travelGroupID), @wantsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Hotel Accommodations' AND groupID = @travelGroupID), @wantsSectionID);
+
+-- Insert budget allocations
+INSERT INTO budgetAllocation (userID, categoryID, amount, area) VALUES
+    -- Income
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), 7000.00, 'Income'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @incomeGroupID), 500.00, 'Income'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Gifts' AND groupID = @incomeGroupID), 100.00, 'Income'),
+
+    -- Savings
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Emergency Fund' AND groupID = @savingsGroupID), 200.00, 'Savings'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), 750.00, 'Savings'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @savingsGroupID), 300.00, 'Savings'),
+
+    -- Expenses (Needs)
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Mortgage/Rent' AND groupID = @housingGroupID), 1800.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Home Insurance' AND groupID = @housingGroupID), 125.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Property Taxes' AND groupID = @housingGroupID), 400.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), 135.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Internet' AND groupID = @utilitiesGroupID), 80.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Water' AND groupID = @utilitiesGroupID), 45.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), 600.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Health Insurance' AND groupID = @healthcareGroupID), 95.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Insurance' AND groupID = @transportationGroupID), 180.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), 250.00, 'Expenses'),
+
+    -- Expenses (Wants)
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), 200.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Takeout/Delivery' AND groupID = @foodGroupID), 100.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), 50.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Hobbies' AND groupID = @entertainmentGroupID), 150.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), 30.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Travel Insurance' AND groupID = @travelGroupID), 50.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Airfare' AND groupID = @travelGroupID), 500.00, 'Expenses'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Hotel Accommodations' AND groupID = @travelGroupID), 400.00, 'Expenses');

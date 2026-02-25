@@ -98,12 +98,25 @@ CREATE TABLE IF NOT EXISTS budgetCategorySelections (
     PRIMARY KEY (userID, categoryID)
 );
 
+-- Budget allocation table
+CREATE TABLE IF NOT EXISTS budgetAllocation (
+    userID INT NOT NULL,
+    categoryID INT NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    area ENUM('Income', 'Expenses', 'Savings') NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (categoryID) REFERENCES categories(categoryID) ON DELETE CASCADE,
+    PRIMARY KEY (userID, categoryID)
+);
+
 -- Insert default account types
 INSERT INTO accountTypes (typeName) VALUES ('Savings'), ('Chequing'), ('Credit Card'), ('TFSA')
 ON DUPLICATE KEY UPDATE typeName=VALUES(typeName);
 
 -- Insert default budget sections
-INSERT INTO budgetSections (sectionName) VALUES ('Needs'), ('Wants'), ('Savings')
+INSERT INTO budgetSections (sectionName) VALUES ('Needs'), ('Wants')
 ON DUPLICATE KEY UPDATE sectionName=VALUES(sectionName);
 
 -- Insert default bank (for ungrouped accounts)

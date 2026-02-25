@@ -1072,4 +1072,28 @@ function setBudgetSelection($userID, $needsArray, $wantsArray) {
     }
 }
 
+function getBudgetCategoryAmounts($userID, $budgetCategory) {
+    global $conn;
+
+    $sql = "SELECT 
+                categories.categoryName, 
+                budgetAllocation.amount 
+            FROM 
+                categories 
+            INNER JOIN 
+                budgetAllocation ON categories.categoryID = budgetAllocation.categoryID 
+            WHERE 
+                budgetAllocation.userID = '$userID' 
+                AND budgetAllocation.area = '$budgetCategory'
+            ORDER BY
+                categories.categoryName ASC
+          ";
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
 ?>
