@@ -310,7 +310,9 @@
                 console.log(data);
 
                 data.forEach(item => {
-                    let input = document.getElementById(`${item.categoryName}`);
+                    let input = document.querySelector(
+                        item.categoryName.split(' ').map(word => `[id*="${word}"]`).join(', ')
+                    );
                     input.value = Number(item.amount).toLocaleString(undefined, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2

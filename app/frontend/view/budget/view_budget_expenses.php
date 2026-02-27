@@ -210,6 +210,7 @@
 <script defer>
     document.addEventListener('DOMContentLoaded', function() {
         loadExpensesCategories();
+        loadExpensesCategoryBudgetAmounts();
     });
 
     function loadExpensesCategories() {
@@ -217,7 +218,6 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 let data = JSON.parse(this.responseText);
-                console.log(this.responseText);
                 formatCategories(data);
             }
         };
@@ -300,6 +300,33 @@
                 container.innerHTML += div;
             }
         });
+    }
+
+
+    function loadExpensesCategoryBudgetAmounts() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                console.log(data);
+
+                data.forEach(item => {
+                    let input = document.querySelector(
+                        item.categoryName.split(' ').map(word => `[id*="${word}"]`).join(', ')
+                    );
+                    console.log(item.amount);
+                    input.value = Number(item.amount).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                });
+                updateExpectedTotal();
+            }
+        };
+        let query = "page=Budget&command=LoadExpensesBudgetCategoryAmounts&budgetCategory=Expenses";
+        xhttp.open("POST", "/../controller/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
     }
 
 
