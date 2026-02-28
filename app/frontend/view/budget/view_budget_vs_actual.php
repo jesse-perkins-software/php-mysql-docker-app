@@ -252,7 +252,7 @@
             datasets: [
                 {
                     data: [50, 30, 20],
-                    backgroundColor: ["rgb(6, 95, 70)", 'rgb(30, 58, 138)', 'rgb(178,34,34)']
+                    backgroundColor: ["rgba(6, 95, 70, 0.75)", 'rgba(30, 58, 138, 0.75)', 'rgba(178,34,34, 0.75)']
                 }
             ],
             labels: ['Savings', 'Needs', 'Wants'],

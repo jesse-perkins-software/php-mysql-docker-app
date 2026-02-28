@@ -265,12 +265,12 @@
 
                 data.forEach(item => {
                     let category = item['categoryName'];
-                    let amount = Number(item['amount']).toLocaleString(undefined, {
+                    let amount = Math.abs(Number(item['amount'])).toLocaleString(undefined, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
                     });
 
-                    total += Number(item['amount']);
+                    total += Math.abs(Number(item['amount']));
                     document.getElementById('actual-total').value = total.toLocaleString(undefined, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
@@ -315,7 +315,7 @@
                         item.categoryName.split(' ').map(word => `[id*="${word}"]`).join(', ')
                     );
                     console.log(input);
-                    input.value = Number(item.amount).toLocaleString(undefined, {
+                    input.value = Math.abs(Number(item.amount)).toLocaleString(undefined, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
                     });
