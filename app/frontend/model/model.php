@@ -989,30 +989,22 @@ function registerNewUser($firstName, $lastName, $email, $username, $password) {
     return mysqli_query($conn, $sql);
 }
 
-function getActualAndBudgetedSavings($userID) {
+function getBudgetedAmounts($userID) {
     global $conn;
 
-    $sql = "SELECT
-                SUM(transactions.amount) AS actualSavings
+    $sql1 = "SELECT
+                SUM(CASE WHEN budgetCategorySelections.sectionID = 1 THEN budgetAllocation.amount ELSE 0 END) AS needs_budget_total,
+                SUM(CASE WHEN budgetCategorySelections.sectionID = 2 THEN budgetAllocation.amount ELSE 0 END) AS wants_budget_total,
+                SUM(CASE WHEN (budgetAllocation.categoryID = 4) THEN budgetAllocation.amount ELSE 0 END) AS savings_budget_total
             FROM
-                categories
+                budgetAllocation
             INNER JOIN
-                categoryGroups ON categories.groupID = categoryGroups.groupID
-            LEFT JOIN
-                transactions ON categories.categoryID = transactions.categoryID
+                budgetCategorySelections ON budgetAllocation.categoryID = budgetCategorySelections.categoryID
             WHERE
-                categoryGroups.userID = '$userID'
-                AND categoryGroups.groupName = 'Savings'
+                budgetAllocation.userID = '$userID'
             ";
-    $result = mysqli_query($conn, $sql);
-    $rows = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $rows[] = $row;
-    }
-
-    return [
-        'actualSavings' => $rows
-    ];
+    $result1 = mysqli_query($conn, $sql1);
+    $row1 = mysqli_fetch_assoc($result1);
 }
 
 function getSelectedBudgetCategories($userID) {

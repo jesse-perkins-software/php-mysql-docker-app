@@ -425,8 +425,8 @@ if ($page == "SignInPage") {
                 echo json_encode(getCategories($_SESSION["userID"], $_POST['budgetCategory']));
                 exit();
             }
-            case "GetSavingsComparison": {
-                echo json_encode(getActualAndBudgetedSavings($_SESSION["userID"]));
+            case "GetBudgetedAmounts": {
+                echo json_encode(getBudgetedAmounts($_SESSION["userID"]));
                 exit();
             }
         }

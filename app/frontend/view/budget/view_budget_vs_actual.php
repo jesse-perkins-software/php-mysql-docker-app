@@ -185,7 +185,7 @@
                 <h5>$400</h5>
                 <div class="card-bottom-half">
                     <div class="progress" id="wants-progress-budgeted" role="progressbar">
-                        <div class="progress-bar" style="width: 20%"></div>
+                        <div class="progress-bar" style="width: 30%"></div>
                     </div>
                     <div class="progress" id="wants-progress-real" role="progressbar">
                         <div class="progress-bar" style="width: 60%"></div>
@@ -292,10 +292,10 @@
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-        getSavings();
+        getBudgetedAmounts();
     });
 
-    function getSavings() {
+    function getBudgetedAmounts() {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
@@ -303,7 +303,7 @@
                 console.log(data);
             }
         };
-        let query = "page=Budget&command=GetSavingsComparison";
+        let query = "page=Budget&command=GetBudgetedAmounts";
         xhttp.open("POST", "/../controller/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
