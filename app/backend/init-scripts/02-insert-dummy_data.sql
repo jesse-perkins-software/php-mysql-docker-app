@@ -252,6 +252,7 @@ INSERT INTO transactions (userID, accountID, categoryID, date, description, amou
 -- Get budget section IDs
 SET @needsSectionID = (SELECT sectionID FROM budgetSections WHERE sectionName = 'Needs');
 SET @wantsSectionID = (SELECT sectionID FROM budgetSections WHERE sectionName = 'Wants');
+SET @savingsSectionID = (SELECT sectionID FROM budgetSections WHERE sectionName = 'Savings');
 
 -- Insert budget category selections
 INSERT INTO budgetCategorySelections (userID, categoryID, sectionID) VALUES
@@ -278,7 +279,12 @@ INSERT INTO budgetCategorySelections (userID, categoryID, sectionID) VALUES
     (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Airfare' AND groupID = @travelGroupID), @wantsSectionID),
     (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Hotel Accommodations' AND groupID = @travelGroupID), @wantsSectionID),
     (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Salon Services' AND groupID = @personalcareGroupID), @wantsSectionID),
-    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Gym Membership' AND groupID = @personalcareGroupID), @wantsSectionID);
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Gym Membership' AND groupID = @personalcareGroupID), @wantsSectionID),
+
+    -- Savings
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), @savingsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @savingsGroupID), @savingsSectionID),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Emergency Fund' AND groupID = @savingsGroupID), @savingsSectionID);
 
 -- Insert budget allocations
 INSERT INTO budgetAllocation (userID, categoryID, amount, area) VALUES

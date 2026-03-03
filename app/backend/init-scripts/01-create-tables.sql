@@ -116,7 +116,7 @@ INSERT INTO accountTypes (typeName) VALUES ('Savings'), ('Chequing'), ('Credit C
 ON DUPLICATE KEY UPDATE typeName=VALUES(typeName);
 
 -- Insert default budget sections
-INSERT INTO budgetSections (sectionName) VALUES ('Needs'), ('Wants')
+INSERT INTO budgetSections (sectionName) VALUES ('Needs'), ('Wants'), ('Savings')
 ON DUPLICATE KEY UPDATE sectionName=VALUES(sectionName);
 
 -- Insert default bank (for ungrouped accounts)

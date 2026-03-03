@@ -995,7 +995,10 @@ function getBudgetedAmounts($userID) {
     $sql1 = "SELECT
                 SUM(CASE WHEN budgetCategorySelections.sectionID = 1 THEN budgetAllocation.amount ELSE 0 END) AS needs_budget_total,
                 SUM(CASE WHEN budgetCategorySelections.sectionID = 2 THEN budgetAllocation.amount ELSE 0 END) AS wants_budget_total,
-                SUM(CASE WHEN (budgetAllocation.categoryID = 4) THEN budgetAllocation.amount ELSE 0 END) AS savings_budget_total
+                SUM(CASE WHEN budgetCategorySelections.sectionID = 3 THEN budgetAllocation.amount ELSE 0 END) AS savings_budget_total,
+                (SELECT SUM(amount) FROM transactions JOIN budgetCategorySelections ON transactions.categoryID = budgetCategorySelections.categoryID WHERE transactions.userID = '$userID' AND budgetCategorySelections.sectionID = 1) AS needs_actual_total,
+                (SELECT SUM(amount) FROM transactions JOIN budgetCategorySelections ON transactions.categoryID = budgetCategorySelections.categoryID WHERE transactions.userID = '$userID' AND budgetCategorySelections.sectionID = 2) AS wants_actual_total,
+                (SELECT SUM(amount) FROM transactions JOIN budgetCategorySelections ON transactions.categoryID = budgetCategorySelections.categoryID WHERE transactions.userID = '$userID' AND budgetCategorySelections.sectionID = 3) AS savings_actual_total
             FROM
                 budgetAllocation
             INNER JOIN
@@ -1004,7 +1007,7 @@ function getBudgetedAmounts($userID) {
                 budgetAllocation.userID = '$userID'
             ";
     $result1 = mysqli_query($conn, $sql1);
-    $row1 = mysqli_fetch_assoc($result1);
+    return mysqli_fetch_assoc($result1);
 }
 
 function getSelectedBudgetCategories($userID) {
