@@ -693,7 +693,6 @@ function getBudgetUserCategories($userID) {
             WHERE
                 categoryGroups.userID = '$userID'
                 AND categoryGroups.groupName != 'Income'
-                AND categoryGroups.groupName != 'Savings'
             GROUP BY
                 categoryGroups.groupID
             ";
@@ -1033,7 +1032,7 @@ function getSelectedBudgetCategories($userID) {
     return $rows;
 }
 
-function setBudgetSelection($userID, $needsArray, $wantsArray) {
+function setBudgetSelection($userID, $needsArray, $wantsArray, $savingsArray) {
     global $conn;
 
     // Clear existing selections for this user
@@ -1062,6 +1061,19 @@ function setBudgetSelection($userID, $needsArray, $wantsArray) {
                         ('$userID', 
                         (SELECT categoryID FROM categories c JOIN categoryGroups cg ON c.groupID = cg.groupID WHERE c.categoryName = '$want' AND cg.userID = '$userID' LIMIT 1), 
                         (SELECT sectionID from budgetSections WHERE sectionName = 'Wants'))";
+            mysqli_query($conn, $sql);
+        }
+    }
+
+    // Insert Savings
+    if (!empty($savingsArray)) {
+        foreach ($savingsArray as $saving) {
+            $sql = "INSERT INTO
+                        budgetCategorySelections (userID, categoryID, sectionID)
+                    VALUES 
+                        ('$userID', 
+                        (SELECT categoryID FROM categories c JOIN categoryGroups cg ON c.groupID = cg.groupID WHERE c.categoryName = '$saving' AND cg.userID = '$userID' LIMIT 1), 
+                        (SELECT sectionID from budgetSections WHERE sectionName = 'Savings'))";
             mysqli_query($conn, $sql);
         }
     }

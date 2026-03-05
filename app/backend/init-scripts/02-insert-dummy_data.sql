@@ -50,7 +50,7 @@ SET @travelGroupID = (SELECT groupID FROM categoryGroups WHERE userID = @userID 
 -- Insert categories
 INSERT INTO categories (groupID, categoryName) VALUES
     (@incomeGroupID, 'Salary/Wages'),
-    (@incomeGroupID, 'Investments'),
+    (@incomeGroupID, 'Dividends'),
     (@incomeGroupID, 'Gifts'),
     (@savingsGroupID, 'Retirement'),
     (@savingsGroupID, 'Investments'),
@@ -92,8 +92,8 @@ INSERT INTO transactions (userID, accountID, categoryID, date, description, amou
     (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-01-01', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
     (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-02-01', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
 
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @incomeGroupID), '2025-12-05', 'Investments', 57.50, 'Quarterly dividend'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @incomeGroupID), '2026-01-05', 'Investments', 57.50, 'Quarterly dividend'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2025-12-05', 'Dividends', 57.50, 'Quarterly dividend'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2026-01-05', 'Dividends', 57.50, 'Quarterly dividend'),
 
     (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gifts' AND groupID = @incomeGroupID), '2025-12-15', 'Gifts', 22.50, 'Birthday gift from parents'),
     (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gifts' AND groupID = @incomeGroupID), '2026-01-15', 'Gifts', 22.50, 'Gift'),
@@ -101,8 +101,8 @@ INSERT INTO transactions (userID, accountID, categoryID, date, description, amou
     (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2025-12-15', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
     (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-01-15', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
 
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @incomeGroupID), '2025-12-20', 'Investments', 57.50, 'Stock dividend payout'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @incomeGroupID), '2026-01-20', 'Investments', 57.50, 'Stock dividend payout'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2025-12-20', 'Dividends', 57.50, 'Stock dividend payout'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2026-01-20', 'Dividends', 57.50, 'Stock dividend payout'),
 
     -- Savings transactions
     (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Emergency Fund' AND groupID = @savingsGroupID), '2025-12-01', 'Emergency Fund', -30.83, 'Monthly emergency fund contribution'),
@@ -290,7 +290,7 @@ INSERT INTO budgetCategorySelections (userID, categoryID, sectionID) VALUES
 INSERT INTO budgetAllocation (userID, categoryID, amount, area) VALUES
     -- Income
     (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), 9000.00, 'Income'),
-    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @incomeGroupID), 500.00, 'Income'),
+    (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), 500.00, 'Income'),
     (@userID, (SELECT categoryID FROM categories WHERE categoryName = 'Gifts' AND groupID = @incomeGroupID), 100.00, 'Income'),
 
     -- Savings

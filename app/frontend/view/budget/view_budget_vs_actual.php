@@ -182,7 +182,7 @@
                     </div>
                     <div></div>
                 </div>
-                <h5>$400</h5>
+                <h5 id="wants-amount"></h5>
                 <div class="card-bottom-half">
                     <div class="progress" id="wants-progress-budgeted" role="progressbar">
                         <div class="progress-bar" id="wants-progress-budgeted-bar"></div>
@@ -204,7 +204,7 @@
                     </div>
                     <div></div>
                 </div>
-                <h5>$300</h5>
+                <h5 id="needs-amount"></h5>
                 <div class="card-bottom-half">
                     <div class="progress" id="needs-progress-budgeted" role="progressbar">
                         <div class="progress-bar" id="needs-progress-budgeted-bar"></div>
@@ -226,7 +226,7 @@
                     </div>
                     <div></div>
                 </div>
-                <h5>$100</h5>
+                <h5 id="savings-amount"></h5>
                 <div class="card-bottom-half">
                     <div class="progress" id="savings-progress-budgeted" role="progressbar">
                         <div class="progress-bar" id="savings-progress-budgeted-bar"></div>
@@ -314,6 +314,7 @@
         let budgetedNeedsAmount = Number(data['needs_budget_total']);
         let budgetedWantsAmount = Number(data['wants_budget_total']);
         let budgetedSavingsAmount = Number(data['savings_budget_total']);
+        console.log(budgetedSavingsAmount);
 
         let budgetTotal = budgetedNeedsAmount + budgetedWantsAmount + budgetedSavingsAmount;
 
@@ -339,12 +340,32 @@
         document.getElementById('savings-percent').textContent = Math.abs(savingsBudgetSpent).toFixed(2) + "%";
         document.getElementById('savings-progress-actual-bar').style.width = Math.abs(savingsBudgetSpent * ((budgetedSavingsAmount / budgetTotal).toFixed(4))) + "%";
 
-        console.log(budgetedWantsAmount / budgetTotal);
+        document.getElementById('wants-amount').textContent = "$" + Math.abs(actualWantsAmount).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }) + " out of " + "$" + budgetedWantsAmount.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+        document.getElementById('needs-amount').textContent = "$" + Math.abs(actualNeedsAmount).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }) + " out of " + "$" + budgetedNeedsAmount.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+        document.getElementById('savings-amount').textContent = "$" + Math.abs(actualSavingsAmount).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }) + " out of " + "$" + budgetedSavingsAmount.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
 
-        budgeted_chart.data.datasets[0].data = [((budgetedWantsAmount / budgetTotal) * 100).toFixed(2), ((budgetedNeedsAmount / budgetTotal) * 100).toFixed(2), ((budgetedSavingsAmount / budgetTotal) * 100).toFixed(2)];
+        budgeted_chart.data.datasets[0].data = [budgetedWantsAmount.toFixed(2), budgetedNeedsAmount.toFixed(2), budgetedSavingsAmount.toFixed(2)];
         budgeted_chart.update();
 
-        actual_chart.data.datasets[0].data = [((actualWantsAmount / actualTotal) * 100).toFixed(2), ((actualNeedsAmount / actualTotal) * 100).toFixed(2), ((actualSavingsAmount / actualTotal) * 100).toFixed(2)];
+        actual_chart.data.datasets[0].data = [Math.abs(actualWantsAmount).toFixed(2), Math.abs(actualNeedsAmount).toFixed(2), Math.abs(actualSavingsAmount).toFixed(2)];
         actual_chart.update();
     }
 

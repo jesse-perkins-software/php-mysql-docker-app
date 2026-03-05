@@ -188,7 +188,7 @@ if ($page == "SignInPage") {
                 exit();
             }
             case "BudgetSelection": {
-                @setBudgetSelection($_SESSION["userID"], $_POST['needs'], $_POST['wants']);
+                @setBudgetSelection($_SESSION["userID"], $_POST['needs'], $_POST['wants'], $_POST['savings']);
 
                 include(__DIR__ . "/../view/settings/view_settings_preferences.php");
                 exit();

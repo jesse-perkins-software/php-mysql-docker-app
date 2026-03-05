@@ -164,6 +164,10 @@
                     <label class="form-label fw-bold">Wants</label>
                     <div class="form-control" id="wants-selection"></div>
                 </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Savings</label>
+                    <div class="form-control" id="savings-selection"></div>
+                </div>
 
                 <input type="submit" class="btn btn-primary" value="Save">
             </form>
@@ -210,8 +214,14 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 let data = JSON.parse(this.responseText);
-                populateCheckboxes(data, 'needs-selection', 'needs');
-                populateCheckboxes(data, 'wants-selection', 'wants');
+                
+                // Separate 'Savings' group from other categories
+                let savingsData = data.filter(group => group.groupName === 'Savings');
+                let otherData = data.filter(group => group.groupName !== 'Savings');
+
+                populateCheckboxes(otherData, 'needs-selection', 'needs');
+                populateCheckboxes(otherData, 'wants-selection', 'wants');
+                populateCheckboxes(savingsData, 'savings-selection', 'savings');
                 fetch_selected_categories();
             }
         };
@@ -257,15 +267,49 @@
                         input.addEventListener('change', event => {
                             if (event.target.checked) {
                                 if (name === 'needs') {
-                                    document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = true;
-                                } else {
-                                    document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                                    if (document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                                    }
+                                    if (document.getElementById(`savings-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`savings-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                                    }
+                                } else if (name === 'wants') {
+                                    if (document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                                    }
+                                    if (document.getElementById(`savings-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`savings-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                                    }
+                                } else if (name === 'savings') {
+                                    if (document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                                    }
+                                    if (document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = true;
+                                    }
                                 }
                             } else {
                                 if (name === 'needs') {
-                                    document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = false;
-                                } else {
-                                    document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                                    if (document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                                    }
+                                    if (document.getElementById(`savings-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`savings-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                                    }
+                                } else if (name === 'wants') {
+                                    if (document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                                    }
+                                    if (document.getElementById(`savings-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`savings-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                                    }
+                                } else if (name === 'savings') {
+                                    if (document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`needs-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                                    }
+                                    if (document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`)) {
+                                        document.getElementById(`wants-${safeGroupName}-${safeCategoryName}`).disabled = false;
+                                    }
                                 }
                             }
                         });
