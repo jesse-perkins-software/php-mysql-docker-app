@@ -178,17 +178,17 @@
                 <div class="card-top-half">
                     <div class="card-top-text">
                         <span class="card-text">Wants</span>
-                        <span class="card-text info-box-neg">300%</span>
+                        <span class="card-text" id="wants-percent"></span>
                     </div>
                     <div></div>
                 </div>
                 <h5>$400</h5>
                 <div class="card-bottom-half">
                     <div class="progress" id="wants-progress-budgeted" role="progressbar">
-                        <div class="progress-bar" style="width: 30%"></div>
+                        <div class="progress-bar" id="wants-progress-budgeted-bar"></div>
                     </div>
                     <div class="progress" id="wants-progress-real" role="progressbar">
-                        <div class="progress-bar" style="width: 60%"></div>
+                        <div class="progress-bar" id="wants-progress-actual-bar"></div>
                     </div>
                     <div class="card-bottom-text">
                         <span class="card-text"></span>
@@ -200,17 +200,17 @@
                 <div class="card-top-half">
                     <div class="card-top-text">
                         <span class="card-text">Needs</span>
-                        <span class="card-text info-box-pos">100%</span>
+                        <span class="card-text" id="needs-percent"></span>
                     </div>
                     <div></div>
                 </div>
                 <h5>$300</h5>
                 <div class="card-bottom-half">
                     <div class="progress" id="needs-progress-budgeted" role="progressbar">
-                        <div class="progress-bar" style="width: 30%"></div>
+                        <div class="progress-bar" id="needs-progress-budgeted-bar"></div>
                     </div>
                     <div class="progress" id="needs-progress-real" role="progressbar">
-                        <div class="progress-bar" style="width: 30%"></div>
+                        <div class="progress-bar" id="needs-progress-actual-bar"></div>
                     </div>
                     <div class="card-bottom-text">
                         <span class="card-text"></span>
@@ -222,17 +222,17 @@
                 <div class="card-top-half">
                     <div class="card-top-text">
                         <span class="card-text">Savings</span>
-                        <span class="card-text">20%</span>
+                        <span class="card-text" id="savings-percent"></span>
                     </div>
                     <div></div>
                 </div>
                 <h5>$100</h5>
                 <div class="card-bottom-half">
                     <div class="progress" id="savings-progress-budgeted" role="progressbar">
-                        <div class="progress-bar" style="width: 50%"></div>
+                        <div class="progress-bar" id="savings-progress-budgeted-bar"></div>
                     </div>
                     <div class="progress" id="savings-progress-real" role="progressbar">
-                        <div class="progress-bar" id="savings-progress-real-bar" style="width: 10%"></div>
+                        <div class="progress-bar" id="savings-progress-actual-bar"></div>
                     </div>
                     <div class="card-bottom-text">
                         <span class="card-text"></span>
@@ -251,7 +251,7 @@
         data: {
             datasets: [
                 {
-                    data: [50, 30, 20],
+                    data: [],
                     backgroundColor: ["rgba(6, 95, 70, 0.75)", 'rgba(30, 58, 138, 0.75)', 'rgba(178,34,34, 0.75)']
                 }
             ],
@@ -301,12 +301,51 @@
             if (this.readyState === 4 && this.status === 200) {
                 let data = JSON.parse(this.responseText);
                 console.log(data);
+                formatData(data);
             }
         };
         let query = "page=Budget&command=GetBudgetedAmounts";
         xhttp.open("POST", "/../controller/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
+    }
+
+    function formatData(data) {
+        let budgetedNeedsAmount = Number(data['needs_budget_total']);
+        let budgetedWantsAmount = Number(data['wants_budget_total']);
+        let budgetedSavingsAmount = Number(data['savings_budget_total']);
+
+        let budgetTotal = budgetedNeedsAmount + budgetedWantsAmount + budgetedSavingsAmount;
+
+        let actualNeedsAmount = Number(data['needs_actual_total']);
+        let actualWantsAmount = Number(data['wants_actual_total']);
+        let actualSavingsAmount = Number(data['savings_actual_total']);
+
+        let actualTotal = actualNeedsAmount + actualWantsAmount + actualSavingsAmount;
+
+        document.getElementById('wants-progress-budgeted-bar').style.width = (budgetedWantsAmount / budgetTotal).toFixed(4) * 100 + "%";
+        document.getElementById('needs-progress-budgeted-bar').style.width = (budgetedNeedsAmount / budgetTotal).toFixed(4) * 100 + "%";
+        document.getElementById('savings-progress-budgeted-bar').style.width = (budgetedSavingsAmount / budgetTotal).toFixed(4) * 100 + "%";
+
+        let wantsBudgetSpent = Math.abs(actualWantsAmount / budgetedWantsAmount) * 100;
+        document.getElementById('wants-percent').textContent = Math.abs(wantsBudgetSpent).toFixed(2) + "%";
+        document.getElementById('wants-progress-actual-bar').style.width = Math.abs(wantsBudgetSpent * ((budgetedWantsAmount / budgetTotal).toFixed(4))) + "%";
+
+        let needsBudgetSpent = Math.abs(actualNeedsAmount / budgetedNeedsAmount) * 100;
+        document.getElementById('needs-percent').textContent = Math.abs(needsBudgetSpent).toFixed(2) + "%";
+        document.getElementById('needs-progress-actual-bar').style.width = Math.abs(needsBudgetSpent * ((budgetedNeedsAmount / budgetTotal).toFixed(4))) + "%";
+
+        let savingsBudgetSpent = Math.abs(actualSavingsAmount / budgetedSavingsAmount) * 100;
+        document.getElementById('savings-percent').textContent = Math.abs(savingsBudgetSpent).toFixed(2) + "%";
+        document.getElementById('savings-progress-actual-bar').style.width = Math.abs(savingsBudgetSpent * ((budgetedSavingsAmount / budgetTotal).toFixed(4))) + "%";
+
+        console.log(budgetedWantsAmount / budgetTotal);
+
+        budgeted_chart.data.datasets[0].data = [((budgetedWantsAmount / budgetTotal) * 100).toFixed(2), ((budgetedNeedsAmount / budgetTotal) * 100).toFixed(2), ((budgetedSavingsAmount / budgetTotal) * 100).toFixed(2)];
+        budgeted_chart.update();
+
+        actual_chart.data.datasets[0].data = [((actualWantsAmount / actualTotal) * 100).toFixed(2), ((actualNeedsAmount / actualTotal) * 100).toFixed(2), ((actualSavingsAmount / actualTotal) * 100).toFixed(2)];
+        actual_chart.update();
     }
 
     <?php include(__DIR__ . '/../js/modal-functions.js'); ?>
