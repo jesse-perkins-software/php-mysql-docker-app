@@ -988,10 +988,10 @@ function registerNewUser($firstName, $lastName, $email, $username, $password) {
     return mysqli_query($conn, $sql);
 }
 
-function getBudgetedAmounts($userID) {
+function getAmounts($userID) {
     global $conn;
 
-    $sql1 = "SELECT
+    $sql = "SELECT
                 SUM(CASE WHEN budgetCategorySelections.sectionID = 1 THEN budgetAllocation.amount ELSE 0 END) AS needs_budget_total,
                 SUM(CASE WHEN budgetCategorySelections.sectionID = 2 THEN budgetAllocation.amount ELSE 0 END) AS wants_budget_total,
                 SUM(CASE WHEN budgetCategorySelections.sectionID = 3 THEN budgetAllocation.amount ELSE 0 END) AS savings_budget_total,
@@ -1005,8 +1005,26 @@ function getBudgetedAmounts($userID) {
             WHERE
                 budgetAllocation.userID = '$userID'
             ";
-    $result1 = mysqli_query($conn, $sql1);
-    return mysqli_fetch_assoc($result1);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function getActualAmounts($userID) {
+    global $conn;
+
+    $sql = "SELECT
+                (SELECT SUM(amount) FROM transactions JOIN budgetCategorySelections ON transactions.categoryID = budgetCategorySelections.categoryID WHERE transactions.userID = '$userID' AND budgetCategorySelections.sectionID = 1) AS needs_actual_total,
+                (SELECT SUM(amount) FROM transactions JOIN budgetCategorySelections ON transactions.categoryID = budgetCategorySelections.categoryID WHERE transactions.userID = '$userID' AND budgetCategorySelections.sectionID = 2) AS wants_actual_total,
+                (SELECT SUM(amount) FROM transactions JOIN budgetCategorySelections ON transactions.categoryID = budgetCategorySelections.categoryID WHERE transactions.userID = '$userID' AND budgetCategorySelections.sectionID = 3) AS savings_actual_total
+            FROM
+                budgetAllocation
+            INNER JOIN
+                budgetCategorySelections ON budgetAllocation.categoryID = budgetCategorySelections.categoryID
+            WHERE
+                budgetAllocation.userID = '$userID'
+            ";
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
 }
 
 function getSelectedBudgetCategories($userID) {

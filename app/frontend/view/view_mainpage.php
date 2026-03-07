@@ -392,7 +392,29 @@
         //load_Card6_Info();
         load_Card7_Info();
         //load_Card8_Info();
+        load_chart_info();
     });
+
+    function load_chart_info() {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                console.log(data);
+
+                let actualNeedsAmount = Number(data['needs_actual_total']);
+                let actualWantsAmount = Number(data['wants_actual_total']);
+                let actualSavingsAmount = Number(data['savings_actual_total']);
+
+                first_chart.data.datasets[0].data = [Math.abs(actualWantsAmount).toFixed(2), Math.abs(actualNeedsAmount).toFixed(2), Math.abs(actualSavingsAmount).toFixed(2)];
+                first_chart.update();
+            }
+        };
+        let query = "page=MainPage&command=GetActualAmounts";
+        xhttp.open("POST", "/../controller/controller.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(query);
+    }
 
     function load_Card1_Info() {
         let xhttp = new XMLHttpRequest();

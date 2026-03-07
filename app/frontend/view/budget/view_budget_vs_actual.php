@@ -304,7 +304,7 @@
                 formatData(data);
             }
         };
-        let query = "page=Budget&command=GetBudgetedAmounts";
+        let query = "page=Budget&command=GetAmounts";
         xhttp.open("POST", "/../controller/controller.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(query);
@@ -321,8 +321,6 @@
         let actualNeedsAmount = Number(data['needs_actual_total']);
         let actualWantsAmount = Number(data['wants_actual_total']);
         let actualSavingsAmount = Number(data['savings_actual_total']);
-
-        let actualTotal = actualNeedsAmount + actualWantsAmount + actualSavingsAmount;
 
         document.getElementById('wants-progress-budgeted-bar').style.width = (budgetedWantsAmount / budgetTotal).toFixed(4) * 100 + "%";
         document.getElementById('needs-progress-budgeted-bar').style.width = (budgetedNeedsAmount / budgetTotal).toFixed(4) * 100 + "%";

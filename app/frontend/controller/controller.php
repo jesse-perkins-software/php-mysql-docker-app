@@ -167,6 +167,11 @@ if ($page == "SignInPage") {
                 echo $result;
                 exit();
             }
+            case "GetActualAmounts": {
+                $result = json_encode(getActualAmounts($_SESSION["userID"]));
+                echo $result;
+                exit();
+            }
             case "SignOut": {
                 session_unset();
                 session_destroy();
@@ -425,8 +430,8 @@ if ($page == "SignInPage") {
                 echo json_encode(getCategories($_SESSION["userID"], $_POST['budgetCategory']));
                 exit();
             }
-            case "GetBudgetedAmounts": {
-                echo json_encode(getBudgetedAmounts($_SESSION["userID"]));
+            case "GetAmounts": {
+                echo json_encode(getAmounts($_SESSION["userID"]));
                 exit();
             }
         }

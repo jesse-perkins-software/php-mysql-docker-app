@@ -88,166 +88,166 @@ SET @creditCardAccountID = (SELECT accountID FROM accounts WHERE userID = @userI
 -- Insert transactions
 INSERT INTO transactions (userID, accountID, categoryID, date, description, amount, notes) VALUES
     -- Income transactions
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2025-12-01', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-01-01', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-02-01', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-02-06', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-02-18', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-03-03', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
 
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2025-12-05', 'Dividends', 57.50, 'Quarterly dividend'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2026-01-05', 'Dividends', 57.50, 'Quarterly dividend'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2026-02-07', 'Dividends', 57.50, 'Quarterly dividend'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2026-02-20', 'Dividends', 57.50, 'Quarterly dividend'),
 
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gifts' AND groupID = @incomeGroupID), '2025-12-15', 'Gifts', 22.50, 'Birthday gift from parents'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gifts' AND groupID = @incomeGroupID), '2026-01-15', 'Gifts', 22.50, 'Gift'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gifts' AND groupID = @incomeGroupID), '2026-02-11', 'Gifts', 22.50, 'Birthday gift from parents'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gifts' AND groupID = @incomeGroupID), '2026-02-24', 'Gifts', 22.50, 'Gift'),
 
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2025-12-15', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-01-15', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-02-11', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salary/Wages' AND groupID = @incomeGroupID), '2026-02-24', 'Salary/Wages', 1100.00, 'Regular salary deposit'),
 
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2025-12-20', 'Dividends', 57.50, 'Stock dividend payout'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2026-01-20', 'Dividends', 57.50, 'Stock dividend payout'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2026-02-13', 'Dividends', 57.50, 'Stock dividend payout'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dividends' AND groupID = @incomeGroupID), '2026-02-26', 'Dividends', 57.50, 'Stock dividend payout'),
 
     -- Savings transactions
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Emergency Fund' AND groupID = @savingsGroupID), '2025-12-01', 'Emergency Fund', -30.83, 'Monthly emergency fund contribution'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Emergency Fund' AND groupID = @savingsGroupID), '2026-01-01', 'Emergency Fund', -30.83, 'Monthly emergency fund contribution'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Emergency Fund' AND groupID = @savingsGroupID), '2026-02-01', 'Emergency Fund', -30.83, 'Monthly emergency fund contribution'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Emergency Fund' AND groupID = @savingsGroupID), '2026-02-06', 'Emergency Fund', -30.83, 'Monthly emergency fund contribution'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Emergency Fund' AND groupID = @savingsGroupID), '2026-02-18', 'Emergency Fund', -30.83, 'Monthly emergency fund contribution'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Emergency Fund' AND groupID = @savingsGroupID), '2026-03-03', 'Emergency Fund', -30.83, 'Monthly emergency fund contribution'),
 
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), '2025-12-01', 'Retirement', -87.50, 'Monthly RRSP contribution'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), '2026-01-01', 'Retirement', -87.50, 'Monthly RRSP contribution'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), '2026-02-01', 'Retirement', -87.50, 'Monthly RRSP contribution'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), '2026-02-06', 'Retirement', -87.50, 'Monthly RRSP contribution'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), '2026-02-18', 'Retirement', -87.50, 'Monthly RRSP contribution'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), '2026-03-03', 'Retirement', -87.50, 'Monthly RRSP contribution'),
 
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @savingsGroupID), '2025-12-10', 'Investments', -70.00, 'ETF purchase'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @savingsGroupID), '2026-01-10', 'Investments', -70.00, 'ETF purchase'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @savingsGroupID), '2026-02-09', 'Investments', -70.00, 'ETF purchase'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Investments' AND groupID = @savingsGroupID), '2026-02-22', 'Investments', -70.00, 'ETF purchase'),
 
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), '2025-12-15', 'Retirement', -87.50, 'Additional RRSP contribution'),
-    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), '2026-01-15', 'Retirement', -87.50, 'Additional RRSP contribution'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), '2026-02-11', 'Retirement', -87.50, 'Additional RRSP contribution'),
+    (@userID, @savingsAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Retirement' AND groupID = @savingsGroupID), '2026-02-24', 'Retirement', -87.50, 'Additional RRSP contribution'),
 
     -- Housing transactions
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Mortgage/Rent' AND groupID = @housingGroupID), '2025-12-01', 'Mortgage/Rent', -316.67, 'Monthly rent payment'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Mortgage/Rent' AND groupID = @housingGroupID), '2026-01-01', 'Mortgage/Rent', -316.67, 'Monthly rent payment'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Mortgage/Rent' AND groupID = @housingGroupID), '2026-02-01', 'Mortgage/Rent', -316.67, 'Monthly rent payment'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Mortgage/Rent' AND groupID = @housingGroupID), '2026-02-06', 'Mortgage/Rent', -316.67, 'Monthly rent payment'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Mortgage/Rent' AND groupID = @housingGroupID), '2026-02-18', 'Mortgage/Rent', -316.67, 'Monthly rent payment'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Mortgage/Rent' AND groupID = @housingGroupID), '2026-03-03', 'Mortgage/Rent', -316.67, 'Monthly rent payment'),
 
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Home Insurance' AND groupID = @housingGroupID), '2025-12-05', 'Home Insurance', -22.50, 'Monthly home insurance premium'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Home Insurance' AND groupID = @housingGroupID), '2026-01-05', 'Home Insurance', -22.50, 'Monthly home insurance premium'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Home Insurance' AND groupID = @housingGroupID), '2026-02-05', 'Home Insurance', -22.50, 'Monthly home insurance premium'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Home Insurance' AND groupID = @housingGroupID), '2026-02-07', 'Home Insurance', -22.50, 'Monthly home insurance premium'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Home Insurance' AND groupID = @housingGroupID), '2026-02-20', 'Home Insurance', -22.50, 'Monthly home insurance premium'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Home Insurance' AND groupID = @housingGroupID), '2026-03-05', 'Home Insurance', -22.50, 'Monthly home insurance premium'),
 
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Property Taxes' AND groupID = @housingGroupID), '2025-12-20', 'Property Taxes', -105.00, 'Quarterly property tax payment'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Property Taxes' AND groupID = @housingGroupID), '2026-01-20', 'Property Taxes', -105.00, 'Quarterly property tax payment'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Property Taxes' AND groupID = @housingGroupID), '2026-02-13', 'Property Taxes', -105.00, 'Quarterly property tax payment'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Property Taxes' AND groupID = @housingGroupID), '2026-02-26', 'Property Taxes', -105.00, 'Quarterly property tax payment'),
 
     -- Utilities transactions
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), '2025-12-07', 'Electricity', -18.13, 'Monthly electricity bill'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), '2026-01-07', 'Electricity', -18.13, 'Monthly electricity bill'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), '2026-02-08', 'Electricity', -18.13, 'Monthly electricity bill'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), '2026-02-21', 'Electricity', -18.13, 'Monthly electricity bill'),
 
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Internet' AND groupID = @utilitiesGroupID), '2025-12-08', 'Internet', -21.25, 'Monthly internet service'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Internet' AND groupID = @utilitiesGroupID), '2026-01-08', 'Internet', -21.25, 'Monthly internet service'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Internet' AND groupID = @utilitiesGroupID), '2026-02-08', 'Internet', -21.25, 'Monthly internet service'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Internet' AND groupID = @utilitiesGroupID), '2026-02-21', 'Internet', -21.25, 'Monthly internet service'),
 
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Water' AND groupID = @utilitiesGroupID), '2025-12-15', 'Water', -12.00, 'Monthly water bill'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Water' AND groupID = @utilitiesGroupID), '2026-01-15', 'Water', -12.00, 'Monthly water bill'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Water' AND groupID = @utilitiesGroupID), '2026-02-11', 'Water', -12.00, 'Monthly water bill'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Water' AND groupID = @utilitiesGroupID), '2026-02-24', 'Water', -12.00, 'Monthly water bill'),
 
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), '2025-12-25', 'Electricity', -18.13, 'Electricity adjustment'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), '2026-01-25', 'Electricity', -18.13, 'Electricity adjustment'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), '2026-02-16', 'Electricity', -18.13, 'Electricity adjustment'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Electricity' AND groupID = @utilitiesGroupID), '2026-02-28', 'Electricity', -18.13, 'Electricity adjustment'),
 
     -- Transportation transactions
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2025-12-04', 'Gas', -21.67, 'Gas fill-up'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-01-04', 'Gas', -21.67, 'Gas fill-up'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-02-04', 'Gas', -21.67, 'Gas fill-up'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-02-07', 'Gas', -21.67, 'Gas fill-up'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-02-20', 'Gas', -21.67, 'Gas fill-up'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-03-05', 'Gas', -21.67, 'Gas fill-up'),
 
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Insurance' AND groupID = @transportationGroupID), '2025-12-01', 'Car Insurance', -31.67, 'Monthly car insurance'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Insurance' AND groupID = @transportationGroupID), '2026-01-01', 'Car Insurance', -31.67, 'Monthly car insurance'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Insurance' AND groupID = @transportationGroupID), '2026-02-01', 'Car Insurance', -31.67, 'Monthly car insurance'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Insurance' AND groupID = @transportationGroupID), '2026-02-06', 'Car Insurance', -31.67, 'Monthly car insurance'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Insurance' AND groupID = @transportationGroupID), '2026-02-18', 'Car Insurance', -31.67, 'Monthly car insurance'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Insurance' AND groupID = @transportationGroupID), '2026-03-03', 'Car Insurance', -31.67, 'Monthly car insurance'),
 
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Maintenance' AND groupID = @transportationGroupID), '2025-12-12', 'Car Maintenance', -72.50, 'Oil change service'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Maintenance' AND groupID = @transportationGroupID), '2026-01-12', 'Car Maintenance', -72.50, 'Car detailing'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Maintenance' AND groupID = @transportationGroupID), '2026-02-10', 'Car Maintenance', -72.50, 'Oil change service'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Maintenance' AND groupID = @transportationGroupID), '2026-02-23', 'Car Maintenance', -72.50, 'Car detailing'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2025-12-18', 'Gas', -21.67, 'Gas fill-up'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-01-18', 'Gas', -21.67, 'Gas fill-up'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-02-13', 'Gas', -21.67, 'Gas fill-up'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-02-26', 'Gas', -21.67, 'Gas fill-up'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Maintenance' AND groupID = @transportationGroupID), '2025-12-25', 'Car Maintenance', -72.50, 'Winter tire installation'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Maintenance' AND groupID = @transportationGroupID), '2026-01-25', 'Car Maintenance', -72.50, 'Brake pads replacement'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Maintenance' AND groupID = @transportationGroupID), '2026-02-16', 'Car Maintenance', -72.50, 'Winter tire installation'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Car Maintenance' AND groupID = @transportationGroupID), '2026-02-28', 'Car Maintenance', -72.50, 'Brake pads replacement'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2025-12-28', 'Gas', -21.67, 'Gas fill-up'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-01-28', 'Gas', -21.67, 'Gas fill-up'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-02-17', 'Gas', -21.67, 'Gas fill-up'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gas' AND groupID = @transportationGroupID), '2026-03-02', 'Gas', -21.67, 'Gas fill-up'),
 
     -- Food transactions
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2025-12-02', 'Groceries', -37.50, 'Weekly grocery shopping'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-01-02', 'Groceries', -37.50, 'Weekly grocery shopping'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-02-02', 'Groceries', -37.50, 'Weekly grocery shopping'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-02-06', 'Groceries', -37.50, 'Weekly grocery shopping'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-02-19', 'Groceries', -37.50, 'Weekly grocery shopping'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-03-04', 'Groceries', -37.50, 'Weekly grocery shopping'),
     
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2025-12-09', 'Groceries', -37.50, 'Bulk shopping trip'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-01-09', 'Groceries', -37.50, 'Bulk shopping trip'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-02-09', 'Groceries', -37.50, 'Bulk shopping trip'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-02-22', 'Groceries', -37.50, 'Bulk shopping trip'),
     
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2025-12-14', 'Groceries', -37.50, 'Fresh produce'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-01-14', 'Groceries', -37.50, 'Fresh produce'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-02-11', 'Groceries', -37.50, 'Fresh produce'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-02-24', 'Groceries', -37.50, 'Fresh produce'),
     
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2025-12-23', 'Groceries', -37.50, 'Weekly grocery shopping'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Groceries' AND groupID = @foodGroupID), '2026-02-15', 'Groceries', -37.50, 'Weekly grocery shopping'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2025-12-06', 'Dining Out', -17.92, 'Dinner with friends'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2026-01-06', 'Dining Out', -17.92, 'Dinner with friends'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2026-02-06', 'Dining Out', -17.92, 'Dinner with friends'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2026-02-08', 'Dining Out', -17.92, 'Dinner with friends'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2026-02-21', 'Dining Out', -17.92, 'Dinner with friends'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2026-03-06', 'Dining Out', -17.92, 'Dinner with friends'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2025-12-13', 'Dining Out', -17.92, 'Date night dinner'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2026-01-13', 'Dining Out', -17.92, 'Date night dinner'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2026-02-11', 'Dining Out', -17.92, 'Date night dinner'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2026-02-23', 'Dining Out', -17.92, 'Date night dinner'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2025-12-27', 'Dining Out', -17.92, 'Weekend brunch'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dining Out' AND groupID = @foodGroupID), '2026-02-16', 'Dining Out', -17.92, 'Weekend brunch'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Takeout/Delivery' AND groupID = @foodGroupID), '2025-12-16', 'Takeout/Delivery', -13.50, 'Morning coffee'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Takeout/Delivery' AND groupID = @foodGroupID), '2026-01-16', 'Takeout/Delivery', -13.50, 'Morning coffee'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Takeout/Delivery' AND groupID = @foodGroupID), '2026-02-12', 'Takeout/Delivery', -13.50, 'Morning coffee'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Takeout/Delivery' AND groupID = @foodGroupID), '2026-02-25', 'Takeout/Delivery', -13.50, 'Morning coffee'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Takeout/Delivery' AND groupID = @foodGroupID), '2025-12-22', 'Takeout/Delivery', -13.50, 'Pizza delivery'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Takeout/Delivery' AND groupID = @foodGroupID), '2026-01-22', 'Takeout/Delivery', -13.50, 'Pizza delivery'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Takeout/Delivery' AND groupID = @foodGroupID), '2026-02-14', 'Takeout/Delivery', -13.50, 'Pizza delivery'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Takeout/Delivery' AND groupID = @foodGroupID), '2026-02-27', 'Takeout/Delivery', -13.50, 'Pizza delivery'),
 
     -- Healthcare transactions
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Health Insurance' AND groupID = @healthcareGroupID), '2025-12-01', 'Health Insurance', -16.67, 'Monthly health insurance premium'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Health Insurance' AND groupID = @healthcareGroupID), '2026-01-01', 'Health Insurance', -16.67, 'Monthly health insurance premium'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Health Insurance' AND groupID = @healthcareGroupID), '2026-02-01', 'Health Insurance', -16.67, 'Monthly health insurance premium'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Health Insurance' AND groupID = @healthcareGroupID), '2026-02-06', 'Health Insurance', -16.67, 'Monthly health insurance premium'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Health Insurance' AND groupID = @healthcareGroupID), '2026-02-18', 'Health Insurance', -16.67, 'Monthly health insurance premium'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Health Insurance' AND groupID = @healthcareGroupID), '2026-03-03', 'Health Insurance', -16.67, 'Monthly health insurance premium'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dental Care' AND groupID = @healthcareGroupID), '2025-12-11', 'Dental Care', -40.00, 'Dental cleaning appointment'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dental Care' AND groupID = @healthcareGroupID), '2026-01-11', 'Dental Care', -40.00, 'Orthodontist adjustment'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dental Care' AND groupID = @healthcareGroupID), '2026-02-10', 'Dental Care', -40.00, 'Dental cleaning appointment'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Dental Care' AND groupID = @healthcareGroupID), '2026-02-23', 'Dental Care', -40.00, 'Orthodontist adjustment'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Therapy/Counseling' AND groupID = @healthcareGroupID), '2025-12-19', 'Therapy/Counseling', -32.50, 'Therapy session'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Therapy/Counseling' AND groupID = @healthcareGroupID), '2026-01-19', 'Therapy/Counseling', -32.50, 'Therapy session'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Therapy/Counseling' AND groupID = @healthcareGroupID), '2026-02-13', 'Therapy/Counseling', -32.50, 'Therapy session'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Therapy/Counseling' AND groupID = @healthcareGroupID), '2026-02-26', 'Therapy/Counseling', -32.50, 'Therapy session'),
 
     -- Personal Care transactions
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salon Services' AND groupID = @personalcareGroupID), '2025-12-08', 'Salon Services', -17.50, 'Haircut and styling'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salon Services' AND groupID = @personalcareGroupID), '2026-01-08', 'Salon Services', -17.50, 'Haircut and styling'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salon Services' AND groupID = @personalcareGroupID), '2026-02-08', 'Salon Services', -17.50, 'Haircut and styling'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Salon Services' AND groupID = @personalcareGroupID), '2026-02-21', 'Salon Services', -17.50, 'Haircut and styling'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Toiletries' AND groupID = @personalcareGroupID), '2025-12-12', 'Toiletries', -9.75, 'Personal care products'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Toiletries' AND groupID = @personalcareGroupID), '2026-01-12', 'Toiletries', -9.75, 'Personal care products'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Toiletries' AND groupID = @personalcareGroupID), '2026-02-10', 'Toiletries', -9.75, 'Personal care products'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Toiletries' AND groupID = @personalcareGroupID), '2026-02-23', 'Toiletries', -9.75, 'Personal care products'),
 
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gym Membership' AND groupID = @personalcareGroupID), '2025-12-01', 'Gym Membership', -10.00, 'Monthly gym membership'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gym Membership' AND groupID = @personalcareGroupID), '2026-01-01', 'Gym Membership', -10.00, 'Monthly gym membership'),
-    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gym Membership' AND groupID = @personalcareGroupID), '2026-02-01', 'Gym Membership', -10.00, 'Monthly gym membership'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gym Membership' AND groupID = @personalcareGroupID), '2026-02-06', 'Gym Membership', -10.00, 'Monthly gym membership'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gym Membership' AND groupID = @personalcareGroupID), '2026-02-18', 'Gym Membership', -10.00, 'Monthly gym membership'),
+    (@userID, @chequingAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Gym Membership' AND groupID = @personalcareGroupID), '2026-03-03', 'Gym Membership', -10.00, 'Monthly gym membership'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Toiletries' AND groupID = @personalcareGroupID), '2025-12-24', 'Toiletries', -9.75, 'Shampoo and soap'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Toiletries' AND groupID = @personalcareGroupID), '2026-01-24', 'Toiletries', -9.75, 'Shampoo and soap'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Toiletries' AND groupID = @personalcareGroupID), '2026-02-15', 'Toiletries', -9.75, 'Shampoo and soap'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Toiletries' AND groupID = @personalcareGroupID), '2026-02-28', 'Toiletries', -9.75, 'Shampoo and soap'),
 
     -- Entertainment transactions
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), '2025-12-03', 'Movies', -5.88, 'Movie tickets for two'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), '2026-01-03', 'Movies', -5.88, 'Movie tickets for two'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), '2026-02-03', 'Movies', -5.88, 'Movie tickets for two'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), '2026-02-06', 'Movies', -5.88, 'Movie tickets for two'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), '2026-02-19', 'Movies', -5.88, 'Movie tickets for two'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), '2026-03-04', 'Movies', -5.88, 'Movie tickets for two'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hobbies' AND groupID = @entertainmentGroupID), '2025-12-09', 'Hobbies', -19.38, 'Video game purchase'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hobbies' AND groupID = @entertainmentGroupID), '2026-01-09', 'Hobbies', -19.38, 'Video game purchase'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hobbies' AND groupID = @entertainmentGroupID), '2026-02-09', 'Hobbies', -19.38, 'Video game purchase'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hobbies' AND groupID = @entertainmentGroupID), '2026-02-22', 'Hobbies', -19.38, 'Video game purchase'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hobbies' AND groupID = @entertainmentGroupID), '2025-12-17', 'Hobbies', -19.38, 'Art supplies'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hobbies' AND groupID = @entertainmentGroupID), '2026-01-17', 'Hobbies', -19.38, 'Art supplies'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hobbies' AND groupID = @entertainmentGroupID), '2026-02-12', 'Hobbies', -19.38, 'Art supplies'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hobbies' AND groupID = @entertainmentGroupID), '2026-02-25', 'Hobbies', -19.38, 'Art supplies'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2025-12-01', 'Subscriptions', -2.50, 'Streaming service'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2026-01-01', 'Subscriptions', -2.50, 'Streaming service'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2026-02-01', 'Subscriptions', -2.50, 'Streaming service'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2026-02-06', 'Subscriptions', -2.50, 'Streaming service'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2026-02-18', 'Subscriptions', -2.50, 'Streaming service'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2026-03-03', 'Subscriptions', -2.50, 'Streaming service'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2025-12-01', 'Subscriptions', -2.50, 'Music streaming'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2026-01-01', 'Subscriptions', -2.50, 'Music streaming'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2026-02-01', 'Subscriptions', -2.50, 'Music streaming'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2026-02-06', 'Subscriptions', -2.50, 'Music streaming'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2026-02-18', 'Subscriptions', -2.50, 'Music streaming'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Subscriptions' AND groupID = @entertainmentGroupID), '2026-03-03', 'Subscriptions', -2.50, 'Music streaming'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), '2025-12-21', 'Movies', -5.88, 'Movie rental'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Movies' AND groupID = @entertainmentGroupID), '2026-02-14', 'Movies', -5.88, 'Movie rental'),
 
     -- Travel transactions
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Airfare' AND groupID = @travelGroupID), '2025-12-20', 'Airfare', -135.00, 'Flight booking'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Airfare' AND groupID = @travelGroupID), '2026-01-20', 'Airfare', -135.00, 'Flight booking'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Airfare' AND groupID = @travelGroupID), '2026-02-13', 'Airfare', -135.00, 'Flight booking'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Airfare' AND groupID = @travelGroupID), '2026-02-26', 'Airfare', -135.00, 'Flight booking'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hotel Accommodations' AND groupID = @travelGroupID), '2025-12-21', 'Hotel Accommodations', -105.00, 'Hotel reservation'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hotel Accommodations' AND groupID = @travelGroupID), '2026-01-21', 'Hotel Accommodations', -105.00, 'Hotel reservation'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hotel Accommodations' AND groupID = @travelGroupID), '2026-02-14', 'Hotel Accommodations', -105.00, 'Hotel reservation'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Hotel Accommodations' AND groupID = @travelGroupID), '2026-02-27', 'Hotel Accommodations', -105.00, 'Hotel reservation'),
 
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Travel Insurance' AND groupID = @travelGroupID), '2025-12-20', 'Travel Insurance', -13.25, 'Trip insurance policy'),
-    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Travel Insurance' AND groupID = @travelGroupID), '2026-01-20', 'Travel Insurance', -13.25, 'Trip insurance policy');
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Travel Insurance' AND groupID = @travelGroupID), '2026-02-13', 'Travel Insurance', -13.25, 'Trip insurance policy'),
+    (@userID, @creditCardAccountID, (SELECT categoryID FROM categories WHERE categoryName = 'Travel Insurance' AND groupID = @travelGroupID), '2026-02-26', 'Travel Insurance', -13.25, 'Trip insurance policy');
 
 -- Get budget section IDs
 SET @needsSectionID = (SELECT sectionID FROM budgetSections WHERE sectionName = 'Needs');
